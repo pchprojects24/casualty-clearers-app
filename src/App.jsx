@@ -45,6 +45,15 @@ const navItems = [
   { id: 'glossary', label: 'Glossary', icon: BookOpen },
 ];
 
+const MARCHE_STEPS = [
+  { id: 'march-m', letter: 'M', title: 'Massive hemorrhage' },
+  { id: 'march-a', letter: 'A', title: 'Airway' },
+  { id: 'march-r', letter: 'R', title: 'Respiration' },
+  { id: 'march-c', letter: 'C', title: 'Circulation' },
+  { id: 'march-h', letter: 'H', title: 'Head & hypothermia' },
+  { id: 'march-e', letter: 'E', title: 'Everything else' },
+];
+
 const readStored = (key) => {
   try {
     const value = JSON.parse(localStorage.getItem(key));
@@ -339,9 +348,35 @@ function NotFoundView() {
   );
 }
 
+function MarcheProgress({ activeId }) {
+  return (
+    <nav className="march-progress" aria-label="MARCHE primary survey">
+      <div className="march-progress-heading"><span>Primary survey</span><strong>MARCHE</strong></div>
+      <div className="march-progress-steps">
+        {MARCHE_STEPS.map((step) => {
+          const current = step.id === activeId;
+          return (
+            <button
+              key={step.id}
+              type="button"
+              className={current ? 'current' : ''}
+              aria-current={current ? 'step' : undefined}
+              aria-label={`${step.letter} — ${step.title}${current ? ', current priority' : ''}`}
+              onClick={() => navigate(`topic/${step.id}`)}
+            >
+              <b>{step.letter}</b><small>{step.title}</small>
+            </button>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
 function ArticleView({ topic, saved, toggleSaved }) {
   const category = getCategory(topic.category);
   const related = (topic.related || []).map((id) => topicById[id]).filter(Boolean);
+  const isMarchPriority = MARCHE_STEPS.some((step) => step.id === topic.id);
   const renderLinks = (links, className) => links?.length ? (
     <div className={className}>
       {links.map((link) => (
@@ -362,15 +397,18 @@ function ArticleView({ topic, saved, toggleSaved }) {
           <Bookmark size={19} fill={saved ? 'currentColor' : 'none'} />{saved ? 'Saved' : 'Save'}
         </button>
       </header>
+      {isMarchPriority && <MarcheProgress activeId={topic.id} />}
       <div className="article-layout">
         <article className="reference-content">
           {topic.path && <section className="reference-block"><h2>Assessment sequence</h2>{renderLinks(topic.path, 'path-list')}</section>}
           {topic.scale && <section className="reference-block"><h2>AVPU scale</h2><div className="scale-grid">{topic.scale.map((item) => <div key={item.letter}><span>{item.letter}</span><strong>{item.title}</strong><p>{item.text}</p></div>)}</div></section>}
           {topic.march && <section className="reference-block"><h2>Select a MARCHE priority</h2><div className="march-grid">{topic.march.map((item) => <button key={item.letter} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><b>{item.letter}</b><span><strong>{item.title}</strong><small>{item.text}</small></span><ChevronRight size={21} /></button>)}</div></section>}
+          {topic.quickRoutes && <section className="reference-block"><h2>Quick route</h2>{renderLinks(topic.quickRoutes, 'quick-route-grid')}</section>}
           {topic.steps && <section className="reference-block"><h2>How to do it</h2><ol className="step-list">{topic.steps.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}</ol></section>}
           {topic.sections?.map((section) => <section className="reference-block" key={section.title}><h2>{section.title}</h2><ul className="check-list">{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul></section>)}
           {topic.notice && <aside className="reference-notice"><TriangleAlert size={21} /><div><strong>{topic.notice.title}</strong><p>{topic.notice.text}</p></div></aside>}
           {topic.actions && <section className="reference-block"><h2>Open a procedure or product</h2>{renderLinks(topic.actions, 'action-grid')}</section>}
+          {topic.nextStep && <section className="continue-primary"><div><span>{topic.nextStep.kicker || 'Next in MARCHE'}</span><h2>{topic.nextStep.title}</h2><p>{topic.nextStep.description}</p></div><button type="button" onClick={() => navigate(`topic/${topic.nextStep.topicId}`)} aria-label={topic.nextStep.title}><ChevronRight size={25} /></button></section>}
           {topic.resources?.length > 0 && <section className="reference-block resources"><h2>Official references & media</h2>{topic.resources.map((resource) => <a key={resource.url} href={resource.url} target="_blank" rel="noreferrer"><span><em>{resource.kind}</em><strong>{resource.title}</strong><small>{resource.description}</small></span><ExternalLink size={19} /></a>)}</section>}
         </article>
         <aside className="related-panel">

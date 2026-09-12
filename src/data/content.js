@@ -74,46 +74,70 @@ export const topics = [
   {
     id: 'march-m', title: 'M — Massive hemorrhage', category: 'assessment', group: 'MARCHE', icon: 'bleeding', color: 'sky', reference: true,
     intro: 'Life-threatening external bleeding comes before the airway in the MARCHE sequence. Find it quickly and control it.',
+    quickRoutes: [
+      internal('direct-pressure', 'Bleeding found', 'Start immediate hands-on control at the source.'),
+      internal('wound-packing', 'Deep wound', 'Review wound packing when the wound and current training make it appropriate.'),
+      internal('cat-tourniquet', 'Life-threatening limb bleeding', 'Open the C-A-T sequence for the carried device.'),
+    ],
     sections: [
       { title: 'Check', bullets: ['Rapidly scan and feel for severe bleeding.', 'Expose the source when practical.', 'Look for pooling, spurting, continuous heavy flow, soaked clothing or partial/complete amputation.', 'Check beneath and behind the casualty when access allows.'] },
       { title: 'Choose the control method', bullets: ['Direct pressure is the immediate starting action for most external bleeding.', 'Pack a suitable deep wound when trained, then maintain firm pressure.', 'Use a pressure dressing to maintain control after bleeding has been controlled.', 'Use a commercial tourniquet for life-threatening limb bleeding when direct pressure does not work, cannot be maintained or is impractical.'] },
       { title: 'Reassess', bullets: ['Confirm that bleeding has stopped.', 'Check dressings for continued soak-through.', 'Check and record a tourniquet application time.', 'Report the wound, treatment and response.'] },
     ],
     actions: [internal('direct-pressure', 'Direct pressure', 'Immediate hands-on bleeding control.'), internal('wound-packing', 'Wound packing', 'For a suitable deep wound when trained.'), internal('pressure-dressing', 'Pressure dressing', 'Maintain control after bleeding has stopped.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'Product page, application sequence and official video.'), internal('olaes-bandage', 'OLAES modular bandage', 'Product features, pressure-dressing use and official product information.')],
+    nextStep: internal('march-a', 'Continue to A — Airway', 'Once bleeding is controlled, check whether the airway is open and stays open.'),
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross bleeding-control guidance', 'Direct pressure, hemostatic dressings and tourniquet guidance.')],
     related: ['direct-pressure', 'wound-packing', 'pressure-dressing', 'cat-tourniquet'],
   },
   {
     id: 'march-a', title: 'A — Airway', category: 'assessment', group: 'MARCHE', icon: 'airway', color: 'yellow', reference: true,
     intro: 'Check whether air can move freely. An open airway must be maintained and reassessed.',
+    quickRoutes: [
+      internal('airway-positioning', 'Airway needs opening', 'Open and position the airway, then check for air movement.'),
+      internal('airway-adjuncts', 'An adjunct may be needed', 'Review the trained OPA, NPA and i-gel options before choosing one.'),
+      internal('march-r', 'Airway is open', 'Continue to breathing and chest assessment.'),
+    ],
     sections: [
       { title: 'Check', bullets: ['Can the casualty speak or make sounds?', 'Look for visible obstruction, vomit, blood or secretions.', 'Listen for snoring, gurgling, stridor or absent air movement.', 'Consider the casualty’s responsiveness and possible head or neck injury.'] },
       { title: 'Options within training', bullets: ['Reposition and use the appropriate airway-opening manoeuvre.', 'Clear visible material; use suction only if carried and trained.', 'Use an OPA for an unresponsive casualty without an intact gag response, when trained.', 'Use an NPA only under the locally taught method and contraindications.', 'Use an i-gel only when the device, training and authorization are confirmed.'] },
       { title: 'Reassess', bullets: ['Look, listen and feel for air movement.', 'Confirm that any adjunct remains correctly positioned.', 'Continue into respiration and return immediately if airway sounds or responsiveness change.'] },
     ],
-    actions: [internal('airway-positioning', 'Open and position the airway', 'Head-tilt/chin-lift or jaw thrust as appropriate.'), internal('opa', 'OPA', 'Purpose, sizing, checks and trained-use sequence.'), internal('npa', 'NPA', 'Purpose and local-method confirmation.'), internal('igel', 'i-gel', 'Training-dependent device page and official manufacturer media.')],
+    actions: [internal('airway-positioning', 'Open and position the airway', 'Head-tilt/chin-lift or jaw thrust as appropriate.'), internal('airway-adjuncts', 'Airway adjuncts', 'Choose between OPA, NPA and i-gel only through current training.'), internal('opa', 'OPA', 'Purpose, sizing, checks and trained-use sequence.'), internal('npa', 'NPA', 'Purpose and local-method confirmation.'), internal('igel', 'i-gel', 'Training-dependent device page and official manufacturer media.')],
+    nextStep: internal('march-r', 'Continue to R — Respiration', 'When the airway is open, assess whether breathing is present and effective.'),
     related: ['airway-positioning', 'opa', 'npa', 'igel'],
   },
   {
     id: 'march-r', title: 'R — Respiration', category: 'assessment', group: 'MARCHE', icon: 'airway', color: 'yellow', reference: true,
     intro: 'Decide whether breathing is present and effective, then look for problems that require support.',
+    quickRoutes: [
+      internal('respiratory-rate', 'Breathing is present', 'Measure the rate and describe whether it is effective.'),
+      internal('bvm', 'Breathing is absent or inadequate', 'Open the BVM page for trained breathing support.'),
+      internal('oxygen', 'Oxygen may be indicated', 'Check the carried system, trained method and authorized target.'),
+    ],
     sections: [
       { title: 'Check', bullets: ['Observe chest and abdominal movement.', 'Count the rate and describe depth and regularity.', 'Look for increased effort, unequal movement, injury or pain.', 'Listen for unusual sounds and note whether the casualty can speak normally.', 'Check skin signs and assigned monitor readings without letting a number override what you see.'] },
       { title: 'Options within training', bullets: ['Allow a responsive casualty with breathing difficulty to use the most comfortable position.', 'Give oxygen only under the applicable training, direction and target.', 'Use BVM ventilation when breathing is absent or inadequate and you are trained.', 'Identify and report chest injury or deteriorating breathing immediately.'] },
       { title: 'Reassess', bullets: ['Repeat rate and quality after positioning or treatment.', 'Look for visible chest rise during assisted ventilation.', 'Record the time, findings, intervention and change.'] },
     ],
     actions: [internal('respiratory-rate', 'Measure respiratory rate', 'How to count and describe breathing.'), internal('oxygen', 'Oxygen', 'Setup, use limits and reassessment.'), internal('bvm', 'Bag-valve-mask', 'Two-person technique points and effectiveness checks.')],
+    nextStep: internal('march-c', 'Continue to C — Circulation', 'After breathing is addressed, assess pulse, skin and signs of circulation problems.'),
     related: ['respiratory-rate', 'oxygen', 'bvm', 'march-a'],
   },
   {
     id: 'march-c', title: 'C — Circulation', category: 'assessment', group: 'MARCHE', icon: 'assessment', color: 'teal', reference: true,
     intro: 'Use pulse, skin and the overall casualty picture to judge circulation and recognize deterioration.',
+    quickRoutes: [
+      internal('march-m', 'Bleeding is found or restarts', 'Return to M immediately and control the source.'),
+      internal('vital-signs', 'Need a clearer picture', 'Put pulse, skin, breathing and responsiveness together as a trend.'),
+      internal('march-h', 'Immediate threats are controlled', 'Continue to head concerns and heat-loss prevention.'),
+    ],
     sections: [
       { title: 'Check', bullets: ['Find and describe the pulse: rate, rhythm and strength.', 'Check skin colour against the casualty’s usual tone, along with temperature and moisture.', 'Look again for bleeding that was missed or has restarted.', 'Check capillary refill only if it is part of the locally taught assessment.', 'Note behaviour, thirst, weakness, confusion and other signs that may accompany shock.'] },
       { title: 'Support', bullets: ['Control external bleeding.', 'Keep the casualty at rest and protect them from heat loss.', 'Continue oxygen or other treatment only as directed by the applicable protocol.', 'Arrange movement and medical assistance according to urgency.'] },
       { title: 'Reassess', bullets: ['Trend findings instead of relying on one number.', 'Repeat pulse and skin checks after treatment and movement.', 'Report deterioration immediately.'] },
     ],
     actions: [internal('pulse', 'Check a pulse', 'Radial and carotid locations, counting and quality.'), internal('skin-signs', 'Check skin signs', 'Colour, temperature, moisture and change.'), internal('vital-signs', 'Vital-sign set', 'Put the findings together and record the trend.')],
+    nextStep: internal('march-h', 'Continue to H — Head & hypothermia', 'Protect from heat loss and look for head-injury concerns while reassessing.'),
     related: ['pulse', 'skin-signs', 'vital-signs', 'reassessment-handover'],
   },
   {
@@ -124,6 +148,8 @@ export const topics = [
       { title: 'Head concerns', bullets: ['Note the mechanism and any direct head impact.', 'Repeat AVPU and watch for confusion, worsening responsiveness, vomiting, seizure or unequal movement.', 'Avoid unnecessary movement and report deterioration promptly.'] },
     ],
     notice: { title: 'Keep reassessing', text: 'Cold stress and head injury can both change responsiveness. Repeat AVPU, breathing and circulation throughout care and movement.' },
+    actions: [internal('avpu', 'Repeat AVPU', 'Describe changes in responsiveness clearly.'), internal('vital-signs', 'Repeat vital signs', 'Look for change, not a single isolated number.'), internal('reassessment-handover', 'Reassess and hand over', 'Confirm treatments and report deterioration.')],
+    nextStep: internal('march-e', 'Continue to E — Everything else', 'When immediate head and heat-loss concerns are addressed, complete the rapid body survey.'),
     related: ['avpu', 'march-r', 'march-c', 'reassessment-handover'],
   },
   {
@@ -134,6 +160,7 @@ export const topics = [
       { title: 'Continue', bullets: ['Move into the secondary survey when immediate threats are controlled.', 'Gather history and repeat vital signs.', 'Prepare findings and treatments for handover.'] },
     ],
     actions: [internal('secondary-survey', 'Secondary survey', 'History, head-to-toe check and additional findings.'), internal('vital-signs', 'Vital signs', 'Measure and describe the casualty’s current condition.'), internal('reassessment-handover', 'Reassessment and handover', 'Trend changes and organize the report.')],
+    nextStep: { ...internal('secondary-survey', 'Continue to secondary survey', 'Immediate MARCHE priorities are addressed. Gather the complete history, head-to-toe findings and handover details.'), kicker: 'After MARCHE' },
     related: ['secondary-survey', 'vital-signs', 'reassessment-handover'],
   },
   {
@@ -240,9 +267,22 @@ export const topics = [
   {
     id: 'airway-positioning', title: 'Open and position the airway', category: 'airway', group: 'Airway', icon: 'airway', color: 'yellow', reference: true,
     intro: 'Positioning is the first airway intervention. Continue to hold and reassess the airway after it opens.',
-    sections: [{ title: 'Choose the manoeuvre', bullets: ['Use a head-tilt/chin-lift for an unresponsive casualty when appropriate.', 'With suspected head or neck trauma, a trained responder may begin with a jaw thrust.', 'If a jaw thrust does not open the airway, opening the airway and ventilation take priority.'] }, { title: 'Confirm', bullets: ['Look for chest movement.', 'Listen and feel for air movement.', 'Remove only clearly visible loose material.', 'Continue to maintain the position and move into respiration.'] }],
+    steps: ['Check responsiveness and look for clearly visible loose material in the mouth.', 'Remove only material that you can clearly see and easily remove.', 'Use the airway-opening manoeuvre taught for the casualty and situation.', 'When head or neck trauma is a concern, a trained responder may begin with a jaw thrust.', 'If a jaw thrust does not open the airway, opening the airway and supporting breathing take priority.', 'Look, listen and feel for air movement, then maintain the position and continue into respiration.'],
+    notice: { title: 'Keep hands-on control', text: 'An airway can change after movement, vomiting or a change in responsiveness. Recheck it whenever the casualty moves or deteriorates.' },
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross airway guidance', 'Current general airway and breathing care.')],
     related: ['march-a', 'opa', 'npa', 'bvm'],
+  },
+  {
+    id: 'airway-adjuncts', title: 'Airway adjuncts', category: 'airway', group: 'Airway', icon: 'airway', color: 'yellow', reference: true,
+    intro: 'An airway adjunct can help maintain an open airway, but it never replaces positioning, observation and reassessment.',
+    sections: [
+      { title: 'Choose only through current training', bullets: ['Use an OPA for an unresponsive casualty without an intact gag response, when trained.', 'Use an NPA only through the locally taught method, including its contraindications.', 'Use an i-gel only when the carried model, training and authorization are confirmed.', 'If an adjunct causes gagging, coughing, resistance or a change in condition, reassess the airway and follow the trained response.'] },
+      { title: 'After placement', bullets: ['Confirm that air is moving and the airway remains open.', 'Continue to respiration and watch for visible chest movement.', 'Recheck position after movement, vomiting or any change in responsiveness.'] },
+    ],
+    notice: { title: 'The device does not make the airway “finished”', text: 'Stay with the casualty, keep reassessing and return to airway support immediately if air movement or responsiveness changes.' },
+    actions: [internal('opa', 'OPA', 'Purpose, sizing, checks and trained-use sequence.'), internal('npa', 'NPA', 'Purpose and local-method confirmation.'), internal('igel', 'i-gel', 'Training-dependent device page and official manufacturer media.')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross airway guidance', 'Current general airway and breathing care.'), external(IGEL_PRODUCT, 'Official i-gel product page', 'Manufacturer product information and adult sizing documents.', 'Manufacturer')],
+    related: ['march-a', 'airway-positioning', 'opa', 'npa'],
   },
   {
     id: 'opa', title: 'Oropharyngeal airway — OPA', category: 'airway', group: 'Airway adjunct — trained skill', icon: 'airway', color: 'yellow', reference: true,
@@ -283,7 +323,7 @@ export const topics = [
 ];
 
 const categoryById = Object.fromEntries(categories.map((category) => [category.id, category]));
-const searchableText = (topic) => JSON.stringify({ title: topic.title, group: topic.group, intro: topic.intro, path: topic.path, march: topic.march, steps: topic.steps, sections: topic.sections, actions: topic.actions }).toLowerCase();
+const searchableText = (topic) => JSON.stringify({ title: topic.title, group: topic.group, intro: topic.intro, path: topic.path, march: topic.march, quickRoutes: topic.quickRoutes, steps: topic.steps, sections: topic.sections, actions: topic.actions, nextStep: topic.nextStep }).toLowerCase();
 topics.forEach((topic) => { topic.searchText = searchableText(topic); });
 
 export const topicById = Object.fromEntries(topics.map((topic) => [topic.id, topic]));
