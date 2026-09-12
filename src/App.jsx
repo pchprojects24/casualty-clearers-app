@@ -73,9 +73,9 @@ const navigate = (path) => {
 
 function Brand() {
   return (
-    <button className="brand" type="button" onClick={() => navigate('home')} aria-label="Casualty Clearers home">
+    <button className="brand" type="button" onClick={() => navigate('home')} aria-label="CCT Info Hub home">
       <span className="brand-mark" aria-hidden="true"><i /><i /><i /><i /></span>
-      <span>Casualty<br className="desktop-only" /> Clearers</span>
+      <span>CCT Info Hub</span>
     </button>
   );
 }
@@ -111,7 +111,7 @@ function SearchBox({ value, onChange, onSelect, compact = false }) {
         onChange={(event) => onChange(event.target.value)}
         onFocus={() => setActive(true)}
         onBlur={() => window.setTimeout(() => setActive(false), 120)}
-        placeholder="Search treatments, equipment, situations..."
+        placeholder="Search all information..."
         aria-label="Search all information"
       />
       {!compact && <kbd>⌘ K</kbd>}
@@ -229,8 +229,8 @@ function HomeView({ saved, toggleSaved, recent }) {
       <header className="desktop-top-search"><SearchBox compact value={query} onChange={setQuery} onSelect={(topic) => navigate(`topic/${topic.id}`)} /></header>
       <main className="home-main">
         <section className="welcome">
-          <h1>Everything in one place.</h1>
-          <p>Clear, connected information for casualty clearers.</p>
+          <h1>CCT Info Hub</h1>
+          <p>Casualty clearing information, organized for quick access.</p>
           <SearchBox value={query} onChange={setQuery} onSelect={(topic) => navigate(`topic/${topic.id}`)} />
         </section>
         <section className="topic-directory" aria-labelledby="explore-heading">

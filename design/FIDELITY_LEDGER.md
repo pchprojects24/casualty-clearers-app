@@ -23,3 +23,17 @@ Final comparison completed against `home-desktop.png` at 1536 × 1024 and `home-
 ## Result
 
 No material visual mismatch remains. The implementation preserves the accepted information hierarchy, palette, typography, component language and responsive behaviour while removing elements that conflicted with the user's content-first direction.
+
+## Smartphone and naming revision
+
+The accepted concept was amended by the user's later direction to make smartphone use a primary target and rename the product to `CCT Info Hub`.
+
+- The browser title, installed-app name, header brand and home heading now use `CCT Info Hub`.
+- The supporting copy is now `Casualty clearing information, organized for quick access.`
+- The mobile search hint was shortened to `Search all information...` so it fits cleanly without clipping.
+- The phone shell now accounts for display safe areas, dynamic viewport height and the on-screen bottom navigation.
+- Search text is 16 px to avoid automatic iPhone input zoom.
+- Menu, navigation, back, save and bookmark controls have phone-appropriate touch targets.
+- Exact checks pass at 375 × 667, 390 × 844 and 430 × 932 with no horizontal overflow.
+
+The old title and brand wording visible in the original concept are therefore intentional, user-directed differences rather than implementation drift. The layout, bright palette, topic-row system, search hierarchy, icon treatment and bottom navigation remain faithful to the accepted visual direction.

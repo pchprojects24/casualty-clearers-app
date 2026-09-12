@@ -1,4 +1,4 @@
-# Casualty Clearers App
+# CCT Info Hub
 
 A consolidated information hub for AOPS casualty clearing team members.
 

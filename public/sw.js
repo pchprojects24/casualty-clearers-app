@@ -1,4 +1,4 @@
-const CACHE = 'casualty-clearers-v1';
+const CACHE = 'cct-info-hub-v2';
 const APP_SHELL = ['./', './index.html', './manifest.webmanifest', './app-icon.svg'];
 
 self.addEventListener('install', (event) => {

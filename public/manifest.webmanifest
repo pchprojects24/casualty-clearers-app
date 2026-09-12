@@ -1,7 +1,7 @@
 {
-  "name": "Casualty Clearers",
-  "short_name": "Clearers",
-  "description": "Clear, connected information for casualty clearers.",
+  "name": "CCT Info Hub",
+  "short_name": "CCT Hub",
+  "description": "Casualty clearing information, organized for quick access.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f7f9fc",

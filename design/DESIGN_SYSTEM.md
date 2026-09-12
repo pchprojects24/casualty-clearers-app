@@ -1,4 +1,4 @@
-# Casualty Clearers Design System
+# CCT Info Hub Design System
 
 This file records the visual specification selected before implementation. The source concepts are `design/concepts/home-desktop.png` and `design/concepts/home-mobile.png`.
 
@@ -64,10 +64,9 @@ Lucide outline icons, 1.75 px stroke, rounded joins, 18–24 px. Icons clarify a
 
 ## Above-the-fold copy lock
 
-- Casualty Clearers
-- Everything in one place.
-- Clear, connected information for casualty clearers.
-- Search treatments, equipment, situations...
+- CCT Info Hub
+- Casualty clearing information, organized for quick access.
+- Search all information...
 - Home
 - Explore
 - Equipment
