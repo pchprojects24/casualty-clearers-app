@@ -317,9 +317,9 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
   .quick-route-grid button { min-height: 92px; padding: 14px; }
   .march-progress { margin-top: 14px; padding: 12px; border-radius: 13px; }
   .march-progress-steps { gap: 4px; }
-  .march-progress-steps button { min-height: 64px; padding: 6px 3px; grid-template-columns: 1fr; justify-items: center; gap: 4px; text-align: center; }
-  .march-progress-steps button b { width: 25px; height: 25px; }
-  .march-progress-steps button small { font-size: 8px; line-height: 1.1; }
+  .march-progress-steps button { min-height: 48px; padding: 5px 3px; grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .march-progress-steps button b { width: 27px; height: 27px; }
+  .march-progress-steps button small { display: none; }
   .continue-primary { margin-top: 30px; padding: 18px 16px; border-radius: 13px; }
   .continue-primary h2 { font-size: 19px; }
   .march-grid button { min-height: 96px; grid-template-columns: 48px 1fr auto; padding: 13px; }
