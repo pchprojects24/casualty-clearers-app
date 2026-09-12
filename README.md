@@ -33,7 +33,7 @@ The application is a responsive React and Vite information hub with:
 - Browseable subject categories and connected topic pages.
 - Saved and recently viewed information stored on the user's device.
 - Responsive desktop, tablet and mobile navigation.
-- An installable manifest and offline caching foundation.
+- An installable manifest. The app is online-only; it does not cache for offline use.
 
 Run it locally with `npm install` and `npm run dev`. Create the production bundle with `npm run build`.
 
