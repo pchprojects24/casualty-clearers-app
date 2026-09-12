@@ -1,17 +1,15 @@
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import {
   ArrowLeft,
   Bandage,
   Bookmark,
   BookOpen,
   Box,
-  ChevronDown,
   ChevronRight,
   ClipboardCheck,
   Clock3,
   Droplets,
+  ExternalLink,
   FileText,
   Home,
   Wind,
@@ -19,12 +17,11 @@ import {
   MoreHorizontal,
   Radio,
   Search,
-  Sparkles,
   TriangleAlert,
   Users,
   X,
 } from 'lucide-react';
-import { categories, getCategory, glossary, searchTopics, sourceNotes, topicById, topics, topicsForCategory } from './data/content.js';
+import { categories, getCategory, glossary, searchTopics, topicById, topics, topicsForCategory } from './data/content.js';
 
 const ICONS = {
   assessment: ClipboardCheck,
@@ -41,8 +38,10 @@ const ICONS = {
 const navItems = [
   { id: 'home', label: 'Home', icon: Home },
   { id: 'explore', label: 'Explore', icon: Search },
+  { id: 'assessment', label: 'Assessment', icon: ClipboardCheck },
+  { id: 'bleeding', label: 'Bleeding Control', icon: Droplets },
+  { id: 'airway', label: 'Airway & Breathing', icon: Wind },
   { id: 'equipment', label: 'Equipment', icon: Box },
-  { id: 'situations', label: 'Situations', icon: TriangleAlert },
   { id: 'glossary', label: 'Glossary', icon: BookOpen },
 ];
 
@@ -199,7 +198,7 @@ function Sidebar({ route, savedCount }) {
       <Brand />
       <nav aria-label="Primary navigation">
         {navItems.map(({ id, label, icon: Icon }) => (
-          <button className={selected === id ? 'selected' : ''} aria-current={selected === id ? 'page' : undefined} key={id} type="button" onClick={() => navigate(id === 'equipment' || id === 'situations' ? `category/${id}` : id)}>
+          <button className={selected === id ? 'selected' : ''} aria-current={selected === id ? 'page' : undefined} key={id} type="button" onClick={() => navigate(['assessment', 'bleeding', 'airway', 'equipment'].includes(id) ? `category/${id}` : id)}>
             <Icon size={20} strokeWidth={1.8} /><span>{label}</span>
           </button>
         ))}
@@ -211,7 +210,6 @@ function Sidebar({ route, savedCount }) {
           <Clock3 size={20} strokeWidth={1.8} /><span>Recently viewed</span>
         </button>
       </nav>
-      <p className="sidebar-note">Information that is easier to find, connect and revisit.</p>
     </aside>
   );
 }
@@ -246,21 +244,14 @@ function MobileNav({ route, savedCount }) {
   );
 }
 
-function TopicRow({ category, expanded, onToggle }) {
-  const sampleTopics = topicsForCategory(category.id).slice(0, 4);
+function TopicRow({ category }) {
   return (
-    <div className={`topic-row ${category.color} ${expanded ? 'expanded' : ''}`}>
-      <button className="topic-row-main" type="button" onClick={onToggle} aria-expanded={expanded}>
+    <div className={`topic-row ${category.color}`}>
+      <button className="topic-row-main" type="button" onClick={() => navigate(`category/${category.id}`)}>
         <span className="topic-icon"><IconFor name={category.icon} /></span>
         <span className="topic-copy"><strong>{category.label}</strong><small>{category.description}</small></span>
-        {expanded ? <ChevronDown /> : <ChevronRight />}
+        <ChevronRight />
       </button>
-      {expanded && (
-        <div className="topic-preview">
-          {sampleTopics.map((topic) => <button type="button" key={topic.id} onClick={() => navigate(`topic/${topic.id}`)}>{topic.title}<ChevronRight size={16} /></button>)}
-          <button type="button" className="view-category" onClick={() => navigate(`category/${category.id}`)}>View all {category.short.toLowerCase()} information <ChevronRight size={16} /></button>
-        </div>
-      )}
     </div>
   );
 }
@@ -280,21 +271,8 @@ function MiniTopicRow({ topic, saved, onSave }) {
   );
 }
 
-const CONTINUE_HEADINGS = [
-  'MARCHE as the main navigation path',
-  'Basic airway opening',
-  'MIST, SITREP, traumagram, and communications',
-];
-
-function HomeView({ saved, toggleSaved, recent }) {
+function HomeView() {
   const [query, setQuery] = useState('');
-  const [expanded, setExpanded] = useState(() => window.matchMedia('(min-width: 761px)').matches ? 'assessment' : '');
-  const recentTopics = recent.map((id) => topicById[id]).filter(Boolean).slice(0, 3);
-  const continueTopics = useMemo(() => {
-    const picks = CONTINUE_HEADINGS.map((heading) => topics.find((topic) => topic.heading.startsWith(heading))).filter(Boolean);
-    topics.forEach((topic) => { if (picks.length < 3 && !picks.includes(topic)) picks.push(topic); });
-    return picks.slice(0, 3);
-  }, []);
 
   return (
     <>
@@ -302,28 +280,15 @@ function HomeView({ saved, toggleSaved, recent }) {
       <main className="home-main">
         <section className="welcome">
           <h1>CCT Info Hub</h1>
-          <p>Casualty clearing information, organized for quick access.</p>
           <SearchBox value={query} onChange={setQuery} onSelect={(topic) => navigate(`topic/${topic.id}`)} />
         </section>
         <section className="topic-directory" aria-labelledby="explore-heading">
-          <h2 id="explore-heading">Explore key topics</h2>
+          <h2 id="explore-heading">Browse</h2>
           <div className="topic-list">
-            {categories.filter((category) => category.id !== 'equipment').map((category) => (
-              <TopicRow key={category.id} category={category} expanded={expanded === category.id} onToggle={() => setExpanded(expanded === category.id ? '' : category.id)} />
-            ))}
+            {categories.map((category) => <TopicRow key={category.id} category={category} />)}
           </div>
         </section>
       </main>
-      <aside className="context-rail">
-        <section>
-          <div className="rail-heading"><h2>Continue exploring</h2><button type="button" onClick={() => navigate('explore')}>See all</button></div>
-          {continueTopics.map((topic) => <MiniTopicRow key={topic.id} topic={topic} saved={saved.includes(topic.id)} onSave={toggleSaved} />)}
-        </section>
-        <section>
-          <div className="rail-heading"><h2>Recently viewed</h2><button type="button" onClick={() => navigate('recent')}>See all</button></div>
-          {recentTopics.length ? recentTopics.map((topic) => <MiniTopicRow key={topic.id} topic={topic} saved={saved.includes(topic.id)} onSave={toggleSaved} />) : <p className="empty-note">Topics you open will appear here.</p>}
-        </section>
-      </aside>
     </>
   );
 }
@@ -376,34 +341,40 @@ function NotFoundView() {
 
 function ArticleView({ topic, saved, toggleSaved }) {
   const category = getCategory(topic.category);
-  const related = topics.filter((item) => item.category === topic.category && item.id !== topic.id).slice(0, 4);
-  const sourceIds = [...new Set([...topic.body.matchAll(/\[(\d+)\]/g)].map((match) => match[1]))].filter((id) => sourceNotes[id]);
+  const related = (topic.related || []).map((id) => topicById[id]).filter(Boolean);
+  const renderLinks = (links, className) => links?.length ? (
+    <div className={className}>
+      {links.map((link) => (
+        <button key={link.topicId} type="button" onClick={() => navigate(`topic/${link.topicId}`)}>
+          <span><strong>{link.title}</strong><small>{link.description}</small></span><ChevronRight size={20} />
+        </button>
+      ))}
+    </div>
+  ) : null;
   return (
     <main className="page-main article-page">
       <BackLink />
       <div className="article-breadcrumb"><button type="button" onClick={() => navigate(`category/${category.id}`)}>{category.label}</button><ChevronRight size={15} /><span>{topic.title}</span></div>
       <header className={`article-header ${topic.color}`}>
         <span className="topic-icon"><IconFor name={topic.icon} size={26} /></span>
-        <div><p>{topic.group}</p><h1>{topic.title}</h1></div>
+        <div><p>{topic.group}</p><h1>{topic.title}</h1>{topic.intro && <span>{topic.intro}</span>}</div>
         <button className={saved ? 'article-save saved' : 'article-save'} type="button" onClick={() => toggleSaved(topic.id)} aria-pressed={saved}>
           <Bookmark size={19} fill={saved ? 'currentColor' : 'none'} />{saved ? 'Saved' : 'Save'}
         </button>
       </header>
       <div className="article-layout">
-        <article className="markdown-content">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
-            a: ({ ...props }) => <a {...props} target="_blank" rel="noreferrer" />,
-          }}>{topic.body}</ReactMarkdown>
-          {sourceIds.length > 0 && (
-            <details className="source-notes">
-              <summary>Sources used in this topic</summary>
-              <ol>{sourceIds.map((id) => <li key={id}><span>[{id}]</span> {sourceNotes[id]}</li>)}</ol>
-            </details>
-          )}
-          <footer className="content-source"><Sparkles size={18} aria-hidden="true" /><span>Consolidated from: {topic.source}</span></footer>
+        <article className="reference-content">
+          {topic.path && <section className="reference-block"><h2>Assessment sequence</h2>{renderLinks(topic.path, 'path-list')}</section>}
+          {topic.scale && <section className="reference-block"><h2>AVPU scale</h2><div className="scale-grid">{topic.scale.map((item) => <div key={item.letter}><span>{item.letter}</span><strong>{item.title}</strong><p>{item.text}</p></div>)}</div></section>}
+          {topic.march && <section className="reference-block"><h2>Select a MARCHE priority</h2><div className="march-grid">{topic.march.map((item) => <button key={item.letter} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><b>{item.letter}</b><span><strong>{item.title}</strong><small>{item.text}</small></span><ChevronRight size={21} /></button>)}</div></section>}
+          {topic.steps && <section className="reference-block"><h2>How to do it</h2><ol className="step-list">{topic.steps.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}</ol></section>}
+          {topic.sections?.map((section) => <section className="reference-block" key={section.title}><h2>{section.title}</h2><ul className="check-list">{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul></section>)}
+          {topic.notice && <aside className="reference-notice"><TriangleAlert size={21} /><div><strong>{topic.notice.title}</strong><p>{topic.notice.text}</p></div></aside>}
+          {topic.actions && <section className="reference-block"><h2>Open a procedure or product</h2>{renderLinks(topic.actions, 'action-grid')}</section>}
+          {topic.resources?.length > 0 && <section className="reference-block resources"><h2>Official references & media</h2>{topic.resources.map((resource) => <a key={resource.url} href={resource.url} target="_blank" rel="noreferrer"><span><em>{resource.kind}</em><strong>{resource.title}</strong><small>{resource.description}</small></span><ExternalLink size={19} /></a>)}</section>}
         </article>
         <aside className="related-panel">
-          <h2>Related information</h2>
+          <h2>Go next</h2>
           {related.map((item) => <button key={item.id} type="button" onClick={() => navigate(`topic/${item.id}`)}><span>{item.title}</span><ChevronRight size={17} /></button>)}
         </aside>
       </div>
@@ -479,11 +450,13 @@ export default function App() {
   const category = route.kind === 'category' ? getCategory(route.id) : null;
 
   let content;
-  if (route.kind === 'home') content = <HomeView saved={saved} toggleSaved={toggleSaved} recent={recent} />;
+  if (route.kind === 'home') content = <HomeView />;
   else if (route.kind === 'explore') content = <DirectoryView key="explore" saved={saved} toggleSaved={toggleSaved} />;
   else if (route.kind === 'category') {
     content = category
-      ? <DirectoryView key={`category-${category.id}`} title={category.label} intro={category.description} topicList={topicsForCategory(category.id)} saved={saved} toggleSaved={toggleSaved} />
+      ? category.id === 'assessment'
+        ? <ArticleView topic={topicById['assessment-overview']} saved={saved.includes('assessment-overview')} toggleSaved={toggleSaved} />
+        : <DirectoryView key={`category-${category.id}`} title={category.label} intro={category.description} topicList={topicsForCategory(category.id)} saved={saved} toggleSaved={toggleSaved} />
       : <NotFoundView />;
   } else if (route.kind === 'topic') {
     content = activeTopic ? <ArticleView topic={activeTopic} saved={saved.includes(activeTopic.id)} toggleSaved={toggleSaved} /> : <NotFoundView />;

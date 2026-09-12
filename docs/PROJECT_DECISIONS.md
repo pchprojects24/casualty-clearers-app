@@ -37,5 +37,7 @@ Updated 11 September 2026.
 
 - `pchprojects24/casualty-clearers-app` is the private project repository.
 - Raw internal source files are not to be copied into the repository.
-- The repository contains the first interactive web-app build. GitHub Pages and public visibility remain off until separately authorized.
+- The interactive web app is published with GitHub Pages at `https://pchprojects24.github.io/casualty-clearers-app/`.
+- Planning documents and source-review notes remain in `docs/` for project control; they are not rendered as app content.
+- The first complete guided pathway runs from scene survey and AVPU through MARCHE, vital signs, secondary survey and reassessment, with connected procedure, equipment and official-media links.
 - The app uses local browser state only for saved and recently viewed topics. It has no patient, account, or administrative data.

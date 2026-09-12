@@ -4,7 +4,7 @@ A consolidated information hub for AOPS casualty clearing team members.
 
 ## Current phase
 
-This repository is the project's content and application home. The first interactive application has now been built; GitHub Pages has not yet been enabled.
+This repository is the project's content and application home. The interactive application is published at [pchprojects24.github.io/casualty-clearers-app](https://pchprojects24.github.io/casualty-clearers-app/).
 
 The project brings useful casualty-clearer information together in one place. It does not include patient records, course schedules, lesson administration, attendance, testing, procurement, or a complete ship medical inventory.
 
@@ -29,14 +29,18 @@ Raw internal source documents and full equipment manuals are not stored here. Th
 
 The application is a responsive React and Vite information hub with:
 
-- Search across the consolidated treatment and blueprint content.
-- Browseable subject categories and connected topic pages.
+- Search across curated app-facing content.
+- A guided assessment pathway from scene survey through AVPU, MARCHE, vital signs, secondary survey and reassessment.
+- Interactive MARCHE letters that open the relevant actions, procedures and equipment.
+- Step-by-step procedure pages with official references and product media where useful.
 - Saved and recently viewed information stored on the user's device.
 - Responsive desktop, tablet and mobile navigation.
 - An installable manifest. The app is online-only; it does not cache for offline use.
+
+Planning documents and source-review notes remain in `docs/`; they are not rendered as user-facing app pages.
 
 Run it locally with `npm install` and `npm run dev`. Create the production bundle with `npm run build`.
 
 ## Next content step
 
-Continue converting the reviewed source decisions into clean app-facing topic wording, then complete local and equipment-model confirmations where required.
+Continue the same guided, connected treatment of content beyond the completed assessment, MARCHE, bleeding-control and airway/breathing pathway. Complete local and equipment-model confirmations where required before presenting exact local procedures.
