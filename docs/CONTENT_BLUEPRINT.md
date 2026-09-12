@@ -332,4 +332,4 @@ A current-source treatment pass is complete and recorded in the separate documen
 
 The review confirms that the core content remains useful, but requires several controlled updates before app-ready pages are drafted: use the 2025 Heart & Stroke choking sequence; remove the older two-finger infant CPR method; do not present oxygen as automatic treatment; frame collars, KEDs and backboards as locally directed packaging/movement equipment rather than routine spinal immobilization; use current open-chest-wound guidance; record the burn-cooling source difference; and keep pulse-oximetry, Rad-57 and Propaq values within a complete assessment and assigned casualty-clearer role.
 
-No web-app build was started.
+The first interactive web-app build was authorized and started on 11 September 2026. GitHub Pages remains disabled until separate publication authorization.

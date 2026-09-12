@@ -1,0 +1,12 @@
+{
+  "name": "Casualty Clearers",
+  "short_name": "Clearers",
+  "description": "Clear, connected information for casualty clearers.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f9fc",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "./app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

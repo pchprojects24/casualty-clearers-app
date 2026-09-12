@@ -37,5 +37,5 @@ Updated 11 September 2026.
 
 - `pchprojects24/casualty-clearers-app` is the private project repository.
 - Raw internal source files are not to be copied into the repository.
-- The repository may eventually host the web app, but GitHub Pages and public visibility remain off until separately authorized.
-- No web-app build has started.
+- The repository contains the first interactive web-app build. GitHub Pages and public visibility remain off until separately authorized.
+- The app uses local browser state only for saved and recently viewed topics. It has no patient, account, or administrative data.

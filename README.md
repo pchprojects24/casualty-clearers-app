@@ -4,7 +4,7 @@ A consolidated information hub for AOPS casualty clearing team members.
 
 ## Current phase
 
-This repository is the project's content home. The present work is content consolidation and review; the web app has not been built and GitHub Pages has not been enabled.
+This repository is the project's content and application home. The first interactive application has now been built; GitHub Pages has not yet been enabled.
 
 The project brings useful casualty-clearer information together in one place. It does not include patient records, course schedules, lesson administration, attendance, testing, procurement, or a complete ship medical inventory.
 
@@ -25,6 +25,18 @@ Treatment subjects use three working states:
 
 Raw internal source documents and full equipment manuals are not stored here. The repository contains consolidated decisions, source notes, and original project content.
 
+## Application
+
+The application is a responsive React and Vite information hub with:
+
+- Search across the consolidated treatment and blueprint content.
+- Browseable subject categories and connected topic pages.
+- Saved and recently viewed information stored on the user's device.
+- Responsive desktop, tablet and mobile navigation.
+- An installable manifest and offline caching foundation.
+
+Run it locally with `npm install` and `npm run dev`. Create the production bundle with `npm run build`.
+
 ## Next content step
 
-Turn the confirmed subjects into a page-level content inventory, then draft the actual subject pages. Building the web interface is a separate later step.
+Continue converting the reviewed source decisions into clean app-facing topic wording, then complete local and equipment-model confirmations where required.
