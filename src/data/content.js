@@ -11,7 +11,7 @@ const RED_CROSS_GUIDE = 'https://cdn.redcross.ca/prodmedia/crc/azure/documents/f
 const CAT_PRODUCT = 'https://www.narescue.com/all-products/combat-application-tourniquet-c-a-t.html';
 const CAT_VIDEOS = 'https://www.narescue.com/education/educational-videos/combat-application-tourniquet-c-a-t-instructions.html';
 const OLAES_PRODUCT = 'https://tacmedsolutions.com/products/olaes-modular-bandage?variant=40633970950343';
-const IGEL_PRODUCT = 'https://www.intersurgical.com/info/igel';
+const IGEL_PRODUCT = 'https://ca.intersurgical.com/products/airway-management/i-gel-supraglottic-airway';
 const IGEL_VIDEOS = 'https://www.intersurgical.com/info/videos-airway-management';
 const VITAL_SIGNS = 'https://medlineplus.gov/ency/article/002341.htm';
 const PULSE_GUIDE = 'https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse';
@@ -66,6 +66,28 @@ export const topics = [
     notice: { title: 'Match the method to the location', text: 'A tourniquet is for qualifying arm or leg bleeding. A suitable deep wound may be packed. A possible pelvic injury and an open chest wound require their own assessment and equipment pathways.' },
     resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current evidence-based guidance for direct pressure, wound packing, pressure dressings, tourniquets and open chest wounds.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian bleeding-control and tourniquet guidance.')],
     related: ['life-threatening-bleeding', 'limb-bleeding', 'wound-packing', 'bleeding-reassessment'],
+  },
+  {
+    id: 'airway-overview', title: 'Airway & Breathing', category: 'airway', group: 'Choose what you find', icon: 'airway', color: 'yellow', reference: true,
+    intro: 'First decide whether the airway is open. Then decide whether breathing is present and effective. Position, support, reassess and continue through MARCHE.',
+    cardHeading: 'Choose the airway or breathing problem',
+    cardLabel: 'Open guide',
+    scenarioCards: [
+      { topicId: 'airway-check', kicker: 'Air movement', title: 'Is the airway open?', text: 'Use responsiveness, speech, sounds and visible findings to decide whether air can move.' },
+      { topicId: 'airway-positioning', kicker: 'First intervention', title: 'Open and position', text: 'Position the airway, clear visible loose material and confirm air movement.' },
+      { topicId: 'airway-adjuncts', kicker: 'Maintain the airway', title: 'Choose an adjunct', text: 'Compare the trained OPA, NPA and i-gel pathways.' },
+      { topicId: 'breathing-assessment', kicker: 'Look, listen and feel', title: 'Is breathing effective?', text: 'Check rate, depth, regularity, effort, sounds and visible chest movement.' },
+      { topicId: 'breathing-support', kicker: 'Intervene', title: 'Support breathing', text: 'Open BVM, oxygen, open-chest-wound and arrest-response choices.' },
+      { topicId: 'airway-breathing-reassessment', kicker: 'Treatment check', title: 'Reassess airway and breathing', text: 'Confirm that positioning, adjuncts and breathing support still work.' },
+    ],
+    sections: [
+      { title: 'The common sequence', bullets: ['After massive bleeding is controlled, check whether the casualty can speak or make sounds and whether air is moving.', 'Open and maintain the airway with positioning before relying on a device.', 'Use an adjunct only when its indication, device and technique are part of current training.', 'Assess breathing with look, listen and feel; auscultation is not part of the casualty-clearer check.', 'If breathing is absent or inadequate, begin the current resuscitation or BVM response without delaying for routine monitoring.', 'Use oxygen through the current training, medical direction and applicable target—not automatically for every casualty.', 'Recheck airway position, air movement, visible chest rise and casualty response after every intervention and move.'] },
+    ],
+    actionHeading: 'Procedures, equipment and monitoring',
+    actions: [internal('opa', 'OPA', 'Review indication, sizing and the trained insertion method.'), internal('npa', 'NPA', 'Use only through the confirmed local method.'), internal('igel', 'i-gel', 'Open the advanced-airway boundary and official manufacturer media.'), internal('bvm', 'Bag-valve-mask', 'Use a two-rescuer technique when available and watch for visible chest rise.'), internal('oxygen', 'Oxygen system', 'Set up the cylinder, regulator and selected delivery device.'), internal('chest-seal', 'Open chest wound', 'Recognize the injury and use the trained vented-seal response.'), internal('pulse-oximeter', 'Pulse oximeter', 'Use the reading only as part of the complete assessment.')],
+    notice: { title: 'A device does not finish the assessment', text: 'Positioning, an airway adjunct, oxygen or a BVM can fail after movement, vomiting, changing responsiveness or a poor seal. Stay with the casualty and keep checking air movement and breathing effectiveness.' },
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for oxygen, pulse oximetry and open chest wounds.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian airway, breathing, CPR and oxygen reference.')],
+    related: ['airway-check', 'airway-positioning', 'breathing-assessment', 'breathing-support'],
   },
   {
     id: 'equipment-overview', title: 'Equipment', category: 'equipment', group: 'Choose by purpose', icon: 'equipment', color: 'coral', reference: true,
@@ -195,6 +217,7 @@ export const topics = [
     id: 'march-a', title: 'A — Airway', category: 'assessment', group: 'MARCHE', icon: 'airway', color: 'yellow', reference: true,
     intro: 'Check whether air can move freely. An open airway must be maintained and reassessed.',
     quickRoutes: [
+      internal('airway-overview', 'Choose the airway pathway', 'Open the interactive airway and breathing hub.'),
       internal('airway-positioning', 'Airway needs opening', 'Open and position the airway, then check for air movement.'),
       internal('airway-adjuncts', 'An adjunct may be needed', 'Review the trained OPA, NPA and i-gel options before choosing one.'),
       internal('march-r', 'Airway is open', 'Continue to breathing and chest assessment.'),
@@ -213,7 +236,8 @@ export const topics = [
     id: 'march-r', title: 'R — Respiration', category: 'assessment', group: 'MARCHE', icon: 'airway', color: 'yellow', reference: true,
     intro: 'Decide whether breathing is present and effective, then look for problems that require support.',
     quickRoutes: [
-      internal('respiratory-rate', 'Breathing is present', 'Measure the rate and describe whether it is effective.'),
+      internal('breathing-assessment', 'Assess breathing', 'Use look, listen and feel to decide whether breathing is effective.'),
+      internal('breathing-support', 'Breathing needs support', 'Choose BVM, oxygen, open-chest-wound or arrest-response equipment.'),
       internal('bvm', 'Breathing is absent or inadequate', 'Open the BVM page for trained breathing support.'),
       internal('oxygen', 'Oxygen may be indicated', 'Check the carried system, trained method and authorized target.'),
       internal('chest-seal', 'Open chest injury', 'Recognize entry and exit wounds, then use the locally confirmed chest-seal response.'),
@@ -288,7 +312,7 @@ export const topics = [
     ],
     notice: { title: 'Confirm the actual product', text: 'Before a detailed application card is added, confirm the carried chest-seal model, whether it is vented, and the current CCT training method.' },
     resources: [external(AHA_FIRST_AID, 'American Heart Association and American Red Cross first-aid guidance', 'Current guidance for open chest wounds and worsening breathing after a dressing or seal.')],
-    related: ['march-r', 'respiratory-rate', 'bvm', 'oxygen'],
+    related: ['airway-overview', 'breathing-assessment', 'bvm', 'oxygen'],
   },
   {
     id: 'pelvic-binder', title: 'Pelvic binder', category: 'equipment', group: 'Possible pelvic injury — local equipment confirmation required', icon: 'equipment', color: 'coral', reference: true,
@@ -670,12 +694,73 @@ export const topics = [
     related: ['pressure-dressing', 'wound-packing', 'direct-pressure', 'cat-tourniquet'],
   },
   {
+    id: 'airway-check', title: 'Check whether the airway is open', category: 'airway', group: 'Air movement', icon: 'airway', color: 'yellow', reference: true,
+    intro: 'An open airway allows air to move between the mouth and nose and the lungs. Use what the casualty can do, what you hear and what you see to make the first decision.',
+    sections: [
+      { title: 'Signs the airway is open', bullets: ['The casualty can speak, cry or make clear sounds.', 'Air can be heard and felt moving at the mouth or nose.', 'The chest rises and falls with breathing.', 'There is no visible blockage or abnormal airway sound.'] },
+      { title: 'Signs the airway may be threatened or blocked', bullets: ['The casualty cannot speak or make normal sounds.', 'Snoring, gurgling, stridor or greatly reduced or absent air movement', 'Visible blood, vomit, secretions or a loose object in the mouth', 'Falling responsiveness or loss of the position that was holding the airway open', 'Poor or absent chest movement despite breathing effort'] },
+      { title: 'Immediate sequence', bullets: ['Check responsiveness and call for assistance early.', 'Look in the mouth and remove only clearly visible loose material that can be removed easily.', 'Open and position the airway using the method taught for the casualty and situation.', 'Look, listen and feel again to confirm air movement.', 'If the airway is open but will not stay open, choose only an adjunct included in current training.', 'If the casualty is not breathing normally, begin the current resuscitation response and bring the BVM and AED.'] },
+    ],
+    actionHeading: 'Choose the next action',
+    actions: [internal('airway-positioning', 'Open and position the airway', 'Use positioning first and maintain it.'), internal('airway-adjuncts', 'Airway adjuncts', 'Compare OPA, NPA and i-gel pathways.'), internal('breathing-assessment', 'Check breathing', 'Once air can move, decide whether breathing is effective.'), internal('bvm', 'Bag-valve-mask', 'Support absent or inadequate breathing when trained.'), internal('aed', 'CPR and AED response', 'Open the AED sequence for a casualty in cardiac arrest.')],
+    notice: { title: 'Never assume it stays open', text: 'Responsiveness, position, vomiting, secretions and movement can change the airway. Maintain the position and repeat the check after every intervention or transfer.' },
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross airway and breathing guidance', 'Current Canadian airway-opening and breathing-assessment sequence.')],
+    related: ['airway-overview', 'airway-positioning', 'airway-adjuncts', 'breathing-assessment'],
+  },
+  {
+    id: 'breathing-assessment', title: 'Assess breathing effectiveness', category: 'airway', group: 'Look, listen and feel', icon: 'airway', color: 'yellow', reference: true,
+    intro: 'Breathing can be present without being effective. Watch the casualty, count the rate and describe the quality before choosing support.',
+    steps: ['Confirm that the airway is open and positioned.', 'Expose enough of the chest to see movement and injury while protecting the casualty from unnecessary exposure.', 'Look for chest and abdominal movement, symmetry, depth and increased effort.', 'Listen at the mouth and nose for air movement and unusual sounds.', 'Feel for exhaled air when the situation allows.', 'Count the respiratory rate and note regularity without telling the casualty to change their breathing.', 'Check whether the casualty can speak normally and whether responsiveness or skin signs are changing.', 'Look for chest injury, pain and possible entry and exit wounds.', 'Record the rate and quality, then repeat after positioning, treatment or movement.'],
+    sections: [
+      { title: 'Breathing appears effective when', bullets: ['Air is moving and visible chest rise is present.', 'Rate, depth and regularity fit the casualty and situation.', 'There is no marked effort, gasping, severe distress or worsening skin sign.', 'The casualty can speak appropriately for their level of responsiveness.'] },
+      { title: 'Breathing may be inadequate when', bullets: ['Breathing is absent, only gasping or becoming irregular.', 'Chest rise is poor, very shallow or unequal.', 'Rate is unusually slow or fast for the casualty and situation.', 'The casualty cannot speak normally because of breathing difficulty.', 'There is marked effort, fatigue, abnormal sound, blue-grey skin or falling responsiveness.'] },
+      { title: 'What casualty clearers do not need', bullets: ['Auscultation is not part of this casualty-clearer check.', 'Do not delay visible assessment and treatment while searching for a monitor.', 'An SpO₂ value supports the assessment; it does not replace rate, effort, chest movement, skin and responsiveness.'] },
+    ],
+    actionHeading: 'Choose the next breathing step',
+    actions: [internal('respiratory-rate', 'Count and describe respirations', 'Record rate, rhythm, depth, effort, sounds and pain.'), internal('breathing-support', 'Support breathing', 'Choose BVM, oxygen, chest-wound or arrest-response equipment.'), internal('bvm', 'Bag-valve-mask', 'Assist absent or inadequate breathing.'), internal('oxygen', 'Oxygen', 'Use the carried system under the applicable direction and target.'), internal('chest-seal', 'Open chest wound', 'Use the separate trained chest-wound response.'), internal('march-c', 'Continue to C — Circulation', 'Continue when breathing is present, effective and supported as needed.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current breathing assessment, oxygen, pulse oximetry and open-chest-wound considerations.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross airway and breathing guidance', 'Current look, listen and feel assessment sequence.')],
+    related: ['airway-overview', 'airway-check', 'respiratory-rate', 'breathing-support'],
+  },
+  {
+    id: 'breathing-support', title: 'Choose breathing support', category: 'airway', group: 'Match support to the problem', icon: 'airway', color: 'sky', reference: true,
+    intro: 'Choose support from the full assessment—not from one number. Keep the airway open, treat the immediate problem and check for visible improvement.',
+    cardHeading: 'Choose the breathing problem',
+    cardLabel: 'Open equipment guide',
+    scenarioCards: [
+      { topicId: 'bvm', kicker: 'Absent or inadequate breathing', title: 'Use a BVM', text: 'Open the trained two-rescuer sequence and visible-chest-rise check.' },
+      { topicId: 'oxygen', kicker: 'Spontaneously breathing', title: 'Set up oxygen', text: 'Use the correct cylinder, regulator, device, flow and authorized target.' },
+      { topicId: 'chest-seal', kicker: 'Open chest wound', title: 'Chest-wound response', text: 'Recognize entry and exit wounds and use the trained vented-seal pathway.' },
+      { topicId: 'aed', kicker: 'Not breathing normally and pulseless', title: 'CPR and AED response', text: 'Begin the current resuscitation sequence and use the AED as soon as possible.' },
+    ],
+    sections: [
+      { title: 'Use the whole casualty picture', bullets: ['Maintain the airway before and during any breathing support.', 'Use a BVM when breathing is absent or inadequate and the responder is trained.', 'Use two trained rescuers for BVM ventilation when available: one maintains the airway and mask seal while the other squeezes the bag.', 'Ventilate only enough to produce visible chest rise and avoid excessive rate or volume.', 'Use oxygen through current training or medical direction with the selected delivery device and applicable target.', 'For an open chest wound, use the separate trained response and watch continuously for worsening breathing.', 'If the casualty is not breathing normally and has no pulse under the current check, begin the current CPR and AED response.'] },
+      { title: 'Confirm improvement', bullets: ['Repeat respiratory rate and quality.', 'Watch for visible chest rise during every assisted breath.', 'Check mask seal, airway position, tubing, oxygen supply and device connections.', 'Trend responsiveness, skin signs and reliable monitor readings.', 'Report worsening breathing or a support method that is not working immediately.'] },
+    ],
+    actions: [internal('pulse-oximeter', 'Portable pulse oximeter', 'Confirm a stable signal and interpret the number with the clinical picture.'), internal('airway-breathing-reassessment', 'Reassess support', 'Check airway position, adjuncts, ventilation and oxygen equipment.'), internal('march-c', 'Continue to C — Circulation', 'Proceed after breathing is supported and reassessed.')],
+    notice: { title: 'Oxygen is not automatic', text: 'Do not apply oxygen to every casualty by default or chase a monitor number alone. Use the current CCT training, medical direction, the casualty’s condition and the applicable oxygen target.' },
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current evidence review for oxygen, pulse oximetry and open chest wounds.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian airway, breathing, CPR and oxygen reference.')],
+    related: ['bvm', 'oxygen', 'chest-seal', 'airway-breathing-reassessment'],
+  },
+  {
+    id: 'airway-breathing-reassessment', title: 'Airway and breathing reassessment', category: 'airway', group: 'Confirm the treatment works', icon: 'airway', color: 'violet', reference: true,
+    intro: 'Airway and breathing treatments can shift or fail. Recheck the casualty and every connection after intervention, movement, vomiting or any change in responsiveness.',
+    phaseHeading: 'Airway and breathing check cycle',
+    scenarioPhases: [
+      { kicker: 'Airway', title: 'Confirm the airway position', text: 'Make sure the position still allows air to move.', bullets: ['Look again for visible blood, vomit, secretions or loose material.', 'Listen for new snoring, gurgling, stridor or reduced air movement.', 'Repeat the airway-opening manoeuvre and maintain hands-on positioning when needed.', 'Check whether responsiveness has changed.'], links: [internal('airway-check', 'Airway check', 'Repeat the open-or-threatened decision.'), internal('airway-positioning', 'Airway positioning', 'Restore and maintain the airway position.')] },
+      { kicker: 'Adjunct', title: 'Check any airway adjunct', text: 'An adjunct must remain tolerated, correctly positioned and effective.', bullets: ['Confirm the device has not shifted, become loose or become obstructed.', 'Watch for gagging, coughing, resistance, vomiting or increasing responsiveness.', 'Confirm air movement after every adjustment or move.', 'If the device is not working, return immediately to positioning and the current trained response.'], links: [internal('airway-adjuncts', 'Airway adjuncts', 'Review OPA, NPA and i-gel choices.'), internal('igel', 'i-gel', 'Open the advanced-airway checks and manufacturer media.')] },
+      { kicker: 'Breathing', title: 'Repeat rate and quality', text: 'Look, listen and feel again instead of relying on the previous assessment.', bullets: ['Count the rate and describe depth, regularity and effort.', 'Look for visible and equal chest movement as access allows.', 'Note new pain, injury findings, abnormal sounds, skin changes or fatigue.', 'Treat absent, gasping or inadequate breathing without delaying for a routine monitor reading.'], links: [internal('breathing-assessment', 'Breathing assessment', 'Repeat the complete visual and hands-on check.'), internal('respiratory-rate', 'Respiratory rate and quality', 'Count and record the new finding.')] },
+      { kicker: 'Equipment', title: 'Check the support equipment', text: 'Trace every part of the BVM or oxygen setup from the casualty back to the source.', bullets: ['Confirm the mask position and seal.', 'Watch for visible chest rise with assisted ventilation.', 'Check the BVM valve, oxygen tubing, regulator, cylinder pressure and selected delivery device.', 'Secure the cylinder and tubing for movement.', 'Use SpO₂ only after confirming a reliable signal and comparing it with the casualty.'], links: [internal('bvm', 'Bag-valve-mask', 'Review seal, ventilation and chest-rise checks.'), internal('oxygen', 'Oxygen system', 'Review the cylinder-to-casualty setup.'), internal('pulse-oximeter', 'Pulse oximeter', 'Validate the displayed reading.')] },
+      { kicker: 'Continue', title: 'Report and continue MARCHE', text: 'State what changed and whether the intervention is working.', bullets: ['Record the new respiratory rate, quality, treatment and response.', 'Report deterioration, ineffective ventilation, falling responsiveness or equipment failure immediately.', 'Repeat the cycle after every major move or transfer.', 'Continue to C—Circulation when airway and breathing are supported, returning to A or R immediately if either changes.'], links: [internal('march-c', 'Continue to C — Circulation', 'Proceed to pulse, skin and shock concerns.'), internal('reassessment-loop', 'Full reassessment loop', 'Restart MARCHE after movement or change.')] },
+    ],
+    related: ['airway-overview', 'airway-check', 'breathing-assessment', 'breathing-support'],
+  },
+  {
     id: 'airway-positioning', title: 'Open and position the airway', category: 'airway', group: 'Airway', icon: 'airway', color: 'yellow', reference: true,
     intro: 'Positioning is the first airway intervention. Continue to hold and reassess the airway after it opens.',
     steps: ['Check responsiveness and look for clearly visible loose material in the mouth.', 'Remove only material that you can clearly see and easily remove.', 'Use the airway-opening manoeuvre taught for the casualty and situation.', 'When head or neck trauma is a concern, a trained responder may begin with a jaw thrust.', 'If a jaw thrust does not open the airway, opening the airway and supporting breathing take priority.', 'Look, listen and feel for air movement, then maintain the position and continue into respiration.'],
     notice: { title: 'Keep hands-on control', text: 'An airway can change after movement, vomiting or a change in responsiveness. Recheck it whenever the casualty moves or deteriorates.' },
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross airway guidance', 'Current general airway and breathing care.')],
-    related: ['march-a', 'opa', 'npa', 'bvm'],
+    related: ['airway-overview', 'airway-check', 'opa', 'bvm'],
   },
   {
     id: 'airway-adjuncts', title: 'Airway adjuncts', category: 'airway', group: 'Airway', icon: 'airway', color: 'yellow', reference: true,
@@ -687,28 +772,28 @@ export const topics = [
     notice: { title: 'The device does not make the airway “finished”', text: 'Stay with the casualty, keep reassessing and return to airway support immediately if air movement or responsiveness changes.' },
     actions: [internal('opa', 'OPA', 'Purpose, sizing, checks and trained-use sequence.'), internal('npa', 'NPA', 'Purpose and local-method confirmation.'), internal('igel', 'i-gel', 'Training-dependent device page and official manufacturer media.')],
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross airway guidance', 'Current general airway and breathing care.'), external(IGEL_PRODUCT, 'Official i-gel product page', 'Manufacturer product information and adult sizing documents.', 'Manufacturer')],
-    related: ['march-a', 'airway-positioning', 'opa', 'npa'],
+    related: ['airway-overview', 'airway-positioning', 'opa', 'npa'],
   },
   {
     id: 'opa', title: 'Oropharyngeal airway — OPA', category: 'airway', group: 'Airway adjunct — trained skill', icon: 'airway', color: 'yellow', reference: true,
     intro: 'An OPA helps hold the tongue away from the airway in an unresponsive casualty without an intact gag response.',
     steps: ['Confirm that the casualty is unresponsive and has no intact gag response.', 'Select and measure the size using the method taught in the current course.', 'Open the mouth and insert using the taught technique for that airway and casualty group.', 'Stop and remove it if the casualty gags, coughs or becomes more responsive.', 'Confirm air movement and continue to maintain the airway.', 'Reassess after movement and during ventilation.'],
     notice: { title: 'Technique must match current training', text: 'Sizing and insertion methods vary by age group and course. This page does not replace hands-on practice with the locally taught method.' },
-    related: ['march-a', 'airway-positioning', 'npa', 'bvm'],
+    related: ['airway-overview', 'airway-positioning', 'npa', 'bvm'],
   },
   {
     id: 'npa', title: 'Nasopharyngeal airway — NPA', category: 'airway', group: 'Airway adjunct — local method required', icon: 'airway', color: 'yellow', reference: true,
     intro: 'An NPA can support an airway when the casualty has some responsiveness or an OPA is not tolerated. The exact CCT method must be confirmed before a step card is published.',
     sections: [{ title: 'The finished page must confirm', bullets: ['Indications and contraindications', 'The carried NPA type', 'Sizing landmark', 'Lubrication method', 'Insertion direction and resistance response', 'How placement and continued effectiveness are checked'] }],
     notice: { title: 'Do not improvise', text: 'Use an NPA only if it is currently taught and follow that exact method. Stop if the device will not advance easily.' },
-    related: ['march-a', 'airway-positioning', 'opa', 'bvm'],
+    related: ['airway-overview', 'airway-positioning', 'opa', 'bvm'],
   },
   {
     id: 'igel', title: 'i-gel supraglottic airway', category: 'equipment', group: 'Advanced airway adjunct — confirmation required', icon: 'equipment', color: 'coral', reference: true,
     intro: 'The i-gel is a single-use supraglottic airway available in weight-based sizes. It belongs in the CCT hub only if the carried model, training and authorization are confirmed.',
     sections: [{ title: 'Before publishing a CCT quick-use sequence', bullets: ['Confirm that casualty clearers are trained and authorized to insert it.', 'Identify the exact carried i-gel or i-gel O₂ product.', 'Confirm size selection, insertion, ventilation connection and securing method.', 'Confirm placement checks and the response to ineffective ventilation.'] }],
     resources: [external(IGEL_PRODUCT, 'Official i-gel product page', 'Manufacturer product information and adult sizing documents.', 'Manufacturer'), external(IGEL_VIDEOS, 'Official Intersurgical airway videos', 'Includes i-gel training and guidance media.', 'Official video')],
-    related: ['march-a', 'airway-positioning', 'bvm', 'opa'],
+    related: ['airway-overview', 'airway-adjuncts', 'bvm', 'opa'],
   },
   {
     id: 'bvm', title: 'Bag-valve-mask — BVM', category: 'airway', group: 'Breathing support — trained skill', icon: 'airway', color: 'yellow', reference: true,
@@ -716,14 +801,14 @@ export const topics = [
     steps: ['Open and maintain the airway.', 'Select the correct mask and connect oxygen when directed and available.', 'Position the mask over the nose and mouth.', 'Create and maintain an effective seal; use two hands on the mask when a second rescuer can squeeze the bag.', 'Ventilate only enough to produce visible chest rise.', 'Avoid excessive rate or volume.', 'Continuously reassess chest rise, air leak, airway position and casualty response.'],
     notice: { title: 'Use the current resuscitation sequence', text: 'Ventilation timing changes with the casualty’s pulse, CPR status and advanced-airway status. Follow the current course algorithm rather than memorizing one rate for every situation.' },
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross breathing and resuscitation guidance', 'General airway, breathing and CPR reference.')],
-    related: ['march-r', 'march-a', 'airway-positioning', 'oxygen'],
+    related: ['airway-overview', 'breathing-assessment', 'airway-positioning', 'oxygen'],
   },
   {
     id: 'oxygen', title: 'Oxygen', category: 'equipment', group: 'Breathing-support equipment', icon: 'equipment', color: 'coral', reference: true,
     intro: 'Oxygen is not automatic for every casualty. Use it under current training or medical direction, with the correct delivery device and target.',
     sections: [{ title: 'Quick-use sequence', bullets: ['Confirm the cylinder and regulator are compatible and undamaged.', 'Secure the cylinder before opening it.', 'Open the valve slowly and check the pressure.', 'Connect the selected delivery device.', 'Set the ordered or trained flow rate.', 'Apply the device and reassess breathing, skin, responsiveness and assigned monitor readings.', 'When finished, close the cylinder, relieve line pressure and return the regulator to zero.'] }, { title: 'Safety', bullets: ['Keep away from flame, heat, oil and grease.', 'Protect the cylinder from falling or impact.', 'Do not let a monitor reading override obvious respiratory distress.'] }],
     notice: { title: 'Confirm the carried system', text: 'The final page should show the actual shipboard cylinder, regulator, masks and authorized targets once those details are confirmed.' },
-    related: ['march-r', 'respiratory-rate', 'bvm', 'vital-signs'],
+    related: ['airway-overview', 'breathing-support', 'bvm', 'respiratory-rate'],
   },
   {
     id: 'equipment-bag-check', title: 'Response-bag check', category: 'equipment', group: 'Team readiness', icon: 'equipment', color: 'coral', reference: true,
