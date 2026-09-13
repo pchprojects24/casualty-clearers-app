@@ -221,6 +221,39 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 .equipment-links button > span { min-width: 0; display: grid; gap: 3px; }
 .equipment-links strong { font-size: 14px; line-height: 1.3; }
 .equipment-links small { color: var(--muted); font-size: 12px; line-height: 1.38; }
+.scenario-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.scenario-card-grid > button { --card-accent: #159d79; --card-soft: #e8faf4; min-height: 196px; border: 1px solid #cfe9e0; border-radius: 17px; background: linear-gradient(145deg, var(--card-soft), #fff 70%); padding: 21px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; color: inherit; cursor: pointer; transition: 170ms ease; }
+.scenario-card-grid > button:nth-child(2) { --card-accent: #167aaa; --card-soft: #eaf7fd; border-color: #d4eaf4; }
+.scenario-card-grid > button:nth-child(3) { --card-accent: #6b4fc2; --card-soft: #f1edff; border-color: #e0dafa; }
+.scenario-card-grid > button:nth-child(4) { --card-accent: #b45c21; --card-soft: #fff4e8; border-color: #f2dfca; }
+.scenario-card-grid > button:hover { border-color: var(--card-accent); box-shadow: 0 10px 24px rgba(18,32,53,0.08); transform: translateY(-2px); }
+.scenario-card-grid > button > span { color: var(--card-accent); font-size: 11px; font-weight: 800; letter-spacing: 0.065em; text-transform: uppercase; }
+.scenario-card-grid strong { margin-top: 8px; font-size: 21px; letter-spacing: -0.025em; line-height: 1.18; }
+.scenario-card-grid p { margin: 8px 0 18px; color: var(--muted); font-size: 14px; line-height: 1.48; }
+.scenario-card-grid em { margin-top: auto; color: var(--card-accent); display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-style: normal; font-weight: 750; }
+.scenario-timeline { display: grid; gap: 15px; }
+.scenario-phase { position: relative; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 14px; align-items: start; }
+.scenario-phase:not(:last-child)::after { content: ''; position: absolute; left: 23px; top: 49px; bottom: -16px; width: 2px; background: #cae9e1; }
+.phase-number { width: 48px; height: 48px; border-radius: 15px; background: #daf5ed; color: #118366; display: grid; place-items: center; font-size: 18px; font-weight: 850; position: relative; z-index: 1; }
+.phase-content { min-width: 0; border: 1px solid var(--border); border-radius: 16px; background: linear-gradient(145deg, #f8fffc, #fff 55%); padding: 19px 20px; }
+.phase-kicker { color: #118366; font-size: 11px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; }
+.phase-content h3 { margin: 4px 0 7px; font-size: 20px; letter-spacing: -0.025em; }
+.phase-content > p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.phase-content > .check-list { margin-top: 16px; color: #344054; font-size: 14px; line-height: 1.5; }
+.phase-link-grid { margin-top: 17px; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.phase-link-grid button { min-width: 0; min-height: 64px; border: 0; border-bottom: 1px solid var(--border); background: transparent; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 9px; padding: 10px 8px 10px 2px; color: inherit; text-align: left; cursor: pointer; }
+.phase-link-grid button:nth-child(odd) { margin-right: 10px; }
+.phase-link-grid button:hover strong { color: #118366; }
+.phase-link-grid button > span { min-width: 0; display: grid; gap: 3px; }
+.phase-link-grid strong { font-size: 13px; line-height: 1.3; }
+.phase-link-grid small { color: var(--muted); font-size: 11px; line-height: 1.35; }
+.role-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.role-card-grid > article { min-width: 0; border: 1px solid #cfe9e0; border-radius: 16px; background: linear-gradient(145deg, #effbf7, #fff 58%); padding: 19px; }
+.role-card-grid > article:nth-child(2) { border-color: #d4eaf4; background: linear-gradient(145deg, #eff9fd, #fff 58%); }
+.role-card-grid > article:nth-child(3) { border-color: #e0dafa; background: linear-gradient(145deg, #f5f2ff, #fff 58%); }
+.role-card-grid h3 { margin: 0; font-size: 18px; letter-spacing: -0.02em; }
+.role-card-grid > article > p { margin: 7px 0 15px; color: var(--muted); font-size: 13px; line-height: 1.46; }
+.role-card-grid .check-list { font-size: 13px; line-height: 1.45; }
 .scale-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .scale-grid > div { border: 1px solid var(--border); border-radius: 14px; padding: 16px; min-width: 0; }
 .scale-grid > div > span { width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; background: #dff7f2; color: #087e70; font-size: 23px; font-weight: 800; margin-bottom: 12px; }
@@ -349,7 +382,7 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
   .reference-content { padding: 24px 0; border-radius: 0; box-shadow: none; }
   .reference-block + .reference-block, .reference-notice + .reference-block { margin-top: 30px; }
   .reference-block h2 { font-size: 20px; }
-  .action-grid, .march-grid, .quick-route-grid, .equipment-directory { grid-template-columns: 1fr; }
+  .action-grid, .march-grid, .quick-route-grid, .equipment-directory, .scenario-card-grid, .role-card-grid { grid-template-columns: 1fr; }
   .path-list button, .action-grid button { min-height: 72px; padding: 13px 14px; }
   .action-grid > button:last-child:nth-child(odd) { grid-column: auto; }
   .quick-route-grid button { min-height: 92px; padding: 14px; }
@@ -372,6 +405,16 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
   .equipment-group > header > b { width: 46px; height: 46px; font-size: 23px; }
   .equipment-links { padding-inline: 13px; }
   .equipment-links button { min-height: 64px; }
+  .scenario-card-grid > button { min-height: 174px; padding: 18px; border-radius: 14px; }
+  .scenario-card-grid strong { font-size: 20px; }
+  .scenario-phase { grid-template-columns: 40px minmax(0, 1fr); gap: 10px; }
+  .scenario-phase:not(:last-child)::after { left: 19px; top: 41px; }
+  .phase-number { width: 40px; height: 40px; border-radius: 12px; font-size: 16px; }
+  .phase-content { padding: 17px 15px; border-radius: 14px; }
+  .phase-content h3 { font-size: 19px; }
+  .phase-link-grid { grid-template-columns: 1fr; }
+  .phase-link-grid button:nth-child(odd) { margin-right: 0; }
+  .role-card-grid > article { padding: 17px; border-radius: 14px; }
   .scale-grid { grid-template-columns: 1fr 1fr; }
   .scale-grid > div { padding: 14px; }
   .mnemonic-grid { grid-template-columns: 1fr; }
