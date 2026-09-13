@@ -62,7 +62,8 @@ const SECONDARY_STEPS = [
 ];
 
 const HEAD_TO_TOE_TOPICS = new Set(['head-face-check', 'neck-check', 'chest-check', 'abdomen-check', 'pelvis-check', 'limbs-check', 'back-check']);
-const SECONDARY_TOPIC_IDS = new Set(['secondary-survey', ...SECONDARY_STEPS.map((step) => step.id), ...HEAD_TO_TOE_TOPICS]);
+const REASSESSMENT_TOPICS = new Set(['reassessment-loop', 'treatment-checks', 'mist-handover', 'handover-example']);
+const SECONDARY_TOPIC_IDS = new Set(['secondary-survey', ...SECONDARY_STEPS.map((step) => step.id), ...HEAD_TO_TOE_TOPICS, ...REASSESSMENT_TOPICS]);
 
 const readStored = (key) => {
   try {
@@ -384,7 +385,7 @@ function MarcheProgress({ activeId }) {
 }
 
 function SecondaryProgress({ activeId }) {
-  const currentId = HEAD_TO_TOE_TOPICS.has(activeId) ? 'head-to-toe' : activeId;
+  const currentId = HEAD_TO_TOE_TOPICS.has(activeId) ? 'head-to-toe' : REASSESSMENT_TOPICS.has(activeId) ? 'reassessment-handover' : activeId;
   return (
     <nav className="secondary-progress" aria-label="Secondary survey sequence">
       <div className="secondary-progress-heading"><span>Secondary survey</span><strong>Build the full picture</strong></div>
@@ -440,6 +441,7 @@ function ArticleView({ topic, saved, toggleSaved }) {
           {topic.path && <section className="reference-block"><h2>Assessment sequence</h2>{renderLinks(topic.path, 'path-list')}</section>}
           {topic.scale && <section className="reference-block"><h2>AVPU scale</h2><div className="scale-grid">{topic.scale.map((item) => <div key={item.letter}><span>{item.letter}</span><strong>{item.title}</strong><p>{item.text}</p></div>)}</div></section>}
           {topic.mnemonic && <section className="reference-block"><h2>{topic.mnemonic.heading}</h2><div className="mnemonic-grid">{topic.mnemonic.items.map((item) => <div key={item.letter}><span>{item.letter}</span><div><strong>{item.title}</strong><p>{item.text}</p></div></div>)}</div></section>}
+          {topic.example && <section className="handover-example"><span>{topic.example.title}</span><blockquote>{topic.example.text}</blockquote></section>}
           {topic.march && <section className="reference-block"><h2>Select a MARCHE priority</h2><div className="march-grid">{topic.march.map((item) => <button key={item.letter} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><b>{item.letter}</b><span><strong>{item.title}</strong><small>{item.text}</small></span><ChevronRight size={21} /></button>)}</div></section>}
           {topic.quickRoutes && <section className="reference-block"><h2>{topic.quickRouteHeading || 'Choose what you need'}</h2>{renderLinks(topic.quickRoutes, 'quick-route-grid')}</section>}
           {topic.steps && <section className="reference-block"><h2>How to do it</h2><ol className="step-list">{topic.steps.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}</ol></section>}

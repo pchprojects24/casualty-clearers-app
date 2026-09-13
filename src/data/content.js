@@ -15,6 +15,7 @@ const VITAL_SIGNS = 'https://medlineplus.gov/ency/article/002341.htm';
 const PULSE_GUIDE = 'https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse';
 const AHA_FIRST_AID = 'https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines';
 const MSD_TBI = 'https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi';
+const JTS_HANDOFF = 'https://jts.health.mil/assets/docs/cpgs/CoERCCC%20Guidelines%20FY26.pdf';
 
 const internal = (topicId, title, description) => ({ topicId, title, description });
 const external = (url, title, description, kind = 'Official resource') => ({ url, title, description, kind });
@@ -384,12 +385,103 @@ export const topics = [
   },
   {
     id: 'reassessment-handover', title: 'Reassessment & handover', category: 'assessment', group: 'Ongoing care', icon: 'communications', color: 'mint', reference: true,
-    intro: 'Repeat the assessment, confirm that treatments still work and communicate changes clearly.',
-    sections: [
-      { title: 'Reassess', bullets: ['Repeat MARCHE whenever the condition changes.', 'Recheck bleeding control, airway position and breathing support.', 'Repeat AVPU, respirations, pulse, skin and assigned observations.', 'Check dressings, tourniquets, splints and movement equipment.', 'Record the time and direction of change.'] },
-      { title: 'Prepare the handover', bullets: ['Mechanism or medical complaint', 'Injuries and important findings', 'Signs: AVPU, respirations, pulse, skin and other recorded observations', 'Treatments, devices and application times', 'Response to treatment and any deterioration'] },
+    intro: 'Keep checking the casualty, confirm that every intervention still works, and hand over the important information in a clear order.',
+    quickRoutes: [
+      internal('reassessment-loop', 'The condition changed', 'Restart the priority assessment and deal with the first problem found.'),
+      internal('treatment-checks', 'A treatment was applied', 'Confirm bleeding control, airway, breathing support, circulation and protection.'),
+      internal('vital-signs', 'Repeat the observations', 'Record a new set and describe the direction of change.'),
+      internal('mist-handover', 'Prepare the handover', 'Organize mechanism, injuries, signs, treatments and response.'),
     ],
-    related: ['marche', 'vital-signs', 'secondary-survey'],
+    sections: [
+      { title: 'Restart MARCHE immediately when', bullets: ['Responsiveness decreases or behaviour changes.', 'Bleeding begins again or a dressing or tourniquet is no longer controlling it.', 'The airway becomes noisy, obstructed or difficult to maintain.', 'Breathing becomes slower, faster, more difficult or less effective.', 'Pulse, skin, circulation beyond a splint, pain or the overall condition worsens.', 'The casualty changes during or after movement.'] },
+      { title: 'Build a useful trend', bullets: ['Repeat the same observations using the same method whenever practical.', 'Record the time and whether each finding is improving, unchanged or worsening.', 'Note treatment or movement that occurred between sets.', 'Report a meaningful change immediately rather than waiting to complete every observation.'] },
+      { title: 'Before the handover', bullets: ['Complete one last priority reassessment.', 'Confirm every dressing, tourniquet, airway device, oxygen or BVM setup, splint and warming measure.', 'Make treatment times, findings and changes easy for the receiving person to understand.', 'Keep responsibility for the casualty until the receiving person acknowledges the handover.'] },
+    ],
+    nextStep: { ...internal('reassessment-loop', 'Open the reassessment loop', 'Use the same short sequence after treatment, movement or any change.'), kicker: 'Ongoing care' },
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross continual care', 'Current guidance for monitoring condition, ABCs and temperature while care continues.'), external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public guidance to repeat MIST, verbally turn over care and identify interventions.', 'Official clinical guidance')],
+    related: ['reassessment-loop', 'treatment-checks', 'mist-handover', 'secondary-survey'],
+  },
+  {
+    id: 'reassessment-loop', title: 'Reassessment loop', category: 'assessment', group: 'Ongoing care', icon: 'assessment', color: 'mint', reference: true,
+    intro: 'Use a short, repeatable loop after an intervention, after movement, at the locally directed interval, and whenever the casualty changes.',
+    steps: [
+      'Look at the whole casualty and identify why you are reassessing.',
+      'Restart MARCHE and deal with the first immediate threat found.',
+      'Confirm that each existing treatment is still in place and working.',
+      'Repeat AVPU, breathing, pulse, skin and other assigned observations.',
+      'Record the time, the new findings and what happened between assessments.',
+      'Report deterioration or a treatment problem immediately, then continue the loop.',
+    ],
+    sections: [
+      { title: 'Repeat after', bullets: ['Direct pressure, wound packing, a pressure dressing or tourniquet', 'Airway positioning, an airway adjunct, oxygen or BVM support', 'A chest dressing or seal', 'A splint, movement device or position change', 'Warming or cooling measures', 'Any change in pain, behaviour, responsiveness, breathing, pulse or skin'] },
+      { title: 'Use the trend', bullets: ['Compare with the previous set, not only a normal range.', 'Use the same measurement site and method when practical.', 'State what is different and whether the change followed treatment or movement.', 'Return to the relevant MARCHE letter when a problem is found.'] },
+    ],
+    notice: { title: 'No invented universal interval', text: 'The correct timed reassessment interval depends on current local direction and the casualty’s condition. A change or treatment problem is always a reason to reassess immediately.' },
+    actionHeading: 'Open the next check',
+    actions: [internal('treatment-checks', 'Treatment checks', 'Confirm that every intervention is still effective.'), internal('vital-signs', 'Repeat vital signs', 'Record a comparable set and the direction of change.'), internal('marche', 'Restart MARCHE', 'Return to the priority sequence.'), internal('mist-handover', 'Prepare MIST', 'Organize the report while continuing care.')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross continual care', 'Monitor the casualty’s condition and primary priorities throughout care.')],
+    related: ['reassessment-handover', 'treatment-checks', 'vital-signs', 'mist-handover'],
+  },
+  {
+    id: 'treatment-checks', title: 'Treatment checks', category: 'assessment', group: 'Ongoing care', icon: 'treatments', color: 'sky', reference: true,
+    intro: 'A treatment is not finished when it is applied. Confirm that it is still working after application, movement and any change in condition.',
+    sections: [
+      { title: 'Bleeding control', bullets: ['Confirm that bleeding has stopped.', 'Look for soak-through, new bleeding or pooling beneath the casualty.', 'Confirm that a tourniquet remains secure, note the application time and do not cover it from view.', 'Do not disturb effective packing or a dressing simply to look underneath.'] },
+      { title: 'Airway and breathing', bullets: ['Confirm that the airway remains open and any adjunct remains positioned as taught.', 'Repeat look, listen and feel; check rate, effort, sounds and visible chest movement.', 'During BVM support, confirm visible chest rise and effective technique.', 'Confirm the oxygen setup remains secure and is being used only under the applicable direction and target.', 'If breathing worsens after a chest dressing or seal, follow the trained response immediately.'] },
+      { title: 'Circulation and limbs', bullets: ['Repeat pulse, skin and the overall circulation assessment.', 'Beyond a splint or dressing, compare pulse, colour, temperature, sensation and movement as trained.', 'Use capillary refill only when it remains part of the local method.', 'Report absent pulse, worsening colour, loss of sensation, increasing pain or renewed bleeding promptly.'] },
+      { title: 'Temperature, position and movement', bullets: ['Keep the casualty insulated from the deck and environment.', 'Confirm blankets, the foil blanket and other warming or cooling measures remain appropriate.', 'Recheck the casualty and all treatments after every move or transfer.', 'Make sure straps and movement equipment are secure without compromising breathing or circulation.'] },
+    ],
+    notice: { title: 'A failed treatment becomes the priority', text: 'If bleeding restarts, the airway closes, breathing worsens or circulation beyond a splint changes, return to the relevant MARCHE letter and act immediately within training.' },
+    actionHeading: 'Open the related card',
+    actions: [internal('march-m', 'Bleeding control', 'Return to M and the carried bleeding-control options.'), internal('march-a', 'Airway', 'Recheck airway position and adjuncts.'), internal('march-r', 'Respiration', 'Recheck breathing support and chest concerns.'), internal('march-c', 'Circulation', 'Recheck pulse, skin and distal circulation.'), internal('march-h', 'Head & hypothermia', 'Repeat AVPU and protect temperature.'), internal('capillary-refill', 'Capillary refill', 'Locally taught use after splinting or dressing.')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross continual care', 'Ongoing monitoring and reassessment principles.'), external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public guidance to verify interventions during transfer of care.', 'Official clinical guidance')],
+    related: ['reassessment-loop', 'mist-handover', 'vital-signs', 'reassessment-handover'],
+  },
+  {
+    id: 'mist-handover', title: 'MIST handover', category: 'assessment', group: 'Handover', icon: 'communications', color: 'mint', reference: true,
+    intro: 'MIST puts the essential information in a predictable order so the receiving person can understand the casualty and continue care.',
+    mnemonic: {
+      heading: 'Report MIST',
+      items: [
+        { letter: 'M', title: 'Mechanism or medical complaint', text: 'What happened, when it happened, and the main illness or injury concern.' },
+        { letter: 'I', title: 'Injuries & important findings', text: 'What you found, where it is, and important findings you did not find.' },
+        { letter: 'S', title: 'Signs & trends', text: 'AVPU, breathing, pulse, skin, assigned readings, and whether the casualty is better, unchanged or worse.' },
+        { letter: 'T', title: 'Treatments & response', text: 'What was done, device and application times, whether it worked, and what still needs attention.' },
+      ],
+    },
+    sections: [
+      { title: 'Prepare before speaking', bullets: ['Complete a final MARCHE reassessment.', 'Put the findings and times in order.', 'Lead with the most urgent concern or recent deterioration.', 'Keep the report short enough to follow, but do not omit a critical treatment or change.'] },
+      { title: 'Make the treatments visible', bullets: ['Point out tourniquets, packed wounds, dressings, chest seals, airway devices and splints.', 'State oxygen or ventilation support and how the casualty responded.', 'Hand over any written record with the casualty.', 'Continue monitoring until the receiver acknowledges the report and takes over.'] },
+      { title: 'Include the direction of change', bullets: ['Give the earliest and most recent important findings.', 'State what happened between those observations.', 'Use clear words such as improving, unchanged or deteriorating.', 'Answer questions and correct any misunderstanding before leaving.'] },
+    ],
+    actionHeading: 'Practise the format',
+    actions: [internal('handover-example', 'Read a complete MIST example', 'See how the four parts become one short verbal report.'), internal('treatment-checks', 'Review treatment checks', 'Confirm everything before the report.'), internal('reassessment-loop', 'Repeat the assessment', 'Update the findings before handover.')],
+    resources: [external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public guidance to repeat MIST, verbally transfer care, provide documentation and identify interventions.', 'Official clinical guidance')],
+    related: ['handover-example', 'treatment-checks', 'reassessment-loop', 'secondary-survey'],
+  },
+  {
+    id: 'handover-example', title: 'MIST handover example', category: 'assessment', group: 'Handover — practice example', icon: 'communications', color: 'mint', reference: true,
+    intro: 'This made-up example shows how separate findings become one concise report. The values and event are fictional.',
+    mnemonic: {
+      heading: 'Build the example',
+      items: [
+        { letter: 'M', title: 'Mechanism', text: 'Adult casualty fell from a ladder approximately 20 minutes ago and landed on the right side.' },
+        { letter: 'I', title: 'Injuries', text: 'Closed deformity and pain to the right lower leg. No other injury found during the secondary check.' },
+        { letter: 'S', title: 'Signs', text: 'Alert throughout. Breathing 18 and effective. Radial pulse changed from 104 to 96 and remains regular. Skin is cool and pale.' },
+        { letter: 'T', title: 'Treatments', text: 'Right leg supported and splinted at 1015. Distal pulse, skin, sensation and movement are unchanged after splinting. Casualty kept warm.' },
+      ],
+    },
+    example: {
+      title: 'Say it as one report',
+      text: 'Adult casualty fell from a ladder about 20 minutes ago and landed on the right side. They have a closed deformity and pain to the right lower leg, with no other injury identified during the secondary check. They have remained alert. Breathing is 18 and effective. Radial pulse changed from 104 to 96 and is regular; skin remains cool and pale. The leg was supported and splinted at 1015. Distal circulation, sensation and movement are unchanged after splinting, and the casualty has been kept warm.'
+    },
+    sections: [
+      { title: 'Why the report works', bullets: ['It follows one predictable order.', 'It gives a trend instead of an isolated pulse.', 'It states the treatment time and whether the treatment changed distal findings.', 'It identifies the remaining concern without adding a diagnosis.'] },
+      { title: 'Before using MIST', bullets: ['Replace every example detail with the actual casualty findings.', 'Include assigned readings only when they were actually measured.', 'Report urgent deterioration before completing a polished handover.', 'Use the locally taught terminology when it differs from this example.'] },
+    ],
+    notice: { title: 'Practice example only', text: 'The app does not collect or store casualty information. This page demonstrates the communication structure only.' },
+    resources: [external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public hand-off and MIST guidance.', 'Official clinical guidance')],
+    related: ['mist-handover', 'treatment-checks', 'reassessment-loop', 'vital-signs'],
   },
   {
     id: 'direct-pressure', title: 'Direct pressure', category: 'bleeding', group: 'Bleeding control', icon: 'bleeding', color: 'sky', reference: true,
