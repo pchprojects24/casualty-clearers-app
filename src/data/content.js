@@ -14,6 +14,7 @@ const IGEL_VIDEOS = 'https://www.intersurgical.com/info/videos-airway-management
 const VITAL_SIGNS = 'https://medlineplus.gov/ency/article/002341.htm';
 const PULSE_GUIDE = 'https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse';
 const AHA_FIRST_AID = 'https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines';
+const MSD_TBI = 'https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi';
 
 const internal = (topicId, title, description) => ({ topicId, title, description });
 const external = (url, title, description, kind = 'Official resource') => ({ url, title, description, kind });
@@ -210,8 +211,9 @@ export const topics = [
       { title: 'Record', bullets: ['Time of each set', 'Position and relevant circumstances', 'Exact rate and observed quality', 'Treatment given between sets', 'Direction of change: improving, unchanged or deteriorating'] },
     ],
     actions: [internal('respiratory-rate', 'Respiratory rate & quality', 'Count and describe breathing.'), internal('pulse', 'Pulse rate & quality', 'Find, count and describe a pulse.'), internal('skin-signs', 'Skin signs', 'Assess colour, temperature and moisture.'), internal('avpu', 'AVPU', 'Describe responsiveness consistently.')],
+    nextStep: { ...internal('head-to-toe', 'Continue to the injury check', 'Use a focused examination or a systematic head-to-toe check to find other injuries.'), kicker: 'Secondary survey' },
     resources: [external(VITAL_SIGNS, 'MedlinePlus: Vital signs', 'Reviewed January 2025; general healthy-adult resting ranges.'), external(RED_CROSS_GUIDE, 'Canadian Red Cross assessment guidance', 'Responsiveness, breathing, skin and ongoing care.')],
-    related: ['respiratory-rate', 'pulse', 'skin-signs', 'avpu'],
+    related: ['secondary-survey', 'respiratory-rate', 'pulse', 'skin-signs', 'avpu'],
   },
   {
     id: 'respiratory-rate', title: 'Respiratory rate & quality', category: 'assessment', group: 'Vital signs', icon: 'airway', color: 'yellow', reference: true,
@@ -241,14 +243,144 @@ export const topics = [
   },
   {
     id: 'secondary-survey', title: 'Secondary survey', category: 'assessment', group: 'After immediate threats', icon: 'assessment', color: 'teal', reference: true,
-    intro: 'Begin after immediate life threats have been identified and managed. Continue to watch for deterioration while gathering more information.',
-    sections: [
-      { title: 'History', bullets: ['Signs and symptoms', 'Allergies', 'Medications', 'Past medical history', 'Last oral intake', 'Events leading to the incident'] },
-      { title: 'Head-to-toe check', bullets: ['Systematically check the head and neck, chest, abdomen, pelvis, limbs and back as appropriate.', 'Look and feel for wounds, bleeding, tenderness, deformity, swelling and abnormal movement.', 'Ask about pain and other symptoms when the casualty can respond.'] },
-      { title: 'Complete the picture', bullets: ['Take and record vital signs.', 'Recheck every treatment and splint.', 'Prepare findings for MIST and handover.'] },
+    intro: 'Build the rest of the casualty picture after immediate threats are managed. Ask the history, record vital signs, check for other injuries and keep reassessing.',
+    quickRoutes: [
+      internal('sample-history', 'Ask the SAMPLE history', 'Use six prompts to collect the information that matters.'),
+      internal('vital-signs', 'Record vital signs', 'Describe responsiveness, breathing, pulse, skin and assigned observations.'),
+      internal('head-to-toe', 'Complete the injury check', 'Choose a focused examination or a systematic head-to-toe check.'),
+      internal('reassessment-handover', 'Reassess and hand over', 'Repeat priority findings and organize the report.'),
     ],
-    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross secondary assessment', 'SAMPLE history, vital signs and injury check.')],
-    related: ['march-e', 'vital-signs', 'reassessment-handover'],
+    sections: [
+      { title: 'Before you begin', bullets: ['Confirm that immediate MARCHE threats have been addressed.', 'Explain what you are going to do and obtain permission when the casualty can respond.', 'Keep watching breathing, responsiveness and skin while you continue.', 'Stop the secondary survey and return to MARCHE immediately if the casualty deteriorates.'] },
+      { title: 'Choose the appropriate examination', bullets: ['For a responsive casualty, ask what hurts and begin with a focused examination of the area of concern.', 'Use a broader hands-on check when the casualty cannot communicate, there may be more than one injury, or the mechanism and findings make it necessary.', 'Preserve privacy and expose only what is needed to assess and treat the casualty.'] },
+      { title: 'Complete the picture', bullets: ['Record the SAMPLE history and each vital-sign set.', 'Recheck dressings, tourniquets, airway devices, splints and other treatments.', 'Document important negative findings as well as injuries found.', 'Prepare the mechanism, injuries, signs, treatments and response for handover.'] },
+    ],
+    nextStep: { ...internal('sample-history', 'Start with the SAMPLE history', 'Ask the casualty and available witnesses for the information that will shape the rest of the assessment.'), kicker: 'Secondary survey' },
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross secondary assessment', 'Current SAMPLE history, vital-sign and injury-check guidance.'), external(AHA_FIRST_AID, 'AHA and American Red Cross first-aid guidelines', 'Physical examination and SAMPLE history as essential assessment components.')],
+    related: ['sample-history', 'vital-signs', 'head-to-toe', 'reassessment-handover'],
+  },
+  {
+    id: 'sample-history', title: 'SAMPLE history', category: 'assessment', group: 'Secondary survey — history', icon: 'communications', color: 'mint', reference: true,
+    intro: 'SAMPLE is a short, repeatable set of prompts for gathering the casualty’s symptoms, medical background and the events surrounding the problem.',
+    mnemonic: {
+      heading: 'Ask SAMPLE',
+      items: [
+        { letter: 'S', title: 'Signs & symptoms', text: 'What happened? What hurts? What feels different? What can you see or observe?' },
+        { letter: 'A', title: 'Allergies', text: 'Any allergies to medication, food, latex or anything else?' },
+        { letter: 'M', title: 'Medications', text: 'What medications do you take, what are they for, and when was the last dose?' },
+        { letter: 'P', title: 'Past medical history', text: 'Any medical conditions, recent illness, surgery, pregnancy, or a similar episode before?' },
+        { letter: 'L', title: 'Last oral intake', text: 'When did you last eat or drink, and what did you have?' },
+        { letter: 'E', title: 'Events leading up', text: 'What was happening immediately before the injury or illness, and how did it develop?' },
+      ],
+    },
+    sections: [
+      { title: 'How to gather it', bullets: ['Ask the casualty first when they can answer.', 'Use calm, open questions, then clarify important details.', 'Ask witnesses or teammates for information the casualty cannot provide.', 'Look for medical identification when appropriate.', 'Record the answers and identify who supplied them.'] },
+      { title: 'What to pass on', bullets: ['The main complaint and when it began', 'Important allergies and medications', 'Relevant medical history', 'The last oral intake when it may affect care', 'The mechanism or events, including any change since the incident'] },
+    ],
+    notice: { title: 'SAMPLE does not delay priority care', text: 'If breathing, responsiveness, bleeding or the overall condition worsens, stop the questions and return to MARCHE.' },
+    nextStep: { ...internal('vital-signs', 'Continue with vital signs', 'Record the casualty’s current condition and establish a baseline for comparison.'), kicker: 'Secondary survey' },
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross SAMPLE history', 'Current prompts used during the secondary assessment.'), external(AHA_FIRST_AID, 'AHA and American Red Cross first-aid guidelines', 'SAMPLE history and physical examination within first-aid assessment.')],
+    related: ['secondary-survey', 'vital-signs', 'head-to-toe', 'reassessment-handover'],
+  },
+  {
+    id: 'head-to-toe', title: 'Head-to-toe injury check', category: 'assessment', group: 'Secondary survey — examination', icon: 'assessment', color: 'violet', reference: true,
+    intro: 'Check systematically for injuries that were not found during MARCHE. Use a focused examination when that is enough and a broader hands-on check when the situation requires it.',
+    quickRouteHeading: 'Choose a body area',
+    quickRoutes: [
+      internal('head-face-check', 'Head & face', 'Scalp, face, eyes, ears, mouth and head-injury warning signs.'),
+      internal('neck-check', 'Neck', 'Pain, wounds, deformity and neurologic symptoms without unnecessary movement.'),
+      internal('chest-check', 'Chest', 'Breathing movement, wounds, pain and rib concerns.'),
+      internal('abdomen-check', 'Abdomen', 'Pain, tenderness, bruising, distension and firmness.'),
+      internal('pelvis-check', 'Pelvis', 'Recognize concerns without pushing or repeatedly manipulating the pelvis.'),
+      internal('limbs-check', 'Arms & legs', 'Compare sides, check movement, sensation and circulation beyond an injury.'),
+      internal('back-check', 'Back', 'Check during safe, necessary movement without reaching blindly underneath.'),
+    ],
+    sections: [
+      { title: 'Focused or full check?', bullets: ['Ask a responsive casualty where they hurt and examine that area first.', 'Use a systematic hands-on check when the casualty cannot communicate or there may be additional injuries.', 'Begin at the head and work downward, prioritizing the chest, abdomen and legs before the arms.', 'Check the back during safe, necessary movement using the locally taught team method.'] },
+      { title: 'Look, ask and feel', bullets: ['Look for bleeding, wounds, bruising, swelling, burns and unusual position or shape.', 'Ask about pain, tenderness, numbness, tingling, weakness and what feels different.', 'Feel gently for tenderness, deformity, firmness or abnormal movement only where appropriate.', 'Compare one side with the other and watch the casualty’s face and response.', 'Look around the casualty for blood or other clues; do not reach blindly underneath.'] },
+      { title: 'Keep the primary survey active', bullets: ['Continue to monitor responsiveness, breathing, pulse and skin.', 'Treat findings within training as they are identified.', 'Stop and return to MARCHE if the casualty deteriorates.', 'Record what was checked, important findings, treatment and the response.'] },
+    ],
+    nextStep: { ...internal('reassessment-handover', 'Reassess and prepare the handover', 'Repeat priority findings, confirm treatments and communicate the full picture.'), kicker: 'Secondary survey' },
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross injury check', 'Focused and hands-on secondary examination guidance.')],
+    related: ['sample-history', 'vital-signs', 'reassessment-handover', 'march-e'],
+  },
+  {
+    id: 'head-face-check', title: 'Head & face check', category: 'assessment', group: 'Head-to-toe', icon: 'assessment', color: 'violet', reference: true,
+    intro: 'Look carefully and use gentle assessment. Changes in responsiveness or breathing take priority over completing the examination.',
+    sections: [
+      { title: 'Ask and observe', bullets: ['Ask about headache, pain, dizziness, nausea, vision, hearing and memory of the event.', 'Repeat AVPU and note confusion, unusual behaviour, vomiting, seizure or worsening drowsiness.', 'Look over the scalp and face for bleeding, wounds, swelling, bruising, burns or unusual shape.', 'Check the eyes for obvious injury and note unequal pupils only if pupil assessment is part of current training.', 'Look at the mouth for bleeding, damaged teeth or loose material that could affect the airway.'] },
+      { title: 'Report these findings immediately', bullets: ['Bruising around the eyes that is not explained by a direct eye injury — often called raccoon eyes.', 'Bruising behind an ear — often called Battle sign.', 'Clear or blood-stained fluid from an ear or the nose.', 'A depressed or visibly deformed area of the skull.', 'A new decrease in responsiveness, repeated vomiting, seizure, weakness or unequal movement.'] },
+      { title: 'Protect and reassess', bullets: ['Do not press on a suspected skull deformity or insert anything into an ear or the nose.', 'Control bleeding using the locally taught approach while avoiding pressure over an obvious deformity.', 'Maintain the airway, minimize unnecessary movement and repeat AVPU.', 'Report the mechanism, findings, changes and treatment promptly.'] },
+    ],
+    notice: { title: 'Recognize; do not diagnose', text: 'These findings can indicate a serious head injury. The casualty-clearer task is to recognize the concern, protect priority functions and report it.' },
+    resources: [external(MSD_TBI, 'MSD Manual: Traumatic brain injury', 'Professional reference for signs associated with skull-base injury.'), external(RED_CROSS_GUIDE, 'Canadian Red Cross injury check', 'Current secondary-assessment approach.')],
+    related: ['head-to-toe', 'neck-check', 'avpu', 'march-h'],
+  },
+  {
+    id: 'neck-check', title: 'Neck check', category: 'assessment', group: 'Head-to-toe', icon: 'assessment', color: 'violet', reference: true,
+    intro: 'Check the neck without asking the casualty to move it when trauma or a spinal injury may be present.',
+    sections: [
+      { title: 'Check', bullets: ['Ask about neck pain, tenderness, numbness, tingling or weakness.', 'Look for wounds, bleeding, bruising, swelling or unusual position.', 'Observe breathing and listen for a change in the voice or new airway sounds.', 'Check movement and sensation in the limbs only using the method included in current training.'] },
+      { title: 'Protect', bullets: ['Do not test neck range of motion after a concerning mechanism or finding.', 'Avoid unnecessary movement and support the head and neck using the locally taught method.', 'Keep airway and breathing care as the priority if the casualty deteriorates.', 'Report pain, neurologic symptoms, deformity and any change in responsiveness.'] },
+    ],
+    resources: [external(AHA_FIRST_AID, 'AHA and American Red Cross first-aid guidelines', 'Current guidance to avoid unnecessary movement with possible neck or back injury.')],
+    related: ['head-face-check', 'head-to-toe', 'limbs-check', 'march-h'],
+  },
+  {
+    id: 'chest-check', title: 'Chest check', category: 'assessment', group: 'Head-to-toe', icon: 'airway', color: 'yellow', reference: true,
+    intro: 'Breathing problems remain a MARCHE priority. Stop the secondary check and return to respiration whenever breathing changes.',
+    sections: [
+      { title: 'Look and listen', bullets: ['Observe the rate, effort and whether both sides of the chest move together.', 'Look for wounds, bruising, burns, swelling, unusual shape and possible entry or exit wounds.', 'Listen for unusual breathing sounds and note whether the casualty can speak normally.', 'Ask about pain, shortness of breath and whether a deep breath makes pain worse.'] },
+      { title: 'Feel only as appropriate', bullets: ['Use gentle, trained palpation to identify localized tenderness or an obvious rib deformity.', 'Do not repeatedly press a painful or unstable area.', 'Check both the front and back when access is safe and movement is justified.', 'Return to R in MARCHE for breathing support or open-chest-wound care.'] },
+      { title: 'Reassess', bullets: ['Repeat breathing rate and quality after positioning or treatment.', 'Report increasing pain, unequal movement, worsening breathing or a change in responsiveness.', 'Record the wound or painful area, treatment, time and response.'] },
+    ],
+    actions: [internal('march-r', 'Return to R — Respiration', 'Reassess breathing and treat the immediate priority.'), internal('chest-seal', 'Chest seal', 'Open-chest-wound recognition and trained-use boundaries.'), internal('respiratory-rate', 'Respiratory rate', 'Count and describe breathing.')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross hands-on check', 'Chest observation and gentle injury-check guidance.')],
+    related: ['head-to-toe', 'abdomen-check', 'march-r', 'chest-seal'],
+  },
+  {
+    id: 'abdomen-check', title: 'Abdomen check', category: 'assessment', group: 'Head-to-toe', icon: 'assessment', color: 'violet', reference: true,
+    intro: 'Look before touching, ask about pain, and use only gentle examination within current training.',
+    sections: [
+      { title: 'Check', bullets: ['Ask about pain, tenderness, nausea and whether the pain began before or after the incident.', 'Look for wounds, bleeding, bruising, burns, swelling or distension.', 'Using the taught sequence, feel gently for tenderness, guarding or unusual firmness.', 'Watch the casualty’s face and stop if gentle pressure produces significant pain.'] },
+      { title: 'Act and report', bullets: ['Treat any immediately visible external bleeding within training.', 'Do not repeatedly palpate a painful, rigid or injured area.', 'Keep the casualty at rest, protect from heat loss and monitor for shock.', 'Report the location and character of pain, visible findings, firmness and any deterioration.'] },
+    ],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross hands-on check', 'Current general guidance for gentle abdominal assessment.')],
+    related: ['head-to-toe', 'chest-check', 'pelvis-check', 'march-c'],
+  },
+  {
+    id: 'pelvis-check', title: 'Pelvis check', category: 'assessment', group: 'Head-to-toe', icon: 'assessment', color: 'violet', reference: true,
+    intro: 'Use the mechanism, symptoms and visible findings. Do not push, spring or repeatedly manipulate the pelvis during the secondary check.',
+    sections: [
+      { title: 'Recognize the concern', bullets: ['Ask about pain in the pelvis, hips, groin or lower back.', 'Consider falls, crush injury, impact or other significant mechanisms.', 'Look for bleeding, bruising, swelling, unusual leg position or apparent leg-length difference.', 'Ask about numbness, weakness and the ability to feel the legs without asking the casualty to stand.'] },
+      { title: 'Protect and report', bullets: ['Do not press inward or downward to test pelvic stability.', 'Avoid unnecessary movement and manage immediate bleeding or shock concerns.', 'Request assistance and the locally confirmed movement or binder equipment when indicated.', 'Report the mechanism, pain, visible findings, circulation concerns and any deterioration.'] },
+    ],
+    actions: [internal('pelvic-binder', 'Pelvic binder', 'Recognition and locally confirmed use only.'), internal('march-c', 'Return to C — Circulation', 'Reassess circulation and shock concerns.'), internal('limbs-check', 'Continue to the limbs', 'Compare both sides without asking the casualty to stand.')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross hands-on check', 'Current guidance not to push on the pelvis during an injury check.'), external(AHA_FIRST_AID, 'AHA and American Red Cross first-aid guidelines', 'Avoid unnecessary movement with possible hip or pelvic injury.')],
+    related: ['head-to-toe', 'abdomen-check', 'pelvic-binder', 'limbs-check'],
+  },
+  {
+    id: 'limbs-check', title: 'Arms & legs check', category: 'assessment', group: 'Head-to-toe', icon: 'assessment', color: 'sky', reference: true,
+    intro: 'Compare both sides and check the injury as well as circulation and sensation beyond it.',
+    sections: [
+      { title: 'Look, ask and feel', bullets: ['Look for bleeding, wounds, bruising, swelling, burns, deformity and unusual position.', 'Ask about pain, tenderness, numbness, tingling or weakness.', 'Feel gently for tenderness and deformity without repeatedly moving the injured part.', 'Check whether the casualty can move fingers or toes only when movement is appropriate and within training.'] },
+      { title: 'Check beyond an injury or splint', bullets: ['Assess the distal pulse using the locally taught site.', 'Check skin colour, temperature and sensation.', 'Use capillary refill only if it remains part of the local method.', 'Repeat and record the same checks after splinting, dressing, movement and any change.'] },
+      { title: 'Protect and report', bullets: ['Control bleeding and support the injured area in the position found unless the current method directs otherwise.', 'Do not straighten a deformed limb simply to complete the examination.', 'Report the side, exact location, appearance, circulation and sensation findings.', 'Escalate absent pulse, worsening colour, loss of sensation or severe pain promptly.'] },
+    ],
+    actions: [internal('pulse', 'Pulse check', 'Record the site, rate, rhythm and strength.'), internal('capillary-refill', 'Capillary refill', 'Locally taught use, including after splinting.'), internal('skin-signs', 'Skin signs', 'Colour, temperature and moisture.')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross injury check', 'Current systematic hands-on assessment guidance.')],
+    related: ['head-to-toe', 'pelvis-check', 'back-check', 'reassessment-handover'],
+  },
+  {
+    id: 'back-check', title: 'Back check', category: 'assessment', group: 'Head-to-toe', icon: 'movement', color: 'mint', reference: true,
+    intro: 'Check the back when it can be done safely during necessary movement. Do not create extra movement only to finish the list.',
+    sections: [
+      { title: 'Before moving', bullets: ['Consider the mechanism, pain, numbness, tingling, weakness and the need for spinal-motion precautions.', 'Keep the airway and immediate treatment needs visible and controlled.', 'Use enough trained team members and the locally taught movement method.', 'Explain the movement to a responsive casualty.'] },
+      { title: 'Check', bullets: ['Look for bleeding, wounds, bruising, burns, swelling or an object beneath the casualty.', 'Ask about pain and note tenderness or deformity without pressing directly on a suspected spinal injury.', 'Inspect clothing and the surface for blood or other clues.', 'Never reach blindly underneath where glass, metal or another sharp object may be present.'] },
+      { title: 'After movement', bullets: ['Recheck MARCHE, AVPU and vital signs.', 'Recheck every dressing, airway device, splint and movement aid.', 'Report what was found and whether the casualty changed during movement.'] },
+    ],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross hands-on check', 'Current back-check and responder-safety guidance.'), external(AHA_FIRST_AID, 'AHA and American Red Cross first-aid guidelines', 'Current spinal-motion and safe-position guidance.')],
+    related: ['head-to-toe', 'neck-check', 'limbs-check', 'reassessment-handover'],
   },
   {
     id: 'reassessment-handover', title: 'Reassessment & handover', category: 'assessment', group: 'Ongoing care', icon: 'communications', color: 'mint', reference: true,

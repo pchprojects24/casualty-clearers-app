@@ -54,6 +54,16 @@ const MARCHE_STEPS = [
   { id: 'march-e', letter: 'E', title: 'Everything else' },
 ];
 
+const SECONDARY_STEPS = [
+  { id: 'sample-history', number: '1', title: 'SAMPLE history' },
+  { id: 'vital-signs', number: '2', title: 'Vital signs' },
+  { id: 'head-to-toe', number: '3', title: 'Injury check' },
+  { id: 'reassessment-handover', number: '4', title: 'Reassess & hand over' },
+];
+
+const HEAD_TO_TOE_TOPICS = new Set(['head-face-check', 'neck-check', 'chest-check', 'abdomen-check', 'pelvis-check', 'limbs-check', 'back-check']);
+const SECONDARY_TOPIC_IDS = new Set(['secondary-survey', ...SECONDARY_STEPS.map((step) => step.id), ...HEAD_TO_TOE_TOPICS]);
+
 const readStored = (key) => {
   try {
     const value = JSON.parse(localStorage.getItem(key));
@@ -373,10 +383,36 @@ function MarcheProgress({ activeId }) {
   );
 }
 
+function SecondaryProgress({ activeId }) {
+  const currentId = HEAD_TO_TOE_TOPICS.has(activeId) ? 'head-to-toe' : activeId;
+  return (
+    <nav className="secondary-progress" aria-label="Secondary survey sequence">
+      <div className="secondary-progress-heading"><span>Secondary survey</span><strong>Build the full picture</strong></div>
+      <div className="secondary-progress-steps">
+        {SECONDARY_STEPS.map((step) => {
+          const current = step.id === currentId;
+          return (
+            <button
+              key={step.id}
+              type="button"
+              className={current ? 'current' : ''}
+              aria-current={current ? 'step' : undefined}
+              onClick={() => navigate(`topic/${step.id}`)}
+            >
+              <b>{step.number}</b><small>{step.title}</small>
+            </button>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
 function ArticleView({ topic, saved, toggleSaved }) {
   const category = getCategory(topic.category);
   const related = (topic.related || []).map((id) => topicById[id]).filter(Boolean);
   const isMarchPriority = MARCHE_STEPS.some((step) => step.id === topic.id);
+  const isSecondaryTopic = SECONDARY_TOPIC_IDS.has(topic.id);
   const renderLinks = (links, className) => links?.length ? (
     <div className={className}>
       {links.map((link) => (
@@ -398,10 +434,12 @@ function ArticleView({ topic, saved, toggleSaved }) {
         </button>
       </header>
       {isMarchPriority && <MarcheProgress activeId={topic.id} />}
+      {isSecondaryTopic && <SecondaryProgress activeId={topic.id} />}
       <div className="article-layout">
         <article className="reference-content">
           {topic.path && <section className="reference-block"><h2>Assessment sequence</h2>{renderLinks(topic.path, 'path-list')}</section>}
           {topic.scale && <section className="reference-block"><h2>AVPU scale</h2><div className="scale-grid">{topic.scale.map((item) => <div key={item.letter}><span>{item.letter}</span><strong>{item.title}</strong><p>{item.text}</p></div>)}</div></section>}
+          {topic.mnemonic && <section className="reference-block"><h2>{topic.mnemonic.heading}</h2><div className="mnemonic-grid">{topic.mnemonic.items.map((item) => <div key={item.letter}><span>{item.letter}</span><div><strong>{item.title}</strong><p>{item.text}</p></div></div>)}</div></section>}
           {topic.march && <section className="reference-block"><h2>Select a MARCHE priority</h2><div className="march-grid">{topic.march.map((item) => <button key={item.letter} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><b>{item.letter}</b><span><strong>{item.title}</strong><small>{item.text}</small></span><ChevronRight size={21} /></button>)}</div></section>}
           {topic.quickRoutes && <section className="reference-block"><h2>{topic.quickRouteHeading || 'Choose what you need'}</h2>{renderLinks(topic.quickRoutes, 'quick-route-grid')}</section>}
           {topic.steps && <section className="reference-block"><h2>How to do it</h2><ol className="step-list">{topic.steps.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}</ol></section>}
