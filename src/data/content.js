@@ -3,6 +3,7 @@ export const categories = [
   { id: 'bleeding', label: 'Bleeding Control', short: 'Bleeding', description: 'Recognize serious bleeding and choose the right control method.', color: 'sky', icon: 'bleeding' },
   { id: 'airway', label: 'Airway & Breathing', short: 'Airway', description: 'Check and support the airway and breathing.', color: 'yellow', icon: 'airway' },
   { id: 'circulation', label: 'Circulation & Shock', short: 'Circulation', description: 'Check pulse and skin, recognize shock, respond to cardiac arrest and trend monitoring.', color: 'teal', icon: 'circulation' },
+  { id: 'head-temperature', label: 'Head & Temperature', short: 'Head & temperature', description: 'Recognize head-injury concerns, prevent heat loss and respond to cold or heat illness.', color: 'violet', icon: 'head' },
   { id: 'splinting', label: 'Splinting & Movement', short: 'Splinting', description: 'Support injured limbs, recheck distal findings and move the casualty safely.', color: 'violet', icon: 'movement' },
   { id: 'equipment', label: 'Equipment', short: 'Equipment', description: 'Quick-use pages and official product media.', color: 'coral', icon: 'equipment' },
   { id: 'scenarios', label: 'Response Scenarios', short: 'Scenarios', description: 'See how the team forms, communicates, treats and moves through each type of response.', color: 'mint', icon: 'situations' },
@@ -22,6 +23,8 @@ const AHA_CPR = 'https://cpr.heart.org/en/resources/what-is-cpr';
 const HEART_STROKE_AED = 'https://www.heartandstroke.ca/how-you-can-help/learn-cpr/aeds';
 const BLOOD_PRESSURE_GUIDE = 'https://medlineplus.gov/lab-tests/measuring-blood-pressure/';
 const RED_CROSS_COLD = 'https://www.redcross.ca/training-and-certification/first-aid-tips-and-resources/first-aid-tips/winter-safety-and-clothing/cold-related-emergencies';
+const RED_CROSS_HEAT = 'https://www.redcross.ca/training-and-certification/first-aid-tips-and-resources/first-aid-tips/summer-safety/heat-stroke-heat-exhaustion';
+const CANADA_CONCUSSION = 'https://www.canada.ca/en/public-health/services/diseases/concussion-sign-symptoms.html';
 const NFPA_REHAB = 'https://link.nfpa.org/all-publications/1580/2025';
 const MSD_TBI = 'https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi';
 const JTS_HANDOFF = 'https://jts.health.mil/assets/docs/cpgs/CoERCCC%20Guidelines%20FY26.pdf';
@@ -115,6 +118,28 @@ export const topics = [
     related: ['march-c', 'shock-recognition', 'cardiac-arrest-response', 'circulation-reassessment'],
   },
   {
+    id: 'head-temperature-overview', title: 'Head & Temperature', category: 'head-temperature', group: 'Choose what you find', icon: 'head', color: 'violet', reference: true,
+    intro: 'Repeat responsiveness, recognize head-injury concerns and protect the casualty from becoming too cold or too hot. Choose the problem in front of you and keep MARCHE active.',
+    cardHeading: 'Choose the head or temperature concern',
+    cardLabel: 'Open guide',
+    scenarioCards: [
+      { topicId: 'head-injury-concerns', kicker: 'Mechanism, symptoms and change', title: 'Possible head injury', text: 'Recognize concerning findings, protect priorities and request the right help.' },
+      { topicId: 'avpu', kicker: 'Repeat responsiveness', title: 'Check AVPU again', text: 'Describe the best response observed and identify deterioration.' },
+      { topicId: 'head-face-check', kicker: 'Focused examination', title: 'Check the head and face', text: 'Look for wounds, deformity, eye findings and signs of a serious skull injury.' },
+      { topicId: 'prevent-heat-loss', kicker: 'Every trauma casualty', title: 'Prevent heat loss', text: 'Insulate, cover and preserve access to essential treatments and reassessment.' },
+      { topicId: 'cold-exposure-response', kicker: 'Cold, wet or immersed', title: 'Cold exposure', text: 'Recognize worsening hypothermia, handle gently and rewarm safely.' },
+      { topicId: 'heat-illness-response', kicker: 'Hot, exhausted or altered', title: 'Heat illness', text: 'Separate heat exhaustion from suspected heatstroke and begin cooling.' },
+    ],
+    sections: [
+      { title: 'The common H sequence', bullets: ['Repeat AVPU and note any change in speech, behaviour, movement or ability to follow commands.', 'Consider the mechanism and any blow to the head, neck, face or body before starting a focused head check.', 'Recognize and report urgent head-injury findings without delaying airway, breathing or circulation care.', 'Prevent heat loss in injured casualties by limiting exposure, insulating from the deck and covering again after treatment.', 'For cold exposure, stop further heat loss, handle gently and choose passive or active warming through the current equipment and direction.', 'For heat illness, stop exertion, move out of the heat, remove excess gear and begin active cooling.', 'Repeat MARCHE and the temperature response after treatment and movement before continuing to E.'] },
+    ],
+    actionHeading: 'Assessment, equipment and reassessment',
+    actions: [internal('march-h', 'H — Head & hypothermia', 'Return to the H step in MARCHE.'), internal('neck-check', 'Neck check', 'Protect the neck and note neurologic symptoms without unnecessary movement.'), internal('foil-blanket', 'Foil blanket', 'Reduce further heat loss while preserving access.'), internal('cocoon-warming', 'Cocoon warming unit', 'Open the active-warming setup boundaries.'), internal('vital-signs', 'Vital signs', 'Trend responsiveness, breathing, pulse, skin and useful monitor readings.'), internal('head-temperature-reassessment', 'Reassess H', 'Repeat the head and temperature checks after treatment or movement.')],
+    notice: { title: 'Do not let one problem hide the other', text: 'A head injury and a temperature emergency can both change responsiveness. Repeat airway, breathing, circulation and AVPU while warming or cooling the casualty.' },
+    resources: [external(CANADA_CONCUSSION, 'Government of Canada: Concussion symptoms and urgent findings', 'Current Canadian recognition and escalation information for possible brain injury.', 'Official clinical guidance'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for heat-loss prevention, hypothermia rewarming and heatstroke cooling.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian assessment and environmental-emergency reference.')],
+    related: ['march-h', 'head-injury-concerns', 'cold-exposure-response', 'heat-illness-response'],
+  },
+  {
     id: 'equipment-overview', title: 'Equipment', category: 'equipment', group: 'Choose by purpose', icon: 'equipment', color: 'coral', reference: true,
     intro: 'Start with the clinical need, then open the equipment card. Each card explains what the item is for, a short use sequence and the checks that matter afterward.',
     quickRoutes: [
@@ -201,7 +226,7 @@ export const topics = [
     ],
     steps: ['Observe whether the casualty is awake and tracking what is happening.', 'Speak clearly and ask a simple question or give a simple command.', 'If there is no response, use only the further assessment method you were trained to use.', 'State and record the result plainly, for example: “Responds to voice.”', 'Repeat AVPU after treatment, movement and any change in condition.'],
     notice: { title: 'A change matters', text: 'A casualty moving from Alert to Voice, Pain or Unresponsive is deteriorating and requires immediate reporting and reassessment.' },
-    related: ['scene-survey', 'marche', 'vital-signs', 'reassessment-handover'],
+    related: ['scene-survey', 'marche', 'head-injury-concerns', 'head-temperature-reassessment'],
   },
   {
     id: 'marche', title: 'MARCHE primary survey', category: 'assessment', group: 'Primary survey', icon: 'assessment', color: 'teal', reference: true,
@@ -339,16 +364,92 @@ export const topics = [
   },
   {
     id: 'march-h', title: 'H — Head & hypothermia', category: 'assessment', group: 'MARCHE', icon: 'assessment', color: 'violet', reference: true,
-    intro: 'Prevent heat loss early and remain alert for changes that may suggest a head injury.',
-    sections: [
-      { title: 'Immediate actions for heat loss', bullets: ['Insulate the casualty from the deck and environment.', 'Remove or isolate wet clothing when appropriate.', 'Cover the head and neck while keeping the airway observable.', 'Use the team’s foil blanket, blankets, a vapour barrier and protected warming measures as trained.', 'Move to a warmer area when it is safe and practical.'] },
-      { title: 'What you’re checking for', bullets: ['Note the mechanism and any direct head impact.', 'Repeat AVPU and watch for confusion, worsening responsiveness, vomiting, seizure or unequal movement.', 'Watch for shivering, loss of coordination, slurred speech, confusion or a fall in responsiveness.', 'Avoid unnecessary movement and report deterioration promptly.'] },
+    intro: 'Repeat responsiveness, recognize head-injury concerns and protect the casualty from heat loss. If the problem is cold or heat exposure, open the matching response.',
+    quickRoutes: [
+      internal('head-injury-concerns', 'Possible head injury', 'Check the mechanism, symptoms, urgent findings and direction of change.'),
+      internal('cold-exposure-response', 'Casualty is cold or wet', 'Stop further heat loss and choose the appropriate warming response.'),
+      internal('heat-illness-response', 'Casualty is overheated', 'Stop heat exposure and begin the appropriate cooling response.'),
+      internal('march-e', 'H concerns are addressed', 'Continue to the rapid body survey and everything else.'),
     ],
-    notice: { title: 'Keep reassessing', text: 'Cold stress and head injury can both change responsiveness. Repeat AVPU, breathing and circulation throughout care and movement.' },
-    actionHeading: 'Reassessment and warming cards',
-    actions: [internal('foil-blanket', 'Foil blanket', 'Reduce further heat loss during care and movement.'), internal('cocoon-warming', 'Cocoon warming unit', 'Active warming in the appropriate care area.'), internal('avpu', 'Repeat AVPU', 'Describe changes in responsiveness clearly.'), internal('vital-signs', 'Repeat vital signs', 'Look for change, not a single isolated number.'), internal('reassessment-handover', 'Reassess and hand over', 'Confirm treatments and report deterioration.')],
+    sections: [
+      { title: 'Head and responsiveness', bullets: ['Note the mechanism and any blow to the head, face, neck or body.', 'Repeat AVPU and watch for confusion, worsening responsiveness, repeated vomiting, seizure, severe or worsening headache, weakness or unequal movement.', 'Look for scalp or facial injury, skull deformity, bruising around the eyes or behind an ear, and clear or blood-stained fluid from an ear or the nose.', 'Maintain the airway, avoid unnecessary movement and report a concerning finding or change immediately.'] },
+      { title: 'Prevent heat loss', bullets: ['Expose only what is needed for assessment and treatment, then cover the casualty again.', 'Insulate from the deck and protect from wind, spray and wet surroundings.', 'Remove or isolate saturated clothing when appropriate, dry the casualty and add a dry insulating layer.', 'Use the foil blanket as a wind or vapour barrier while keeping the airway and critical treatments accessible.', 'Use active warming equipment only through its instructions, current training and medical direction.'] },
+      { title: 'If the casualty is too cold or too hot', bullets: ['Cold, shivering and alert may indicate cold stress or early hypothermia; loss of coordination, abnormal speech, confusion, falling AVPU or stopped shivering are more concerning.', 'For cold exposure, move to shelter when possible, handle gently, prevent further heat loss and begin the appropriate rewarming response.', 'For heat exposure, stop exertion, move to a cooler place, remove excess clothing or gear and begin active cooling.', 'Altered behaviour, confusion, seizure or decreased responsiveness with heat illness makes suspected heatstroke an immediate emergency.'] },
+    ],
+    notice: { title: 'Keep MARCHE active', text: 'Head injury, cold exposure and heat illness can all change airway, breathing, circulation and responsiveness. Return to the earlier priority immediately when the casualty deteriorates.' },
+    actionHeading: 'Head, temperature and reassessment cards',
+    actions: [internal('head-temperature-overview', 'Head & Temperature hub', 'Choose the head-injury, warming, cooling or reassessment path.'), internal('head-face-check', 'Head & face check', 'Complete a focused examination without delaying immediate threats.'), internal('avpu', 'Repeat AVPU', 'Describe changes in responsiveness clearly.'), internal('prevent-heat-loss', 'Prevent heat loss', 'Build a simple insulation and covering package.'), internal('foil-blanket', 'Foil blanket', 'Reduce further heat loss during care and movement.'), internal('cocoon-warming', 'Cocoon warming unit', 'Active warming in the appropriate care area.'), internal('head-temperature-reassessment', 'Reassess H', 'Confirm the casualty and treatment response after every change.')],
     nextStep: internal('march-e', 'Continue to E — Everything else', 'When immediate head and heat-loss concerns are addressed, complete the rapid body survey.'),
-    related: ['avpu', 'march-r', 'march-c', 'reassessment-handover'],
+    resources: [external(CANADA_CONCUSSION, 'Government of Canada: Concussion symptoms and urgent findings', 'Current Canadian recognition and escalation information for possible brain injury.', 'Official clinical guidance'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current environmental first-aid guidance for heat-loss prevention, hypothermia and heatstroke.', 'Official clinical guidance')],
+    related: ['head-temperature-overview', 'head-injury-concerns', 'cold-exposure-response', 'heat-illness-response'],
+  },
+  {
+    id: 'head-injury-concerns', title: 'Possible head injury', category: 'head-temperature', group: 'Recognize and report', icon: 'head', color: 'violet', reference: true,
+    intro: 'A head injury may follow a hit to the head, face, neck or body and does not require a loss of consciousness. Recognize the concern, protect immediate priorities and watch for change.',
+    sections: [
+      { title: 'Build the picture', bullets: ['Ask what happened and whether the casualty struck their head or experienced a forceful movement of the head or body.', 'Ask about headache, pressure in the head, dizziness, nausea, memory loss, blurred or double vision, balance trouble, sensitivity to light or noise and feeling foggy.', 'Repeat AVPU and note confusion, irritability, unusual behaviour, drowsiness, slowed answers or difficulty following commands.', 'Look for scalp and facial wounds, swelling, bruising, burns or unusual shape.'] },
+      { title: 'Report these findings immediately', bullets: ['A new decrease in responsiveness or any loss of consciousness.', 'A seizure or convulsion.', 'Repeated vomiting or a severe or worsening headache.', 'New weakness, numbness, tingling, burning or unequal movement in an arm or leg.', 'Double vision or another marked change in vision.', 'A depressed or visibly deformed area of the skull.', 'Bruising around both eyes without a direct eye injury, bruising behind an ear, or clear or blood-stained fluid from an ear or the nose.'] },
+      { title: 'Protect and reassess', bullets: ['Complete MARCHE and address airway, breathing, circulation and serious bleeding first.', 'Avoid unnecessary movement when the mechanism or findings suggest a head, neck or spinal injury.', 'Do not press on a suspected skull deformity or insert anything into an ear or the nose.', 'Control bleeding using the locally taught method while avoiding direct pressure over an obvious deformity.', 'Request medical assistance, record the time and repeat AVPU, breathing, pulse and symptoms.'] },
+    ],
+    notice: { title: 'Recognize; do not diagnose or clear', text: 'Casualty clearers identify the mechanism, findings and change. A possible concussion or more serious brain injury requires assessment by an appropriately qualified clinician.' },
+    actionHeading: 'Focused checks and next actions',
+    actions: [internal('avpu', 'Repeat AVPU', 'State the best response actually observed.'), internal('head-face-check', 'Head & face check', 'Look for injuries and serious skull findings.'), internal('neck-check', 'Neck check', 'Protect the neck and report neurologic concerns.'), internal('head-temperature-reassessment', 'Reassess head findings', 'Compare the next check with the first one.'), internal('mist-handover', 'MIST handover', 'Report the mechanism, injuries, signs, treatments and change.')],
+    resources: [external(CANADA_CONCUSSION, 'Government of Canada: Concussion symptoms and treatment', 'Current symptoms, urgent warning signs and Canadian assessment boundaries.', 'Official clinical guidance'), external(MSD_TBI, 'MSD Manual: Traumatic brain injury', 'Professional reference for findings associated with serious head and skull-base injury.')],
+    related: ['head-temperature-overview', 'head-face-check', 'avpu', 'head-temperature-reassessment'],
+  },
+  {
+    id: 'prevent-heat-loss', title: 'Prevent heat loss', category: 'head-temperature', group: 'Routine protection during injury care', icon: 'head', color: 'yellow', reference: true,
+    intro: 'An injured casualty can lose heat during exposure, treatment and movement even when cold exposure was not the original problem. Build heat-loss prevention into the primary survey.',
+    steps: ['Address immediate MARCHE threats and expose only the area needed for assessment or treatment.', 'Insulate the casualty from the deck, stretcher or other cold surface.', 'Shield the casualty from wind, spray and wet surroundings.', 'Remove or isolate saturated clothing when appropriate and dry the casualty.', 'Add a dry insulating layer, cover the head and neck when practical, and use the foil blanket as a wind or vapour barrier.', 'Keep the face, airway and essential treatment sites visible and accessible.', 'After every treatment or move, re-cover the casualty and repeat breathing, pulse, skin and AVPU.'],
+    sections: [
+      { title: 'Use the right layer for the job', bullets: ['Dry blankets and clothing provide insulation.', 'A foil or plastic layer helps reduce wind and evaporative heat loss but does not create heat by itself.', 'Active warming equipment adds heat and must be used through the manufacturer’s instructions and current direction.', 'Do not place a very hot object directly against the skin or use an uncovered forced-air hose.'] },
+      { title: 'Do not warm the wrong casualty', bullets: ['If the casualty is overheated, remove them from the heat and begin cooling instead of wrapping for warmth.', 'During burn cooling, continue watching for whole-body heat loss.', 'Open insulation enough to reassess and treat, then restore the covering promptly.'] },
+    ],
+    actionHeading: 'Insulation and warming options',
+    actions: [internal('foil-blanket', 'Foil blanket', 'Use the carried barrier while protecting airway access.'), internal('cold-exposure-response', 'Cold exposure', 'Open recognition and rewarming when hypothermia is suspected.'), internal('cocoon-warming', 'Cocoon warming unit', 'Use active warming through the confirmed setup.'), internal('head-temperature-reassessment', 'Reassess temperature care', 'Check the casualty, layers and equipment after movement.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for protection from environmental heat loss and hypothermia wrapping.', 'Official clinical guidance')],
+    related: ['head-temperature-overview', 'march-h', 'foil-blanket', 'cold-exposure-response'],
+  },
+  {
+    id: 'cold-exposure-response', title: 'Cold exposure and hypothermia', category: 'head-temperature', group: 'Recognize, protect and rewarm', icon: 'head', color: 'sky', reference: true,
+    intro: 'Use signs, symptoms and change—not a guessed core temperature—to recognize worsening hypothermia. Stop further heat loss, handle gently and keep checking breathing and responsiveness.',
+    sections: [
+      { title: 'What it can look like', bullets: ['Cold stress or early hypothermia: cold, shivering, alert, and possibly numb fingers or toes.', 'Worsening hypothermia: loss of coordination, stumbling, abnormal or mumbling speech, confusion, unusual behaviour or impaired judgment.', 'Life-threatening concern: inability to stay awake, falling AVPU, stopped shivering despite ongoing cold, pale or blue-grey skin, frozen skin, very slow or absent breathing, or unconsciousness.', 'A cold-water casualty can continue to deteriorate after recovery; do not judge severity from the first appearance alone.'] },
+      { title: 'Immediate response', bullets: ['Complete MARCHE and request urgent medical assistance for altered responsiveness, abnormal breathing or another severe finding.', 'Move to shelter or a warmer environment when the route and movement are safe.', 'Handle the casualty gently and minimize unnecessary movement.', 'Remove saturated clothing when appropriate, dry the casualty and insulate from the deck.', 'Cover with dry insulation plus a foil or plastic wind and vapour barrier; cover the head and neck while keeping the airway visible.', 'Use the Cocoon or another active-warming device only through its instructions and current direction, checking the skin and pressure areas frequently.', 'If the casualty is alert and can swallow safely, warm high-calorie food or drink may support rewarming under the applicable direction. Give nothing by mouth if alertness or swallowing is impaired.', 'Repeat breathing, pulse, skin and AVPU continuously; if cardiac arrest is recognized, use the current resuscitation sequence.'] },
+      { title: 'Avoid preventable harm', bullets: ['Do not rub or massage cold or frozen extremities.', 'Do not rely on small glove or boot heat packs as the main rewarming method.', 'Do not place an unprotected heat source directly against the casualty.', 'Do not use a hot shower or warm-water immersion for a casualty with decreased responsiveness.', 'Do not let warming equipment cover the face or hide a critical treatment.'] },
+    ],
+    actionHeading: 'Warming, monitoring and response',
+    actions: [internal('prevent-heat-loss', 'Build the insulation package', 'Stop conductive, convective and evaporative heat loss.'), internal('foil-blanket', 'Foil blanket', 'Add the wind and vapour barrier.'), internal('cocoon-warming', 'Cocoon warming unit', 'Set up active warming under current direction.'), internal('person-overboard', 'Person overboard response', 'Connect recovery, transfer and cold-water care.'), internal('monitoring-equipment', 'Monitoring equipment', 'Trend useful readings beside the physical assessment.'), internal('head-temperature-reassessment', 'Reassess cold care', 'Repeat the casualty and equipment checks.')],
+    notice: { title: 'Gentle handling and ongoing observation', text: 'A cold casualty with worsening coordination, speech, responsiveness or breathing needs urgent advanced care while heat loss is stopped and rewarming begins.' },
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current hypothermia recognition, insulation, rewarming and harm-prevention guidance.', 'Official clinical guidance'), external(RED_CROSS_COLD, 'Canadian Red Cross: Cold-related emergencies', 'Canadian recognition, gentle handling, wet-clothing removal and gradual warming guidance.')],
+    related: ['head-temperature-overview', 'prevent-heat-loss', 'person-overboard', 'cocoon-warming'],
+  },
+  {
+    id: 'heat-illness-response', title: 'Heat illness and heatstroke', category: 'head-temperature', group: 'Recognize and cool', icon: 'head', color: 'coral', reference: true,
+    intro: 'Heat exhaustion is a warning that the body is struggling with heat. Heat illness with altered behaviour or responsiveness is suspected heatstroke and requires immediate cooling and urgent advanced care.',
+    sections: [
+      { title: 'Heat exhaustion can include', bullets: ['Warm or moist skin and heavy sweating.', 'Headache, weakness, marked fatigue or exhaustion.', 'Dizziness, fainting, nausea or vomiting.', 'Anxiety, cramps, thirst or a rapid pulse.', 'Symptoms that do not improve or that progress toward confusion or a lower AVPU.'] },
+      { title: 'Suspect heatstroke when', bullets: ['There is altered behaviour, confusion, agitation, collapse, seizure or decreased responsiveness during heat illness.', 'The casualty appears very hot; the skin may be wet or dry, so sweating does not rule heatstroke in or out.', 'Breathing or pulse becomes rapid, weak or irregular, or the casualty is deteriorating quickly.', 'Treat altered mental status with heat illness as the key emergency finding and do not wait for a precise temperature.'] },
+      { title: 'Immediate response', bullets: ['Stop exertion, move the casualty out of the hot environment and remove excess clothing or heavy equipment.', 'Activate the medical response immediately for suspected heatstroke, altered responsiveness, seizure, collapse or other severe finding.', 'Begin active cooling at once. Use whole-body cool- or cold-water immersion when it is available, safe and part of current training; otherwise use the fastest available combination of cool water, wet towels or sheets, a cool shower, fanning, cooling equipment or cold packs.', 'Keep the airway accessible and continue MARCHE throughout cooling.', 'If the casualty is alert and can swallow safely, provide cool fluids through the applicable first-aid method. Give nothing by mouth when alertness or swallowing is impaired.', 'Repeat AVPU, breathing, pulse and skin while cooling. Be ready to begin CPR and use the AED if cardiac arrest occurs.'] },
+    ],
+    notice: { title: 'Cool first; do not delay', text: 'Suspected heatstroke is a time-critical emergency. Start the fastest safe cooling method available while advanced help and movement are arranged.' },
+    actionHeading: 'Assessment and continued care',
+    actions: [internal('avpu', 'Repeat AVPU', 'Identify altered behaviour or a fall in responsiveness.'), internal('vital-signs', 'Vital signs', 'Trend breathing, pulse, skin and responsiveness.'), internal('cardiac-arrest-response', 'Cardiac arrest and CPR', 'Open the adult sequence if arrest is recognized.'), internal('firefighter-rehab', 'Firefighter rehabilitation', 'Separate routine recovery from a firefighter who needs immediate medical care.'), internal('head-temperature-reassessment', 'Reassess cooling', 'Confirm the casualty and cooling response.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current heatstroke recognition, emergency activation and active-cooling guidance.', 'Official clinical guidance'), external(RED_CROSS_HEAT, 'Canadian Red Cross: Heat stroke and heat exhaustion', 'Canadian recognition and practical cooling methods.')],
+    related: ['head-temperature-overview', 'avpu', 'vital-signs', 'head-temperature-reassessment'],
+  },
+  {
+    id: 'head-temperature-reassessment', title: 'Head and temperature reassessment', category: 'head-temperature', group: 'Repeat after treatment and movement', icon: 'head', color: 'mint', reference: true,
+    intro: 'Repeat the same short H check to identify neurologic change, confirm warming or cooling is working and keep earlier MARCHE priorities visible.',
+    phaseHeading: 'Head and temperature check cycle',
+    scenarioPhases: [
+      { kicker: 'Return to priorities', title: 'Repeat MARCHE first', text: 'Head and temperature care never replaces the earlier life-threat checks.', bullets: ['Confirm bleeding remains controlled.', 'Repeat airway position, breathing effectiveness, pulse and skin.', 'Return immediately to M, A, R, C or CPR when the casualty changes.'], links: [internal('marche', 'MARCHE primary survey', 'Restart the sequence when needed.'), internal('treatment-checks', 'Treatment checks', 'Confirm every intervention still works.')] },
+      { kicker: 'Neurologic trend', title: 'Repeat AVPU and movement', text: 'Compare the casualty with the first check instead of describing the latest finding in isolation.', bullets: ['State AVPU and the direction of change.', 'Repeat speech, behaviour, ability to follow commands and any reported symptoms.', 'Note new vomiting, seizure, weakness, numbness or unequal movement.'], links: [internal('avpu', 'AVPU', 'Describe responsiveness consistently.'), internal('head-injury-concerns', 'Possible head injury', 'Review urgent changes and escalation.')] },
+      { kicker: 'Temperature trend', title: 'Check the casualty’s response', text: 'Look for improvement or deterioration while warming or cooling continues.', bullets: ['For cold exposure, repeat shivering, coordination, speech, skin, breathing and alertness.', 'For heat illness, repeat behaviour, AVPU, skin, breathing, pulse and overall heat burden.', 'Do not rely on a guessed temperature or one monitor number.'], links: [internal('cold-exposure-response', 'Cold exposure', 'Repeat the hypothermia pattern.'), internal('heat-illness-response', 'Heat illness', 'Repeat the heatstroke warning signs.')] },
+      { kicker: 'Equipment and access', title: 'Confirm the treatment still works', text: 'Check the layers or cooling method without hiding the casualty.', bullets: ['Keep the airway, face and critical treatments accessible.', 'Check that blankets and barriers remain dry, closed and insulating as intended.', 'For active warming, confirm airflow, connections, skin condition and alarms.', 'For cooling, confirm the method is still transferring heat and does not obstruct care.'], links: [internal('foil-blanket', 'Foil blanket', 'Check the barrier and access.'), internal('cocoon-warming', 'Cocoon warming unit', 'Check active warming and the casualty’s skin.')] },
+      { kicker: 'Report and continue', title: 'State what changed', text: 'Give the next responder the mechanism, neurologic trend, temperature concern, treatment and response.', bullets: ['Report deterioration immediately.', 'Record the time and every major treatment or move.', 'Repeat the cycle after transfer or a change.', 'Continue to E when H concerns are addressed, while keeping MARCHE active.'], links: [internal('mist-handover', 'MIST handover', 'Organize the report.'), internal('march-e', 'Continue to E', 'Complete the rapid body survey.')] },
+    ],
+    related: ['head-temperature-overview', 'head-injury-concerns', 'cold-exposure-response', 'heat-illness-response'],
   },
   {
     id: 'march-e', title: 'E — Everything else', category: 'assessment', group: 'MARCHE', icon: 'assessment', color: 'violet', reference: true,
@@ -503,7 +604,7 @@ export const topics = [
     ],
     notice: { title: 'Recognize; do not diagnose', text: 'These findings can indicate a serious head injury. The casualty-clearer task is to recognize the concern, protect priority functions and report it.' },
     resources: [external(MSD_TBI, 'MSD Manual: Traumatic brain injury', 'Professional reference for signs associated with skull-base injury.'), external(RED_CROSS_GUIDE, 'Canadian Red Cross injury check', 'Current secondary-assessment approach.')],
-    related: ['head-to-toe', 'neck-check', 'avpu', 'march-h'],
+    related: ['head-temperature-overview', 'head-injury-concerns', 'neck-check', 'avpu'],
   },
   {
     id: 'neck-check', title: 'Neck check', category: 'assessment', group: 'Head-to-toe', icon: 'assessment', color: 'violet', reference: true,
@@ -958,7 +1059,7 @@ export const topics = [
     sections: [
       { title: 'Remember', bullets: ['A foil blanket reduces further heat loss; it does not replace active warming when active warming is required.', 'Avoid direct contact between the casualty and very hot objects.', 'Open the wrap enough to reassess and treat, then cover the casualty again promptly.', 'If the casualty is overheated, remove them from the heat, begin the locally taught cooling response and do not wrap them for warmth.'] },
     ],
-    related: ['march-h', 'cocoon-warming', 'reassessment-handover', 'equipment-bag-check'],
+    related: ['head-temperature-overview', 'prevent-heat-loss', 'cold-exposure-response', 'cocoon-warming'],
   },
   {
     id: 'cocoon-warming', title: 'Cocoon warming unit', category: 'equipment', group: 'Active warming — confirmed setup required', icon: 'equipment', color: 'coral', reference: true,
@@ -968,7 +1069,7 @@ export const topics = [
       { title: 'Avoid preventable harm', bullets: ['Do not direct an uncovered warming hose onto the casualty.', 'Do not place the blanket or hose where it obstructs the airway, compresses an injury or interferes with monitoring.', 'Watch areas with reduced sensation, poor circulation or pressure risk closely.', 'Stop and report excessive heat, skin changes, worsening condition or equipment malfunction.'] },
     ],
     notice: { title: 'Add the model-specific controls later', text: 'The exact Cocoon model, compatible blankets, approved temperature settings, alarm meanings and cleaning method still need to be confirmed before a button-by-button card is added.' },
-    related: ['march-h', 'foil-blanket', 'vital-signs', 'monitoring-equipment'],
+    related: ['head-temperature-overview', 'cold-exposure-response', 'foil-blanket', 'head-temperature-reassessment'],
   },
   {
     id: 'splinting-equipment', title: 'Splinting equipment', category: 'equipment', group: 'Injury support and movement', icon: 'equipment', color: 'coral', reference: true,
@@ -1193,7 +1294,7 @@ export const topics = [
     ],
     notice: { title: 'Cold-water recovery needs gentle handling', text: 'Do not assume recovery ends the danger. Continue airway, breathing, circulation, heat-loss prevention and repeated assessment throughout transfer and warming.' },
     resources: [external(RED_CROSS_COLD, 'Canadian Red Cross: Cold-related emergencies', 'Recognition, gentle handling, wet-clothing removal and gradual warming guidance.')],
-    related: ['foil-blanket', 'cocoon-warming', 'monitoring-equipment', 'sick-bay-continuation'],
+    related: ['cold-exposure-response', 'foil-blanket', 'cocoon-warming', 'head-temperature-reassessment'],
   },
   {
     id: 'firefighter-rehab', title: 'Firefighter rehabilitation', category: 'scenarios', group: 'Sustained or repeated firefighting', icon: 'situations', color: 'mint', reference: true,
@@ -1207,7 +1308,7 @@ export const topics = [
     ],
     notice: { title: 'No invented return threshold', text: 'Work-rest timing, required observations and return criteria must come from the current shipboard firefighting and medical process. Symptoms or deterioration always take priority over a routine rehab sequence.' },
     resources: [external(NFPA_REHAB, 'NFPA 1580: Emergency responder rehabilitation', 'Current NFPA rehabilitation framework, including preparedness, incident-scene rehabilitation and post-incident recovery.', 'Professional standard')],
-    related: ['vital-signs', 'monitoring-equipment', 'radio-report', 'sick-bay-continuation'],
+    related: ['heat-illness-response', 'vital-signs', 'monitoring-equipment', 'sick-bay-continuation'],
   },
   {
     id: 'team-roles', title: 'Two-person team roles', category: 'scenarios', group: 'Casualty-team organization', icon: 'communications', color: 'mint', reference: true,
