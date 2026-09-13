@@ -2,6 +2,7 @@ export const categories = [
   { id: 'assessment', label: 'Assessment & MARCHE', short: 'Assessment', description: 'Approach, assess, treat immediate threats and reassess.', color: 'teal', icon: 'assessment' },
   { id: 'bleeding', label: 'Bleeding Control', short: 'Bleeding', description: 'Recognize serious bleeding and choose the right control method.', color: 'sky', icon: 'bleeding' },
   { id: 'airway', label: 'Airway & Breathing', short: 'Airway', description: 'Check and support the airway and breathing.', color: 'yellow', icon: 'airway' },
+  { id: 'circulation', label: 'Circulation & Shock', short: 'Circulation', description: 'Check pulse and skin, recognize shock, respond to cardiac arrest and trend monitoring.', color: 'teal', icon: 'circulation' },
   { id: 'splinting', label: 'Splinting & Movement', short: 'Splinting', description: 'Support injured limbs, recheck distal findings and move the casualty safely.', color: 'violet', icon: 'movement' },
   { id: 'equipment', label: 'Equipment', short: 'Equipment', description: 'Quick-use pages and official product media.', color: 'coral', icon: 'equipment' },
   { id: 'scenarios', label: 'Response Scenarios', short: 'Scenarios', description: 'See how the team forms, communicates, treats and moves through each type of response.', color: 'mint', icon: 'situations' },
@@ -16,6 +17,8 @@ const IGEL_VIDEOS = 'https://www.intersurgical.com/info/videos-airway-management
 const VITAL_SIGNS = 'https://medlineplus.gov/ency/article/002341.htm';
 const PULSE_GUIDE = 'https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse';
 const AHA_FIRST_AID = 'https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines';
+const AHA_BLS = 'https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-basic-life-support';
+const AHA_CPR = 'https://cpr.heart.org/en/resources/what-is-cpr';
 const HEART_STROKE_AED = 'https://www.heartandstroke.ca/how-you-can-help/learn-cpr/aeds';
 const BLOOD_PRESSURE_GUIDE = 'https://medlineplus.gov/lab-tests/measuring-blood-pressure/';
 const RED_CROSS_COLD = 'https://www.redcross.ca/training-and-certification/first-aid-tips-and-resources/first-aid-tips/winter-safety-and-clothing/cold-related-emergencies';
@@ -88,6 +91,28 @@ export const topics = [
     notice: { title: 'A device does not finish the assessment', text: 'Positioning, an airway adjunct, oxygen or a BVM can fail after movement, vomiting, changing responsiveness or a poor seal. Stay with the casualty and keep checking air movement and breathing effectiveness.' },
     resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for oxygen, pulse oximetry and open chest wounds.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian airway, breathing, CPR and oxygen reference.')],
     related: ['airway-check', 'airway-positioning', 'breathing-assessment', 'breathing-support'],
+  },
+  {
+    id: 'circulation-overview', title: 'Circulation & Shock', category: 'circulation', group: 'Choose what you find', icon: 'circulation', color: 'teal', reference: true,
+    intro: 'Check pulse, skin, bleeding and responsiveness together. Recognize when circulation is failing, act on the immediate threat and keep checking the trend.',
+    cardHeading: 'Choose the circulation concern',
+    cardLabel: 'Open guide',
+    scenarioCards: [
+      { topicId: 'pulse', kicker: 'Rate, rhythm and strength', title: 'Check the pulse', text: 'Find a radial or carotid pulse as trained, count it and describe its quality.' },
+      { topicId: 'skin-signs', kicker: 'Colour, temperature and moisture', title: 'Check skin signs', text: 'Compare with the casualty’s normal appearance and look for change.' },
+      { topicId: 'shock-recognition', kicker: 'Pattern and trend', title: 'Recognize shock', text: 'Put mechanism, pulse, skin, breathing and responsiveness together.' },
+      { topicId: 'cardiac-arrest-response', kicker: 'No normal breathing and no definite pulse', title: 'Cardiac arrest and CPR', text: 'Open the current adult CPR and AED sequence.' },
+      { topicId: 'monitoring-equipment', kicker: 'BP, SpO₂ and 3-lead', title: 'Add monitoring', text: 'Apply useful monitoring after immediate threats are addressed.' },
+      { topicId: 'circulation-reassessment', kicker: 'Treatment check', title: 'Reassess circulation', text: 'Repeat the physical checks, confirm treatments and report the direction of change.' },
+    ],
+    sections: [
+      { title: 'The common sequence', bullets: ['Return to M immediately if serious bleeding is found or has restarted.', 'Check a pulse and describe the site, rate, rhythm and strength.', 'Check skin colour against the casualty’s normal appearance, along with temperature and moisture.', 'Look for weakness, dizziness, thirst, confusion or a falling AVPU and interpret them with the mechanism and the rest of the assessment.', 'If an unresponsive adult is not breathing normally and no definite pulse is felt within 10 seconds, activate the response and begin the current adult CPR and AED sequence.', 'After immediate threats are addressed, add useful monitoring without losing sight of the casualty.', 'Protect the casualty from heat loss and repeat the circulation check after every treatment, move or change.'] },
+    ],
+    actionHeading: 'Assessment and equipment cards',
+    actions: [internal('march-c', 'C — Circulation', 'Return to the circulation step in MARCHE.'), internal('capillary-refill', 'Capillary refill', 'Use only as a locally taught supporting observation.'), internal('manual-blood-pressure', 'Manual blood pressure', 'Measure and trend a blood pressure without delaying care.'), internal('pulse-oximeter', 'Portable pulse oximeter', 'Validate the displayed pulse and SpO₂ against the casualty.'), internal('three-lead-ecg', '3-lead ECG setup', 'Apply the monitor leads and obtain a usable trace.'), internal('aed', 'AED', 'Review the equipment sequence used during cardiac arrest.')],
+    notice: { title: 'Treat the casualty, not one number', text: 'A single pulse, blood pressure or monitor reading can be misleading. Use the physical findings, mechanism, treatment response and direction of change together.' },
+    resources: [external(AHA_BLS, '2025 AHA Adult Basic Life Support Guidelines', 'Current adult cardiac-arrest recognition, high-quality CPR, ventilation and AED guidance.', 'Official clinical guidance'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current first-aid positioning and supportive care for a person showing signs of shock.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian assessment, shock, CPR and AED reference.')],
+    related: ['march-c', 'shock-recognition', 'cardiac-arrest-response', 'circulation-reassessment'],
   },
   {
     id: 'equipment-overview', title: 'Equipment', category: 'equipment', group: 'Choose by purpose', icon: 'equipment', color: 'coral', reference: true,
@@ -254,21 +279,63 @@ export const topics = [
   },
   {
     id: 'march-c', title: 'C — Circulation', category: 'assessment', group: 'MARCHE', icon: 'assessment', color: 'teal', reference: true,
-    intro: 'Use pulse, skin and the overall casualty picture to judge circulation and recognize deterioration.',
+    intro: 'Use pulse, skin, bleeding, responsiveness and the overall casualty picture to judge circulation, recognize shock and identify cardiac arrest.',
     quickRoutes: [
       internal('march-m', 'Bleeding is found or restarts', 'Return to M immediately and control the source.'),
-      internal('vital-signs', 'Need a clearer picture', 'Put pulse, skin, breathing and responsiveness together as a trend.'),
+      internal('shock-recognition', 'Signs of shock are present', 'Recognize the pattern, support the casualty and request urgent help.'),
+      internal('cardiac-arrest-response', 'No normal breathing and no definite pulse', 'Begin the current adult CPR and AED sequence.'),
       internal('march-h', 'Immediate threats are controlled', 'Continue to head concerns and heat-loss prevention.'),
     ],
     sections: [
-      { title: 'What you’re checking', bullets: ['Find and describe the pulse: rate, rhythm and strength.', 'Check skin colour against the casualty’s usual tone, along with temperature and moisture.', 'Look again for bleeding that was missed or has restarted.', 'Check capillary refill only if it is part of the locally taught assessment, including after splinting.', 'Note behaviour, thirst, weakness, confusion and other signs that may accompany shock.'] },
-      { title: 'Immediate actions', bullets: ['Return to massive-hemorrhage control if bleeding is found or restarts.', 'Keep the casualty at rest and protect them from heat loss.', 'Continue oxygen or other treatment only as directed by the applicable protocol.', 'Arrange movement and medical assistance according to urgency.'] },
+      { title: 'What you’re checking', bullets: ['Look again for bleeding that was missed or has restarted.', 'Find and describe the pulse: site, rate, rhythm and strength.', 'Check skin colour against the casualty’s usual tone, along with temperature and moisture.', 'Note behaviour, thirst, weakness, dizziness, confusion and any change in AVPU.', 'Check capillary refill only if it remains part of the locally taught assessment, including after splinting.'] },
+      { title: 'Immediate actions', bullets: ['Return to massive-hemorrhage control if bleeding is found or restarts.', 'If the unresponsive adult is not breathing normally and no definite pulse is felt within 10 seconds, activate the response and begin CPR with the AED as soon as it is available.', 'For signs of shock, support the airway and breathing, keep the casualty at rest, protect them from heat loss and request urgent medical assistance.', 'Continue oxygen or other treatment only as directed by the applicable protocol.', 'Arrange movement according to the casualty’s urgency and the safe route.'] },
       { title: 'Reassess and report', bullets: ['Trend findings instead of relying on one number.', 'Repeat pulse, skin and any locally taught capillary-refill checks after treatment and movement.', 'Report deterioration immediately.'] },
     ],
     actionHeading: 'Circulation assessment and equipment cards',
-    actions: [internal('pulse', 'Check a pulse', 'Radial and carotid locations, counting and quality.'), internal('capillary-refill', 'Check capillary refill', 'A locally taught check, including after splinting.'), internal('skin-signs', 'Check skin signs', 'Colour, temperature, moisture and change.'), internal('vital-signs', 'Vital-sign set', 'Put the findings together and record the trend.'), internal('aed', 'AED', 'Open the cardiac-arrest and AED sequence.'), internal('monitoring-equipment', 'Monitoring equipment', 'Blood pressure, SpO₂ and 3-lead setup.')],
+    actions: [internal('circulation-overview', 'Circulation & Shock hub', 'Choose the assessment, shock, CPR or monitoring path.'), internal('pulse', 'Check a pulse', 'Radial and carotid locations, counting and quality.'), internal('skin-signs', 'Check skin signs', 'Colour, temperature, moisture and change.'), internal('shock-recognition', 'Recognize and support shock', 'Put the pattern together and respond to the immediate cause.'), internal('cardiac-arrest-response', 'Cardiac arrest and CPR', 'Open the current adult CPR and AED sequence.'), internal('monitoring-equipment', 'Monitoring equipment', 'Blood pressure, SpO₂ and 3-lead setup.')],
     nextStep: internal('march-h', 'Continue to H — Head & hypothermia', 'Protect from heat loss and look for head-injury concerns while reassessing.'),
-    related: ['pulse', 'skin-signs', 'vital-signs', 'reassessment-handover'],
+    related: ['circulation-overview', 'shock-recognition', 'cardiac-arrest-response', 'circulation-reassessment'],
+  },
+  {
+    id: 'shock-recognition', title: 'Recognize and support shock', category: 'circulation', group: 'Circulation is failing', icon: 'circulation', color: 'teal', reference: true,
+    intro: 'Shock is a failure to deliver enough oxygenated blood to the body. Recognize the pattern early, treat an immediate cause you can address and watch for deterioration.',
+    sections: [
+      { title: 'What it can look like', bullets: ['A rapid, weak or difficult-to-feel pulse.', 'Skin that is pale or ashen for the casualty, cool, clammy or mottled.', 'Fast or difficult breathing.', 'Weakness, dizziness, thirst, nausea, anxiety, restlessness or confusion.', 'A falling AVPU or other worsening responsiveness.', 'A concerning mechanism or cause such as serious bleeding, major injury, burn or sudden illness.'] },
+      { title: 'Immediate response', bullets: ['Return to M and control serious bleeding if it is present or has restarted.', 'Maintain the airway and support breathing under the current training and direction.', 'Keep an alert casualty showing signs of shock lying flat when the injury, breathing and situation allow. Use a position that protects the airway or supports breathing when those needs take priority.', 'Keep the casualty at rest and protect them from heat loss without overheating them.', 'Do not give food or drink.', 'Request urgent medical assistance and organize the safe movement plan.', 'Repeat pulse, skin, breathing and AVPU while checking that every treatment still works.'] },
+      { title: 'Use the trend', bullets: ['Record the time and the direction of change after treatment or movement.', 'A blood pressure can add information, but a single normal reading does not rule out shock.', 'Capillary refill is only a supporting observation when it is part of the locally taught method.', 'Report the suspected cause, findings, treatments and response together.'] },
+    ],
+    notice: { title: 'Do not wait for every sign', text: 'Shock is recognized from the whole casualty picture. Act on serious bleeding, airway or breathing threats immediately and escalate when the pattern is concerning.' },
+    actionHeading: 'Act, monitor and move',
+    actions: [internal('march-m', 'Control serious bleeding', 'Return to the first MARCHE priority.'), internal('airway-overview', 'Airway & breathing', 'Position and support the airway and breathing.'), internal('foil-blanket', 'Protect from heat loss', 'Insulate and keep important assessment sites accessible.'), internal('vital-signs', 'Build the vital-sign trend', 'Record pulse, breathing, skin, AVPU and useful monitoring.'), internal('movement-decision', 'Plan movement', 'Match urgency to the safe route and available help.'), internal('circulation-reassessment', 'Repeat the circulation cycle', 'Check whether the casualty and treatments are improving or worsening.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for positioning and supportive care when a person shows signs of shock.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian first-aid assessment and shock reference.')],
+    related: ['circulation-overview', 'march-c', 'pulse', 'circulation-reassessment'],
+  },
+  {
+    id: 'cardiac-arrest-response', title: 'Adult cardiac arrest and CPR', category: 'circulation', group: 'Immediate resuscitation', icon: 'circulation', color: 'coral', reference: true,
+    intro: 'For an unresponsive adult who is not breathing normally and has no definite pulse, activate the response, begin high-quality CPR and use the AED as soon as possible.',
+    steps: ['Confirm the scene is safe enough to provide care and use the required protection.', 'Check responsiveness, shout for help and activate the response. Send for the AED, BVM and other assigned resuscitation equipment.', 'Check breathing and a pulse at the same time. If the casualty is not breathing normally or is only gasping and no definite pulse is felt within 10 seconds, begin CPR.', 'Place the casualty on their back on a firm surface when this can be done safely and promptly.', 'Begin with 30 chest compressions. Compress the centre of the chest at 100–120 per minute, at least 5 cm deep for an average adult while avoiding more than 6 cm.', 'Allow full chest recoil, keep pauses as short as possible and change compressors about every two minutes when another trained rescuer is available.', 'Open the airway and give two breaths with the trained CPR mask or BVM method. Give only enough air for visible chest rise, then immediately return to compressions.', 'Turn on and apply the AED as soon as it arrives. Follow its prompts, make sure nobody touches the casualty during analysis or shock delivery, and resume CPR immediately when prompted.', 'Continue the 30:2 CPR and AED cycle under the current adult resuscitation sequence until the casualty shows signs of life, care is transferred, you are directed to stop or the scene becomes unsafe.'],
+    sections: [
+      { title: 'Divide the work when help arrives', bullets: ['One responder maintains high-quality compressions.', 'One responder manages the airway, mask seal and breaths.', 'Another responder prepares and operates the AED without delaying compressions.', 'Use closed-loop communication for compressor changes, breaths, clear calls and equipment needs.', 'Continue care where the casualty is found when safe and effective CPR can be delivered there; do not interrupt CPR simply to rush toward Sick Bay.'] },
+      { title: 'Quality checks', bullets: ['Use a firm surface and a body position that allows effective compressions.', 'Watch for visible chest rise with each breath and correct the airway position or mask seal if the chest does not rise.', 'Avoid too many breaths, too much volume and long pauses.', 'Keep oxygen and loose equipment clear of the chest during shock delivery as taught.', 'If signs of life return, stop compressions, reassess MARCHE and continue urgent care.'] },
+    ],
+    notice: { title: 'Adult sequence', text: 'This page summarizes the current adult trained-rescuer sequence. Pediatric care, choking and special-circumstance resuscitation use their own current training and are not combined with this page.' },
+    actionHeading: 'Resuscitation equipment and support',
+    actions: [internal('aed', 'AED', 'Apply pads, clear the casualty and follow the prompts.'), internal('bvm', 'Bag-valve-mask', 'Use a two-rescuer seal when enough trained responders are available.'), internal('airway-positioning', 'Open the airway', 'Use the appropriate trained airway manoeuvre.'), internal('team-roles', 'Team roles', 'Assign the primary, communication and support work clearly.')],
+    resources: [external(AHA_BLS, '2025 AHA Adult Basic Life Support Guidelines', 'Current cardiac-arrest recognition, 30:2 CPR, compression quality, ventilation and AED guidance.', 'Official clinical guidance'), external(AHA_CPR, 'American Heart Association: What is CPR?', 'Current adult compression rate and depth summary.'), external(HEART_STROKE_AED, 'Heart & Stroke: How to use an AED', 'Canadian AED sequence and training information.'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian CPR and AED reference.')],
+    related: ['circulation-overview', 'aed', 'bvm', 'team-roles'],
+  },
+  {
+    id: 'circulation-reassessment', title: 'Circulation reassessment', category: 'circulation', group: 'Repeat after treatment and movement', icon: 'circulation', color: 'violet', reference: true,
+    intro: 'Repeat the same short circulation cycle so the team can see what changed, confirm treatments and report deterioration early.',
+    phaseHeading: 'Circulation check cycle',
+    scenarioPhases: [
+      { kicker: 'Return to M', title: 'Check bleeding first', text: 'Look again for missed or restarted bleeding before focusing on monitor numbers.', bullets: ['Expose enough to see whether dressings, packing and tourniquets remain effective.', 'Check for new pooling, soaking, equipment movement or other signs that control has failed.'], links: [internal('bleeding-reassessment', 'Bleeding-control reassessment', 'Confirm the treatment still works.'), internal('march-m', 'M — Massive hemorrhage', 'Return to immediate bleeding control.')] },
+      { kicker: 'Physical check', title: 'Repeat pulse and skin', text: 'Use the same sites and descriptions so changes are meaningful.', bullets: ['Record pulse site, rate, rhythm and strength.', 'Repeat skin colour, temperature and moisture.', 'Use capillary refill only through the locally taught method.'], links: [internal('pulse', 'Pulse check', 'Repeat rate, rhythm and strength.'), internal('skin-signs', 'Skin signs', 'Compare colour, temperature and moisture.')] },
+      { kicker: 'Whole casualty', title: 'Check breathing and AVPU', text: 'Circulation findings only make sense beside airway, breathing and responsiveness.', bullets: ['Repeat respiratory rate and quality.', 'Repeat AVPU and note new weakness, dizziness, restlessness or confusion.', 'Return immediately to A or R if the airway or breathing has changed.'], links: [internal('breathing-assessment', 'Breathing assessment', 'Repeat look, listen and feel.'), internal('avpu', 'AVPU', 'Describe the responsiveness change.')] },
+      { kicker: 'Treatment and equipment', title: 'Confirm what is helping', text: 'Check the intervention before trusting the next reading.', bullets: ['Confirm every dressing, tourniquet, airway device, splint and warming measure remains effective and secure.', 'Validate BP, SpO₂ and 3-lead readings against the physical assessment.', 'Do not let setup or troubleshooting delay an immediate MARCHE intervention.'], links: [internal('treatment-checks', 'Treatment checks', 'Confirm every intervention after movement.'), internal('monitoring-equipment', 'Monitoring equipment', 'Build a useful, repeatable trend.')] },
+      { kicker: 'Trend and report', title: 'State the direction of change', text: 'Report what is improving, unchanged or worsening and what the team needs next.', bullets: ['Give the time, findings, treatment and response.', 'Report a concerning change immediately.', 'Repeat the cycle after every major treatment, move, transfer or deterioration.', 'Continue to H when circulation is supported, returning to M, A, R or CPR whenever the casualty changes.'], links: [internal('mist-handover', 'MIST handover', 'Organize mechanism, injuries, signs and treatments.'), internal('march-h', 'Continue to H', 'Protect from heat loss and assess head concerns.')] },
+    ],
+    related: ['circulation-overview', 'shock-recognition', 'monitoring-equipment', 'reassessment-handover'],
   },
   {
     id: 'march-h', title: 'H — Head & hypothermia', category: 'assessment', group: 'MARCHE', icon: 'assessment', color: 'violet', reference: true,
@@ -300,7 +367,7 @@ export const topics = [
     intro: 'Capillary refill is a supporting observation, not a stand-alone diagnosis. Use it only if it remains part of the locally taught assessment.',
     steps: ['Choose the finger, toe or other site taught in the current course.', 'Briefly press the area to blanch it, then release.', 'Observe and describe the return of colour using the locally taught method.', 'Record the site, conditions and result with pulse, skin, responsiveness and the rest of the assessment.', 'Repeat the check after a splint, dressing, movement or change in condition when it is part of the local method.'],
     notice: { title: 'Use the trend, not one finding', text: 'Cold surroundings, poor perfusion and the assessment site can affect the observation. Recheck a concerning result and report it with the rest of the casualty picture.' },
-    related: ['march-c', 'pulse', 'skin-signs', 'vital-signs'],
+    related: ['circulation-overview', 'march-c', 'pulse', 'shock-recognition'],
   },
   {
     id: 'chest-seal', title: 'Chest seal', category: 'equipment', group: 'Open chest injury — trained-use equipment', icon: 'equipment', color: 'coral', reference: true,
@@ -351,7 +418,7 @@ export const topics = [
     steps: ['Use the pads of two fingers, not your thumb.', 'For a radial pulse, place the fingers on the thumb side of the inner wrist and press lightly.', 'Use a carotid pulse only as taught for an unresponsive casualty. Never press both sides of the neck at once.', 'Count for a full 60 seconds. Use a shorter timed count only when that is the current locally taught method.', 'Record the rate, regularity and strength, then compare it with later checks.'],
     sections: [{ title: 'Describe', bullets: ['Rate in beats per minute', 'Regular or irregular rhythm', 'Strong, normal or weak quality', 'Location used: radial or carotid'] }, { title: 'Typical resting adult guide', bullets: ['About 60–100 beats per minute for a calm, resting adult.', 'Fitness, pain, anxiety, temperature, medication, illness, blood loss and shock can alter the rate.'] }],
     resources: [external(PULSE_GUIDE, 'American Heart Association: Checking a pulse', 'Pulse locations, wrist technique and resting adult range.'), external(VITAL_SIGNS, 'MedlinePlus: Vital signs', 'General healthy-adult resting ranges.')],
-    related: ['march-c', 'skin-signs', 'vital-signs', 'reassessment-handover'],
+    related: ['circulation-overview', 'shock-recognition', 'skin-signs', 'circulation-reassessment'],
   },
   {
     id: 'skin-signs', title: 'Skin signs', category: 'assessment', group: 'Vital signs', icon: 'assessment', color: 'teal', reference: true,
@@ -361,7 +428,7 @@ export const topics = [
       { title: 'Report the finding', bullets: ['Use descriptive words instead of diagnosing from skin alone.', 'Record the time and whether the finding is improving or worsening.', 'Interpret skin together with breathing, pulse, responsiveness and the mechanism.'] },
     ],
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross skin assessment', 'Current guidance for evaluating colour, temperature and moisture.')],
-    related: ['march-c', 'pulse', 'vital-signs', 'reassessment-handover'],
+    related: ['circulation-overview', 'shock-recognition', 'pulse', 'circulation-reassessment'],
   },
   {
     id: 'secondary-survey', title: 'Secondary survey', category: 'assessment', group: 'After immediate threats', icon: 'assessment', color: 'teal', reference: true,
@@ -831,7 +898,7 @@ export const topics = [
     ],
     notice: { title: 'Follow the AED in front of you', text: 'Button layout, pad connection, pediatric mode and ready indicators vary. Use the labels and prompts on the actual AED and the current CPR sequence.' },
     resources: [external(HEART_STROKE_AED, 'Heart & Stroke: How to use an AED', 'Canadian AED sequence and public training information.'), external(RED_CROSS_GUIDE, 'Canadian Red Cross CPR and AED guide', 'Current CPR, pad placement and AED sequence.')],
-    related: ['march-c', 'monitoring-equipment', 'vital-signs', 'reassessment-handover'],
+    related: ['cardiac-arrest-response', 'circulation-overview', 'monitoring-equipment', 'bvm'],
   },
   {
     id: 'pulse-oximeter', title: 'Portable pulse oximeter', category: 'equipment', group: 'Breathing and circulation monitoring', icon: 'equipment', color: 'coral', reference: true,
@@ -854,7 +921,7 @@ export const topics = [
       { title: 'Use the finding', bullets: ['Report blood pressure with pulse, skin, responsiveness, breathing and the overall trend.', 'Do not delay treatment of an immediate MARCHE threat to obtain a blood pressure.', 'The stethoscope is used here for the blood-pressure sounds; lung auscultation is not part of the casualty-clearer breathing check.'] },
     ],
     resources: [external(BLOOD_PRESSURE_GUIDE, 'MedlinePlus: Measuring blood pressure', 'Cuff placement, brachial sounds and systolic/diastolic measurement.')],
-    related: ['march-c', 'vital-signs', 'pulse', 'monitoring-equipment'],
+    related: ['circulation-overview', 'circulation-reassessment', 'vital-signs', 'pulse'],
   },
   {
     id: 'three-lead-ecg', title: '3-lead ECG setup', category: 'equipment', group: 'Cardiac monitoring setup', icon: 'equipment', color: 'coral', reference: true,
@@ -865,7 +932,7 @@ export const topics = [
       { title: 'Keep the role clear', bullets: ['Complete MARCHE and vital signs; the trace does not replace physical assessment.', 'Report symptoms, pulse and casualty appearance with the monitor finding.', 'Use the placement diagram and labels for the actual monitor because cable colour conventions vary.'] },
     ],
     notice: { title: 'Confirm the monitor model', text: 'The final device-specific page should show the actual cable labels, connector, screen controls and approved lead placement for the monitor in use.' },
-    related: ['monitoring-equipment', 'vital-signs', 'pulse', 'march-c'],
+    related: ['circulation-overview', 'circulation-reassessment', 'monitoring-equipment', 'pulse'],
   },
   {
     id: 'monitoring-equipment', title: 'Monitoring equipment', category: 'equipment', group: 'Sick Bay and scene monitoring', icon: 'equipment', color: 'coral', reference: true,
@@ -882,7 +949,7 @@ export const topics = [
       { title: 'Make the numbers useful', bullets: ['Check whether each reading fits the casualty’s pulse, breathing, skin and responsiveness.', 'Repeat readings after treatment, movement or a change in condition.', 'Record the time, reading, oxygen or other treatment, and any reason the value may be unreliable.', 'Report the trend and important changes rather than reading a screen without context.'] },
     ],
     notice: { title: 'Know the equipment in use', text: 'Portable and Sick Bay monitors can use different connectors, cables and controls. Device-specific setup should match the actual monitor and approved instructions.' },
-    related: ['equipment-overview', 'manual-blood-pressure', 'pulse-oximeter', 'three-lead-ecg'],
+    related: ['circulation-overview', 'circulation-reassessment', 'manual-blood-pressure', 'pulse-oximeter'],
   },
   {
     id: 'foil-blanket', title: 'Foil blanket', category: 'equipment', group: 'Heat-loss prevention', icon: 'equipment', color: 'coral', reference: true,
