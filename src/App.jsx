@@ -538,7 +538,7 @@ export default function App() {
   else if (route.kind === 'explore') content = <DirectoryView key="explore" saved={saved} toggleSaved={toggleSaved} />;
   else if (route.kind === 'category') {
     content = category
-      ? ['assessment', 'splinting', 'equipment', 'scenarios'].includes(category.id)
+      ? ['assessment', 'bleeding', 'splinting', 'equipment', 'scenarios'].includes(category.id)
         ? <ArticleView topic={topicById[`${category.id}-overview`]} saved={saved.includes(`${category.id}-overview`)} toggleSaved={toggleSaved} />
         : <DirectoryView key={`category-${category.id}`} title={category.label} intro={category.description} topicList={topicsForCategory(category.id)} saved={saved} toggleSaved={toggleSaved} />
       : <NotFoundView />;

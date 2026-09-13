@@ -8,8 +8,8 @@ export const categories = [
 ];
 
 const RED_CROSS_GUIDE = 'https://cdn.redcross.ca/prodmedia/crc/azure/documents/first-aid-program-2025/comprehensive_guide_fa_cpr_en.pdf';
-const CAT_PRODUCT = 'https://www.narescue.com/cat-tourniquet';
-const CAT_VIDEOS = 'https://www.narescue.com/videos';
+const CAT_PRODUCT = 'https://www.narescue.com/all-products/combat-application-tourniquet-c-a-t.html';
+const CAT_VIDEOS = 'https://www.narescue.com/education/educational-videos/combat-application-tourniquet-c-a-t-instructions.html';
 const OLAES_PRODUCT = 'https://tacmedsolutions.com/products/olaes-modular-bandage?variant=40633970950343';
 const IGEL_PRODUCT = 'https://www.intersurgical.com/info/igel';
 const IGEL_VIDEOS = 'https://www.intersurgical.com/info/videos-airway-management';
@@ -44,6 +44,28 @@ export const topics = [
     ],
     sections: [{ title: 'Keep the sequence moving', bullets: ['If you find an immediate threat, act within your training and call for help.', 'After an intervention, check whether it worked before continuing.', 'Return to MARCHE whenever the casualty changes.'] }],
     related: ['scene-survey', 'avpu', 'marche', 'vital-signs'],
+  },
+  {
+    id: 'bleeding-overview', title: 'Bleeding Control', category: 'bleeding', group: 'Choose what you see', icon: 'bleeding', color: 'sky', reference: true,
+    intro: 'Find the source, control it and confirm that it stays controlled. Start with the situation in front of you, then open the procedure or equipment needed.',
+    cardHeading: 'Choose the bleeding problem',
+    cardLabel: 'Open guide',
+    scenarioCards: [
+      { topicId: 'life-threatening-bleeding', kicker: 'Recognize the priority', title: 'Is it life-threatening?', text: 'Identify bleeding that needs immediate control before the rest of the primary survey.' },
+      { topicId: 'limb-bleeding', kicker: 'Arm or leg', title: 'Limb bleeding', text: 'Choose pressure, packing, a pressure dressing or a tourniquet.' },
+      { topicId: 'wound-packing', kicker: 'Deep wound', title: 'Wound packing', text: 'Pack a suitable wound directly at the bleeding source when trained.' },
+      { topicId: 'pressure-dressing', kicker: 'Maintain control', title: 'Pressure dressing', text: 'Keep pressure on a wound after the bleeding has stopped.' },
+      { topicId: 'cat-tourniquet', kicker: 'Life-threatening limb bleed', title: 'C-A-T tourniquet', text: 'Open the carried-device sequence and official application video.' },
+      { topicId: 'bleeding-reassessment', kicker: 'Control check', title: 'Bleeding not controlled', text: 'Find why control failed, escalate the method and repeat MARCHE.' },
+    ],
+    sections: [
+      { title: 'The control sequence', bullets: ['Expose enough to identify the actual bleeding source.', 'Apply firm direct pressure at the source.', 'For a suitable deep wound, pack the cavity and maintain pressure when trained.', 'For life-threatening arm or leg bleeding that pressure does not control, cannot be maintained or is impractical, apply the commercial tourniquet taught for the carried device.', 'After control, use a pressure dressing when appropriate and secure every treatment for movement.', 'Confirm that bleeding has stopped, record treatment times and restart MARCHE if the casualty changes.'] },
+    ],
+    actionHeading: 'Specific injury and equipment pages',
+    actions: [internal('direct-pressure', 'Direct pressure', 'Begin immediate hands-on control at the bleeding source.'), internal('olaes-bandage', 'OLAES modular bandage', 'Open the product components and pressure-dressing sequence.'), internal('pelvic-binder', 'Suspected pelvic injury', 'Recognize the concern and keep binder use model-specific.'), internal('chest-seal', 'Open chest wound', 'Move to the respiration pathway and the trained chest-seal response.'), internal('march-m', 'M — Massive hemorrhage', 'Return to the MARCHE priority and continue the primary survey.')],
+    notice: { title: 'Match the method to the location', text: 'A tourniquet is for qualifying arm or leg bleeding. A suitable deep wound may be packed. A possible pelvic injury and an open chest wound require their own assessment and equipment pathways.' },
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current evidence-based guidance for direct pressure, wound packing, pressure dressings, tourniquets and open chest wounds.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian bleeding-control and tourniquet guidance.')],
+    related: ['life-threatening-bleeding', 'limb-bleeding', 'wound-packing', 'bleeding-reassessment'],
   },
   {
     id: 'equipment-overview', title: 'Equipment', category: 'equipment', group: 'Choose by purpose', icon: 'equipment', color: 'coral', reference: true,
@@ -152,6 +174,7 @@ export const topics = [
     id: 'march-m', title: 'M — Massive hemorrhage', category: 'assessment', group: 'MARCHE', icon: 'bleeding', color: 'sky', reference: true,
     intro: 'Life-threatening external bleeding comes before the airway in the MARCHE sequence. Find it quickly and control it.',
     quickRoutes: [
+      internal('bleeding-overview', 'Choose the control method', 'Open the interactive bleeding-control hub.'),
       internal('direct-pressure', 'Bleeding found', 'Start immediate hands-on control at the source.'),
       internal('wound-packing', 'Deep wound', 'Review wound packing when the wound and current training make it appropriate.'),
       internal('cat-tourniquet', 'Life-threatening limb bleeding', 'Open the C-A-T sequence for the carried device.'),
@@ -558,20 +581,66 @@ export const topics = [
     related: ['mist-handover', 'treatment-checks', 'reassessment-loop', 'vital-signs'],
   },
   {
+    id: 'life-threatening-bleeding', title: 'Recognize life-threatening bleeding', category: 'bleeding', group: 'Immediate priority', icon: 'bleeding', color: 'sky', reference: true,
+    intro: 'Life-threatening external bleeding needs immediate control. Recognize it quickly, expose the source and act before continuing the rest of the primary survey.',
+    sections: [
+      { title: 'What it can look like', bullets: ['Blood pooling on the deck or another surface', 'Blood that is rapidly flowing or spurting from a wound', 'Bleeding that continues despite firm direct pressure', 'Clothing or dressings becoming heavily or repeatedly soaked', 'Partial or complete amputation', 'A casualty becoming pale, weak, dizzy, drowsy, confused or unresponsive while bleeding'] },
+      { title: 'Immediate sequence', bullets: ['Use the protection required for the scene and expose enough to find the source.', 'Apply firm direct pressure directly at the source.', 'Call for assistance early while hands-on bleeding control continues.', 'Choose wound packing for a suitable deep wound when trained.', 'Choose a commercial tourniquet for qualifying arm or leg bleeding when pressure does not work, cannot be maintained or is impractical.', 'Confirm that the selected method has stopped the bleeding before continuing to the airway.'] },
+      { title: 'Look for more than one source', bullets: ['Scan the entire casualty rapidly, including beneath and behind when access allows.', 'Do not let one obvious wound hide another life-threatening source.', 'After every lift or turn, recheck the wound, dressing and surrounding area for renewed bleeding.'] },
+    ],
+    actionHeading: 'Choose the control method',
+    actions: [internal('direct-pressure', 'Direct pressure', 'Start firm, continuous pressure at the source.'), internal('wound-packing', 'Wound packing', 'Pack a suitable deep wound when trained.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'Control qualifying life-threatening arm or leg bleeding.'), internal('bleeding-reassessment', 'Control check', 'Confirm control and correct a treatment that is not working.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Recognition and current recommendations for severe external bleeding.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross bleeding-control guidance', 'Current Canadian first-aid sequence for life-threatening bleeding.')],
+    related: ['bleeding-overview', 'march-m', 'limb-bleeding', 'bleeding-reassessment'],
+  },
+  {
+    id: 'limb-bleeding', title: 'Arm or leg bleeding', category: 'bleeding', group: 'Choose the next control', icon: 'bleeding', color: 'sky', reference: true,
+    intro: 'Start at the bleeding source, then choose the least complicated method that controls the wound and can stay effective during the response.',
+    cardHeading: 'Choose the next control',
+    cardLabel: 'Open procedure',
+    scenarioCards: [
+      { topicId: 'direct-pressure', kicker: 'Start here', title: 'Apply direct pressure', text: 'Use firm, continuous pressure directly at the bleeding source.' },
+      { topicId: 'wound-packing', kicker: 'Deep wound', title: 'Pack the wound', text: 'Fill a suitable wound cavity at the source, then hold firm pressure.' },
+      { topicId: 'pressure-dressing', kicker: 'Bleeding controlled', title: 'Maintain pressure', text: 'Secure a pressure dressing without creating an unintended tourniquet.' },
+      { topicId: 'cat-tourniquet', kicker: 'Life-threatening limb bleeding', title: 'Apply a tourniquet', text: 'Use the carried commercial device when pressure fails, cannot be maintained or is impractical.' },
+    ],
+    sections: [
+      { title: 'Make the choice', bullets: ['If the source can be compressed, begin with firm direct pressure.', 'If the wound is deep and suitable for packing, pack directly at the source when trained and continue pressure.', 'Once bleeding is controlled, use a pressure dressing when appropriate to maintain control.', 'If life-threatening arm or leg bleeding is not controlled by pressure—or pressure cannot be maintained or is impractical—move to the commercial tourniquet method.', 'If one method is not working, do not simply cover it and continue the survey; correct or escalate it and confirm control.'] },
+      { title: 'Protect the result', bullets: ['Keep the wound, dressing and any tourniquet visible enough to reassess.', 'Record the tourniquet time where it remains visible.', 'Secure the limb and treatment before movement.', 'Recheck immediately after every major move and return to M if bleeding restarts.'] },
+    ],
+    actions: [internal('olaes-bandage', 'OLAES modular bandage', 'Open the pressure-dressing product and its components.'), internal('bleeding-reassessment', 'Bleeding-control reassessment', 'Check whether the treatment is still working.'), internal('splinting-overview', 'Support the injured limb', 'After bleeding is controlled, prepare the injury and whole casualty for movement.')],
+    notice: { title: 'Tourniquet location', text: 'Commercial tourniquets are for qualifying arm or leg bleeding. Do not place one over a joint. Placement wording must remain consistent with the current CCT course and the carried-device instructions.' },
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Direct pressure, wound packing, pressure dressing and tourniquet recommendations.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross tourniquet guidance', 'Current Canadian placement, tightening and documentation sequence.')],
+    related: ['bleeding-overview', 'direct-pressure', 'wound-packing', 'cat-tourniquet'],
+  },
+  {
+    id: 'bleeding-reassessment', title: 'Bleeding-control reassessment', category: 'bleeding', group: 'Confirm it stays controlled', icon: 'bleeding', color: 'violet', reference: true,
+    intro: 'Every bleeding treatment needs a control check. If blood is still flowing, soaking through or returning after movement, stay at M and correct the problem before continuing.',
+    phaseHeading: 'Control-check cycle',
+    scenarioPhases: [
+      { kicker: 'Source', title: 'Find where the blood is coming from', text: 'Expose enough to see whether the original wound, a second wound or the treatment itself explains the continuing bleeding.', bullets: ['Maintain pressure while another team member exposes or prepares equipment when possible.', 'Check beneath and behind the casualty when the situation allows.', 'Look for a dressing that missed the source, shifted or became loose during movement.'], links: [internal('life-threatening-bleeding', 'Recognize serious bleeding', 'Repeat the rapid severity check.')] },
+      { kicker: 'Pressure', title: 'Restore firm control at the source', text: 'Do not replace effective source pressure with a loose layer of material.', bullets: ['Press directly where the bleeding is occurring.', 'If blood comes through a dressing, maintain pressure and reinforce while reassessing the need for another method.', 'For a packed wound, keep pressure over the packed cavity for the time required by the carried product and current training.'], links: [internal('direct-pressure', 'Direct pressure', 'Return to firm hands-on source control.'), internal('wound-packing', 'Wound packing', 'Check the deep-wound sequence.')] },
+      { kicker: 'Escalate', title: 'Change the method when needed', text: 'A treatment that is not controlling life-threatening bleeding is not finished.', bullets: ['For qualifying arm or leg bleeding, apply and tighten the commercial tourniquet using the taught carried-device method.', 'Correct a loose or displaced dressing or wrap while maintaining control.', 'Request additional equipment and advanced help early.', 'Do not remove a tourniquet once applied.'], links: [internal('cat-tourniquet', 'C-A-T tourniquet', 'Open the carried-device procedure and official video.'), internal('olaes-bandage', 'OLAES modular bandage', 'Review the product used to maintain pressure.')] },
+      { kicker: 'Confirm', title: 'Prove that bleeding has stopped', text: 'Look at the wound and treatment rather than assuming the procedure worked.', bullets: ['Confirm there is no continued flow, pooling or soak-through.', 'Check the casualty’s pulse, skin and responsiveness for deterioration.', 'Check circulation beyond a pressure dressing when applicable.', 'Secure the treatment so it can survive the planned movement.'], links: [internal('vital-signs', 'Repeat vital signs', 'Record the casualty response and trend.'), internal('treatment-checks', 'Treatment checks', 'Confirm every intervention remains effective.')] },
+      { kicker: 'Continue', title: 'Record, protect and restart MARCHE', text: 'Once control is confirmed, preserve the result and move to the next priority.', bullets: ['Record the treatment, time and response; make the tourniquet time visible.', 'Start heat-loss prevention and avoid unnecessary exposure.', 'Report the wound, control method and any continuing concern.', 'Continue to A—Airway, but return immediately to M if bleeding recurs.'], links: [internal('march-a', 'Continue to A — Airway', 'Proceed only after massive bleeding is controlled.'), internal('foil-blanket', 'Prevent heat loss', 'Protect the casualty while keeping treatments accessible.')] },
+    ],
+    related: ['bleeding-overview', 'life-threatening-bleeding', 'march-m', 'reassessment-loop'],
+  },
+  {
     id: 'direct-pressure', title: 'Direct pressure', category: 'bleeding', group: 'Bleeding control', icon: 'bleeding', color: 'sky', reference: true,
     intro: 'Firm, continuous pressure is the immediate control method for most external bleeding.',
     steps: ['Expose the bleeding site when practical.', 'Place a dressing or gauze directly over the source.', 'Press firmly and continuously with your hand.', 'Maintain pressure until bleeding is controlled or another method is required.', 'If blood comes through, maintain pressure and reinforce without disturbing the clot.', 'Reassess continuously.'],
     notice: { title: 'Life-threatening limb bleeding', text: 'If direct pressure does not control the bleeding, cannot be maintained or is impractical, move to the commercial-tourniquet method taught for the carried device.' },
     actions: [internal('pressure-dressing', 'Pressure dressing', 'Maintain control once direct pressure has stopped the bleeding.'), internal('wound-packing', 'Wound packing', 'Add packing for a suitable deep wound when trained.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'Commercial tourniquet product page and official media.')],
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross bleeding-control guidance', 'Current first-aid guide.')],
-    related: ['wound-packing', 'pressure-dressing', 'cat-tourniquet', 'march-m'],
+    related: ['bleeding-overview', 'wound-packing', 'pressure-dressing', 'cat-tourniquet'],
   },
   {
     id: 'pressure-dressing', title: 'Pressure dressing', category: 'bleeding', group: 'Bleeding control', icon: 'bleeding', color: 'sky', reference: true,
     intro: 'A pressure dressing helps maintain control after firm direct pressure has stopped the bleeding.',
     steps: ['Keep direct pressure on the wound while preparing the dressing.', 'Centre the wound pad over the bleeding site.', 'Wrap firmly enough to maintain pressure and keep the pad in place.', 'Secure the dressing without creating an unintended tourniquet.', 'Check for renewed bleeding and reassess circulation beyond the dressing when applicable.', 'Record and report the wound, dressing and response.'],
     actions: [internal('olaes-bandage', 'OLAES modular bandage', 'Review the carried pressure-dressing product and official information.'), internal('direct-pressure', 'Direct pressure', 'Return to the immediate manual-pressure method.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'For qualifying life-threatening limb bleeding.')],
-    related: ['direct-pressure', 'olaes-bandage', 'wound-packing', 'march-m'],
+    related: ['bleeding-overview', 'direct-pressure', 'olaes-bandage', 'wound-packing'],
   },
   {
     id: 'wound-packing', title: 'Wound packing', category: 'bleeding', group: 'Bleeding control — trained skill', icon: 'bleeding', color: 'sky', reference: true,
@@ -579,7 +648,7 @@ export const topics = [
     steps: ['Expose the wound and identify the bleeding cavity.', 'Feed gauze firmly into the deepest part of the wound, directly onto the bleeding source.', 'Continue packing until the cavity is filled.', 'Apply firm direct pressure for the time required by the carried gauze and current training.', 'Secure with a pressure dressing after control is achieved.', 'Reassess for renewed bleeding and report the treatment.'],
     notice: { title: 'Use the taught product method', text: 'Plain gauze and hemostatic gauze can require different hold times and instructions. Follow the carried product and current course.' },
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross bleeding-control guidance', 'Hemostatic dressing and direct-pressure principles.')],
-    related: ['direct-pressure', 'pressure-dressing', 'olaes-bandage', 'march-m'],
+    related: ['bleeding-overview', 'direct-pressure', 'pressure-dressing', 'olaes-bandage'],
   },
   {
     id: 'cat-tourniquet', title: 'C-A-T tourniquet', category: 'equipment', group: 'Bleeding-control product', icon: 'equipment', color: 'coral', reference: true,
