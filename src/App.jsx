@@ -41,6 +41,7 @@ const navItems = [
   { id: 'assessment', label: 'Assessment', icon: ClipboardCheck },
   { id: 'bleeding', label: 'Bleeding Control', icon: Droplets },
   { id: 'airway', label: 'Airway & Breathing', icon: Wind },
+  { id: 'splinting', label: 'Splinting & Movement', icon: Users },
   { id: 'equipment', label: 'Equipment', icon: Box },
   { id: 'scenarios', label: 'Scenarios', icon: TriangleAlert },
   { id: 'glossary', label: 'Glossary', icon: BookOpen },
@@ -219,7 +220,7 @@ function Sidebar({ route, savedCount }) {
       <Brand />
       <nav aria-label="Primary navigation">
         {navItems.map(({ id, label, icon: Icon }) => (
-          <button className={selected === id ? 'selected' : ''} aria-current={selected === id ? 'page' : undefined} key={id} type="button" onClick={() => navigate(['assessment', 'bleeding', 'airway', 'equipment', 'scenarios'].includes(id) ? `category/${id}` : id)}>
+          <button className={selected === id ? 'selected' : ''} aria-current={selected === id ? 'page' : undefined} key={id} type="button" onClick={() => navigate(['assessment', 'bleeding', 'airway', 'splinting', 'equipment', 'scenarios'].includes(id) ? `category/${id}` : id)}>
             <Icon size={20} strokeWidth={1.8} /><span>{label}</span>
           </button>
         ))}
@@ -444,8 +445,8 @@ function ArticleView({ topic, saved, toggleSaved }) {
           {topic.mnemonic && <section className="reference-block"><h2>{topic.mnemonic.heading}</h2><div className="mnemonic-grid">{topic.mnemonic.items.map((item) => <div key={item.letter}><span>{item.letter}</span><div><strong>{item.title}</strong><p>{item.text}</p></div></div>)}</div></section>}
           {topic.example && <section className="handover-example"><span>{topic.example.title}</span><blockquote>{topic.example.text}</blockquote></section>}
           {topic.quickRoutes && <section className="reference-block"><h2>{topic.quickRouteHeading || 'Choose what you need'}</h2>{renderLinks(topic.quickRoutes, 'quick-route-grid')}</section>}
-          {topic.scenarioCards && <section className="reference-block"><h2>Choose a response</h2><div className="scenario-card-grid">{topic.scenarioCards.map((item) => <button key={item.topicId} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><span>{item.kicker}</span><strong>{item.title}</strong><p>{item.text}</p><em>Open scenario <ChevronRight size={17} /></em></button>)}</div></section>}
-          {topic.scenarioPhases && <section className="reference-block"><h2>Response flow</h2><div className="scenario-timeline">{topic.scenarioPhases.map((phase, index) => <article className="scenario-phase" key={`${phase.kicker}-${phase.title}`}><span className="phase-number">{index + 1}</span><div className="phase-content"><span className="phase-kicker">{phase.kicker}</span><h3>{phase.title}</h3><p>{phase.text}</p>{phase.bullets && <ul className="check-list">{phase.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}{renderLinks(phase.links, 'phase-link-grid')}</div></article>)}</div></section>}
+          {topic.scenarioCards && <section className="reference-block"><h2>{topic.cardHeading || 'Choose a response'}</h2><div className="scenario-card-grid">{topic.scenarioCards.map((item) => <button key={item.topicId} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><span>{item.kicker}</span><strong>{item.title}</strong><p>{item.text}</p><em>{topic.cardLabel || 'Open scenario'} <ChevronRight size={17} /></em></button>)}</div></section>}
+          {topic.scenarioPhases && <section className="reference-block"><h2>{topic.phaseHeading || 'Response flow'}</h2><div className="scenario-timeline">{topic.scenarioPhases.map((phase, index) => <article className="scenario-phase" key={`${phase.kicker}-${phase.title}`}><span className="phase-number">{index + 1}</span><div className="phase-content"><span className="phase-kicker">{phase.kicker}</span><h3>{phase.title}</h3><p>{phase.text}</p>{phase.bullets && <ul className="check-list">{phase.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}{renderLinks(phase.links, 'phase-link-grid')}</div></article>)}</div></section>}
           {topic.roleCards && <section className="reference-block"><h2>Divide the work</h2><div className="role-card-grid">{topic.roleCards.map((role) => <article key={role.title}><h3>{role.title}</h3><p>{role.text}</p><ul className="check-list">{role.bullets.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div></section>}
           {topic.march && <section className="reference-block"><h2>Select a MARCHE priority</h2><div className="march-grid">{topic.march.map((item) => <button key={item.letter} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><b>{item.letter}</b><span><strong>{item.title}</strong><small>{item.text}</small></span><ChevronRight size={21} /></button>)}</div></section>}
           {topic.equipmentGroups && <section className="reference-block"><h2>Choose equipment by use</h2><div className="equipment-directory">{topic.equipmentGroups.map((group) => <section className="equipment-group" key={group.letter}><header><b>{group.letter}</b><div><h3>{group.title}</h3><p>{group.text}</p></div></header><div className="equipment-links">{group.items.map((item) => <button key={item.topicId} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><span><strong>{item.title}</strong><small>{item.description}</small></span><ChevronRight size={19} /></button>)}</div></section>)}</div></section>}
@@ -537,7 +538,7 @@ export default function App() {
   else if (route.kind === 'explore') content = <DirectoryView key="explore" saved={saved} toggleSaved={toggleSaved} />;
   else if (route.kind === 'category') {
     content = category
-      ? ['assessment', 'equipment', 'scenarios'].includes(category.id)
+      ? ['assessment', 'splinting', 'equipment', 'scenarios'].includes(category.id)
         ? <ArticleView topic={topicById[`${category.id}-overview`]} saved={saved.includes(`${category.id}-overview`)} toggleSaved={toggleSaved} />
         : <DirectoryView key={`category-${category.id}`} title={category.label} intro={category.description} topicList={topicsForCategory(category.id)} saved={saved} toggleSaved={toggleSaved} />
       : <NotFoundView />;

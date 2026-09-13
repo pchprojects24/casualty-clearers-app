@@ -226,6 +226,8 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 .scenario-card-grid > button:nth-child(2) { --card-accent: #167aaa; --card-soft: #eaf7fd; border-color: #d4eaf4; }
 .scenario-card-grid > button:nth-child(3) { --card-accent: #6b4fc2; --card-soft: #f1edff; border-color: #e0dafa; }
 .scenario-card-grid > button:nth-child(4) { --card-accent: #b45c21; --card-soft: #fff4e8; border-color: #f2dfca; }
+.scenario-card-grid > button:nth-child(5) { --card-accent: #b13e62; --card-soft: #fff0f5; border-color: #f1d6df; }
+.scenario-card-grid > button:nth-child(6) { --card-accent: #43762b; --card-soft: #f1f9ec; border-color: #dcebd4; }
 .scenario-card-grid > button:hover { border-color: var(--card-accent); box-shadow: 0 10px 24px rgba(18,32,53,0.08); transform: translateY(-2px); }
 .scenario-card-grid > button > span { color: var(--card-accent); font-size: 11px; font-weight: 800; letter-spacing: 0.065em; text-transform: uppercase; }
 .scenario-card-grid strong { margin-top: 8px; font-size: 21px; letter-spacing: -0.025em; line-height: 1.18; }

@@ -2,6 +2,7 @@ export const categories = [
   { id: 'assessment', label: 'Assessment & MARCHE', short: 'Assessment', description: 'Approach, assess, treat immediate threats and reassess.', color: 'teal', icon: 'assessment' },
   { id: 'bleeding', label: 'Bleeding Control', short: 'Bleeding', description: 'Recognize serious bleeding and choose the right control method.', color: 'sky', icon: 'bleeding' },
   { id: 'airway', label: 'Airway & Breathing', short: 'Airway', description: 'Check and support the airway and breathing.', color: 'yellow', icon: 'airway' },
+  { id: 'splinting', label: 'Splinting & Movement', short: 'Splinting', description: 'Support injured limbs, recheck distal findings and move the casualty safely.', color: 'violet', icon: 'movement' },
   { id: 'equipment', label: 'Equipment', short: 'Equipment', description: 'Quick-use pages and official product media.', color: 'coral', icon: 'equipment' },
   { id: 'scenarios', label: 'Response Scenarios', short: 'Scenarios', description: 'See how the team forms, communicates, treats and moves through each type of response.', color: 'mint', icon: 'situations' },
 ];
@@ -21,6 +22,10 @@ const RED_CROSS_COLD = 'https://www.redcross.ca/training-and-certification/first
 const NFPA_REHAB = 'https://link.nfpa.org/all-publications/1580/2025';
 const MSD_TBI = 'https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi';
 const JTS_HANDOFF = 'https://jts.health.mil/assets/docs/cpgs/CoERCCC%20Guidelines%20FY26.pdf';
+const SAM_TRAINING = 'https://www.sammedical.com/blogs/training/sam-splint';
+const SAM_INSTRUCTIONS = 'https://www.sammedical.com/pages/instructions';
+const SAM_IFU = 'https://bit.ly/sam-splint-ifu';
+const SAM_PRODUCT_INFO = 'https://bit.ly/sam-splint-product-info';
 
 const internal = (topicId, title, description) => ({ topicId, title, description });
 const external = (url, title, description, kind = 'Official resource') => ({ url, title, description, kind });
@@ -96,7 +101,7 @@ export const topics = [
       {
         letter: 'E', title: 'Everything else & movement', text: 'Support injuries and move a casualty with coordinated handling.',
         items: [
-          internal('splinting-equipment', 'Splinting equipment', 'Support the injury and recheck distal findings.'),
+          internal('splinting-overview', 'Splinting & movement', 'Choose the support, check CSM and plan the move.'),
           internal('basket-stretcher', 'Basket stretcher', 'Brief guide for the rarely used Stokes-style stretcher.'),
         ],
       },
@@ -239,7 +244,7 @@ export const topics = [
       { title: 'Next step', bullets: ['Move into the secondary survey when immediate threats are controlled.', 'Gather history and repeat vital signs.', 'Prepare findings and treatments for handover.'] },
     ],
     actionHeading: 'Continue the assessment',
-    actions: [internal('secondary-survey', 'Secondary survey', 'History, head-to-toe check and additional findings.'), internal('vital-signs', 'Vital signs', 'Measure and describe the casualty’s current condition.'), internal('splinting-equipment', 'Splinting equipment', 'Support an injury and recheck distal findings.'), internal('basket-stretcher', 'Basket stretcher', 'Coordinated movement using the rarely used Stokes-style stretcher.'), internal('reassessment-handover', 'Reassessment and handover', 'Trend changes and organize the report.')],
+    actions: [internal('secondary-survey', 'Secondary survey', 'History, head-to-toe check and additional findings.'), internal('vital-signs', 'Vital signs', 'Measure and describe the casualty’s current condition.'), internal('splinting-overview', 'Splinting & movement', 'Choose the support, check CSM and plan the move.'), internal('basket-stretcher', 'Basket stretcher', 'Coordinated movement using the rarely used Stokes-style stretcher.'), internal('reassessment-handover', 'Reassessment and handover', 'Trend changes and organize the report.')],
     nextStep: { ...internal('secondary-survey', 'Continue to secondary survey', 'Immediate MARCHE priorities are addressed. Gather the complete history, head-to-toe findings and handover details.'), kicker: 'After MARCHE' },
     related: ['secondary-survey', 'vital-signs', 'reassessment-handover'],
   },
@@ -437,7 +442,7 @@ export const topics = [
       { title: 'Check beyond an injury or splint', bullets: ['Assess the distal pulse using the locally taught site.', 'Check skin colour, temperature and sensation.', 'Use capillary refill only if it remains part of the local method.', 'Repeat and record the same checks after splinting, dressing, movement and any change.'] },
       { title: 'Protect and report', bullets: ['Control bleeding and support the injured area in the position found unless the current method directs otherwise.', 'Do not straighten a deformed limb simply to complete the examination.', 'Report the side, exact location, appearance, circulation and sensation findings.', 'Escalate absent pulse, worsening colour, loss of sensation or severe pain promptly.'] },
     ],
-    actions: [internal('pulse', 'Pulse check', 'Record the site, rate, rhythm and strength.'), internal('capillary-refill', 'Capillary refill', 'Locally taught use, including after splinting.'), internal('skin-signs', 'Skin signs', 'Colour, temperature and moisture.')],
+    actions: [internal('csm-check', 'CSM check', 'Circulation, sensation and movement before and after support.'), internal('splinting-overview', 'Splinting & movement', 'Choose a support and protect the casualty during movement.'), internal('pulse', 'Pulse check', 'Record the site, rate, rhythm and strength.'), internal('capillary-refill', 'Capillary refill', 'Locally taught use, including after splinting.'), internal('skin-signs', 'Skin signs', 'Colour, temperature and moisture.')],
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross injury check', 'Current systematic hands-on assessment guidance.')],
     related: ['head-to-toe', 'pelvis-check', 'back-check', 'reassessment-handover'],
   },
@@ -746,13 +751,160 @@ export const topics = [
   },
   {
     id: 'splinting-equipment', title: 'Splinting equipment', category: 'equipment', group: 'Injury support and movement', icon: 'equipment', color: 'coral', reference: true,
-    intro: 'A splint supports an injured limb, reduces movement and helps protect it during care and transport. Use the device and technique included in current training.',
+    intro: 'A splint supports an injured limb, reduces movement and helps protect it during care and transport. Open the splinting hub for assessment, CSM checks, application choices and movement.',
     steps: ['Address immediate MARCHE threats before routine splinting.', 'Expose the injury enough to check it and control bleeding.', 'Check and record distal pulse, skin, sensation and movement before applying the splint when possible.', 'Support the limb in the position found unless the current course directs otherwise for a specific problem.', 'Choose a splint that supports the injury and the joints above and below when practical.', 'Pad gaps and secure the splint without placing pressure directly over the injury.', 'Recheck distal pulse, skin, sensation and movement after securing and after movement.', 'Loosen or correct the splint and report immediately if distal findings worsen.'],
     sections: [
       { title: 'Good splinting practice', bullets: ['Remove rings, watches or other constricting items early when swelling is expected and it can be done safely.', 'Keep dressings and important treatment sites accessible.', 'Do not straighten a limb simply to make it fit a device.', 'Reassess pain, swelling, bleeding and distal findings regularly.'] },
     ],
-    notice: { title: 'Confirm the splints carried', text: 'The directory can be expanded with separate cards when the actual rigid, soft, vacuum or traction splints and the casualty-clearer scope for each are confirmed.' },
-    related: ['march-e', 'capillary-refill', 'head-to-toe', 'basket-stretcher'],
+    actionHeading: 'Open the splinting guide',
+    actions: [internal('splinting-overview', 'Splinting & movement hub', 'Choose the injury check, CSM check, support or movement guide.'), internal('sam-splint', 'SAM Splint', 'Mold the splint, choose a body area and open official application media.'), internal('csm-check', 'CSM check', 'Compare circulation, sensation and movement before and after.')],
+    related: ['splinting-overview', 'march-e', 'capillary-refill', 'basket-stretcher'],
+  },
+  {
+    id: 'splinting-overview', title: 'Splinting & Movement', category: 'splinting', group: 'Choose what you need', icon: 'movement', color: 'violet', reference: true,
+    intro: 'Start with the injury and the casualty—not the device. Control immediate threats, document CSM, support the injury, recheck and then prepare the whole casualty for movement.',
+    cardHeading: 'Choose a splinting topic',
+    cardLabel: 'Open topic',
+    scenarioCards: [
+      { topicId: 'splinting-assessment', kicker: 'Before the device', title: 'Assess the injury', text: 'Expose, inspect, control bleeding and identify what must be supported.' },
+      { topicId: 'csm-check', kicker: 'Before and after', title: 'CSM check', text: 'Compare circulation, sensation and movement beyond the injury.' },
+      { topicId: 'sam-splint', kicker: 'Moldable support', title: 'SAM Splint', text: 'Use the C-curve principle and choose the body area you need.' },
+      { topicId: 'support-options', kicker: 'Use what fits', title: 'Other support options', text: 'Compare soft, rigid, anatomical and sling support.' },
+      { topicId: 'traction-splint', kicker: 'Separate skill', title: 'Sager / traction splint', text: 'Recognize when the device may be considered and where model-specific training begins.' },
+      { topicId: 'casualty-movement', kicker: 'Whole-casualty plan', title: 'Prepare and move', text: 'Ready the casualty, team, route, equipment and reassessment.' },
+    ],
+    sections: [
+      { title: 'The common sequence', bullets: ['Complete MARCHE and control serious bleeding before routine splinting.', 'Expose and inspect the injury while avoiding unnecessary movement.', 'Check and record CSM beyond the injury before applying support when possible.', 'Shape and pad the support before moving it onto the casualty whenever practical.', 'Secure the support without covering the distal CSM check or essential treatment sites.', 'Repeat CSM immediately, after every major move and whenever pain or swelling changes.', 'Move only after the casualty, treatment, team, route and destination are ready.'] },
+    ],
+    actionHeading: 'Specific equipment and assessment cards',
+    actions: [internal('pelvic-binder', 'Pelvic binder', 'Keep suspected pelvic injury support separate and model-specific.'), internal('basket-stretcher', 'Basket stretcher', 'Review basic coordinated handling for the rarely used Stokes-style stretcher.'), internal('limbs-check', 'Arms & legs check', 'Complete the detailed limb assessment.'), internal('movement-decision', 'Movement decision', 'Decide whether to stay, prepare or move.')],
+    notice: { title: 'Treat first, splint second', text: 'A splint is not the first priority when a MARCHE threat is present. If distal circulation, sensation, movement, pain or swelling worsens after support, stop and correct the problem within training and report it promptly.' },
+    related: ['splinting-assessment', 'csm-check', 'sam-splint', 'casualty-movement'],
+  },
+  {
+    id: 'splinting-assessment', title: 'Assess before splinting', category: 'splinting', group: 'Before the device', icon: 'assessment', color: 'violet', reference: true,
+    intro: 'Understand the injury and record a baseline before choosing a splint. The casualty may need bleeding control, another MARCHE intervention or extra help before the limb is supported.',
+    steps: ['Complete the scene survey and address immediate MARCHE threats.', 'Ask what happened, where it hurts and whether there is numbness, tingling or weakness.', 'Expose enough to see the injury and control bleeding; do not push exposed bone back into the wound.', 'Look for wounds, bruising, swelling, deformity, unusual position and objects that may interfere with support.', 'Remove rings, watches or other constricting items early when swelling is expected and removal is safe.', 'Check and record CSM beyond the injury, comparing with the uninjured side when practical.', 'Support the injury in the position found and choose a support that can be applied without unnecessary movement.', 'Request added clinical or movement help early when the injury, pain, access or casualty size makes the task difficult.'],
+    sections: [
+      { title: 'Stop and escalate', bullets: ['Absent or worsening distal pulse, colour, warmth, sensation or movement', 'Severe deformity, open fracture, uncontrolled bleeding or rapidly increasing swelling', 'A trapped limb, difficult access or a movement that exceeds the team’s current skill', 'Any casualty deterioration that requires a return to MARCHE'] },
+    ],
+    actions: [internal('csm-check', 'Perform the CSM check', 'Build the before-splinting baseline.'), internal('support-options', 'Choose a support', 'Compare the main ways to support an injury.'), internal('sam-splint', 'Open the SAM Splint guide', 'Shape and secure a moldable splint.')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian first-aid guidance for bone, muscle and joint injuries.')],
+    related: ['csm-check', 'limbs-check', 'march-e', 'support-options'],
+  },
+  {
+    id: 'csm-check', title: 'CSM check', category: 'splinting', group: 'Before, after and after movement', icon: 'assessment', color: 'sky', reference: true,
+    intro: 'CSM means circulation, sensation and movement. Check it beyond the injury before support when possible, immediately afterward and again after movement.',
+    mnemonic: {
+      heading: 'Circulation, sensation and movement',
+      items: [
+        { letter: 'C', title: 'Circulation', text: 'Check the taught distal pulse, skin colour and temperature. Add capillary refill only when it is part of the local method.' },
+        { letter: 'S', title: 'Sensation', text: 'Ask about numbness or tingling and compare light-touch sensation with the other side when practical.' },
+        { letter: 'M', title: 'Movement', text: 'Ask for gentle finger or toe movement only when it is appropriate; never force motion through the injured area.' },
+      ],
+    },
+    steps: ['Explain the check and identify the hand or foot beyond the injury.', 'Check circulation using the same pulse site and skin observations each time.', 'Ask what the casualty can feel and whether anything feels numb, tingling or different.', 'Check movement only when movement is appropriate and does not require moving the injured part.', 'Compare with the uninjured side when practical.', 'Record the time and the actual finding—not only “CSM good.”', 'Repeat immediately after splinting, after every major move and whenever pain, swelling or condition changes.'],
+    sections: [
+      { title: 'If the findings worsen', bullets: ['Stop the movement or application and look for a wrap, strap, edge or position that is causing pressure.', 'Correct or loosen the support within training while another team member stabilizes the injury.', 'Repeat the same CSM check and report the change promptly.', 'Do not ignore a new absent pulse, pale or cool skin, numbness, weakness or severe increasing pain.'] },
+    ],
+    actions: [internal('pulse', 'Pulse check', 'Use the taught pulse site and describe rate, rhythm and strength.'), internal('capillary-refill', 'Capillary refill', 'Use only as part of the locally taught circulation check.'), internal('limbs-check', 'Full limbs check', 'Compare both arms and legs during the secondary survey.')],
+    related: ['splinting-assessment', 'sam-splint', 'treatment-checks', 'reassessment-loop'],
+  },
+  {
+    id: 'sam-splint', title: 'SAM Splint', category: 'splinting', group: 'Moldable splint', icon: 'movement', color: 'violet', reference: true,
+    intro: 'The SAM Splint is a padded, moldable aluminum splint. Bending it into a curve gives it the rigidity needed to support an injured limb.',
+    steps: ['Complete the injury assessment and record CSM before application when possible.', 'Select a size that can support the injury and the adjacent joints when practical.', 'Plan the final shape before placing the splint on the casualty.', 'Form a lengthwise C-curve for strength; mold it on your own limb or the uninjured side when practical.', 'Add padding where needed, especially around bony areas or gaps.', 'Apply without forceful straightening and make only small adjustments on the casualty.', 'Secure with the available wrap, leaving the fingers or toes and important treatment sites accessible.', 'Recheck CSM, comfort, pressure points and splint security immediately and after every move.'],
+    cardHeading: 'Choose a body area',
+    cardLabel: 'Open application',
+    scenarioCards: [
+      { topicId: 'sam-hand-finger', kicker: 'Small support', title: 'Finger & hand', text: 'Support a finger or the ulnar side of the hand without hiding the distal check.' },
+      { topicId: 'sam-wrist-forearm', kicker: 'Upper limb', title: 'Wrist & forearm', text: 'Build a volar or side support and keep the fingers accessible.' },
+      { topicId: 'sam-elbow-upper-arm', kicker: 'Position found', title: 'Elbow & upper arm', text: 'Support the entire limb without forcing a painful elbow straight.' },
+      { topicId: 'sam-knee-lower-leg', kicker: 'Long support', title: 'Knee & lower leg', text: 'Use enough length and shape to control movement around the injury.' },
+      { topicId: 'sam-ankle-foot', kicker: 'Stirrup support', title: 'Ankle & foot', text: 'Support the sides and sole while preserving the position found.' },
+    ],
+    sections: [
+      { title: 'Strength comes from shape', bullets: ['A flat SAM Splint remains flexible; a C-curve or folded edge adds rigidity.', 'Shape on the rescuer or uninjured side first when possible to reduce movement of the injury.', 'Use the minimum manipulation needed to fit the support.', 'Padding and even wrap tension protect skin and circulation.'] },
+    ],
+    resources: [external(SAM_TRAINING, 'SAM Splint training and application videos', 'Official videos for strength in curves and upper- and lower-extremity applications.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official manufacturer IFU PDF.', 'Manufacturer IFU'), external(SAM_PRODUCT_INFO, 'SAM Splint product overview', 'Official product overview PDF.', 'Manufacturer guide'), external(SAM_INSTRUCTIONS, 'SAM Medical instruction library', 'Official IFU directory for current SAM Medical products.', 'Manufacturer instructions')],
+    related: ['csm-check', 'support-options', 'splinting-assessment', 'casualty-movement'],
+  },
+  {
+    id: 'sam-hand-finger', title: 'SAM Splint — finger & hand', category: 'splinting', group: 'Body-area application', icon: 'movement', color: 'violet', reference: true,
+    intro: 'Use a small shaped section to protect an injured finger or the hand while keeping the fingertips visible for repeat CSM checks.',
+    steps: ['Assess the injury, remove constricting jewelry when safe and record CSM.', 'Choose enough splint to support the injured area without covering the fingertips.', 'Shape the splint on your own hand or the uninjured side when practical.', 'For a finger, use the finger-support shape taught; for the little-finger side of the hand, use the official ulnar-gutter application when trained.', 'Pad gaps and place the hand in the comfortable position found without forceful correction.', 'Secure from the hand toward the forearm without excessive wrap tension.', 'Recheck fingertip colour, warmth, sensation and movement as appropriate.'],
+    sections: [{ title: 'Keep visible', bullets: ['Fingertips for circulation and sensation checks', 'Wounds and dressings that require reassessment', 'Any area where swelling or wrap pressure may develop'] }],
+    resources: [external(SAM_TRAINING, 'Official finger and ulnar-gutter videos', 'Open the SAM training page and select the finger or ulnar-gutter application.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official precautions, use and care information.', 'Manufacturer IFU')],
+    related: ['sam-splint', 'csm-check', 'sam-wrist-forearm', 'splinting-assessment'],
+  },
+  {
+    id: 'sam-wrist-forearm', title: 'SAM Splint — wrist & forearm', category: 'splinting', group: 'Body-area application', icon: 'movement', color: 'sky', reference: true,
+    intro: 'A shaped support along the palm side or edge of the forearm can reduce wrist and forearm movement while leaving the fingers accessible.',
+    steps: ['Assess the injury and record CSM at the hand.', 'Choose enough length to support the injured area and adjacent joints when practical.', 'Create a strong C-curve along the splint.', 'Mold it on your own wrist and forearm or the uninjured side before application when possible.', 'Apply along the position and side taught for the injury without forcing the wrist straight.', 'Pad gaps and secure above and below the injury without wrapping directly over it when avoidable.', 'Leave the fingertips visible and repeat the complete CSM check.'],
+    sections: [{ title: 'Application choices', bullets: ['The official SAM training page demonstrates volar/wrist, ulnar-gutter and sugar-tong options.', 'Use only the application included in current training.', 'Support the entire arm with a sling when indicated and recheck circulation after the sling is secured.'] }],
+    resources: [external(SAM_TRAINING, 'Official wrist, ulnar-gutter and sugar-tong videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official precautions, use and care information.', 'Manufacturer IFU')],
+    related: ['sam-splint', 'sam-hand-finger', 'sam-elbow-upper-arm', 'csm-check'],
+  },
+  {
+    id: 'sam-elbow-upper-arm', title: 'SAM Splint — elbow & upper arm', category: 'splinting', group: 'Body-area application', icon: 'movement', color: 'coral', reference: true,
+    intro: 'Support the arm in the position found. Elbow and upper-arm injuries may need a long shaped support plus a sling or swathe to control movement.',
+    steps: ['Complete MARCHE, inspect the injury and record CSM at the hand.', 'Support the arm manually while the splint and securing material are prepared.', 'Choose a length and shape that supports the injured area without requiring the elbow to be straightened.', 'Mold the splint away from the injured arm when practical.', 'Pad the elbow, underarm and other pressure areas.', 'Apply the shaped support and secure it with even tension.', 'Add a sling or swathe when it is part of the taught method, then repeat CSM.'],
+    notice: { title: 'Do not force the elbow', text: 'Do not attempt to straighten a painful, deformed or dislocated elbow simply to fit a splint. Support it in the position found and request added clinical help.' },
+    resources: [external(SAM_TRAINING, 'Official upper-arm and dislocated-elbow videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official precautions, use and care information.', 'Manufacturer IFU')],
+    related: ['sam-splint', 'sam-wrist-forearm', 'support-options', 'csm-check'],
+  },
+  {
+    id: 'sam-knee-lower-leg', title: 'SAM Splint — knee & lower leg', category: 'splinting', group: 'Body-area application', icon: 'movement', color: 'mint', reference: true,
+    intro: 'Lower-limb support must control movement around the injury without adding unnecessary lifting, twisting or straightening.',
+    steps: ['Complete MARCHE, expose the injury and control bleeding.', 'Record foot CSM before application when possible.', 'Support the limb while enough splint length, padding and wraps are prepared.', 'Build the long C-curve or folded shape demonstrated for the selected application.', 'Mold away from the injured leg when practical and maintain the position found.', 'Apply padding and secure the support above and below the injury without hiding the toes.', 'Repeat foot CSM and check for pressure, pain, swelling and splint movement.', 'Recheck again after lifting or transferring the casualty.'],
+    sections: [{ title: 'Official application choices', bullets: ['The SAM training page demonstrates knee-immobilizer and long-leg applications.', 'Choose the configuration included in current training and appropriate to the area needing support.', 'A traction splint is a separate device and skill; do not substitute one method for the other.'] }],
+    resources: [external(SAM_TRAINING, 'Official knee and long-leg videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official precautions, use and care information.', 'Manufacturer IFU')],
+    related: ['sam-splint', 'sam-ankle-foot', 'traction-splint', 'csm-check'],
+  },
+  {
+    id: 'sam-ankle-foot', title: 'SAM Splint — ankle & foot', category: 'splinting', group: 'Body-area application', icon: 'movement', color: 'yellow', reference: true,
+    intro: 'A stirrup or figure-8 style support can stabilize the sides of the ankle and the foot while keeping the toes visible for reassessment.',
+    steps: ['Remove the shoe only when needed for inspection, bleeding control or the chosen application, and support the injury while doing so.', 'Record CSM at the foot and toes.', 'Choose enough splint length for the sides of the ankle and the planned foot support.', 'Form the stirrup or figure-8 shape away from the injured ankle when practical.', 'Pad the ankle bones, heel and gaps.', 'Apply in the position found without forcing the foot to a right angle.', 'Secure evenly while leaving the toes visible.', 'Repeat CSM, heel and ankle pressure checks, and splint security after movement.'],
+    resources: [external(SAM_TRAINING, 'Official ankle-stirrup and figure-8 videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official precautions, use and care information.', 'Manufacturer IFU')],
+    related: ['sam-splint', 'sam-knee-lower-leg', 'csm-check', 'casualty-movement'],
+  },
+  {
+    id: 'support-options', title: 'Other support options', category: 'splinting', group: 'Choose the support', icon: 'movement', color: 'mint', reference: true,
+    intro: 'The best support is the one that protects the injury, can be applied without unnecessary movement and can be monitored after it is secured.',
+    sections: [
+      { title: 'Soft support', bullets: ['Use folded blankets, towels or other padded material to fill gaps and reduce movement.', 'Useful when a rigid splint will not fit the position found or while another device is prepared.', 'Secure the padding without creating a tight circumferential wrap.'] },
+      { title: 'Rigid or moldable support', bullets: ['Use a SAM Splint or another rigid support that fits the injury and adjacent joints when practical.', 'Pad hard edges and gaps before securing.', 'Do not shape the casualty to the device; shape the device to the casualty.'] },
+      { title: 'Anatomical support', bullets: ['Use the body as the support—for example, an injured leg supported against the uninjured leg—when appropriate and taught.', 'Pad between body parts and secure above and below the injury.', 'Recheck both sides after securing.'] },
+      { title: 'Sling and swathe', bullets: ['Support an upper-limb injury with a sling when appropriate.', 'A swathe can limit movement of the arm against the body when included in training.', 'Keep the hand visible, avoid pressure at the neck and repeat CSM after application.'] },
+    ],
+    actions: [internal('sam-splint', 'SAM Splint', 'Open the moldable splint and body-area guide.'), internal('pelvic-binder', 'Pelvic binder', 'A separate model-specific device for suspected pelvic injury.'), internal('traction-splint', 'Sager / traction splint', 'A separate familiarization and sign-off skill.')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian guidance describing soft, rigid and anatomical splints and slings.')],
+    related: ['splinting-assessment', 'csm-check', 'sam-splint', 'casualty-movement'],
+  },
+  {
+    id: 'traction-splint', title: 'Sager / traction splint', category: 'splinting', group: 'Familiarization — exact model required', icon: 'movement', color: 'coral', reference: true,
+    intro: 'A traction splint is a specialized device considered for selected femur injuries. It is not a SAM Splint and should not be applied from a generic web sequence.',
+    sections: [
+      { title: 'What casualty clearers should recognize', bullets: ['A significant isolated thigh injury can involve severe pain, deformity, shortening, swelling and internal blood loss.', 'Immediate MARCHE threats and external bleeding control come before the device.', 'Record CSM at the foot and protect the injured leg from unnecessary movement.', 'Request the trained clinician, the correct device and enough assistance early.', 'Prepare for pain, movement difficulty, casualty deterioration and repeat reassessment.'] },
+      { title: 'Before any application', bullets: ['Identify the exact Sager or traction-splint model available.', 'Confirm the current casualty-clearer training and sign-off for that device.', 'Review the manufacturer indications, contraindications, setup and traction method for that model.', 'Use the required number of trained people and continue manual support until the device is ready.', 'Record CSM before, during and after application and after each move.'] },
+    ],
+    notice: { title: 'Model-specific skill', text: 'A full button-by-button or strap-by-strap guide belongs here only after the exact carried model, current manufacturer IFU and casualty-clearer authorization are confirmed.' },
+    actions: [internal('csm-check', 'CSM check', 'Build and repeat the distal baseline.'), internal('splinting-assessment', 'Injury assessment', 'Inspect and protect the limb before choosing equipment.'), internal('casualty-movement', 'Prepare the move', 'Coordinate the whole casualty, team and route.')],
+    related: ['sam-knee-lower-leg', 'support-options', 'movement-decision', 'reassessment-loop'],
+  },
+  {
+    id: 'casualty-movement', title: 'Prepare and move the casualty', category: 'splinting', group: 'Whole-casualty movement', icon: 'movement', color: 'mint', reference: true,
+    intro: 'Splinting one injury is only part of safe movement. Prepare the casualty, treatments, equipment, people, route and destination before committing to a lift or transfer.',
+    phaseHeading: 'Movement flow',
+    scenarioPhases: [
+      { kicker: 'Treat', title: 'Prepare the casualty', text: 'Control immediate threats and decide what must be done before movement.', bullets: ['Complete MARCHE and address time-critical problems on scene.', 'Support injuries and secure dressings, airway equipment, oxygen and other treatments.', 'Record the casualty’s condition and CSM before the move.', 'Explain the plan to a responsive casualty.'], links: [internal('marche', 'MARCHE', 'Treat immediate threats in order.'), internal('csm-check', 'CSM check', 'Record the distal findings before movement.')] },
+      { kicker: 'Team', title: 'Prepare people and equipment', text: 'Name one movement leader and assign enough trained people to every part of the move.', bullets: ['State who is protecting the head and airway, who is handling the injured area and who is carrying equipment.', 'Choose the movement device and gather padding, straps and securing material.', 'Keep essential treatment and radio equipment accessible.', 'Rehearse the lift, turn or transfer commands before starting.'], links: [internal('team-roles', 'Team roles', 'Divide care, support and communication work.'), internal('basket-stretcher', 'Basket stretcher', 'Review the rarely used rigid movement option.')] },
+      { kicker: 'Route', title: 'Confirm route and destination', text: 'The route must be safe now—not merely familiar from normal operations.', bullets: ['Confirm the destination is ready to receive the casualty.', 'Check access, doors, ladders, obstructions, smoke, water and other current hazards.', 'Confirm movement authority and request route or carrying assistance as needed.', 'Decide where the team can stop safely if the casualty or situation changes.'], links: [internal('movement-decision', 'Movement decision', 'Check whether to stay, prepare or move.'), internal('radio-report', 'Movement request', 'Report the help, route and destination needed.')] },
+      { kicker: 'Move', title: 'Move on one leader’s commands', text: 'Use clear commands and protect the casualty and every treatment throughout the move.', bullets: ['Lift, turn and lower together on the leader’s count.', 'Watch the airway, breathing, bleeding control, splints, straps, cables and oxygen continuously.', 'Stop if a treatment fails, the casualty deteriorates or the route becomes unsafe.', 'Avoid unnecessary speed, twisting and repeated transfers.'], links: [internal('treatment-checks', 'Treatment checks', 'Keep every intervention working during movement.')] },
+      { kicker: 'Recheck', title: 'Reassess and hand over', text: 'A completed move creates a new assessment point.', bullets: ['Repeat MARCHE and the full CSM check after arrival and after every major transfer.', 'Check skin, pressure areas, pain, swelling and the security of every splint and strap.', 'State what changed during movement and what still needs attention.', 'Give a MIST handover and continue the secondary survey when time and condition allow.'], links: [internal('reassessment-loop', 'Reassessment loop', 'Restart the assessment after change or movement.'), internal('mist-handover', 'MIST handover', 'Transfer the mechanism, injuries, signs and treatments.')] },
+    ],
+    notice: { title: 'Shipboard route and lifting methods', text: 'Exact routes, movement authority, confined-space techniques, ladder or vertical movement and device-specific handling must follow the current response organization and trained method.' },
+    related: ['movement-decision', 'basket-stretcher', 'team-roles', 'reassessment-loop'],
   },
   {
     id: 'basket-stretcher', title: 'Basket stretcher', category: 'equipment', group: 'Rarely used movement equipment', icon: 'equipment', color: 'coral', reference: true,
@@ -762,7 +914,7 @@ export const topics = [
       { title: 'Secure and move', bullets: ['Place and pad the casualty using the taught movement method.', 'Secure the casualty with the stretcher straps while keeping the airway and essential treatment accessible.', 'Secure loose monitoring, oxygen and treatment equipment so it cannot fall or pull.', 'Lift, lower and turn only on the team leader’s command.', 'Recheck airway, breathing, bleeding control, distal findings and strap security after loading and after each major movement.'] },
     ],
     notice: { title: 'No generic hauling procedure', text: 'Confined-space, vertical, ladder and hoisting movements need the applicable shipboard procedure, trained personnel and rigging. This card covers recognition and basic coordinated handling only.' },
-    related: ['march-e', 'splinting-equipment', 'reassessment-handover', 'equipment-bag-check'],
+    related: ['casualty-movement', 'splinting-overview', 'reassessment-handover', 'equipment-bag-check'],
   },
   {
     id: 'scenarios-overview', title: 'Response Scenarios', category: 'scenarios', group: 'Choose the situation', icon: 'situations', color: 'mint', reference: true,
@@ -869,7 +1021,7 @@ export const topics = [
       { title: 'During the move', bullets: ['Name one movement leader and use clear commands.', 'Maintain the airway, breathing support and bleeding control.', 'Keep the radio and essential equipment accessible.', 'Stop if a critical treatment fails, the casualty deteriorates or the route becomes unsafe.', 'Reassess after every major transfer, turn, lift or arrival.'] },
     ],
     actionHeading: 'Prepare the move',
-    actions: [internal('basket-stretcher', 'Basket stretcher', 'Rarely used rigid movement equipment.'), internal('splinting-equipment', 'Splinting equipment', 'Support injuries and recheck distal findings.'), internal('reassessment-loop', 'Reassessment loop', 'Check the casualty after movement.'), internal('radio-report', 'Movement request', 'Coordinate the route, help and destination.')],
+    actions: [internal('casualty-movement', 'Prepare and move', 'Ready the casualty, team, route, equipment and reassessment.'), internal('basket-stretcher', 'Basket stretcher', 'Rarely used rigid movement equipment.'), internal('splinting-overview', 'Splinting & movement', 'Support injuries and recheck distal findings.'), internal('reassessment-loop', 'Reassessment loop', 'Check the casualty after movement.'), internal('radio-report', 'Movement request', 'Coordinate the route, help and destination.')],
     related: ['damage-control-casualty', 'isolated-casualty', 'radio-report', 'sick-bay-continuation'],
   },
   {
