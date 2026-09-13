@@ -442,8 +442,9 @@ function ArticleView({ topic, saved, toggleSaved }) {
           {topic.scale && <section className="reference-block"><h2>AVPU scale</h2><div className="scale-grid">{topic.scale.map((item) => <div key={item.letter}><span>{item.letter}</span><strong>{item.title}</strong><p>{item.text}</p></div>)}</div></section>}
           {topic.mnemonic && <section className="reference-block"><h2>{topic.mnemonic.heading}</h2><div className="mnemonic-grid">{topic.mnemonic.items.map((item) => <div key={item.letter}><span>{item.letter}</span><div><strong>{item.title}</strong><p>{item.text}</p></div></div>)}</div></section>}
           {topic.example && <section className="handover-example"><span>{topic.example.title}</span><blockquote>{topic.example.text}</blockquote></section>}
-          {topic.march && <section className="reference-block"><h2>Select a MARCHE priority</h2><div className="march-grid">{topic.march.map((item) => <button key={item.letter} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><b>{item.letter}</b><span><strong>{item.title}</strong><small>{item.text}</small></span><ChevronRight size={21} /></button>)}</div></section>}
           {topic.quickRoutes && <section className="reference-block"><h2>{topic.quickRouteHeading || 'Choose what you need'}</h2>{renderLinks(topic.quickRoutes, 'quick-route-grid')}</section>}
+          {topic.march && <section className="reference-block"><h2>Select a MARCHE priority</h2><div className="march-grid">{topic.march.map((item) => <button key={item.letter} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><b>{item.letter}</b><span><strong>{item.title}</strong><small>{item.text}</small></span><ChevronRight size={21} /></button>)}</div></section>}
+          {topic.equipmentGroups && <section className="reference-block"><h2>Choose equipment by use</h2><div className="equipment-directory">{topic.equipmentGroups.map((group) => <section className="equipment-group" key={group.letter}><header><b>{group.letter}</b><div><h3>{group.title}</h3><p>{group.text}</p></div></header><div className="equipment-links">{group.items.map((item) => <button key={item.topicId} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><span><strong>{item.title}</strong><small>{item.description}</small></span><ChevronRight size={19} /></button>)}</div></section>)}</div></section>}
           {topic.steps && <section className="reference-block"><h2>How to do it</h2><ol className="step-list">{topic.steps.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}</ol></section>}
           {topic.sections?.map((section) => <section className="reference-block" key={section.title}><h2>{section.title}</h2><ul className="check-list">{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul></section>)}
           {topic.notice && <aside className="reference-notice"><TriangleAlert size={21} /><div><strong>{topic.notice.title}</strong><p>{topic.notice.text}</p></div></aside>}
@@ -532,8 +533,8 @@ export default function App() {
   else if (route.kind === 'explore') content = <DirectoryView key="explore" saved={saved} toggleSaved={toggleSaved} />;
   else if (route.kind === 'category') {
     content = category
-      ? category.id === 'assessment'
-        ? <ArticleView topic={topicById['assessment-overview']} saved={saved.includes('assessment-overview')} toggleSaved={toggleSaved} />
+      ? ['assessment', 'equipment'].includes(category.id)
+        ? <ArticleView topic={topicById[`${category.id}-overview`]} saved={saved.includes(`${category.id}-overview`)} toggleSaved={toggleSaved} />
         : <DirectoryView key={`category-${category.id}`} title={category.label} intro={category.description} topicList={topicsForCategory(category.id)} saved={saved} toggleSaved={toggleSaved} />
       : <NotFoundView />;
   } else if (route.kind === 'topic') {

@@ -14,6 +14,8 @@ const IGEL_VIDEOS = 'https://www.intersurgical.com/info/videos-airway-management
 const VITAL_SIGNS = 'https://medlineplus.gov/ency/article/002341.htm';
 const PULSE_GUIDE = 'https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse';
 const AHA_FIRST_AID = 'https://cpr.heart.org/en/resuscitation-science/2024-first-aid-guidelines';
+const HEART_STROKE_AED = 'https://www.heartandstroke.ca/how-you-can-help/learn-cpr/aeds';
+const BLOOD_PRESSURE_GUIDE = 'https://medlineplus.gov/lab-tests/measuring-blood-pressure/';
 const MSD_TBI = 'https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi';
 const JTS_HANDOFF = 'https://jts.health.mil/assets/docs/cpgs/CoERCCC%20Guidelines%20FY26.pdf';
 
@@ -34,6 +36,70 @@ export const topics = [
     ],
     sections: [{ title: 'Keep the sequence moving', bullets: ['If you find an immediate threat, act within your training and call for help.', 'After an intervention, check whether it worked before continuing.', 'Return to MARCHE whenever the casualty changes.'] }],
     related: ['scene-survey', 'avpu', 'marche', 'vital-signs'],
+  },
+  {
+    id: 'equipment-overview', title: 'Equipment', category: 'equipment', group: 'Choose by purpose', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'Start with the clinical need, then open the equipment card. Each card explains what the item is for, a short use sequence and the checks that matter afterward.',
+    quickRoutes: [
+      internal('equipment-bag-check', 'Response-bag check', 'Confirm the team is ready before leaving and restore the bag after use.'),
+      internal('monitoring-equipment', 'Monitoring setup', 'Open blood pressure, pulse oximetry and 3-lead setup from one place.'),
+      internal('aed', 'AED', 'Review the arrest response and AED sequence.'),
+    ],
+    quickRouteHeading: 'Start here',
+    equipmentGroups: [
+      {
+        letter: 'M', title: 'Massive hemorrhage', text: 'Stop life-threatening bleeding and support a suspected pelvic injury.',
+        items: [
+          internal('cat-tourniquet', 'C-A-T tourniquet', 'Life-threatening bleeding from an arm or leg.'),
+          internal('olaes-bandage', 'OLAES modular bandage', 'Pressure dressing with modular components.'),
+          internal('wound-packing', 'Packing gauze', 'Pack a suitable deep wound when trained.'),
+          internal('pelvic-binder', 'Pelvic binder', 'Recognition and model-specific use boundary.'),
+        ],
+      },
+      {
+        letter: 'A', title: 'Airway', text: 'Open the airway and choose an adjunct only through current training.',
+        items: [
+          internal('opa', 'OPA', 'For an unresponsive casualty without an intact gag response.'),
+          internal('npa', 'NPA', 'Use only through the locally taught method.'),
+          internal('igel', 'i-gel', 'Advanced airway adjunct when trained and authorized.'),
+        ],
+      },
+      {
+        letter: 'R', title: 'Respiration', text: 'Support inadequate breathing, provide oxygen and manage an open chest wound.',
+        items: [
+          internal('bvm', 'Bag-valve-mask', 'Assisted ventilation with visible chest rise.'),
+          internal('oxygen', 'Oxygen system', 'Cylinder, regulator and delivery-device sequence.'),
+          internal('chest-seal', 'Chest seal', 'Trained response to a recognized open chest wound.'),
+          internal('pulse-oximeter', 'Portable pulse oximeter', 'Obtain and interpret a reliable SpO₂ reading.'),
+        ],
+      },
+      {
+        letter: 'C', title: 'Circulation & monitoring', text: 'Recognize cardiac arrest and build a reliable set of observations.',
+        items: [
+          internal('aed', 'AED', 'Use as soon as possible during cardiac arrest.'),
+          internal('manual-blood-pressure', 'Manual blood pressure', 'Cuff and stethoscope measurement sequence.'),
+          internal('pulse-oximeter', 'Portable pulse oximeter', 'SpO₂ and displayed pulse with limitations.'),
+          internal('three-lead-ecg', '3-lead ECG setup', 'Apply leads and obtain a usable trace.'),
+          internal('monitoring-equipment', 'Monitoring equipment', 'Open all monitoring cards and record a trend.'),
+        ],
+      },
+      {
+        letter: 'H', title: 'Head & hypothermia', text: 'Reduce further heat loss and use active warming in the appropriate care area.',
+        items: [
+          internal('foil-blanket', 'Foil blanket', 'Insulate, wrap and keep the airway visible.'),
+          internal('cocoon-warming', 'Cocoon warming unit', 'Active warming setup under the confirmed model instructions.'),
+        ],
+      },
+      {
+        letter: 'E', title: 'Everything else & movement', text: 'Support injuries and move a casualty with coordinated handling.',
+        items: [
+          internal('splinting-equipment', 'Splinting equipment', 'Support the injury and recheck distal findings.'),
+          internal('basket-stretcher', 'Basket stretcher', 'Brief guide for the rarely used Stokes-style stretcher.'),
+        ],
+      },
+    ],
+    notice: { title: 'Current equipment set', text: 'Aston equipment is excluded because it is no longer used. The basket stretcher is included briefly as a rarely used option. Exact models and model-specific steps must match the equipment actually available.' },
+    related: ['marche', 'equipment-bag-check', 'monitoring-equipment', 'aed'],
   },
   {
     id: 'scene-survey', title: 'Scene survey', category: 'assessment', group: 'Before contact', icon: 'assessment', color: 'teal', reference: true,
@@ -127,7 +193,7 @@ export const topics = [
       { title: 'Reassess and report', bullets: ['Repeat rate and quality after positioning or treatment.', 'Look for visible chest rise during assisted ventilation.', 'If breathing worsens after a dressing or seal, follow the trained response immediately.', 'Record the time, findings, intervention and change.'] },
     ],
     actionHeading: 'Breathing procedure and equipment cards',
-    actions: [internal('respiratory-rate', 'Measure respiratory rate', 'How to count and describe breathing.'), internal('oxygen', 'Oxygen', 'Setup, use limits and reassessment.'), internal('bvm', 'Bag-valve-mask', 'Two-person technique points and effectiveness checks.'), internal('chest-seal', 'Chest seal', 'Open-chest-wound recognition and trained-use boundaries.')],
+    actions: [internal('respiratory-rate', 'Measure respiratory rate', 'How to count and describe breathing.'), internal('oxygen', 'Oxygen', 'Setup, use limits and reassessment.'), internal('bvm', 'Bag-valve-mask', 'Two-person technique points and effectiveness checks.'), internal('chest-seal', 'Chest seal', 'Open-chest-wound recognition and trained-use boundaries.'), internal('pulse-oximeter', 'Portable pulse oximeter', 'Obtain a stable SpO₂ reading and recognize its limitations.')],
     nextStep: internal('march-c', 'Continue to C — Circulation', 'After breathing is addressed, assess pulse, skin and signs of circulation problems.'),
     related: ['respiratory-rate', 'oxygen', 'bvm', 'march-a'],
   },
@@ -144,8 +210,8 @@ export const topics = [
       { title: 'Immediate actions', bullets: ['Return to massive-hemorrhage control if bleeding is found or restarts.', 'Keep the casualty at rest and protect them from heat loss.', 'Continue oxygen or other treatment only as directed by the applicable protocol.', 'Arrange movement and medical assistance according to urgency.'] },
       { title: 'Reassess and report', bullets: ['Trend findings instead of relying on one number.', 'Repeat pulse, skin and any locally taught capillary-refill checks after treatment and movement.', 'Report deterioration immediately.'] },
     ],
-    actionHeading: 'Circulation assessment cards',
-    actions: [internal('pulse', 'Check a pulse', 'Radial and carotid locations, counting and quality.'), internal('capillary-refill', 'Check capillary refill', 'A locally taught check, including after splinting.'), internal('skin-signs', 'Check skin signs', 'Colour, temperature, moisture and change.'), internal('vital-signs', 'Vital-sign set', 'Put the findings together and record the trend.')],
+    actionHeading: 'Circulation assessment and equipment cards',
+    actions: [internal('pulse', 'Check a pulse', 'Radial and carotid locations, counting and quality.'), internal('capillary-refill', 'Check capillary refill', 'A locally taught check, including after splinting.'), internal('skin-signs', 'Check skin signs', 'Colour, temperature, moisture and change.'), internal('vital-signs', 'Vital-sign set', 'Put the findings together and record the trend.'), internal('aed', 'AED', 'Open the cardiac-arrest and AED sequence.'), internal('monitoring-equipment', 'Monitoring equipment', 'Blood pressure, SpO₂ and 3-lead setup.')],
     nextStep: internal('march-h', 'Continue to H — Head & hypothermia', 'Protect from heat loss and look for head-injury concerns while reassessing.'),
     related: ['pulse', 'skin-signs', 'vital-signs', 'reassessment-handover'],
   },
@@ -157,8 +223,8 @@ export const topics = [
       { title: 'What you’re checking for', bullets: ['Note the mechanism and any direct head impact.', 'Repeat AVPU and watch for confusion, worsening responsiveness, vomiting, seizure or unequal movement.', 'Watch for shivering, loss of coordination, slurred speech, confusion or a fall in responsiveness.', 'Avoid unnecessary movement and report deterioration promptly.'] },
     ],
     notice: { title: 'Keep reassessing', text: 'Cold stress and head injury can both change responsiveness. Repeat AVPU, breathing and circulation throughout care and movement.' },
-    actionHeading: 'Reassessment cards',
-    actions: [internal('avpu', 'Repeat AVPU', 'Describe changes in responsiveness clearly.'), internal('vital-signs', 'Repeat vital signs', 'Look for change, not a single isolated number.'), internal('reassessment-handover', 'Reassess and hand over', 'Confirm treatments and report deterioration.')],
+    actionHeading: 'Reassessment and warming cards',
+    actions: [internal('foil-blanket', 'Foil blanket', 'Reduce further heat loss during care and movement.'), internal('cocoon-warming', 'Cocoon warming unit', 'Active warming in the appropriate care area.'), internal('avpu', 'Repeat AVPU', 'Describe changes in responsiveness clearly.'), internal('vital-signs', 'Repeat vital signs', 'Look for change, not a single isolated number.'), internal('reassessment-handover', 'Reassess and hand over', 'Confirm treatments and report deterioration.')],
     nextStep: internal('march-e', 'Continue to E — Everything else', 'When immediate head and heat-loss concerns are addressed, complete the rapid body survey.'),
     related: ['avpu', 'march-r', 'march-c', 'reassessment-handover'],
   },
@@ -170,7 +236,7 @@ export const topics = [
       { title: 'Next step', bullets: ['Move into the secondary survey when immediate threats are controlled.', 'Gather history and repeat vital signs.', 'Prepare findings and treatments for handover.'] },
     ],
     actionHeading: 'Continue the assessment',
-    actions: [internal('secondary-survey', 'Secondary survey', 'History, head-to-toe check and additional findings.'), internal('vital-signs', 'Vital signs', 'Measure and describe the casualty’s current condition.'), internal('reassessment-handover', 'Reassessment and handover', 'Trend changes and organize the report.')],
+    actions: [internal('secondary-survey', 'Secondary survey', 'History, head-to-toe check and additional findings.'), internal('vital-signs', 'Vital signs', 'Measure and describe the casualty’s current condition.'), internal('splinting-equipment', 'Splinting equipment', 'Support an injury and recheck distal findings.'), internal('basket-stretcher', 'Basket stretcher', 'Coordinated movement using the rarely used Stokes-style stretcher.'), internal('reassessment-handover', 'Reassessment and handover', 'Trend changes and organize the report.')],
     nextStep: { ...internal('secondary-survey', 'Continue to secondary survey', 'Immediate MARCHE priorities are addressed. Gather the complete history, head-to-toe findings and handover details.'), kicker: 'After MARCHE' },
     related: ['secondary-survey', 'vital-signs', 'reassessment-handover'],
   },
@@ -211,7 +277,7 @@ export const topics = [
       { title: 'Typical resting adult guide', bullets: ['Respirations: about 12–18 breaths per minute.', 'Pulse: about 60–100 beats per minute.', 'Pain, anxiety, exertion, temperature, medication, illness and injury can change these values.', 'Treat and report the casualty, not an isolated number.'] },
       { title: 'Record', bullets: ['Time of each set', 'Position and relevant circumstances', 'Exact rate and observed quality', 'Treatment given between sets', 'Direction of change: improving, unchanged or deteriorating'] },
     ],
-    actions: [internal('respiratory-rate', 'Respiratory rate & quality', 'Count and describe breathing.'), internal('pulse', 'Pulse rate & quality', 'Find, count and describe a pulse.'), internal('skin-signs', 'Skin signs', 'Assess colour, temperature and moisture.'), internal('avpu', 'AVPU', 'Describe responsiveness consistently.')],
+    actions: [internal('respiratory-rate', 'Respiratory rate & quality', 'Count and describe breathing.'), internal('pulse', 'Pulse rate & quality', 'Find, count and describe a pulse.'), internal('skin-signs', 'Skin signs', 'Assess colour, temperature and moisture.'), internal('avpu', 'AVPU', 'Describe responsiveness consistently.'), internal('manual-blood-pressure', 'Manual blood pressure', 'Measure systolic and diastolic pressure.'), internal('pulse-oximeter', 'Portable pulse oximeter', 'Obtain and validate an SpO₂ reading.'), internal('three-lead-ecg', '3-lead ECG setup', 'Apply leads and obtain a usable trace.')],
     nextStep: { ...internal('head-to-toe', 'Continue to the injury check', 'Use a focused examination or a systematic head-to-toe check to find other injuries.'), kicker: 'Secondary survey' },
     resources: [external(VITAL_SIGNS, 'MedlinePlus: Vital signs', 'Reviewed January 2025; general healthy-adult resting ranges.'), external(RED_CROSS_GUIDE, 'Canadian Red Cross assessment guidance', 'Responsiveness, breathing, skin and ongoing care.')],
     related: ['secondary-survey', 'respiratory-rate', 'pulse', 'skin-signs', 'avpu'],
@@ -582,10 +648,123 @@ export const topics = [
     notice: { title: 'Confirm the carried system', text: 'The final page should show the actual shipboard cylinder, regulator, masks and authorized targets once those details are confirmed.' },
     related: ['march-r', 'respiratory-rate', 'bvm', 'vital-signs'],
   },
+  {
+    id: 'equipment-bag-check', title: 'Response-bag check', category: 'equipment', group: 'Team readiness', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'A quick readiness check makes sure the bag can support the first minutes of a casualty response and can be handed between team members without surprises.',
+    sections: [
+      { title: 'Before the response', bullets: ['Check that the bag closes, carries safely and has no obvious damage or contamination.', 'Confirm PPE, bleeding-control supplies, airway equipment, BVM, oxygen equipment, monitoring items and the foil blanket are present as locally assigned.', 'Check packages, seals, expiry dates and sterile items without opening them.', 'Confirm battery-powered items switch on or show the expected ready status.', 'Confirm the oxygen cylinder is secured, the regulator matches it and there is enough pressure for the expected response.', 'Arrange the bag so urgent MARCHE equipment can be found without emptying everything.'] },
+      { title: 'Before leaving for the scene', bullets: ['Take the assigned bag and any separately stored equipment requested for the call.', 'Make sure the oxygen cylinder and loose equipment are secured for movement.', 'Confirm the team has the required communication equipment.', 'Tell the team lead immediately if an expected item is missing, damaged or not ready.'] },
+      { title: 'After use', bullets: ['Separate used, contaminated, damaged and expired items.', 'Clean reusable equipment under the local cleaning method.', 'Replace opened or used supplies and restore the layout.', 'Recharge or replace batteries as required, secure the oxygen system and report anything that could not be restored.'] },
+    ],
+    notice: { title: 'Use the local inventory', text: 'This page organizes the readiness check without inventing quantities or storage locations. The confirmed response-bag inventory remains the source for what must be present.' },
+    related: ['equipment-overview', 'oxygen', 'bvm', 'monitoring-equipment'],
+  },
+  {
+    id: 'aed', title: 'AED', category: 'equipment', group: 'Automated external defibrillator — cardiac-arrest equipment', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'Use an AED as soon as it is available for a casualty in cardiac arrest. Keep CPR interruptions as short as possible and follow the device prompts.',
+    steps: ['Recognize cardiac arrest, activate the response and begin CPR under the current resuscitation sequence.', 'Bring the AED to the casualty and turn it on.', 'Expose the chest. Dry it quickly if needed so the pads will stick.', 'Apply the pads to bare skin exactly as shown on the pads or AED package.', 'Connect the pad cable if the model requires it.', 'Make sure nobody is touching the casualty while the AED analyzes.', 'If a shock is advised, clearly tell everyone to stand clear, visually confirm the casualty is clear and deliver the shock as prompted.', 'Resume CPR immediately when prompted. Continue the CPR and AED cycle until the casualty shows signs of life or care is transferred.'],
+    sections: [
+      { title: 'Before applying pads', bullets: ['Choose the correct adult or pediatric pads and mode for the casualty and current training.', 'Remove medication patches from a pad site using appropriate protection, then wipe the site.', 'Do not place a pad directly over an implanted-device lump; shift the pad enough to avoid it.', 'Keep oxygen equipment away from the chest during shock delivery as taught.'] },
+      { title: 'Keep the sequence effective', bullets: ['Continue CPR while the AED is prepared when enough responders are present.', 'Touch the casualty only when the AED says it is safe to do so.', 'Do not delay the shock to obtain a complete set of vital signs.', 'If the casualty begins to move or breathe normally, reassess and continue care.'] },
+    ],
+    notice: { title: 'Follow the AED in front of you', text: 'Button layout, pad connection, pediatric mode and ready indicators vary. Use the labels and prompts on the actual AED and the current CPR sequence.' },
+    resources: [external(HEART_STROKE_AED, 'Heart & Stroke: How to use an AED', 'Canadian AED sequence and public training information.'), external(RED_CROSS_GUIDE, 'Canadian Red Cross CPR and AED guide', 'Current CPR, pad placement and AED sequence.')],
+    related: ['march-c', 'monitoring-equipment', 'vital-signs', 'reassessment-handover'],
+  },
+  {
+    id: 'pulse-oximeter', title: 'Portable pulse oximeter', category: 'equipment', group: 'Breathing and circulation monitoring', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'A pulse oximeter estimates oxygen saturation and displays a pulse rate. Treat it as one part of the assessment, not a replacement for looking at the casualty.',
+    steps: ['Check the casualty’s breathing, colour, responsiveness and pulse before focusing on the display.', 'Choose a clean, warm and still finger that fits the sensor.', 'Remove anything that prevents the sensor from seating correctly when practical.', 'Apply the sensor in the orientation shown on the device.', 'Keep the hand still and wait for the reading to settle or for the device to show an acceptable signal.', 'Compare the displayed pulse with the pulse you assessed. If they do not reasonably match, reposition the sensor and repeat.', 'Record the SpO₂, displayed pulse, time, oxygen treatment and any conditions that could affect the reading.'],
+    sections: [
+      { title: 'Question the reading when', bullets: ['The casualty is moving, shivering or has cold hands.', 'Perfusion is poor or the pulse is weak.', 'The sensor is loose, poorly positioned or the finger does not fit.', 'Nail products, bright light or contamination interfere with the sensor.', 'The displayed pulse does not match the assessed pulse.', 'The number conflicts with obvious breathing difficulty or deterioration.'] },
+      { title: 'Use the trend', bullets: ['Repeat the measurement after positioning, oxygen or assisted ventilation.', 'Report the value with respiratory rate, work of breathing, skin signs and oxygen treatment.', 'Use oxygen targets and escalation thresholds from current direction, not a number invented for this app.'] },
+    ],
+    notice: { title: 'The casualty comes first', text: 'A normal-looking SpO₂ value does not rule out serious illness or injury. Continue the physical assessment and act on obvious respiratory distress or deterioration.' },
+    resources: [external(AHA_FIRST_AID, 'American Heart Association and American Red Cross first-aid guidance', 'Use pulse oximetry with a complete assessment and an understanding of device limitations.')],
+    related: ['march-r', 'respiratory-rate', 'oxygen', 'monitoring-equipment'],
+  },
+  {
+    id: 'manual-blood-pressure', title: 'Manual blood pressure', category: 'equipment', group: 'Circulation monitoring', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'A manual blood pressure uses a correctly sized cuff, gauge and stethoscope to measure systolic and diastolic pressure.',
+    steps: ['Explain the check and position the casualty as the situation allows.', 'Choose the correct cuff size and place it on the bare upper arm with the artery marker aligned as shown on the cuff.', 'Support the arm close to heart level and keep the tubing free of twists.', 'Locate the brachial pulse at the inside of the elbow and place the stethoscope over it.', 'Close the valve, inflate the cuff using the method taught in the current course, then release pressure slowly and steadily.', 'Note the pressure at the first clear repetitive sound as the systolic value.', 'Note the pressure when the sounds disappear as the diastolic value.', 'Fully deflate the cuff, record the result, arm, position and time, and repeat only when needed.'],
+    sections: [
+      { title: 'Improve the measurement', bullets: ['Use the correct cuff size; a poor fit can distort the result.', 'Keep the casualty and arm as still as possible.', 'Do not place the cuff over thick clothing, an injury or equipment that makes the reading unsafe or unreliable.', 'If a value is unexpected, check the setup and repeat after allowing the arm to recover.'] },
+      { title: 'Use the finding', bullets: ['Report blood pressure with pulse, skin, responsiveness, breathing and the overall trend.', 'Do not delay treatment of an immediate MARCHE threat to obtain a blood pressure.', 'The stethoscope is used here for the blood-pressure sounds; lung auscultation is not part of the casualty-clearer breathing check.'] },
+    ],
+    resources: [external(BLOOD_PRESSURE_GUIDE, 'MedlinePlus: Measuring blood pressure', 'Cuff placement, brachial sounds and systolic/diastolic measurement.')],
+    related: ['march-c', 'vital-signs', 'pulse', 'monitoring-equipment'],
+  },
+  {
+    id: 'three-lead-ecg', title: '3-lead ECG setup', category: 'equipment', group: 'Cardiac monitoring setup', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'The casualty clearer’s role is to place the leads correctly, obtain a clean trace and report changes. Rhythm interpretation and treatment decisions remain with the appropriately trained clinician.',
+    steps: ['Confirm the monitor, 3-lead cable and electrodes are compatible and ready.', 'Expose only the areas needed and prepare clean, dry skin. Clip excess hair only when it prevents electrode contact.', 'Use the labels on the cable—not wire colour alone—to identify RA, LA and LL.', 'Place RA and LA on the upper right and upper left torso as taught, avoiding muscle and bony prominences.', 'Place LL on the lower left torso as taught.', 'Attach the lead wires, select the appropriate monitoring mode and check for a clear trace.', 'If the trace is poor, check skin contact, electrode position, cable connection and casualty movement before replacing equipment.', 'Record the time and report the monitor display and any change to the responsible clinician.'],
+    sections: [
+      { title: 'Reduce artifact', bullets: ['Keep electrodes on clean, dry, relatively flat skin.', 'Press the full electrode surface into contact.', 'Keep cables supported so they do not pull on the electrodes.', 'Minimize movement and shivering when possible without delaying care.'] },
+      { title: 'Keep the role clear', bullets: ['Complete MARCHE and vital signs; the trace does not replace physical assessment.', 'Report symptoms, pulse and casualty appearance with the monitor finding.', 'Use the placement diagram and labels for the actual monitor because cable colour conventions vary.'] },
+    ],
+    notice: { title: 'Confirm the monitor model', text: 'The final device-specific page should show the actual cable labels, connector, screen controls and approved lead placement for the monitor in use.' },
+    related: ['monitoring-equipment', 'vital-signs', 'pulse', 'march-c'],
+  },
+  {
+    id: 'monitoring-equipment', title: 'Monitoring equipment', category: 'equipment', group: 'Sick Bay and scene monitoring', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'Use monitoring equipment to add repeatable observations to the physical assessment. Start with the casualty, connect only what is useful and record the trend.',
+    quickRoutes: [
+      internal('manual-blood-pressure', 'Manual blood pressure', 'Measure systolic and diastolic pressure with a cuff and stethoscope.'),
+      internal('pulse-oximeter', 'Portable pulse oximeter', 'Obtain and validate an SpO₂ reading.'),
+      internal('three-lead-ecg', '3-lead ECG setup', 'Apply the lead cable and obtain a usable trace.'),
+      internal('vital-signs', 'Complete vital-sign set', 'Put the readings together with breathing, pulse, skin and AVPU.'),
+    ],
+    quickRouteHeading: 'Choose a monitoring card',
+    sections: [
+      { title: 'Set up without losing priorities', bullets: ['Address immediate MARCHE threats before routine monitoring.', 'Tell the casualty what you are applying when they can respond.', 'Confirm the equipment is clean, powered and shows the expected ready state.', 'Use one team member to continue observation while another sets up equipment when possible.', 'Secure cables and tubing so they do not interfere with treatment or movement.'] },
+      { title: 'Make the numbers useful', bullets: ['Check whether each reading fits the casualty’s pulse, breathing, skin and responsiveness.', 'Repeat readings after treatment, movement or a change in condition.', 'Record the time, reading, oxygen or other treatment, and any reason the value may be unreliable.', 'Report the trend and important changes rather than reading a screen without context.'] },
+    ],
+    notice: { title: 'Know the equipment in use', text: 'Portable and Sick Bay monitors can use different connectors, cables and controls. Device-specific setup should match the actual monitor and approved instructions.' },
+    related: ['equipment-overview', 'manual-blood-pressure', 'pulse-oximeter', 'three-lead-ecg'],
+  },
+  {
+    id: 'foil-blanket', title: 'Foil blanket', category: 'equipment', group: 'Heat-loss prevention', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'A foil blanket helps reduce further heat loss. It works best as part of a simple package that also protects the casualty from a cold or wet surface and the surrounding environment.',
+    steps: ['Address immediate MARCHE threats before wrapping the casualty.', 'Insulate the casualty from the deck or other cold surface.', 'Remove or isolate wet clothing when appropriate and when privacy, safety and time allow.', 'Open the blanket fully and wrap it around the casualty without covering the face or blocking airway observation.', 'Close gaps and protect the casualty from wind, spray and further exposure.', 'Keep dressings, tourniquets, airway equipment and required assessment sites accessible.', 'Reassess breathing, skin, responsiveness and temperature concerns throughout care and movement.'],
+    sections: [
+      { title: 'Remember', bullets: ['A foil blanket reduces further heat loss; it does not replace active warming when active warming is required.', 'Avoid direct contact between the casualty and very hot objects.', 'Open the wrap enough to reassess and treat, then cover the casualty again promptly.', 'If the casualty is overheated, remove them from the heat, begin the locally taught cooling response and do not wrap them for warmth.'] },
+    ],
+    related: ['march-h', 'cocoon-warming', 'reassessment-handover', 'equipment-bag-check'],
+  },
+  {
+    id: 'cocoon-warming', title: 'Cocoon warming unit', category: 'equipment', group: 'Active warming — confirmed setup required', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'The Cocoon warming unit provides active warming in the appropriate care area. Setup, temperature selection and alarms must match the exact unit and warming blanket in use.',
+    sections: [
+      { title: 'General setup sequence', bullets: ['Continue MARCHE, remove wet clothing when appropriate, dry the casualty and use insulating blankets as needed.', 'Inspect the warming unit, hose, power connection and compatible warming blanket before use.', 'Position the warming blanket and hose using the diagram for the actual product while keeping the airway and required treatment sites accessible.', 'Turn on the unit and select only the setting taught or directed for the casualty.', 'Confirm warm air is flowing and that the hose is connected to the blanket as designed.', 'Check the casualty’s skin, comfort, vital signs and temperature trend regularly.', 'Respond to alarms by checking the casualty and following the unit instructions; do not bypass the alarm.'] },
+      { title: 'Avoid preventable harm', bullets: ['Do not direct an uncovered warming hose onto the casualty.', 'Do not place the blanket or hose where it obstructs the airway, compresses an injury or interferes with monitoring.', 'Watch areas with reduced sensation, poor circulation or pressure risk closely.', 'Stop and report excessive heat, skin changes, worsening condition or equipment malfunction.'] },
+    ],
+    notice: { title: 'Add the model-specific controls later', text: 'The exact Cocoon model, compatible blankets, approved temperature settings, alarm meanings and cleaning method still need to be confirmed before a button-by-button card is added.' },
+    related: ['march-h', 'foil-blanket', 'vital-signs', 'monitoring-equipment'],
+  },
+  {
+    id: 'splinting-equipment', title: 'Splinting equipment', category: 'equipment', group: 'Injury support and movement', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'A splint supports an injured limb, reduces movement and helps protect it during care and transport. Use the device and technique included in current training.',
+    steps: ['Address immediate MARCHE threats before routine splinting.', 'Expose the injury enough to check it and control bleeding.', 'Check and record distal pulse, skin, sensation and movement before applying the splint when possible.', 'Support the limb in the position found unless the current course directs otherwise for a specific problem.', 'Choose a splint that supports the injury and the joints above and below when practical.', 'Pad gaps and secure the splint without placing pressure directly over the injury.', 'Recheck distal pulse, skin, sensation and movement after securing and after movement.', 'Loosen or correct the splint and report immediately if distal findings worsen.'],
+    sections: [
+      { title: 'Good splinting practice', bullets: ['Remove rings, watches or other constricting items early when swelling is expected and it can be done safely.', 'Keep dressings and important treatment sites accessible.', 'Do not straighten a limb simply to make it fit a device.', 'Reassess pain, swelling, bleeding and distal findings regularly.'] },
+    ],
+    notice: { title: 'Confirm the splints carried', text: 'The directory can be expanded with separate cards when the actual rigid, soft, vacuum or traction splints and the casualty-clearer scope for each are confirmed.' },
+    related: ['march-e', 'capillary-refill', 'head-to-toe', 'basket-stretcher'],
+  },
+  {
+    id: 'basket-stretcher', title: 'Basket stretcher', category: 'equipment', group: 'Rarely used movement equipment', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'The Stokes-style basket stretcher is rarely used by the team, but it is worth recognizing as a rigid casualty-movement option. Use it only with the assigned team, route and handling method.',
+    sections: [
+      { title: 'Before loading', bullets: ['Confirm the basket, straps, handles and attachment points have no obvious damage.', 'Choose one team leader and agree on the movement commands.', 'Plan the route and identify hazards before lifting.', 'Complete immediate treatment, secure equipment and recheck the casualty before movement.', 'Use the number of handlers and lifting method required for the situation.'] },
+      { title: 'Secure and move', bullets: ['Place and pad the casualty using the taught movement method.', 'Secure the casualty with the stretcher straps while keeping the airway and essential treatment accessible.', 'Secure loose monitoring, oxygen and treatment equipment so it cannot fall or pull.', 'Lift, lower and turn only on the team leader’s command.', 'Recheck airway, breathing, bleeding control, distal findings and strap security after loading and after each major movement.'] },
+    ],
+    notice: { title: 'No generic hauling procedure', text: 'Confined-space, vertical, ladder and hoisting movements need the applicable shipboard procedure, trained personnel and rigging. This card covers recognition and basic coordinated handling only.' },
+    related: ['march-e', 'splinting-equipment', 'reassessment-handover', 'equipment-bag-check'],
+  },
 ];
 
 const categoryById = Object.fromEntries(categories.map((category) => [category.id, category]));
-const searchableText = (topic) => JSON.stringify({ title: topic.title, group: topic.group, intro: topic.intro, path: topic.path, march: topic.march, quickRoutes: topic.quickRoutes, steps: topic.steps, sections: topic.sections, actions: topic.actions, nextStep: topic.nextStep }).toLowerCase();
+const searchableText = (topic) => JSON.stringify({ title: topic.title, group: topic.group, intro: topic.intro, path: topic.path, march: topic.march, equipmentGroups: topic.equipmentGroups, quickRoutes: topic.quickRoutes, steps: topic.steps, sections: topic.sections, actions: topic.actions, nextStep: topic.nextStep }).toLowerCase();
 topics.forEach((topic) => { topic.searchText = searchableText(topic); });
 
 export const topicById = Object.fromEntries(topics.map((topic) => [topic.id, topic]));

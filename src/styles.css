@@ -208,6 +208,19 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 .march-grid button > span { display: grid; gap: 5px; }
 .march-grid strong { font-size: 16px; }
 .march-grid small { color: var(--muted); font-size: 13px; line-height: 1.38; }
+.equipment-directory { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.equipment-group { min-width: 0; border: 1px solid var(--border); border-radius: 17px; background: linear-gradient(145deg, #fffaf7, #fff 68%); overflow: hidden; }
+.equipment-group > header { min-height: 104px; display: grid; grid-template-columns: 52px minmax(0, 1fr); align-items: start; gap: 13px; padding: 17px; border-bottom: 1px solid #f0e3dc; }
+.equipment-group > header > b { width: 50px; height: 50px; border-radius: 15px; background: #ffe7dc; color: #b84f2d; display: grid; place-items: center; font-size: 25px; }
+.equipment-group h3 { margin: 1px 0 4px; font-size: 17px; line-height: 1.25; }
+.equipment-group header p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.42; }
+.equipment-links { display: grid; padding: 4px 14px 10px; }
+.equipment-links button { min-width: 0; min-height: 66px; border: 0; border-bottom: 1px solid var(--border); background: transparent; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 11px; padding: 10px 3px; color: inherit; text-align: left; cursor: pointer; }
+.equipment-links button:last-child { border-bottom: 0; }
+.equipment-links button:hover { color: #b84f2d; }
+.equipment-links button > span { min-width: 0; display: grid; gap: 3px; }
+.equipment-links strong { font-size: 14px; line-height: 1.3; }
+.equipment-links small { color: var(--muted); font-size: 12px; line-height: 1.38; }
 .scale-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .scale-grid > div { border: 1px solid var(--border); border-radius: 14px; padding: 16px; min-width: 0; }
 .scale-grid > div > span { width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; background: #dff7f2; color: #087e70; font-size: 23px; font-weight: 800; margin-bottom: 12px; }
@@ -336,7 +349,7 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
   .reference-content { padding: 24px 0; border-radius: 0; box-shadow: none; }
   .reference-block + .reference-block, .reference-notice + .reference-block { margin-top: 30px; }
   .reference-block h2 { font-size: 20px; }
-  .action-grid, .march-grid, .quick-route-grid { grid-template-columns: 1fr; }
+  .action-grid, .march-grid, .quick-route-grid, .equipment-directory { grid-template-columns: 1fr; }
   .path-list button, .action-grid button { min-height: 72px; padding: 13px 14px; }
   .action-grid > button:last-child:nth-child(odd) { grid-column: auto; }
   .quick-route-grid button { min-height: 92px; padding: 14px; }
@@ -353,6 +366,12 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
   .continue-primary h2 { font-size: 19px; }
   .march-grid button { min-height: 96px; grid-template-columns: 48px 1fr auto; padding: 13px; }
   .march-grid b { width: 46px; height: 46px; font-size: 24px; }
+  .equipment-directory { gap: 12px; }
+  .equipment-group { border-radius: 14px; }
+  .equipment-group > header { min-height: 0; grid-template-columns: 48px minmax(0, 1fr); padding: 14px; }
+  .equipment-group > header > b { width: 46px; height: 46px; font-size: 23px; }
+  .equipment-links { padding-inline: 13px; }
+  .equipment-links button { min-height: 64px; }
   .scale-grid { grid-template-columns: 1fr 1fr; }
   .scale-grid > div { padding: 14px; }
   .mnemonic-grid { grid-template-columns: 1fr; }
