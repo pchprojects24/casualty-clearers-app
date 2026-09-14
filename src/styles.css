@@ -370,7 +370,8 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
   .topic-directory > h2 { font-size: 18px; }
   .home-recent { margin-top: 24px; }
   .home-recent h2 { font-size: 18px; }
-  .home-recent > div { display: flex; overflow-x: auto; gap: 9px; padding: 1px 1px 6px; scroll-snap-type: x proximity; }
+  .home-recent > div { display: flex; overflow-x: auto; gap: 9px; padding: 1px 1px 6px; scroll-snap-type: x proximity; scrollbar-width: none; }
+  .home-recent > div::-webkit-scrollbar { display: none; }
   .home-recent > div > button { flex: 0 0 min(82vw, 300px); min-height: 74px; scroll-snap-align: start; }
   .topic-row-main { min-height: 72px; grid-template-columns: 48px 1fr auto; gap: 12px; padding: 8px 0; }
   .topic-row-main::before { display: none; }
