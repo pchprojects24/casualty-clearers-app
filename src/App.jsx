@@ -71,7 +71,7 @@ const SECONDARY_STEPS = [
 
 const HEAD_TO_TOE_TOPICS = new Set(['head-face-check', 'neck-check', 'chest-check', 'abdomen-check', 'pelvis-check', 'limbs-check', 'back-check']);
 const REASSESSMENT_TOPICS = new Set(['reassessment-loop', 'treatment-checks', 'mist-handover', 'handover-example']);
-const SECONDARY_TOPIC_IDS = new Set(['secondary-survey', ...SECONDARY_STEPS.map((step) => step.id), ...HEAD_TO_TOE_TOPICS, ...REASSESSMENT_TOPICS]);
+const SECONDARY_TOPIC_IDS = new Set(['secondary-survey', 'focused-examination', ...SECONDARY_STEPS.map((step) => step.id), ...HEAD_TO_TOE_TOPICS, ...REASSESSMENT_TOPICS]);
 
 const readStored = (key) => {
   try {
@@ -393,7 +393,7 @@ function MarcheProgress({ activeId }) {
 }
 
 function SecondaryProgress({ activeId }) {
-  const currentId = HEAD_TO_TOE_TOPICS.has(activeId) ? 'head-to-toe' : REASSESSMENT_TOPICS.has(activeId) ? 'reassessment-handover' : activeId;
+  const currentId = HEAD_TO_TOE_TOPICS.has(activeId) || activeId === 'focused-examination' ? 'head-to-toe' : REASSESSMENT_TOPICS.has(activeId) ? 'reassessment-handover' : activeId;
   return (
     <nav className="secondary-progress" aria-label="Secondary survey sequence">
       <div className="secondary-progress-heading"><span>Secondary survey</span><strong>Build the full picture</strong></div>
