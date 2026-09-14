@@ -183,8 +183,8 @@ function SearchBox({ value, onChange, onSelect, compact = false, shortcut = true
         onFocus={() => setActive(true)}
         onBlur={() => window.setTimeout(() => setActive(false), 120)}
         onKeyDown={onKeyDown}
-        placeholder="Search all information..."
-        aria-label="Search all information"
+        placeholder="Search CCT topics..."
+        aria-label="Search CCT topics"
         role="combobox"
         aria-expanded={expanded}
         aria-controls={listId}
@@ -213,14 +213,14 @@ function SearchBox({ value, onChange, onSelect, compact = false, shortcut = true
           ))}
         </div>
       ) : (
-        <div className="search-results"><p role="status">No matching information found.</p></div>
+        <div className="search-results"><p role="status">No matching topic found.</p></div>
       ))}
     </div>
   );
 }
 
 function Sidebar({ route, savedCount }) {
-  const selected = route.kind === 'category' ? route.id : route.kind;
+  const selected = route.kind === 'category' ? route.id : route.kind === 'topic' ? topicById[route.id]?.category : route.kind;
   return (
     <aside className="sidebar">
       <Brand />
@@ -251,19 +251,27 @@ function MobileHeader({ onOpen }) {
   );
 }
 
-function MobileNav({ route, savedCount }) {
+function MobileNav({ route, savedCount, onOpen }) {
   const items = [
     { id: 'home', label: 'Home', icon: Home, path: 'home' },
-    { id: 'explore', label: 'Explore', icon: Search, path: 'explore' },
+    { id: 'marche', label: 'MARCHE', icon: ClipboardCheck, path: 'topic/marche' },
+    { id: 'explore', label: 'Topics', icon: Search, path: 'explore' },
     { id: 'saved', label: 'Saved', icon: Bookmark, path: 'saved' },
-    { id: 'more', label: 'More', icon: MoreHorizontal, path: 'glossary' },
+    { id: 'more', label: 'More', icon: MoreHorizontal },
   ];
   return (
     <nav className="mobile-nav" aria-label="Mobile navigation">
       {items.map(({ id, label, icon: Icon, path }) => {
-        const selected = route.kind === id || (id === 'more' && route.kind === 'glossary');
+        const selected = route.kind === id || (id === 'marche' && route.kind === 'topic' && (route.id === 'marche' || route.id?.startsWith('march-')));
         return (
-          <button key={id} className={selected ? 'selected' : ''} aria-current={selected ? 'page' : undefined} type="button" onClick={() => navigate(path)}>
+          <button
+            key={id}
+            className={selected ? 'selected' : ''}
+            aria-current={selected ? 'page' : undefined}
+            aria-haspopup={id === 'more' ? 'dialog' : undefined}
+            type="button"
+            onClick={() => id === 'more' ? onOpen() : navigate(path)}
+          >
             <span className="mobile-nav-icon"><Icon size={23} strokeWidth={1.8} />{id === 'saved' && savedCount > 0 && <em aria-hidden="true">{savedCount}</em>}</span><span>{label}</span>
           </button>
         );
@@ -299,7 +307,25 @@ function MiniTopicRow({ topic, saved, onSave }) {
   );
 }
 
-function HomeView() {
+function RecentStrip({ topics: recentTopics }) {
+  if (!recentTopics.length) return null;
+  return (
+    <section className="home-recent" aria-labelledby="recent-heading">
+      <header><h2 id="recent-heading">Recent</h2><button type="button" onClick={() => navigate('recent')}>See all <ChevronRight size={16} /></button></header>
+      <div>
+        {recentTopics.slice(0, 3).map((topic) => (
+          <button key={topic.id} type="button" onClick={() => navigate(`topic/${topic.id}`)}>
+            <span className={`mini-icon ${topic.color}`}><IconFor name={topic.icon} size={19} /></span>
+            <span><strong>{topic.title}</strong><small>{getCategory(topic.category)?.label}</small></span>
+            <ChevronRight size={18} />
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function HomeView({ recentTopics }) {
   const [query, setQuery] = useState('');
 
   return (
@@ -310,8 +336,9 @@ function HomeView() {
           <h1>CCT Info Hub</h1>
           <SearchBox value={query} onChange={setQuery} onSelect={(topic) => navigate(`topic/${topic.id}`)} />
         </section>
+        <RecentStrip topics={recentTopics} />
         <section className="topic-directory" aria-labelledby="explore-heading">
-          <h2 id="explore-heading">Browse</h2>
+          <h2 id="explore-heading">Topics</h2>
           <div className="topic-list">
             {categories.map((category) => <TopicRow key={category.id} category={category} />)}
           </div>
@@ -321,7 +348,7 @@ function HomeView() {
   );
 }
 
-function DirectoryView({ title = 'Explore all information', intro = 'Browse by subject or search across every topic.', emptyNote, topicList = topics, saved, toggleSaved }) {
+function DirectoryView({ title = 'All topics', intro = 'Search by name or browse each section.', emptyNote, topicList = topics, saved, toggleSaved }) {
   const [query, setQuery] = useState('');
   const scopedIds = useMemo(() => new Set(topicList.map((topic) => topic.id)), [topicList]);
   const visible = query ? searchTopics(query).filter((topic) => scopedIds.has(topic.id)) : topicList;
@@ -343,9 +370,9 @@ function DirectoryView({ title = 'Explore all information', intro = 'Browse by s
         {!groups.length && (
           <div className="empty-state">
             <Search />
-            <h2>{query ? 'No matching information' : 'Nothing here yet'}</h2>
+            <h2>{query ? 'No matching topic' : 'Nothing here yet'}</h2>
             <p>{query ? 'Try a shorter term or a related word.' : emptyNote || 'There is no information in this section.'}</p>
-            {!query && <button type="button" onClick={() => navigate('explore')}>Browse all information <ChevronRight size={16} /></button>}
+            {!query && <button type="button" onClick={() => navigate('explore')}>Browse all topics <ChevronRight size={16} /></button>}
           </div>
         )}
       </div>
@@ -359,9 +386,9 @@ function NotFoundView() {
       <BackLink />
       <div className="empty-state">
         <TriangleAlert />
-        <h2>That information could not be found</h2>
+        <h2>Topic not found</h2>
         <p>The link may be out of date, or the topic may have been renamed.</p>
-        <button type="button" onClick={() => navigate('explore')}>Browse all information <ChevronRight size={16} /></button>
+        <button type="button" onClick={() => navigate('explore')}>Browse all topics <ChevronRight size={16} /></button>
       </div>
     </main>
   );
@@ -417,11 +444,42 @@ function SecondaryProgress({ activeId }) {
   );
 }
 
+const pageSectionsFor = (topic) => [
+  topic.path && { id: 'assessment-sequence', label: 'Assessment sequence' },
+  topic.scale && { id: 'avpu-scale', label: 'AVPU scale' },
+  topic.mnemonic && { id: 'mnemonic', label: 'Key prompts' },
+  topic.example && { id: 'worked-example', label: 'Example' },
+  topic.quickRoutes && { id: 'quick-routes', label: 'Choices' },
+  topic.scenarioCards && { id: 'response-choices', label: 'Responses' },
+  topic.scenarioPhases && { id: 'response-flow', label: topic.phaseHeading || 'Response flow' },
+  topic.roleCards && { id: 'team-roles', label: 'Team roles' },
+  topic.march && { id: 'marche-priorities', label: 'MARCHE priorities' },
+  topic.equipmentGroups && { id: 'equipment-by-use', label: 'Equipment' },
+  topic.steps && { id: 'steps', label: 'How to do it' },
+  ...(topic.sections || []).map((section, index) => ({ id: `section-${index}`, label: section.title })),
+  topic.notice && { id: 'important-note', label: 'Important note' },
+  topic.actions && { id: 'related-actions', label: 'Related pages' },
+  topic.nextStep && { id: 'next-step', label: 'Next step' },
+  topic.resources?.length > 0 && { id: 'sources', label: 'Sources' },
+].filter(Boolean);
+
+function PageJumps({ sections }) {
+  if (sections.length < 3) return null;
+  const jump = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  return (
+    <nav className="page-jumps" aria-label="On this page">
+      <strong>On this page</strong>
+      <div>{sections.map((section) => <button key={section.id} type="button" onClick={() => jump(section.id)}>{section.label}</button>)}</div>
+    </nav>
+  );
+}
+
 function ArticleView({ topic, saved, toggleSaved }) {
   const category = getCategory(topic.category);
   const related = (topic.related || []).map((id) => topicById[id]).filter(Boolean);
   const isMarchPriority = MARCHE_STEPS.some((step) => step.id === topic.id);
   const isSecondaryTopic = SECONDARY_TOPIC_IDS.has(topic.id);
+  const pageSections = pageSectionsFor(topic);
   const renderLinks = (links, className) => links?.length ? (
     <div className={className}>
       {links.map((link) => (
@@ -444,27 +502,28 @@ function ArticleView({ topic, saved, toggleSaved }) {
       </header>
       {isMarchPriority && <MarcheProgress activeId={topic.id} />}
       {isSecondaryTopic && <SecondaryProgress activeId={topic.id} />}
+      <PageJumps sections={pageSections} />
       <div className="article-layout">
         <article className="reference-content">
-          {topic.path && <section className="reference-block"><h2>Assessment sequence</h2>{renderLinks(topic.path, 'path-list')}</section>}
-          {topic.scale && <section className="reference-block"><h2>AVPU scale</h2><div className="scale-grid">{topic.scale.map((item) => <div key={item.letter}><span>{item.letter}</span><strong>{item.title}</strong><p>{item.text}</p></div>)}</div></section>}
-          {topic.mnemonic && <section className="reference-block"><h2>{topic.mnemonic.heading}</h2><div className="mnemonic-grid">{topic.mnemonic.items.map((item) => <div key={item.letter}><span>{item.letter}</span><div><strong>{item.title}</strong><p>{item.text}</p></div></div>)}</div></section>}
-          {topic.example && <section className="handover-example"><span>{topic.example.title}</span><blockquote>{topic.example.text}</blockquote></section>}
-          {topic.quickRoutes && <section className="reference-block"><h2>{topic.quickRouteHeading || 'Choose what you need'}</h2>{renderLinks(topic.quickRoutes, 'quick-route-grid')}</section>}
-          {topic.scenarioCards && <section className="reference-block"><h2>{topic.cardHeading || 'Choose a response'}</h2><div className="scenario-card-grid">{topic.scenarioCards.map((item) => <button key={item.topicId} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><span>{item.kicker}</span><strong>{item.title}</strong><p>{item.text}</p><em>{topic.cardLabel || 'Open scenario'} <ChevronRight size={17} /></em></button>)}</div></section>}
-          {topic.scenarioPhases && <section className="reference-block"><h2>{topic.phaseHeading || 'Response flow'}</h2><div className="scenario-timeline">{topic.scenarioPhases.map((phase, index) => <article className="scenario-phase" key={`${phase.kicker}-${phase.title}`}><span className="phase-number">{index + 1}</span><div className="phase-content"><span className="phase-kicker">{phase.kicker}</span><h3>{phase.title}</h3><p>{phase.text}</p>{phase.bullets && <ul className="check-list">{phase.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}{renderLinks(phase.links, 'phase-link-grid')}</div></article>)}</div></section>}
-          {topic.roleCards && <section className="reference-block"><h2>Divide the work</h2><div className="role-card-grid">{topic.roleCards.map((role) => <article key={role.title}><h3>{role.title}</h3><p>{role.text}</p><ul className="check-list">{role.bullets.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div></section>}
-          {topic.march && <section className="reference-block"><h2>Select a MARCHE priority</h2><div className="march-grid">{topic.march.map((item) => <button key={item.letter} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><b>{item.letter}</b><span><strong>{item.title}</strong><small>{item.text}</small></span><ChevronRight size={21} /></button>)}</div></section>}
-          {topic.equipmentGroups && <section className="reference-block"><h2>Choose equipment by use</h2><div className="equipment-directory">{topic.equipmentGroups.map((group) => <section className="equipment-group" key={group.letter}><header><b>{group.letter}</b><div><h3>{group.title}</h3><p>{group.text}</p></div></header><div className="equipment-links">{group.items.map((item) => <button key={item.topicId} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><span><strong>{item.title}</strong><small>{item.description}</small></span><ChevronRight size={19} /></button>)}</div></section>)}</div></section>}
-          {topic.steps && <section className="reference-block"><h2>How to do it</h2><ol className="step-list">{topic.steps.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}</ol></section>}
-          {topic.sections?.map((section) => <section className="reference-block" key={section.title}><h2>{section.title}</h2><ul className="check-list">{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul></section>)}
-          {topic.notice && <aside className="reference-notice"><TriangleAlert size={21} /><div><strong>{topic.notice.title}</strong><p>{topic.notice.text}</p></div></aside>}
-          {topic.actions && <section className="reference-block"><h2>{topic.actionHeading || 'Open a procedure or equipment card'}</h2>{renderLinks(topic.actions, 'action-grid')}</section>}
-          {topic.nextStep && <section className="continue-primary"><div><span>{topic.nextStep.kicker || 'Next in MARCHE'}</span><h2>{topic.nextStep.title}</h2><p>{topic.nextStep.description}</p></div><button type="button" onClick={() => navigate(`topic/${topic.nextStep.topicId}`)} aria-label={topic.nextStep.title}><ChevronRight size={25} /></button></section>}
-          {topic.resources?.length > 0 && <section className="reference-block resources"><h2>Official references & media</h2>{topic.resources.map((resource) => <a key={resource.url} href={resource.url} target="_blank" rel="noreferrer"><span><em>{resource.kind}</em><strong>{resource.title}</strong><small>{resource.description}</small></span><ExternalLink size={19} /></a>)}</section>}
+          {topic.path && <section id="assessment-sequence" className="reference-block"><h2>Assessment sequence</h2>{renderLinks(topic.path, 'path-list')}</section>}
+          {topic.scale && <section id="avpu-scale" className="reference-block"><h2>AVPU scale</h2><div className="scale-grid">{topic.scale.map((item) => <div key={item.letter}><span>{item.letter}</span><strong>{item.title}</strong><p>{item.text}</p></div>)}</div></section>}
+          {topic.mnemonic && <section id="mnemonic" className="reference-block"><h2>{topic.mnemonic.heading}</h2><div className="mnemonic-grid">{topic.mnemonic.items.map((item) => <div key={item.letter}><span>{item.letter}</span><div><strong>{item.title}</strong><p>{item.text}</p></div></div>)}</div></section>}
+          {topic.example && <section id="worked-example" className="handover-example"><span>{topic.example.title}</span><blockquote>{topic.example.text}</blockquote></section>}
+          {topic.quickRoutes && <section id="quick-routes" className="reference-block"><h2>{topic.quickRouteHeading || 'Choose what you need'}</h2>{renderLinks(topic.quickRoutes, 'quick-route-grid')}</section>}
+          {topic.scenarioCards && <section id="response-choices" className="reference-block"><h2>{topic.cardHeading || 'Choose a response'}</h2><div className="scenario-card-grid">{topic.scenarioCards.map((item) => <button key={item.topicId} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><span>{item.kicker}</span><strong>{item.title}</strong><p>{item.text}</p><em>{topic.cardLabel || 'View response'} <ChevronRight size={17} /></em></button>)}</div></section>}
+          {topic.scenarioPhases && <section id="response-flow" className="reference-block"><h2>{topic.phaseHeading || 'Response flow'}</h2><div className="scenario-timeline">{topic.scenarioPhases.map((phase, index) => <article className="scenario-phase" key={`${phase.kicker}-${phase.title}`}><span className="phase-number">{index + 1}</span><div className="phase-content"><span className="phase-kicker">{phase.kicker}</span><h3>{phase.title}</h3><p>{phase.text}</p>{phase.bullets && <ul className="check-list">{phase.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}{renderLinks(phase.links, 'phase-link-grid')}</div></article>)}</div></section>}
+          {topic.roleCards && <section id="team-roles" className="reference-block"><h2>Divide the work</h2><div className="role-card-grid">{topic.roleCards.map((role) => <article key={role.title}><h3>{role.title}</h3><p>{role.text}</p><ul className="check-list">{role.bullets.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div></section>}
+          {topic.march && <section id="marche-priorities" className="reference-block"><h2>Select a MARCHE priority</h2><div className="march-grid">{topic.march.map((item) => <button key={item.letter} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><b>{item.letter}</b><span><strong>{item.title}</strong><small>{item.text}</small></span><ChevronRight size={21} /></button>)}</div></section>}
+          {topic.equipmentGroups && <section id="equipment-by-use" className="reference-block"><h2>Choose equipment by use</h2><div className="equipment-directory">{topic.equipmentGroups.map((group) => <section className="equipment-group" key={group.letter}><header><b>{group.letter}</b><div><h3>{group.title}</h3><p>{group.text}</p></div></header><div className="equipment-links">{group.items.map((item) => <button key={item.topicId} type="button" onClick={() => navigate(`topic/${item.topicId}`)}><span><strong>{item.title}</strong><small>{item.description}</small></span><ChevronRight size={19} /></button>)}</div></section>)}</div></section>}
+          {topic.steps && <section id="steps" className="reference-block"><h2>How to do it</h2><ol className="step-list">{topic.steps.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}</ol></section>}
+          {topic.sections?.map((section, index) => <section id={`section-${index}`} className="reference-block" key={section.title}><h2>{section.title}</h2><ul className="check-list">{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul></section>)}
+          {topic.notice && <aside id="important-note" className="reference-notice"><TriangleAlert size={21} /><div><strong>{topic.notice.title}</strong><p>{topic.notice.text}</p></div></aside>}
+          {topic.actions && <section id="related-actions" className="reference-block"><h2>{topic.actionHeading || 'Procedures and equipment'}</h2>{renderLinks(topic.actions, 'action-grid')}</section>}
+          {topic.nextStep && <button id="next-step" className="continue-primary" type="button" onClick={() => navigate(`topic/${topic.nextStep.topicId}`)}><span><small>{topic.nextStep.kicker || 'Next in MARCHE'}</small><strong>{topic.nextStep.title}</strong><em>{topic.nextStep.description}</em></span><i aria-hidden="true"><ChevronRight size={25} /></i></button>}
+          {topic.resources?.length > 0 && <section id="sources" className="reference-block resources"><h2>Sources and demonstrations</h2>{topic.resources.map((resource) => <a key={resource.url} href={resource.url} target="_blank" rel="noreferrer"><span><em>{resource.kind}</em><strong>{resource.title}</strong><small>{resource.description}</small></span><ExternalLink size={19} /></a>)}</section>}
         </article>
         <aside className="related-panel">
-          <h2>Go next</h2>
+          <h2>Related topics</h2>
           {related.map((item) => <button key={item.id} type="button" onClick={() => navigate(`topic/${item.id}`)}><span>{item.title}</span><ChevronRight size={17} /></button>)}
         </aside>
       </div>
@@ -478,7 +537,7 @@ function GlossaryView() {
   return (
     <main className="page-main glossary-page">
       <BackLink />
-      <div className="page-heading"><h1>Glossary</h1><p>Common terms used throughout the information.</p></div>
+      <div className="page-heading"><h1>Glossary</h1><p>Definitions for terms used in the app.</p></div>
       <div className="small-search">
         <Search size={19} aria-hidden="true" />
         <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Find a term..." aria-label="Find a term" />
@@ -540,7 +599,7 @@ export default function App() {
   const category = route.kind === 'category' ? getCategory(route.id) : null;
 
   let content;
-  if (route.kind === 'home') content = <HomeView />;
+  if (route.kind === 'home') content = <HomeView recentTopics={recentTopics} />;
   else if (route.kind === 'explore') content = <DirectoryView key="explore" saved={saved} toggleSaved={toggleSaved} />;
   else if (route.kind === 'category') {
     content = category
@@ -550,8 +609,8 @@ export default function App() {
       : <NotFoundView />;
   } else if (route.kind === 'topic') {
     content = activeTopic ? <ArticleView topic={activeTopic} saved={saved.includes(activeTopic.id)} toggleSaved={toggleSaved} /> : <NotFoundView />;
-  } else if (route.kind === 'saved') content = <DirectoryView key="saved" title="Saved information" intro="Topics you have set aside to revisit." emptyNote="Use the bookmark on any topic to save it here." topicList={savedTopics} saved={saved} toggleSaved={toggleSaved} />;
-  else if (route.kind === 'recent') content = <DirectoryView key="recent" title="Recently viewed" intro="The information you opened most recently." emptyNote="Topics you open will appear here." topicList={recentTopics} saved={saved} toggleSaved={toggleSaved} />;
+  } else if (route.kind === 'saved') content = <DirectoryView key="saved" title="Saved topics" intro="Topics you saved for another look." emptyNote="Use the bookmark on any topic to save it here." topicList={savedTopics} saved={saved} toggleSaved={toggleSaved} />;
+  else if (route.kind === 'recent') content = <DirectoryView key="recent" title="Recently viewed" intro="Your most recently opened topics." emptyNote="Topics you open will appear here." topicList={recentTopics} saved={saved} toggleSaved={toggleSaved} />;
   else if (route.kind === 'glossary') content = <GlossaryView />;
   else content = <NotFoundView />;
 
@@ -560,7 +619,7 @@ export default function App() {
       <Sidebar route={route} savedCount={saved.length} />
       <MobileHeader onOpen={() => setDrawerOpen(true)} />
       <div className={`content-shell ${route.kind === 'home' ? 'home-layout' : ''}`}>{content}</div>
-      <MobileNav route={route} savedCount={saved.length} />
+      <MobileNav route={route} savedCount={saved.length} onOpen={() => setDrawerOpen(true)} />
       <Drawer open={drawerOpen} onClose={closeDrawer} route={route} savedCount={saved.length} />
     </div>
   );
