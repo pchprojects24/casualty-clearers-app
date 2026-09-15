@@ -82,12 +82,15 @@ Equipment pages also cover identification, setup, use checks and common errors. 
 
 ### Sudden illness
 
-This is the next major information section. It should cover:
+The section currently covers:
 
 - Chest pain and suspected heart attack.
 - Stroke recognition.
 - Seizure care.
 - Severe allergic reaction and anaphylaxis.
+
+The next bundle should add:
+
 - Asthma and acute breathing difficulty.
 - Diabetic emergencies.
 - Poisoning, opioid overdose and naloxone awareness.
@@ -97,7 +100,7 @@ Each topic should connect back to MARCHE, vital signs, reassessment, equipment a
 
 ## Remaining equipment and scenario information
 
-After sudden illness, the most useful additions are:
+After the remaining sudden-illness topics, the most useful additions are:
 
 - Suction setup and use checks.
 - Scoop stretcher, KED, Med Sled and backboard/head-bed recognition.

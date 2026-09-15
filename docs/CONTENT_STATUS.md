@@ -4,7 +4,7 @@ Updated 14 September 2026.
 
 ## Current coverage
 
-The app currently contains 104 searchable topics across eight sections.
+The app currently contains 109 searchable topics across nine sections.
 
 ### Complete connected pathways
 
@@ -13,6 +13,7 @@ The app currently contains 104 searchable topics across eight sections.
 - Bleeding control: recognition, direct pressure, wound packing, pressure dressing, tourniquet pathway and reassessment.
 - Airway and breathing: airway check, adult choking, positioning, adjuncts, breathing assessment, BVM, oxygen, chest wound and reassessment.
 - Circulation: pulse, skin signs, shock, adult CPR/AED and reassessment.
+- Sudden illness: overview, suspected heart attack, stroke recognition, seizure care and anaphylaxis.
 - Head and temperature: head injury, heat-loss prevention, hypothermia, heat illness and reassessment.
 - Burns and exposure: thermal, chemical skin, chemical eye, smoke/facial and electrical pathways.
 - Splinting and movement: injury assessment, CSM checks, SAM Splint body-area guides, support choices, traction-splint recognition and casualty movement.
@@ -29,20 +30,16 @@ The app currently contains 104 searchable topics across eight sections.
 
 ## Information still needed
 
-### Priority 1 — Sudden illness
+### Priority 1 — Complete sudden illness
 
-There is no dedicated sudden-illness section. The app mentions symptoms such as chest pain, seizure, breathing difficulty and altered responsiveness, but it does not yet give complete response pathways for:
+The first sudden-illness bundle is connected to MARCHE, monitoring, reassessment and handover. The next bundle should add:
 
-- Suspected heart attack.
-- Stroke.
-- Seizure.
-- Severe allergic reaction and anaphylaxis.
 - Asthma.
 - Diabetic emergencies.
 - Poisoning, opioid overdose and naloxone awareness.
 - Fainting and unexplained altered responsiveness.
 
-This is the largest content gap because these problems can begin without a traumatic injury and should still lead cleanly into MARCHE, monitoring, reassessment and handover.
+These pages should use the same short recognition, immediate-action, monitoring and handover pattern as the first bundle.
 
 ### Priority 2 — Common equipment gaps
 
@@ -75,16 +72,17 @@ The existing chemical-burn pages cover skin and eye decontamination, but not the
 
 ### Needed for a broader first-aid information app
 
-- Complete the sudden-illness section.
+- Complete the remaining sudden-illness topics.
 - Add the most useful missing equipment cards.
 - Add the contaminated-casualty scenario.
 - Run a final consistency, accessibility and mobile-browser pass after those additions.
 
 ## Recommended build order
 
-1. Sudden-illness overview plus heart attack, stroke, seizure and anaphylaxis.
-2. Asthma, diabetic emergencies, poisoning/overdose and fainting.
-3. Suction and movement-equipment cards.
-4. Propaq/ZOLL and Rad-57 cards.
-5. Contaminated-casualty scenario.
-6. Final content, navigation, accessibility and deployment verification.
+1. Asthma and acute breathing difficulty.
+2. Diabetic emergencies.
+3. Poisoning, opioid overdose, naloxone awareness and fainting.
+4. Suction and movement-equipment cards.
+5. Propaq/ZOLL and Rad-57 cards.
+6. Contaminated-casualty scenario.
+7. Final content, navigation, accessibility and deployment verification.

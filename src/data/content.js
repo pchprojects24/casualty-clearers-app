@@ -3,6 +3,7 @@ export const categories = [
   { id: 'bleeding', label: 'Bleeding Control', short: 'Bleeding', description: 'Recognize serious bleeding and choose the right control method.', color: 'sky', icon: 'bleeding' },
   { id: 'airway', label: 'Airway & Breathing', short: 'Airway', description: 'Check and support the airway and breathing.', color: 'yellow', icon: 'airway' },
   { id: 'circulation', label: 'Circulation & Shock', short: 'Circulation', description: 'Check pulse and skin, recognize shock, respond to cardiac arrest and trend monitoring.', color: 'teal', icon: 'circulation' },
+  { id: 'medical', label: 'Sudden Illness', short: 'Sudden illness', description: 'Recognize time-critical medical problems and give immediate care.', color: 'coral', icon: 'medical' },
   { id: 'head-temperature', label: 'Head & Temperature', short: 'Head & temperature', description: 'Recognize head-injury concerns, prevent heat loss and respond to cold or heat illness.', color: 'violet', icon: 'head' },
   { id: 'splinting', label: 'Splinting & Movement', short: 'Splinting', description: 'Support injured limbs, recheck distal findings and move the casualty safely.', color: 'violet', icon: 'movement' },
   { id: 'equipment', label: 'Equipment', short: 'Equipment', description: 'Quick-use pages and product information.', color: 'coral', icon: 'equipment' },
@@ -87,6 +88,7 @@ export const topics = [
       { topicId: 'smoke-inhalation', kicker: 'Smoke or facial burn', title: 'Possible inhalation injury', text: 'Move to clean air when safe, protect the airway and recognize early warning signs.' },
       { topicId: 'breathing-support', kicker: 'Intervene', title: 'Support breathing', text: 'Open BVM, oxygen, open-chest-wound and arrest-response choices.' },
       { topicId: 'airway-breathing-reassessment', kicker: 'Treatment check', title: 'Reassess airway and breathing', text: 'Confirm that positioning, adjuncts and breathing support still work.' },
+      { topicId: 'anaphylaxis', kicker: 'Rapid allergic reaction', title: 'Anaphylaxis', text: 'Call for help, assist with epinephrine and watch the airway and breathing closely.' },
     ],
     sections: [
       { title: 'The common sequence', bullets: ['After massive bleeding is controlled, check whether the casualty can speak or make sounds and whether air is moving.', 'If food or another object is blocking the airway, open the adult choking pathway.', 'Open and maintain the airway with positioning before relying on a device.', 'Use an adjunct only when its indication, device and technique are part of current training.', 'Assess breathing with look, listen and feel; auscultation is not part of the casualty-clearer check.', 'If breathing is absent or inadequate, begin the current resuscitation or BVM response without delaying for routine monitoring.', 'Use oxygen through the current training, medical direction and applicable target—not automatically for every casualty.', 'Recheck airway position, air movement, visible chest rise and casualty response after every intervention and move.'] },
@@ -109,6 +111,7 @@ export const topics = [
       { topicId: 'cardiac-arrest-response', kicker: 'No normal breathing and no definite pulse', title: 'Cardiac arrest and CPR', text: 'Open the current adult CPR and AED sequence.' },
       { topicId: 'monitoring-equipment', kicker: 'BP, SpO₂ and 3-lead', title: 'Add monitoring', text: 'Apply useful monitoring after immediate threats are addressed.' },
       { topicId: 'circulation-reassessment', kicker: 'Treatment check', title: 'Reassess circulation', text: 'Repeat the physical checks, confirm treatments and report the direction of change.' },
+      { topicId: 'suspected-heart-attack', kicker: 'Chest discomfort or related symptoms', title: 'Suspected heart attack', text: 'Stop exertion, call emergency help and prepare for sudden deterioration.' },
     ],
     sections: [
       { title: 'The common sequence', bullets: ['Return to M immediately if serious bleeding is found or has restarted.', 'Check a pulse and describe the site, rate, rhythm and strength.', 'Check skin colour against the casualty’s normal appearance, along with temperature and moisture.', 'Look for weakness, dizziness, thirst, confusion or a falling AVPU and interpret them with the mechanism and the rest of the assessment.', 'If an unresponsive adult is not breathing normally and no definite pulse is felt within 10 seconds, activate the response and begin the current adult CPR and AED sequence.', 'After immediate threats are addressed, add useful monitoring without losing sight of the casualty.', 'Protect the casualty from heat loss and repeat the circulation check after every treatment, move or change.'] },
@@ -118,6 +121,86 @@ export const topics = [
     notice: { title: 'Treat the casualty, not one number', text: 'A single pulse, blood pressure or monitor reading can be misleading. Use the physical findings, mechanism, treatment response and direction of change together.' },
     resources: [external(AHA_BLS, '2025 AHA Adult Basic Life Support Guidelines', 'Current adult cardiac-arrest recognition, high-quality CPR, ventilation and AED guidance.', 'First-aid reference'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current first-aid positioning and supportive care for a person showing signs of shock.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian assessment, shock, CPR and AED reference.')],
     related: ['march-c', 'shock-recognition', 'cardiac-arrest-response', 'circulation-reassessment'],
+  },
+  {
+    id: 'medical-overview', title: 'Sudden Illness', category: 'medical', group: 'Choose what you find', icon: 'medical', color: 'coral', reference: true,
+    intro: 'Recognize the time-critical problem, call for the help it needs and keep MARCHE active. Treat the findings in front of you while gathering the history and watching for change.',
+    cardHeading: 'Choose the sudden illness',
+    cardLabel: 'Open guide',
+    scenarioCards: [
+      { topicId: 'suspected-heart-attack', kicker: 'Chest discomfort or related symptoms', title: 'Suspected heart attack', text: 'Recognize common and less obvious symptoms, stop exertion and call emergency help.' },
+      { topicId: 'stroke-recognition', kicker: 'Sudden neurologic change', title: 'Stroke — use FAST', text: 'Check face, arms and speech, note when the person was last known well and call immediately.' },
+      { topicId: 'seizure-care', kicker: 'Abnormal movements or awareness', title: 'Seizure care', text: 'Protect the person from injury, time the seizure and support recovery.' },
+      { topicId: 'anaphylaxis', kicker: 'Severe allergic reaction', title: 'Anaphylaxis', text: 'Recognize airway, breathing or circulation symptoms and assist with epinephrine.' },
+    ],
+    sections: [
+      { title: 'The common response', bullets: ['Check the scene and use MARCHE to find any immediate airway, breathing or circulation threat.', 'Call emergency help early for a time-critical illness; do not wait for every possible symptom.', 'Let a responsive person use the position that best supports breathing, unless dizziness or collapse makes a supported lying position safer.', 'Help with the person’s prescribed lifesaving medication when the guide calls for it and you know how.', 'Record symptom onset or the last time the person was known well, then gather SAMPLE history without delaying care.', 'Repeat AVPU, breathing, pulse and skin signs. Add useful monitoring only after immediate actions are underway.', 'If the person becomes unresponsive and is not breathing normally, begin the adult cardiac-arrest response and use the AED.'] },
+    ],
+    actionHeading: 'Assessment, monitoring and handover',
+    actions: [internal('marche', 'MARCHE primary survey', 'Find and treat immediate threats in priority order.'), internal('vital-signs', 'Vital signs', 'Build a repeatable trend from the whole casualty picture.'), internal('sample-history', 'SAMPLE history', 'Gather symptoms, allergies, medications, history and events.'), internal('monitoring-equipment', 'Monitoring equipment', 'Add useful readings without delaying urgent care.'), internal('mist-handover', 'MIST handover', 'Report the complaint, findings, times, treatments and change.'), internal('cardiac-arrest-response', 'Cardiac arrest and CPR', 'Open the adult CPR and AED sequence if the person collapses.')],
+    notice: { title: 'Return to MARCHE whenever the person changes', text: 'A sudden illness can become an airway, breathing or circulation emergency quickly. Stop the history or equipment setup and act on the immediate threat.' },
+    related: ['suspected-heart-attack', 'stroke-recognition', 'seizure-care', 'anaphylaxis'],
+  },
+  {
+    id: 'suspected-heart-attack', title: 'Suspected heart attack', category: 'medical', group: 'Chest discomfort or related symptoms', icon: 'medical', color: 'coral', reference: true,
+    intro: 'Treat new non-traumatic chest discomfort or a concerning cluster of related symptoms as time-critical. Stop exertion, call emergency help and prepare for sudden deterioration.',
+    phaseHeading: 'Recognition and response',
+    scenarioPhases: [
+      { kicker: 'Recognize', title: 'Look beyond chest pain', text: 'Symptoms can be obvious, mild or described as discomfort rather than pain.', bullets: ['Pressure, squeezing, tightness, heaviness, burning or pain in the chest.', 'Pain or discomfort spreading to an arm, shoulder, back, neck, jaw or upper abdomen.', 'Shortness of breath, sweating, pale or clammy skin, nausea or vomiting.', 'Marked weakness, unusual fatigue, dizziness, lightheadedness or a sense that something is very wrong.', 'Older adults, women and people with diabetes may have less typical symptoms and little or no chest pain.'], links: [internal('sample-history', 'SAMPLE history', 'Ask about symptoms, medications, history and onset without delaying help.')] },
+      { kicker: 'Act', title: 'Stop exertion and call immediately', text: 'Emergency transport is safer than having the person walk or travel in a private vehicle.', bullets: ['Have the person stop activity and rest in the position they find most comfortable, usually seated or partly upright.', 'Activate emergency help and send for the AED.', 'Reassure the person, loosen restrictive clothing and keep the area calm.', 'Do not let the person walk, exert themselves or drive.', 'Do not give routine oxygen when they are breathing adequately; use oxygen only when indicated through the carried equipment and current method.'], links: [internal('aed', 'Prepare the AED', 'Have it nearby in case cardiac arrest occurs.'), internal('oxygen', 'Oxygen system', 'Use oxygen only when it is indicated.')] },
+      { kicker: 'Aspirin', title: 'Consider aspirin for an alert adult', text: 'While help is coming, an alert adult with non-traumatic chest pain may chew and swallow 162–325 mg of aspirin.', bullets: ['Do not encourage aspirin if the person has a known aspirin allergy or has been told by a health professional not to take it.', 'The person must be alert and able to chew and swallow safely.', 'If there is any uncertainty, wait for emergency help without giving aspirin.', 'Do not delay the emergency call or other immediate care to find aspirin.'] },
+      { kicker: 'Monitor', title: 'Watch for cardiac arrest', text: 'Keep reassessing while help is coming because the person can deteriorate suddenly.', bullets: ['Record when the symptoms began and what the person was doing.', 'Repeat AVPU, breathing, pulse and skin signs; note whether symptoms are improving, unchanged or worsening.', 'Keep the AED ready and know who will begin compressions.', 'If the person becomes unresponsive and is not breathing normally, begin CPR and use the AED.'], links: [internal('vital-signs', 'Vital signs', 'Record the physical trend.'), internal('cardiac-arrest-response', 'Cardiac arrest and CPR', 'Begin the adult sequence if arrest is recognized.'), internal('mist-handover', 'MIST handover', 'Report onset, symptoms, aspirin if taken and the trend.')] },
+    ],
+    notice: { title: 'Do not wait for a textbook presentation', text: 'A heart attack may present without severe central chest pain. A new combination of shortness of breath, sweating, nausea, weakness or upper-body discomfort can still be an emergency.' },
+    related: ['medical-overview', 'cardiac-arrest-response', 'aed', 'vital-signs'],
+  },
+  {
+    id: 'stroke-recognition', title: 'Stroke recognition — FAST', category: 'medical', group: 'Sudden neurologic change', icon: 'medical', color: 'violet', reference: true,
+    intro: 'A sudden change in face, arm movement or speech can be a stroke. Use FAST, note when the person was last known well and call emergency help immediately.',
+    mnemonic: {
+      heading: 'Use FAST',
+      items: [
+        { letter: 'F', title: 'Face', text: 'Ask the person to smile. Does one side droop or look uneven?' },
+        { letter: 'A', title: 'Arms', text: 'Ask them to raise both arms. Is one arm weak, numb or drifting down?' },
+        { letter: 'S', title: 'Speech', text: 'Ask for a simple sentence. Is speech slurred, jumbled, absent or unusual?' },
+        { letter: 'T', title: 'Time', text: 'Call emergency help immediately and report the last-known-well time.' },
+      ],
+    },
+    sections: [
+      { title: 'Other sudden signs', bullets: ['New numbness or weakness, especially on one side.', 'Sudden trouble seeing in one or both eyes.', 'Sudden severe headache unlike the person’s usual headache.', 'Sudden dizziness, loss of balance, poor coordination or difficulty walking.', 'Sudden confusion, difficulty understanding or a change in responsiveness.'] },
+      { title: 'Immediate response', bullets: ['Call emergency help as soon as any FAST sign or other sudden neurologic change is recognized.', 'Find and record the exact time symptoms began. If unknown, record the last time the person was known to be normal.', 'Keep the person at rest and support them in a position that protects the airway and breathing.', 'Do not give food, drink, aspirin or other oral medication.', 'Do not let the person walk or drive.', 'Use MARCHE and repeat AVPU, breathing, pulse, skin, FAST findings and any other change while help is coming.'] },
+      { title: 'If the person deteriorates', bullets: ['If vomiting or reduced responsiveness threatens the airway, position and suction as available while protecting the airway.', 'If breathing becomes absent or inadequate, begin the appropriate breathing support.', 'If the person becomes unresponsive and is not breathing normally, begin CPR and use the AED.', 'Report the last-known-well time, FAST findings, changes and treatments clearly at handover.'] },
+    ],
+    actionHeading: 'Assessment and continued care',
+    actions: [internal('avpu', 'Repeat AVPU', 'Identify and report any responsiveness change.'), internal('airway-positioning', 'Protect the airway', 'Use the position that keeps the airway open.'), internal('vital-signs', 'Vital signs', 'Trend breathing, pulse, skin and responsiveness.'), internal('mist-handover', 'MIST handover', 'Lead with FAST findings and the last-known-well time.'), internal('cardiac-arrest-response', 'Cardiac arrest and CPR', 'Open the adult sequence if arrest is recognized.')],
+    notice: { title: 'Time matters', text: 'Do not wait to see whether the signs improve. Call immediately, note the last-known-well time and keep reassessing.' },
+    related: ['medical-overview', 'avpu', 'vital-signs', 'mist-handover'],
+  },
+  {
+    id: 'seizure-care', title: 'Seizure care', category: 'medical', group: 'Abnormal movements or awareness', icon: 'medical', color: 'yellow', reference: true,
+    intro: 'Stay with the person, reduce the chance of injury and time the seizure. Do not restrain them or put anything in their mouth.',
+    phaseHeading: 'During and after a seizure',
+    scenarioPhases: [
+      { kicker: 'Protect', title: 'Make the immediate area safer', text: 'Let the seizure run its course while preventing avoidable injury.', bullets: ['Help the person to the ground if they are falling and it is safe to do so.', 'Move hard, sharp or hot objects away and cushion the head with something soft.', 'Loosen tight clothing around the neck and remove nearby glasses when practical.', 'Place the person on their side when it can be done safely without force; keep the airway as clear as possible.', 'Stay with the person and preserve privacy.'], links: [internal('scene-survey', 'Scene survey', 'Check for continuing hazards and injuries.')] },
+      { kicker: 'Do not', title: 'Avoid restraint and objects in the mouth', text: 'These actions do not stop a seizure and can cause injury.', bullets: ['Do not hold the person down or try to stop the movements.', 'Do not put fingers, tools or any object in the mouth.', 'Do not give food, drink or oral medication during the seizure or while responsiveness remains reduced.', 'Do not attempt to force the jaw open.'] },
+      { kicker: 'Time', title: 'Know when to call emergency help', text: 'Start timing when the seizure activity begins.', bullets: ['Call for a first seizure, a seizure lasting more than five minutes or repeated seizures without return to normal between them.', 'Call when the seizure occurs in water, during pregnancy or in an infant younger than six months.', 'Call for injury, breathing difficulty, choking or another serious concern.', 'Call if the person does not return to their usual mental state within five to ten minutes after the seizure stops.'] },
+      { kicker: 'Recover', title: 'Check the person after movements stop', text: 'A period of confusion, tiredness or reduced responsiveness is common, but airway and breathing still need active attention.', bullets: ['Use MARCHE, beginning with airway and breathing, and look for an injury from the fall or movements.', 'Keep the person on their side in the recovery position when breathing normally and no injury prevents it.', 'Reassure them as awareness returns and explain what happened.', 'Continue to withhold food, drink and oral medication until they are fully alert and can swallow normally.', 'Record the duration, movements, injuries, breathing, responsiveness and recovery.'], links: [internal('airway-check', 'Airway check', 'Confirm the airway is open after the seizure.'), internal('airway-positioning', 'Recovery position', 'Protect the airway when breathing is normal.'), internal('rapid-body-survey', 'Check for injury', 'Look for injuries after immediate threats are addressed.'), internal('mist-handover', 'MIST handover', 'Report timing, observations, injury and recovery.')] },
+    ],
+    notice: { title: 'Nothing in the mouth', text: 'A person cannot swallow their tongue. Objects, food, liquids and oral medication can injure the person or block the airway.' },
+    related: ['medical-overview', 'airway-check', 'airway-positioning', 'avpu'],
+  },
+  {
+    id: 'anaphylaxis', title: 'Anaphylaxis', category: 'medical', group: 'Severe allergic reaction', icon: 'medical', color: 'coral', reference: true,
+    intro: 'Anaphylaxis is a rapidly developing allergic reaction that can threaten the airway, breathing or circulation. Call emergency help and use epinephrine without delay when an auto-injector is available.',
+    phaseHeading: 'Recognition and response',
+    scenarioPhases: [
+      { kicker: 'Recognize', title: 'Look for a severe or rapidly worsening reaction', text: 'Anaphylaxis may affect more than one body system and may occur without a rash.', bullets: ['Swelling of the lips, tongue, face or throat; throat tightness, hoarse voice or trouble swallowing.', 'Difficulty breathing, wheeze, persistent cough, noisy breathing or a feeling that the throat is closing.', 'Widespread hives, flushing, itching or rapidly increasing swelling.', 'Vomiting, diarrhea or severe abdominal symptoms after a likely allergen exposure.', 'Pale or clammy skin, dizziness, confusion, collapse or reduced responsiveness.'], links: [internal('airway-check', 'Airway check', 'Recognize obstruction and confirm air movement.'), internal('shock-recognition', 'Recognize shock', 'Identify circulation failure and deterioration.')] },
+      { kicker: 'Epinephrine', title: 'Use the auto-injector promptly', text: 'Epinephrine is the priority treatment for anaphylaxis.', bullets: ['Activate emergency help.', 'Have the person use their prescribed epinephrine auto-injector immediately.', 'Assist with the auto-injector if they need help and you know how to use it.', 'Use the device instructions and inject into the outer side of the thigh, through clothing if the device permits.', 'Note the injection time and keep the used device with the person for handover.'] },
+      { kicker: 'Position', title: 'Support airway, breathing and circulation', text: 'Choose the safest position for the person’s condition and do not let them stand or walk.', bullets: ['If breathing is difficult, allow the position that best supports breathing.', 'If faint, dizzy or collapsing, keep the person lying flat when breathing allows; raise the legs only when it does not worsen breathing or cause pain.', 'If unresponsive but breathing normally, use the recovery position and protect the airway.', 'Give breathing support or begin CPR and use the AED if their condition requires it.', 'Antihistamines do not replace epinephrine and must not delay it.'], links: [internal('airway-positioning', 'Airway positioning and recovery position', 'Protect the airway as responsiveness changes.'), internal('breathing-support', 'Breathing support', 'Open oxygen, BVM and arrest-response choices.'), internal('cardiac-arrest-response', 'Cardiac arrest and CPR', 'Begin the adult sequence if arrest is recognized.')] },
+      { kicker: 'Reassess', title: 'Watch for persistent or returning symptoms', text: 'Stay with the person and repeat MARCHE while emergency help is coming.', bullets: ['Repeat airway sounds, breathing effort, pulse, skin and AVPU.', 'If there is no response to the first dose and emergency help will take more than five to ten minutes, a second dose may be considered when another prescribed auto-injector is available.', 'Record the suspected trigger, symptom onset, injection time, response and any second dose.', 'Continue monitoring even if symptoms improve because they can return.'], links: [internal('vital-signs', 'Vital signs', 'Record the response and direction of change.'), internal('mist-handover', 'MIST handover', 'Report trigger, symptoms, doses, times and response.')] },
+    ],
+    notice: { title: 'Epinephrine first', text: 'Do not delay epinephrine while waiting for antihistamines, oxygen, monitoring equipment or a complete history.' },
+    related: ['medical-overview', 'airway-overview', 'shock-recognition', 'cardiac-arrest-response'],
   },
   {
     id: 'head-temperature-overview', title: 'Head & Temperature', category: 'head-temperature', group: 'Choose what you find', icon: 'head', color: 'violet', reference: true,
@@ -334,7 +417,7 @@ export const topics = [
     ],
     notice: { title: 'Do not wait for every sign', text: 'Shock is recognized from the whole casualty picture. Act on serious bleeding, airway or breathing threats immediately and escalate when the pattern is concerning.' },
     actionHeading: 'Act, monitor and move',
-    actions: [internal('march-m', 'Control serious bleeding', 'Return to the first MARCHE priority.'), internal('airway-overview', 'Airway & breathing', 'Position and support the airway and breathing.'), internal('burns-overview', 'Burns and exposure', 'Stop the source, cool or decontaminate and cover the injury.'), internal('foil-blanket', 'Protect from heat loss', 'Insulate and keep important assessment sites accessible.'), internal('vital-signs', 'Build the vital-sign trend', 'Record pulse, breathing, skin, AVPU and useful monitoring.'), internal('movement-decision', 'Plan movement', 'Match urgency to the safe route and available help.'), internal('circulation-reassessment', 'Repeat the circulation cycle', 'Check whether the casualty and treatments are improving or worsening.')],
+    actions: [internal('march-m', 'Control serious bleeding', 'Return to the first MARCHE priority.'), internal('airway-overview', 'Airway & breathing', 'Position and support the airway and breathing.'), internal('anaphylaxis', 'Anaphylaxis', 'Use epinephrine promptly when an allergic reaction threatens airway, breathing or circulation.'), internal('burns-overview', 'Burns and exposure', 'Stop the source, cool or decontaminate and cover the injury.'), internal('foil-blanket', 'Protect from heat loss', 'Insulate and keep important assessment sites accessible.'), internal('vital-signs', 'Build the vital-sign trend', 'Record pulse, breathing, skin, AVPU and useful monitoring.'), internal('movement-decision', 'Plan movement', 'Match urgency to the safe route and available help.'), internal('circulation-reassessment', 'Repeat the circulation cycle', 'Check whether the casualty and treatments are improving or worsening.')],
     resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for positioning and supportive care when a person shows signs of shock.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian first-aid assessment and shock reference.')],
     related: ['circulation-overview', 'burns-overview', 'pulse', 'circulation-reassessment'],
   },
@@ -1388,6 +1471,7 @@ export const topics = [
       { topicId: 'person-overboard', kicker: 'Water recovery', title: 'Person overboard', text: 'Prepare the medical response during recovery and receive the casualty back aboard.' },
       { topicId: 'firefighter-rehab', kicker: 'Sustained response', title: 'Firefighter rehabilitation', text: 'Support firefighters during repeated entries, prolonged work or recovery from heat and exertion.' },
       { topicId: 'burns-overview', kicker: 'Burn or hazardous exposure', title: 'Burn response', text: 'Choose thermal, chemical, eye, smoke or electrical care and keep MARCHE active.' },
+      { topicId: 'medical-overview', kicker: 'Chest, neurologic or allergic emergency', title: 'Sudden illness', text: 'Choose heart attack, stroke, seizure or anaphylaxis care.' },
     ],
     sections: [
       { title: 'The common response spine', bullets: ['Protect the team and complete the scene survey.', 'Assign a lead casualty carer and a communications/support role.', 'Work through MARCHE and treat immediate threats on scene.', 'Send concise updates and request equipment, people or advanced care early.', 'Move only when the casualty is ready, the route is safe and movement has been coordinated.', 'Continue reassessment and give a structured handover.'] },
@@ -1395,7 +1479,7 @@ export const topics = [
     actionHeading: 'Common team skills',
     actions: [internal('team-roles', 'Two-person team roles', 'Divide patient care, communications and equipment work clearly.'), internal('radio-report', 'Radio reports', 'Send the information needed without stopping casualty care.'), internal('movement-decision', 'Movement decision', 'Decide when to stay, when to move and what must be coordinated.'), internal('sick-bay-continuation', 'Continue care in Sick Bay', 'Carry treatments, monitoring and handover into the receiving space.')],
     notice: { title: 'Use the response plan in effect', text: 'Confirm the mustering point, channel, callsign, route, protective clothing and team assignments at the start of the response.' },
-    related: ['burns-overview', 'damage-control-casualty', 'person-overboard', 'firefighter-rehab'],
+    related: ['medical-overview', 'burns-overview', 'damage-control-casualty', 'person-overboard'],
   },
   {
     id: 'damage-control-casualty', title: 'Damage-control casualty', category: 'scenarios', group: 'Fire, flood or other concurrent emergency', icon: 'situations', color: 'mint', reference: true,
@@ -1523,10 +1607,16 @@ export const glossary = [
 export const getCategory = (id) => categoryById[id];
 
 export function searchTopics(query) {
-  const words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+  const normalizedQuery = query.toLowerCase().trim();
+  const words = normalizedQuery.split(/\s+/).filter(Boolean);
   if (!words.length) return [];
   return topics
-    .map((topic) => ({ ...topic, score: words.reduce((score, word) => score + (topic.title.toLowerCase().includes(word) ? 8 : topic.searchText.includes(word) ? 2 : -10), 0) }))
+    .map((topic) => {
+      const title = topic.title.toLowerCase();
+      const phraseScore = title === normalizedQuery ? 20 : title.startsWith(normalizedQuery) ? 10 : 0;
+      const wordScore = words.reduce((score, word) => score + (title.includes(word) ? 8 : topic.searchText.includes(word) ? 2 : -10), 0);
+      return { ...topic, score: phraseScore + wordScore };
+    })
     .filter((topic) => topic.score >= words.length * 2)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
     .slice(0, 16);

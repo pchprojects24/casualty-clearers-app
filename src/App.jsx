@@ -30,6 +30,7 @@ const ICONS = {
   treatments: Bandage,
   airway: Wind,
   circulation: HeartPulse,
+  medical: HeartPulse,
   head: Brain,
   bleeding: Droplets,
   movement: Users,
@@ -46,6 +47,7 @@ const navItems = [
   { id: 'bleeding', label: 'Bleeding Control', icon: Droplets },
   { id: 'airway', label: 'Airway & Breathing', icon: Wind },
   { id: 'circulation', label: 'Circulation & Shock', icon: HeartPulse },
+  { id: 'medical', label: 'Sudden Illness', icon: HeartPulse },
   { id: 'head-temperature', label: 'Head & Temperature', icon: Brain },
   { id: 'splinting', label: 'Splinting & Movement', icon: Users },
   { id: 'equipment', label: 'Equipment', icon: Box },
@@ -226,7 +228,7 @@ function Sidebar({ route, savedCount }) {
       <Brand />
       <nav aria-label="Primary navigation">
         {navItems.map(({ id, label, icon: Icon }) => (
-          <button className={selected === id ? 'selected' : ''} aria-current={selected === id ? 'page' : undefined} key={id} type="button" onClick={() => navigate(['assessment', 'bleeding', 'airway', 'circulation', 'head-temperature', 'splinting', 'equipment', 'scenarios'].includes(id) ? `category/${id}` : id)}>
+          <button className={selected === id ? 'selected' : ''} aria-current={selected === id ? 'page' : undefined} key={id} type="button" onClick={() => navigate(['assessment', 'bleeding', 'airway', 'circulation', 'medical', 'head-temperature', 'splinting', 'equipment', 'scenarios'].includes(id) ? `category/${id}` : id)}>
             <Icon size={20} strokeWidth={1.8} /><span>{label}</span>
           </button>
         ))}
@@ -603,7 +605,7 @@ export default function App() {
   else if (route.kind === 'explore') content = <DirectoryView key="explore" saved={saved} toggleSaved={toggleSaved} />;
   else if (route.kind === 'category') {
     content = category
-      ? ['assessment', 'bleeding', 'airway', 'circulation', 'head-temperature', 'splinting', 'equipment', 'scenarios'].includes(category.id)
+      ? ['assessment', 'bleeding', 'airway', 'circulation', 'medical', 'head-temperature', 'splinting', 'equipment', 'scenarios'].includes(category.id)
         ? <ArticleView topic={topicById[`${category.id}-overview`]} saved={saved.includes(`${category.id}-overview`)} toggleSaved={toggleSaved} />
         : <DirectoryView key={`category-${category.id}`} title={category.label} intro={category.description} topicList={topicsForCategory(category.id)} saved={saved} toggleSaved={toggleSaved} />
       : <NotFoundView />;
