@@ -1,13 +1,13 @@
 # Project Decisions
 
-Updated 11 September 2026.
+Updated 14 September 2026.
 
 ## What this project is
 
 - One practical place for information useful to AOPS casualty clearing team members.
-- A consolidation project: useful material may come from supplied files, iCloud Drive, existing GitHub repositories, and current authoritative online sources.
-- Content is assessed before inclusion. Material is not included merely because it appears in a source.
-- Missing material does not stop progress; incomplete subjects remain open until something worthwhile is available.
+- A working information app with short, connected pages rather than a document library.
+- Useful material is rewritten into clear app content instead of copied in bulk.
+- Missing subjects are tracked in the content-status page and added in practical groups.
 
 ## What this project is not
 
@@ -21,23 +21,22 @@ Updated 11 September 2026.
 
 - Photographs are optional. A useful page can exist without one.
 - Equipment pages should provide a simple explanation and basic use appropriate to casualty clearers.
-- Exact controls, limits, contraindications, and maintenance steps must match the carried model or local direction.
+- Device-specific controls and limits should match the equipment being described.
 - Ashton Waters stretcher material is excluded because it is no longer used.
 - Stokes stretchers may receive a brief basket-stretcher mention but should not be presented as routinely used.
 - SAGER and Cocoon material stays at familiarization depth unless later evidence shows a larger casualty-clearer role.
 
-## Medical content
+## Information style
 
-- Current best practice takes precedence over older wording found in source files.
-- The existing sources are evidence inputs, not the final authority.
-- Current authoritative online sources may be used to correct, supplement, or reject older material.
-- Ship-specific routes, roles, communication formats, equipment fit, and procedures must be confirmed locally rather than invented.
+- Put the immediate action first, followed by recognition points, cautions and reassessment.
+- Keep wording direct and practical.
+- Preserve practical safety boundaries such as scene safety, equipment limits and when urgent help is needed.
+- Link related pages instead of repeating the same treatment sequence in several places.
 
 ## Repository and build state
 
-- `pchprojects24/casualty-clearers-app` is the private project repository.
-- Raw internal source files are not to be copied into the repository.
+- `pchprojects24/casualty-clearers-app` is the project repository.
 - The interactive web app is published with GitHub Pages at `https://pchprojects24.github.io/casualty-clearers-app/`.
-- Planning documents and source-review notes remain in `docs/` for project control; they are not rendered as app content.
-- The first complete guided pathway runs from scene survey and AVPU through MARCHE, vital signs, secondary survey and reassessment, with connected procedure, equipment and official-media links.
+- Project notes remain in `docs/`; they are not rendered as app content.
+- The guided pathway runs from scene survey and AVPU through MARCHE, vital signs, secondary survey and reassessment, with connected procedure, equipment and product-information links.
 - The app uses local browser state only for saved and recently viewed topics. It has no patient, account, or administrative data.
