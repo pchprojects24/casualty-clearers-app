@@ -5,7 +5,7 @@ export const categories = [
   { id: 'circulation', label: 'Circulation & Shock', short: 'Circulation', description: 'Check pulse and skin, recognize shock, respond to cardiac arrest and trend monitoring.', color: 'teal', icon: 'circulation' },
   { id: 'head-temperature', label: 'Head & Temperature', short: 'Head & temperature', description: 'Recognize head-injury concerns, prevent heat loss and respond to cold or heat illness.', color: 'violet', icon: 'head' },
   { id: 'splinting', label: 'Splinting & Movement', short: 'Splinting', description: 'Support injured limbs, recheck distal findings and move the casualty safely.', color: 'violet', icon: 'movement' },
-  { id: 'equipment', label: 'Equipment', short: 'Equipment', description: 'Quick-use pages and official product media.', color: 'coral', icon: 'equipment' },
+  { id: 'equipment', label: 'Equipment', short: 'Equipment', description: 'Quick-use pages and product information.', color: 'coral', icon: 'equipment' },
   { id: 'scenarios', label: 'Response Scenarios', short: 'Scenarios', description: 'See how the team forms, communicates, treats and moves through each type of response.', color: 'mint', icon: 'situations' },
 ];
 
@@ -34,7 +34,7 @@ const SAM_IFU = 'https://bit.ly/sam-splint-ifu';
 const SAM_PRODUCT_INFO = 'https://bit.ly/sam-splint-product-info';
 
 const internal = (topicId, title, description) => ({ topicId, title, description });
-const external = (url, title, description, kind = 'Official resource') => ({ url, title, description, kind });
+const external = (url, title, description, kind = 'Reference link') => ({ url, title, description, kind });
 
 export const topics = [
   {
@@ -61,7 +61,7 @@ export const topics = [
       { topicId: 'limb-bleeding', kicker: 'Arm or leg', title: 'Limb bleeding', text: 'Choose pressure, packing, a pressure dressing or a tourniquet.' },
       { topicId: 'wound-packing', kicker: 'Deep wound', title: 'Wound packing', text: 'Pack a suitable wound directly at the bleeding source when trained.' },
       { topicId: 'pressure-dressing', kicker: 'Maintain control', title: 'Pressure dressing', text: 'Keep pressure on a wound after the bleeding has stopped.' },
-      { topicId: 'cat-tourniquet', kicker: 'Life-threatening limb bleed', title: 'C-A-T tourniquet', text: 'Open the carried-device sequence and official application video.' },
+      { topicId: 'cat-tourniquet', kicker: 'Life-threatening limb bleed', title: 'C-A-T tourniquet', text: 'Open the carried-device sequence and application video.' },
       { topicId: 'bleeding-reassessment', kicker: 'Control check', title: 'Bleeding not controlled', text: 'Find why control failed, escalate the method and repeat MARCHE.' },
     ],
     sections: [
@@ -70,7 +70,7 @@ export const topics = [
     actionHeading: 'Specific injury and equipment pages',
     actions: [internal('direct-pressure', 'Direct pressure', 'Begin immediate hands-on control at the bleeding source.'), internal('olaes-bandage', 'OLAES modular bandage', 'Open the product components and pressure-dressing sequence.'), internal('pelvic-binder', 'Suspected pelvic injury', 'Recognize the concern and keep binder use model-specific.'), internal('chest-seal', 'Open chest wound', 'Move to the respiration pathway and the trained chest-seal response.'), internal('march-m', 'M — Massive hemorrhage', 'Return to the MARCHE priority and continue the primary survey.')],
     notice: { title: 'Match the method to the location', text: 'A tourniquet is for qualifying arm or leg bleeding. A suitable deep wound may be packed. A possible pelvic injury and an open chest wound require their own assessment and equipment pathways.' },
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current evidence-based guidance for direct pressure, wound packing, pressure dressings, tourniquets and open chest wounds.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian bleeding-control and tourniquet guidance.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current evidence-based guidance for direct pressure, wound packing, pressure dressings, tourniquets and open chest wounds.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian bleeding-control and tourniquet guidance.')],
     related: ['life-threatening-bleeding', 'limb-bleeding', 'wound-packing', 'bleeding-reassessment'],
   },
   {
@@ -94,7 +94,7 @@ export const topics = [
     actionHeading: 'Procedures, equipment and monitoring',
     actions: [internal('adult-choking', 'Adult choking', 'Respond to a mild or severe foreign-body airway obstruction.'), internal('smoke-inhalation', 'Smoke or facial burn', 'Recognize a possible inhalation injury and act before swelling worsens.'), internal('opa', 'OPA', 'Review indication, sizing and the trained insertion method.'), internal('npa', 'NPA', 'Use only through the confirmed local method.'), internal('igel', 'i-gel', 'Open the advanced-airway boundary and manufacturer media.'), internal('bvm', 'Bag-valve-mask', 'Use a two-rescuer technique when available and watch for visible chest rise.'), internal('oxygen', 'Oxygen system', 'Set up the cylinder, regulator and selected delivery device.'), internal('chest-seal', 'Open chest wound', 'Recognize the injury and use the trained vented-seal response.'), internal('pulse-oximeter', 'Pulse oximeter', 'Use the reading only as part of the complete assessment.')],
     notice: { title: 'A device does not finish the assessment', text: 'Positioning, an airway adjunct, oxygen or a BVM can fail after movement, vomiting, changing responsiveness or a poor seal. Stay with the casualty and keep checking air movement and breathing effectiveness.' },
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for oxygen, pulse oximetry and open chest wounds.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian airway, breathing, CPR and oxygen reference.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for oxygen, pulse oximetry and open chest wounds.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian airway, breathing, CPR and oxygen reference.')],
     related: ['adult-choking', 'smoke-inhalation', 'airway-positioning', 'breathing-assessment'],
   },
   {
@@ -116,7 +116,7 @@ export const topics = [
     actionHeading: 'Assessment and equipment cards',
     actions: [internal('march-c', 'C — Circulation', 'Return to the circulation step in MARCHE.'), internal('capillary-refill', 'Capillary refill', 'Use only as a locally taught supporting observation.'), internal('manual-blood-pressure', 'Manual blood pressure', 'Measure and trend a blood pressure without delaying care.'), internal('pulse-oximeter', 'Portable pulse oximeter', 'Validate the displayed pulse and SpO₂ against the casualty.'), internal('three-lead-ecg', '3-lead ECG setup', 'Apply the monitor leads and obtain a usable trace.'), internal('aed', 'AED', 'Review the equipment sequence used during cardiac arrest.')],
     notice: { title: 'Treat the casualty, not one number', text: 'A single pulse, blood pressure or monitor reading can be misleading. Use the physical findings, mechanism, treatment response and direction of change together.' },
-    resources: [external(AHA_BLS, '2025 AHA Adult Basic Life Support Guidelines', 'Current adult cardiac-arrest recognition, high-quality CPR, ventilation and AED guidance.', 'Official clinical guidance'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current first-aid positioning and supportive care for a person showing signs of shock.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian assessment, shock, CPR and AED reference.')],
+    resources: [external(AHA_BLS, '2025 AHA Adult Basic Life Support Guidelines', 'Current adult cardiac-arrest recognition, high-quality CPR, ventilation and AED guidance.', 'First-aid reference'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current first-aid positioning and supportive care for a person showing signs of shock.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian assessment, shock, CPR and AED reference.')],
     related: ['march-c', 'shock-recognition', 'cardiac-arrest-response', 'circulation-reassessment'],
   },
   {
@@ -139,7 +139,7 @@ export const topics = [
     actionHeading: 'Assessment, equipment and reassessment',
     actions: [internal('march-h', 'H — Head & hypothermia', 'Return to the H step in MARCHE.'), internal('burns-overview', 'Burns and exposure', 'Choose thermal, chemical, eye, smoke or electrical care.'), internal('neck-check', 'Neck check', 'Protect the neck and note neurologic symptoms without unnecessary movement.'), internal('foil-blanket', 'Foil blanket', 'Reduce further heat loss while preserving access.'), internal('cocoon-warming', 'Cocoon warming unit', 'Open the active-warming setup boundaries.'), internal('vital-signs', 'Vital signs', 'Trend responsiveness, breathing, pulse, skin and useful monitor readings.'), internal('head-temperature-reassessment', 'Reassess H', 'Repeat the head and temperature checks after treatment or movement.')],
     notice: { title: 'Do not let one problem hide the other', text: 'A head injury and a temperature emergency can both change responsiveness. Repeat airway, breathing, circulation and AVPU while warming or cooling the casualty.' },
-    resources: [external(CANADA_CONCUSSION, 'Government of Canada: Concussion symptoms and urgent findings', 'Current Canadian recognition and escalation information for possible brain injury.', 'Official clinical guidance'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for heat-loss prevention, hypothermia rewarming and heatstroke cooling.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian assessment and environmental-emergency reference.')],
+    resources: [external(CANADA_CONCUSSION, 'Government of Canada: Concussion symptoms and urgent findings', 'Current Canadian recognition and escalation information for possible brain injury.', 'First-aid reference'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for heat-loss prevention, hypothermia rewarming and heatstroke cooling.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian assessment and environmental-emergency reference.')],
     related: ['march-h', 'burns-overview', 'cold-exposure-response', 'heat-illness-response'],
   },
   {
@@ -166,7 +166,7 @@ export const topics = [
         items: [
           internal('opa', 'OPA', 'For an unresponsive casualty without an intact gag response.'),
           internal('npa', 'NPA', 'Use only through the locally taught method.'),
-          internal('igel', 'i-gel', 'Advanced airway adjunct when trained and authorized.'),
+          internal('igel', 'i-gel', 'Advanced airway adjunct for responders trained to use it.'),
         ],
       },
       {
@@ -261,7 +261,7 @@ export const topics = [
       { title: 'Reassess and report', bullets: ['Confirm that bleeding has stopped.', 'Check dressings for continued soak-through.', 'Check and record a tourniquet application time.', 'Report the wound, treatment and response.'] },
     ],
     actionHeading: 'Procedure and equipment cards',
-    actions: [internal('direct-pressure', 'Direct pressure', 'Immediate hands-on bleeding control.'), internal('wound-packing', 'Wound packing', 'For a suitable deep wound when trained.'), internal('pressure-dressing', 'Pressure dressing', 'Maintain control after bleeding has stopped.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'Product page, application sequence and official video.'), internal('olaes-bandage', 'OLAES modular bandage', 'Product features, pressure-dressing use and official product information.'), internal('pelvic-binder', 'Pelvic binder', 'Recognition and locally confirmed use only.')],
+    actions: [internal('direct-pressure', 'Direct pressure', 'Immediate hands-on bleeding control.'), internal('wound-packing', 'Wound packing', 'For a suitable deep wound when trained.'), internal('pressure-dressing', 'Pressure dressing', 'Maintain control after bleeding has stopped.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'Product page, application sequence and demonstration video.'), internal('olaes-bandage', 'OLAES modular bandage', 'Product features, pressure-dressing use and product information.'), internal('pelvic-binder', 'Pelvic binder', 'Recognition and locally confirmed use only.')],
     nextStep: internal('march-a', 'Continue to A — Airway', 'Once bleeding is controlled, check whether the airway is open and stays open.'),
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross bleeding-control guidance', 'Direct pressure, hemostatic dressings and tourniquet guidance.')],
     related: ['direct-pressure', 'wound-packing', 'pressure-dressing', 'cat-tourniquet', 'pelvic-binder'],
@@ -277,11 +277,11 @@ export const topics = [
     ],
     sections: [
       { title: 'What you’re checking', bullets: ['Can the casualty speak or make sounds?', 'Look for visible obstruction, vomit, blood or secretions.', 'Listen for snoring, gurgling, stridor or absent air movement.', 'Consider the casualty’s responsiveness and possible head or neck injury.'] },
-      { title: 'Immediate actions', bullets: ['Reposition and use the appropriate airway-opening manoeuvre.', 'Clear visible material; use suction only if carried and trained.', 'Use an OPA for an unresponsive casualty without an intact gag response, when trained.', 'Use an NPA only under the locally taught method and contraindications.', 'Use an i-gel only when the device, training and authorization are confirmed.'] },
+      { title: 'Immediate actions', bullets: ['Reposition and use the appropriate airway-opening manoeuvre.', 'Clear visible material; use suction only if carried and trained.', 'Use an OPA for an unresponsive casualty without an intact gag response, when trained.', 'Use an NPA only with the sizing, insertion method and contraindications you were taught.', 'Use an i-gel only if you are trained to select, insert, secure and check it.'] },
       { title: 'Reassess and continue', bullets: ['Look, listen and feel for air movement.', 'Confirm that any adjunct remains correctly positioned.', 'Continue into respiration and return immediately if airway sounds or responsiveness change.'] },
     ],
     actionHeading: 'Airway procedure and equipment cards',
-    actions: [internal('airway-positioning', 'Open and position the airway', 'Head-tilt/chin-lift or jaw thrust as appropriate.'), internal('airway-adjuncts', 'Airway adjuncts', 'Choose between OPA, NPA and i-gel only through current training.'), internal('opa', 'OPA', 'Purpose, sizing, checks and trained-use sequence.'), internal('npa', 'NPA', 'Purpose and local-method confirmation.'), internal('igel', 'i-gel', 'Training-dependent device page and official manufacturer media.')],
+    actions: [internal('airway-positioning', 'Open and position the airway', 'Head-tilt/chin-lift or jaw thrust as appropriate.'), internal('airway-adjuncts', 'Airway adjuncts', 'Choose between OPA, NPA and i-gel only through current training.'), internal('opa', 'OPA', 'Purpose, sizing, checks and trained-use sequence.'), internal('npa', 'NPA', 'Purpose and local-method confirmation.'), internal('igel', 'i-gel', 'Training-dependent device page and manufacturer information.')],
     nextStep: internal('march-r', 'Continue to R — Respiration', 'When the airway is open, assess whether breathing is present and effective.'),
     related: ['airway-positioning', 'opa', 'npa', 'igel'],
   },
@@ -292,7 +292,7 @@ export const topics = [
       internal('breathing-assessment', 'Assess breathing', 'Use look, listen and feel to decide whether breathing is effective.'),
       internal('breathing-support', 'Breathing needs support', 'Choose BVM, oxygen, open-chest-wound or arrest-response equipment.'),
       internal('bvm', 'Breathing is absent or inadequate', 'Open the BVM page for trained breathing support.'),
-      internal('oxygen', 'Oxygen may be indicated', 'Check the carried system, trained method and authorized target.'),
+      internal('oxygen', 'Oxygen may be indicated', 'Check the system, delivery device and target used for the casualty.'),
       internal('chest-seal', 'Open chest injury', 'Recognize entry and exit wounds, then use the locally confirmed chest-seal response.'),
     ],
     sections: [
@@ -335,7 +335,7 @@ export const topics = [
     notice: { title: 'Do not wait for every sign', text: 'Shock is recognized from the whole casualty picture. Act on serious bleeding, airway or breathing threats immediately and escalate when the pattern is concerning.' },
     actionHeading: 'Act, monitor and move',
     actions: [internal('march-m', 'Control serious bleeding', 'Return to the first MARCHE priority.'), internal('airway-overview', 'Airway & breathing', 'Position and support the airway and breathing.'), internal('burns-overview', 'Burns and exposure', 'Stop the source, cool or decontaminate and cover the injury.'), internal('foil-blanket', 'Protect from heat loss', 'Insulate and keep important assessment sites accessible.'), internal('vital-signs', 'Build the vital-sign trend', 'Record pulse, breathing, skin, AVPU and useful monitoring.'), internal('movement-decision', 'Plan movement', 'Match urgency to the safe route and available help.'), internal('circulation-reassessment', 'Repeat the circulation cycle', 'Check whether the casualty and treatments are improving or worsening.')],
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for positioning and supportive care when a person shows signs of shock.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian first-aid assessment and shock reference.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for positioning and supportive care when a person shows signs of shock.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian first-aid assessment and shock reference.')],
     related: ['circulation-overview', 'burns-overview', 'pulse', 'circulation-reassessment'],
   },
   {
@@ -349,7 +349,7 @@ export const topics = [
     notice: { title: 'Adult sequence', text: 'This page summarizes the current adult trained-rescuer sequence. Pediatric care, choking and special-circumstance resuscitation use their own current training and are not combined with this page.' },
     actionHeading: 'Resuscitation equipment and support',
     actions: [internal('adult-choking', 'Adult choking', 'Open the choking response when an airway obstruction caused the collapse.'), internal('aed', 'AED', 'Apply pads, clear the casualty and follow the prompts.'), internal('bvm', 'Bag-valve-mask', 'Use a two-rescuer seal when enough trained responders are available.'), internal('airway-positioning', 'Open the airway', 'Use the appropriate trained airway manoeuvre.'), internal('team-roles', 'Team roles', 'Assign the primary, communication and support work clearly.')],
-    resources: [external(AHA_BLS, '2025 AHA Adult Basic Life Support Guidelines', 'Current cardiac-arrest recognition, 30:2 CPR, compression quality, ventilation and AED guidance.', 'Official clinical guidance'), external(AHA_CPR, 'American Heart Association: What is CPR?', 'Current adult compression rate and depth summary.'), external(HEART_STROKE_AED, 'Heart & Stroke: How to use an AED', 'Canadian AED sequence and training information.'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian CPR and AED reference.')],
+    resources: [external(AHA_BLS, '2025 AHA Adult Basic Life Support Guidelines', 'Current cardiac-arrest recognition, 30:2 CPR, compression quality, ventilation and AED guidance.', 'First-aid reference'), external(AHA_CPR, 'American Heart Association: What is CPR?', 'Current adult compression rate and depth summary.'), external(HEART_STROKE_AED, 'Heart & Stroke: How to use an AED', 'Canadian AED sequence and training information.'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian CPR and AED reference.')],
     related: ['adult-choking', 'circulation-overview', 'aed', 'bvm'],
   },
   {
@@ -383,7 +383,7 @@ export const topics = [
     actionHeading: 'Head, temperature and reassessment cards',
     actions: [internal('head-temperature-overview', 'Head & Temperature hub', 'Choose the head-injury, warming, cooling or reassessment path.'), internal('head-face-check', 'Head & face check', 'Complete a focused examination without delaying immediate threats.'), internal('avpu', 'Repeat AVPU', 'Describe changes in responsiveness clearly.'), internal('prevent-heat-loss', 'Prevent heat loss', 'Build a simple insulation and covering package.'), internal('foil-blanket', 'Foil blanket', 'Reduce further heat loss during care and movement.'), internal('cocoon-warming', 'Cocoon warming unit', 'Active warming in the appropriate care area.'), internal('head-temperature-reassessment', 'Reassess H', 'Confirm the casualty and treatment response after every change.')],
     nextStep: internal('march-e', 'Continue to E — Everything else', 'When immediate head and heat-loss concerns are addressed, complete the rapid body survey.'),
-    resources: [external(CANADA_CONCUSSION, 'Government of Canada: Concussion symptoms and urgent findings', 'Current Canadian recognition and escalation information for possible brain injury.', 'Official clinical guidance'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current environmental first-aid guidance for heat-loss prevention, hypothermia and heatstroke.', 'Official clinical guidance')],
+    resources: [external(CANADA_CONCUSSION, 'Government of Canada: Concussion symptoms and urgent findings', 'Current Canadian recognition and escalation information for possible brain injury.', 'First-aid reference'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current environmental first-aid guidance for heat-loss prevention, hypothermia and heatstroke.', 'First-aid reference')],
     related: ['head-temperature-overview', 'head-injury-concerns', 'cold-exposure-response', 'heat-illness-response'],
   },
   {
@@ -397,7 +397,7 @@ export const topics = [
     notice: { title: 'Recognize; do not diagnose or clear', text: 'Casualty clearers identify the mechanism, findings and change. A possible concussion or more serious brain injury requires assessment by an appropriately qualified clinician.' },
     actionHeading: 'Focused checks and next actions',
     actions: [internal('avpu', 'Repeat AVPU', 'State the best response actually observed.'), internal('head-face-check', 'Head & face check', 'Look for injuries and serious skull findings.'), internal('neck-check', 'Neck check', 'Protect the neck and report neurologic concerns.'), internal('head-temperature-reassessment', 'Reassess head findings', 'Compare the next check with the first one.'), internal('mist-handover', 'MIST handover', 'Report the mechanism, injuries, signs, treatments and change.')],
-    resources: [external(CANADA_CONCUSSION, 'Government of Canada: Concussion symptoms and treatment', 'Current symptoms, urgent warning signs and Canadian assessment boundaries.', 'Official clinical guidance'), external(MSD_TBI, 'MSD Manual: Traumatic brain injury', 'Professional reference for findings associated with serious head and skull-base injury.')],
+    resources: [external(CANADA_CONCUSSION, 'Government of Canada: Concussion symptoms and treatment', 'Current symptoms, urgent warning signs and Canadian assessment boundaries.', 'First-aid reference'), external(MSD_TBI, 'MSD Manual: Traumatic brain injury', 'Professional reference for findings associated with serious head and skull-base injury.')],
     related: ['head-temperature-overview', 'head-face-check', 'avpu', 'head-temperature-reassessment'],
   },
   {
@@ -410,7 +410,7 @@ export const topics = [
     ],
     actionHeading: 'Insulation and warming options',
     actions: [internal('burns-overview', 'Burn cooling and heat loss', 'Balance local burn cooling with protection of the rest of the casualty.'), internal('foil-blanket', 'Foil blanket', 'Use the carried barrier while protecting airway access.'), internal('cold-exposure-response', 'Cold exposure', 'Open recognition and rewarming when hypothermia is suspected.'), internal('cocoon-warming', 'Cocoon warming unit', 'Use active warming through the confirmed setup.'), internal('head-temperature-reassessment', 'Reassess temperature care', 'Check the casualty, layers and equipment after movement.')],
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for protection from environmental heat loss and hypothermia wrapping.', 'Official clinical guidance')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current guidance for protection from environmental heat loss and hypothermia wrapping.', 'First-aid reference')],
     related: ['head-temperature-overview', 'burns-overview', 'foil-blanket', 'cold-exposure-response'],
   },
   {
@@ -502,7 +502,7 @@ export const topics = [
     actionHeading: 'Warming, monitoring and response',
     actions: [internal('prevent-heat-loss', 'Build the insulation package', 'Stop conductive, convective and evaporative heat loss.'), internal('foil-blanket', 'Foil blanket', 'Add the wind and vapour barrier.'), internal('cocoon-warming', 'Cocoon warming unit', 'Set up active warming under current direction.'), internal('person-overboard', 'Person overboard response', 'Connect recovery, transfer and cold-water care.'), internal('monitoring-equipment', 'Monitoring equipment', 'Trend useful readings beside the physical assessment.'), internal('head-temperature-reassessment', 'Reassess cold care', 'Repeat the casualty and equipment checks.')],
     notice: { title: 'Gentle handling and ongoing observation', text: 'A cold casualty with worsening coordination, speech, responsiveness or breathing needs urgent advanced care while heat loss is stopped and rewarming begins.' },
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current hypothermia recognition, insulation, rewarming and harm-prevention guidance.', 'Official clinical guidance'), external(RED_CROSS_COLD, 'Canadian Red Cross: Cold-related emergencies', 'Canadian recognition, gentle handling, wet-clothing removal and gradual warming guidance.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current hypothermia recognition, insulation, rewarming and harm-prevention guidance.', 'First-aid reference'), external(RED_CROSS_COLD, 'Canadian Red Cross: Cold-related emergencies', 'Canadian recognition, gentle handling, wet-clothing removal and gradual warming guidance.')],
     related: ['head-temperature-overview', 'prevent-heat-loss', 'person-overboard', 'cocoon-warming'],
   },
   {
@@ -516,7 +516,7 @@ export const topics = [
     notice: { title: 'Cool first; do not delay', text: 'Suspected heatstroke is a time-critical emergency. Start the fastest safe cooling method available while advanced help and movement are arranged.' },
     actionHeading: 'Assessment and continued care',
     actions: [internal('avpu', 'Repeat AVPU', 'Identify altered behaviour or a fall in responsiveness.'), internal('vital-signs', 'Vital signs', 'Trend breathing, pulse, skin and responsiveness.'), internal('cardiac-arrest-response', 'Cardiac arrest and CPR', 'Open the adult sequence if arrest is recognized.'), internal('firefighter-rehab', 'Firefighter rehabilitation', 'Separate routine recovery from a firefighter who needs immediate medical care.'), internal('head-temperature-reassessment', 'Reassess cooling', 'Confirm the casualty and cooling response.')],
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current heatstroke recognition, emergency activation and active-cooling guidance.', 'Official clinical guidance'), external(RED_CROSS_HEAT, 'Canadian Red Cross: Heat stroke and heat exhaustion', 'Canadian recognition and practical cooling methods.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current heatstroke recognition, emergency activation and active-cooling guidance.', 'First-aid reference'), external(RED_CROSS_HEAT, 'Canadian Red Cross: Heat stroke and heat exhaustion', 'Canadian recognition and practical cooling methods.')],
     related: ['head-temperature-overview', 'avpu', 'vital-signs', 'head-temperature-reassessment'],
   },
   {
@@ -551,7 +551,7 @@ export const topics = [
     actionHeading: 'Body areas, treatment and movement',
     actions: [internal('burns-overview', 'Burns and exposure', 'Stop the source, cool or decontaminate and cover.'), internal('head-face-check', 'Head & face', 'Recognize wounds, deformity and serious head findings.'), internal('chest-check', 'Chest', 'Return to R immediately for a breathing concern or open chest wound.'), internal('abdomen-check', 'Abdomen', 'Look, ask and use only gentle examination.'), internal('pelvis-check', 'Pelvis', 'Recognize the concern without pressing or springing the pelvis.'), internal('limbs-check', 'Arms & legs', 'Check injury, distal circulation, sensation and movement.'), internal('back-check', 'Back', 'Check during safe, necessary movement without reaching blindly underneath.'), internal('movement-decision', 'Movement decision', 'Match urgency to the team, route, equipment and destination.')],
     nextStep: { ...internal('secondary-survey', 'Begin the secondary survey', 'Immediate MARCHE threats are addressed. Gather SAMPLE, establish the vital-sign trend and choose a focused or full examination.'), kicker: 'Primary survey complete' },
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Physical examination and SAMPLE history are essential parts of a complete first-aid assessment.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current primary and secondary assessment reference.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Physical examination and SAMPLE history are essential parts of a complete first-aid assessment.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current primary and secondary assessment reference.')],
     related: ['burns-overview', 'rapid-body-survey', 'secondary-survey', 'reassessment-loop'],
   },
   {
@@ -565,7 +565,7 @@ export const topics = [
     notice: { title: 'Fast does not mean rough', text: 'Use a deliberate visual and gentle hands-on check. Do not create extra movement, repeatedly palpate painful areas or finish the sequence at the expense of an immediate threat.' },
     actionHeading: 'Open a body area or continue',
     actions: [internal('head-to-toe', 'Choose a body area', 'Open the detailed head-to-toe directory.'), internal('splinting-overview', 'Splinting & movement', 'Support an injured limb and repeat distal checks.'), internal('reassessment-loop', 'Restart MARCHE', 'Return to the first priority when the casualty changes.'), internal('secondary-survey', 'Continue to secondary survey', 'Add the history, vital signs and appropriate detailed examination.')],
-    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross injury assessment', 'Current visual and hands-on injury-check guidance.'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Physical examination and history as primary assessment methods.', 'Official clinical guidance')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross injury assessment', 'Current visual and hands-on injury-check guidance.'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Physical examination and history as primary assessment methods.', 'First-aid reference')],
     related: ['march-e', 'head-to-toe', 'secondary-survey', 'movement-decision'],
   },
   {
@@ -583,16 +583,16 @@ export const topics = [
       { title: 'Trained-use boundaries', bullets: ['Call for urgent medical assistance and continue the breathing assessment.', 'Use a purpose-designed vented chest seal only when it is carried and you are trained to apply it.', 'Do not treat an improvised fully occlusive seal as a universal answer for every open chest wound.', 'If breathing worsens after a dressing or seal, follow the trained response immediately and report the change.'] },
       { title: 'Keep watching', bullets: ['Repeat look, listen and feel checks.', 'Record the wound location, what was applied, the time and the casualty’s response.', 'Continue into circulation and return to respiration immediately if breathing changes.'] },
     ],
-    notice: { title: 'Confirm the actual product', text: 'Before a detailed application card is added, confirm the carried chest-seal model, whether it is vented, and the current CCT training method.' },
+    notice: { title: 'Use the seal in front of you', text: 'Confirm whether the chest seal is vented and follow the package application diagram. Keep reassessing breathing after it is applied.' },
     resources: [external(AHA_FIRST_AID, 'American Heart Association and American Red Cross first-aid guidance', 'Current guidance for open chest wounds and worsening breathing after a dressing or seal.')],
     related: ['airway-overview', 'breathing-assessment', 'bvm', 'oxygen'],
   },
   {
-    id: 'pelvic-binder', title: 'Pelvic binder', category: 'equipment', group: 'Possible pelvic injury — local equipment confirmation required', icon: 'equipment', color: 'coral', reference: true,
-    intro: 'A pelvic binder belongs in the information hub as a recognition and escalation topic. A detailed application procedure must match the exact carried product and local direction.',
+    id: 'pelvic-binder', title: 'Pelvic binder', category: 'equipment', group: 'Possible pelvic injury — model-specific equipment', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'A pelvic binder is model-specific equipment used for a suspected unstable pelvic injury. Recognize the concern, limit unnecessary movement and use the instructions for the binder available.',
     sections: [
       { title: 'Recognize and report', bullets: ['Consider the mechanism, pelvic pain, deformity or other signs of significant trauma.', 'Control any immediately visible bleeding and continue MARCHE priorities.', 'Avoid repeated movement or repeated manipulation of the pelvis.', 'Report the concern and request the required equipment or medical direction.'] },
-      { title: 'Before a procedure card is published', bullets: ['Confirm that the device is carried.', 'Confirm whether casualty clearers are trained or directed to apply or assist with it.', 'Confirm the exact product, placement landmark, indications, contraindications and authorization process.', 'Use the manufacturer’s instructions for that exact model.'] },
+      { title: 'Before using the binder', bullets: ['Identify the exact product and open its instructions.', 'Confirm the placement landmark, indications and contraindications for that model.', 'Use enough help to limit unnecessary movement while positioning the device.', 'Continue supporting the pelvis until the binder is secured, then repeat circulation, skin, pain and responsiveness checks.'] },
     ],
     notice: { title: 'Do not blend products', text: 'Pelvic binders and wraps have model-specific instructions. This hub will not present a generic procedure made from several different products.' },
     related: ['march-m', 'march-c', 'march-e', 'reassessment-handover'],
@@ -672,7 +672,7 @@ export const topics = [
     notice: { title: 'Focused does not mean incomplete', text: 'The examination is limited because the casualty picture supports it—not because the remaining assessment was forgotten. Broaden the check whenever the mechanism, findings or change requires it.' },
     actionHeading: 'Choose the next step',
     actions: [internal('head-to-toe', 'Expand to head-to-toe', 'Open the systematic body-area directory.'), internal('vital-signs', 'Repeat vital signs', 'Establish or update the casualty trend.'), internal('treatment-checks', 'Check the treatment', 'Confirm that support or another intervention is working.'), internal('mist-handover', 'Prepare MIST', 'Add the focused findings and response to the report.')],
-    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross injury check', 'Current focused and systematic visual and hands-on assessment guidance.'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Physical examination and history as primary assessment methods.', 'Official clinical guidance')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross injury check', 'Current focused and systematic visual and hands-on assessment guidance.'), external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Physical examination and history as primary assessment methods.', 'First-aid reference')],
     related: ['secondary-survey', 'head-to-toe', 'vital-signs', 'reassessment-handover'],
   },
   {
@@ -813,7 +813,7 @@ export const topics = [
       { title: 'Before the handover', bullets: ['Complete one last priority reassessment.', 'Confirm every dressing, tourniquet, airway device, oxygen or BVM setup, splint and warming measure.', 'Make treatment times, findings and changes easy for the receiving person to understand.', 'Keep responsibility for the casualty until the receiving person acknowledges the handover.'] },
     ],
     nextStep: { ...internal('reassessment-loop', 'Open the reassessment loop', 'Use the same short sequence after treatment, movement or any change.'), kicker: 'Ongoing care' },
-    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross continual care', 'Current guidance for monitoring condition, ABCs and temperature while care continues.'), external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public guidance to repeat MIST, verbally turn over care and identify interventions.', 'Official clinical guidance')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross continual care', 'Current guidance for monitoring condition, ABCs and temperature while care continues.'), external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public guidance to repeat MIST, verbally turn over care and identify interventions.', 'First-aid reference')],
     related: ['reassessment-loop', 'treatment-checks', 'mist-handover', 'secondary-survey'],
   },
   {
@@ -849,7 +849,7 @@ export const topics = [
     notice: { title: 'A failed treatment becomes the priority', text: 'If bleeding restarts, the airway closes, breathing worsens or circulation beyond a splint changes, return to the relevant MARCHE letter and act immediately within training.' },
     actionHeading: 'Open the related card',
     actions: [internal('march-m', 'Bleeding control', 'Return to M and the carried bleeding-control options.'), internal('march-a', 'Airway', 'Recheck airway position and adjuncts.'), internal('march-r', 'Respiration', 'Recheck breathing support and chest concerns.'), internal('march-c', 'Circulation', 'Recheck pulse, skin and distal circulation.'), internal('march-h', 'Head & hypothermia', 'Repeat AVPU and protect temperature.'), internal('capillary-refill', 'Capillary refill', 'Locally taught use after splinting or dressing.')],
-    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross continual care', 'Ongoing monitoring and reassessment principles.'), external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public guidance to verify interventions during transfer of care.', 'Official clinical guidance')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross continual care', 'Ongoing monitoring and reassessment principles.'), external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public guidance to verify interventions during transfer of care.', 'First-aid reference')],
     related: ['reassessment-loop', 'mist-handover', 'vital-signs', 'reassessment-handover'],
   },
   {
@@ -871,7 +871,7 @@ export const topics = [
     ],
     actionHeading: 'Practise the format',
     actions: [internal('handover-example', 'Read a complete MIST example', 'See how the four parts become one short verbal report.'), internal('treatment-checks', 'Review treatment checks', 'Confirm everything before the report.'), internal('reassessment-loop', 'Repeat the assessment', 'Update the findings before handover.')],
-    resources: [external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public guidance to repeat MIST, verbally transfer care, provide documentation and identify interventions.', 'Official clinical guidance')],
+    resources: [external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public guidance to repeat MIST, verbally transfer care, provide documentation and identify interventions.', 'First-aid reference')],
     related: ['handover-example', 'treatment-checks', 'reassessment-loop', 'secondary-survey'],
   },
   {
@@ -895,7 +895,7 @@ export const topics = [
       { title: 'Before using MIST', bullets: ['Replace every example detail with the actual casualty findings.', 'Include assigned readings only when they were actually measured.', 'Report urgent deterioration before completing a polished handover.', 'Use the locally taught terminology when it differs from this example.'] },
     ],
     notice: { title: 'Practice example only', text: 'The app does not collect or store casualty information. This page demonstrates the communication structure only.' },
-    resources: [external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public hand-off and MIST guidance.', 'Official clinical guidance')],
+    resources: [external(JTS_HANDOFF, 'Joint Trauma System hand-off guidance', 'Current public hand-off and MIST guidance.', 'First-aid reference')],
     related: ['mist-handover', 'treatment-checks', 'reassessment-loop', 'vital-signs'],
   },
   {
@@ -908,7 +908,7 @@ export const topics = [
     ],
     actionHeading: 'Choose the control method',
     actions: [internal('direct-pressure', 'Direct pressure', 'Start firm, continuous pressure at the source.'), internal('wound-packing', 'Wound packing', 'Pack a suitable deep wound when trained.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'Control qualifying life-threatening arm or leg bleeding.'), internal('bleeding-reassessment', 'Control check', 'Confirm control and correct a treatment that is not working.')],
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Recognition and current recommendations for severe external bleeding.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross bleeding-control guidance', 'Current Canadian first-aid sequence for life-threatening bleeding.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Recognition and current recommendations for severe external bleeding.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross bleeding-control guidance', 'Current Canadian first-aid sequence for life-threatening bleeding.')],
     related: ['bleeding-overview', 'march-m', 'limb-bleeding', 'bleeding-reassessment'],
   },
   {
@@ -928,7 +928,7 @@ export const topics = [
     ],
     actions: [internal('olaes-bandage', 'OLAES modular bandage', 'Open the pressure-dressing product and its components.'), internal('bleeding-reassessment', 'Bleeding-control reassessment', 'Check whether the treatment is still working.'), internal('splinting-overview', 'Support the injured limb', 'After bleeding is controlled, prepare the injury and whole casualty for movement.')],
     notice: { title: 'Tourniquet location', text: 'Commercial tourniquets are for qualifying arm or leg bleeding. Do not place one over a joint. Placement wording must remain consistent with the current CCT course and the carried-device instructions.' },
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Direct pressure, wound packing, pressure dressing and tourniquet recommendations.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross tourniquet guidance', 'Current Canadian placement, tightening and documentation sequence.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Direct pressure, wound packing, pressure dressing and tourniquet recommendations.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross tourniquet guidance', 'Current Canadian placement, tightening and documentation sequence.')],
     related: ['bleeding-overview', 'direct-pressure', 'wound-packing', 'cat-tourniquet'],
   },
   {
@@ -938,7 +938,7 @@ export const topics = [
     scenarioPhases: [
       { kicker: 'Source', title: 'Find where the blood is coming from', text: 'Expose enough to see whether the original wound, a second wound or the treatment itself explains the continuing bleeding.', bullets: ['Maintain pressure while another team member exposes or prepares equipment when possible.', 'Check beneath and behind the casualty when the situation allows.', 'Look for a dressing that missed the source, shifted or became loose during movement.'], links: [internal('life-threatening-bleeding', 'Recognize serious bleeding', 'Repeat the rapid severity check.')] },
       { kicker: 'Pressure', title: 'Restore firm control at the source', text: 'Do not replace effective source pressure with a loose layer of material.', bullets: ['Press directly where the bleeding is occurring.', 'If blood comes through a dressing, maintain pressure and reinforce while reassessing the need for another method.', 'For a packed wound, keep pressure over the packed cavity for the time required by the carried product and current training.'], links: [internal('direct-pressure', 'Direct pressure', 'Return to firm hands-on source control.'), internal('wound-packing', 'Wound packing', 'Check the deep-wound sequence.')] },
-      { kicker: 'Escalate', title: 'Change the method when needed', text: 'A treatment that is not controlling life-threatening bleeding is not finished.', bullets: ['For qualifying arm or leg bleeding, apply and tighten the commercial tourniquet using the taught carried-device method.', 'Correct a loose or displaced dressing or wrap while maintaining control.', 'Request additional equipment and advanced help early.', 'Do not remove a tourniquet once applied.'], links: [internal('cat-tourniquet', 'C-A-T tourniquet', 'Open the carried-device procedure and official video.'), internal('olaes-bandage', 'OLAES modular bandage', 'Review the product used to maintain pressure.')] },
+      { kicker: 'Escalate', title: 'Change the method when needed', text: 'A treatment that is not controlling life-threatening bleeding is not finished.', bullets: ['For qualifying arm or leg bleeding, apply and tighten the commercial tourniquet using the taught carried-device method.', 'Correct a loose or displaced dressing or wrap while maintaining control.', 'Request additional equipment and advanced help early.', 'Do not remove a tourniquet once applied.'], links: [internal('cat-tourniquet', 'C-A-T tourniquet', 'Open the carried-device procedure and demonstration video.'), internal('olaes-bandage', 'OLAES modular bandage', 'Review the product used to maintain pressure.')] },
       { kicker: 'Confirm', title: 'Prove that bleeding has stopped', text: 'Look at the wound and treatment rather than assuming the procedure worked.', bullets: ['Confirm there is no continued flow, pooling or soak-through.', 'Check the casualty’s pulse, skin and responsiveness for deterioration.', 'Check circulation beyond a pressure dressing when applicable.', 'Secure the treatment so it can survive the planned movement.'], links: [internal('vital-signs', 'Repeat vital signs', 'Record the casualty response and trend.'), internal('treatment-checks', 'Treatment checks', 'Confirm every intervention remains effective.')] },
       { kicker: 'Continue', title: 'Record, protect and restart MARCHE', text: 'Once control is confirmed, preserve the result and move to the next priority.', bullets: ['Record the treatment, time and response; make the tourniquet time visible.', 'Start heat-loss prevention and avoid unnecessary exposure.', 'Report the wound, control method and any continuing concern.', 'Continue to A—Airway, but return immediately to M if bleeding recurs.'], links: [internal('march-a', 'Continue to A — Airway', 'Proceed only after massive bleeding is controlled.'), internal('foil-blanket', 'Prevent heat loss', 'Protect the casualty while keeping treatments accessible.')] },
     ],
@@ -949,7 +949,7 @@ export const topics = [
     intro: 'Firm, continuous pressure is the immediate control method for most external bleeding.',
     steps: ['Expose the bleeding site when practical.', 'Place a dressing or gauze directly over the source.', 'Press firmly and continuously with your hand.', 'Maintain pressure until bleeding is controlled or another method is required.', 'If blood comes through, maintain pressure and reinforce without disturbing the clot.', 'Reassess continuously.'],
     notice: { title: 'Life-threatening limb bleeding', text: 'If direct pressure does not control the bleeding, cannot be maintained or is impractical, move to the commercial-tourniquet method taught for the carried device.' },
-    actions: [internal('pressure-dressing', 'Pressure dressing', 'Maintain control once direct pressure has stopped the bleeding.'), internal('wound-packing', 'Wound packing', 'Add packing for a suitable deep wound when trained.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'Commercial tourniquet product page and official media.')],
+    actions: [internal('pressure-dressing', 'Pressure dressing', 'Maintain control once direct pressure has stopped the bleeding.'), internal('wound-packing', 'Wound packing', 'Add packing for a suitable deep wound when trained.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'Commercial tourniquet page and application media.')],
     resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross bleeding-control guidance', 'Current first-aid guide.')],
     related: ['bleeding-overview', 'wound-packing', 'pressure-dressing', 'cat-tourniquet'],
   },
@@ -957,7 +957,7 @@ export const topics = [
     id: 'pressure-dressing', title: 'Pressure dressing', category: 'bleeding', group: 'Bleeding control', icon: 'bleeding', color: 'sky', reference: true,
     intro: 'A pressure dressing helps maintain control after firm direct pressure has stopped the bleeding.',
     steps: ['Keep direct pressure on the wound while preparing the dressing.', 'Centre the wound pad over the bleeding site.', 'Wrap firmly enough to maintain pressure and keep the pad in place.', 'Secure the dressing without creating an unintended tourniquet.', 'Check for renewed bleeding and reassess circulation beyond the dressing when applicable.', 'Record and report the wound, dressing and response.'],
-    actions: [internal('olaes-bandage', 'OLAES modular bandage', 'Review the carried pressure-dressing product and official information.'), internal('direct-pressure', 'Direct pressure', 'Return to the immediate manual-pressure method.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'For qualifying life-threatening limb bleeding.')],
+    actions: [internal('olaes-bandage', 'OLAES modular bandage', 'Review the pressure-dressing product and use information.'), internal('direct-pressure', 'Direct pressure', 'Return to the immediate manual-pressure method.'), internal('cat-tourniquet', 'C-A-T tourniquet', 'For qualifying life-threatening limb bleeding.')],
     related: ['bleeding-overview', 'direct-pressure', 'olaes-bandage', 'wound-packing'],
   },
   {
@@ -973,7 +973,7 @@ export const topics = [
     intro: 'A commercial windlass tourniquet for life-threatening bleeding from an arm or leg. Confirm the carried generation and practise with a trainer, not an operational device.',
     steps: ['Expose the limb and identify the bleeding site.', 'Apply using the placement method taught for the current course and carried C-A-T generation.', 'Pull the band tight before turning the windlass.', 'Turn the windlass until the bleeding stops.', 'Secure the windlass and the retaining strap.', 'Record the application time where it remains visible.', 'Confirm bleeding has stopped and do not remove the tourniquet.'],
     notice: { title: 'Placement wording must match training', text: 'The 2025 Canadian Red Cross guide uses 5–10 cm above the injury, above a joint when necessary. Threat-based “high and tight” use is a different context. The app must follow the current CCT course and manufacturer instructions consistently.' },
-    resources: [external(CAT_PRODUCT, 'Official C-A-T product page', 'Features, product details and application videos.', 'Manufacturer'), external(CAT_VIDEOS, 'Official North American Rescue product-use videos', 'Includes C-A-T one-handed and two-handed application videos.', 'Official video'), external(RED_CROSS_GUIDE, 'Canadian Red Cross tourniquet guidance', 'Current general first-aid placement and reassessment guidance.')],
+    resources: [external(CAT_PRODUCT, 'C-A-T product page', 'Features, product details and application videos.', 'Manufacturer'), external(CAT_VIDEOS, 'North American Rescue product-use videos', 'Includes C-A-T one-handed and two-handed application videos.', 'Demonstration video'), external(RED_CROSS_GUIDE, 'Canadian Red Cross tourniquet guidance', 'Current general first-aid placement and reassessment guidance.')],
     related: ['march-m', 'direct-pressure', 'pressure-dressing', 'olaes-bandage'],
   },
   {
@@ -984,7 +984,7 @@ export const topics = [
       { title: 'As a pressure dressing', bullets: ['Control the bleeding with direct pressure first.', 'Centre the pad and pressure cup over the wound.', 'Wrap the elastic flat and firmly around the limb or body area.', 'Secure the wrap and reassess bleeding and circulation beyond the dressing.'] },
       { title: 'Before use', bullets: ['Confirm whether the carried model is standard OLAES or the hemostatic version.', 'Check package integrity and expiry.', 'Use the model demonstrated in current training.'] },
     ],
-    resources: [external(OLAES_PRODUCT, 'Official OLAES Modular Bandage page', 'Manufacturer features, component photographs and product media.', 'Manufacturer')],
+    resources: [external(OLAES_PRODUCT, 'OLAES Modular Bandage page', 'Manufacturer features, component photographs and product media.', 'Manufacturer')],
     related: ['pressure-dressing', 'wound-packing', 'direct-pressure', 'cat-tourniquet'],
   },
   {
@@ -1027,7 +1027,7 @@ export const topics = [
     ],
     actionHeading: 'Choose the next breathing step',
     actions: [internal('respiratory-rate', 'Count and describe respirations', 'Record rate, rhythm, depth, effort, sounds and pain.'), internal('breathing-support', 'Support breathing', 'Choose BVM, oxygen, chest-wound or arrest-response equipment.'), internal('bvm', 'Bag-valve-mask', 'Assist absent or inadequate breathing.'), internal('oxygen', 'Oxygen', 'Use the carried system under the applicable direction and target.'), internal('chest-seal', 'Open chest wound', 'Use the separate trained chest-wound response.'), internal('march-c', 'Continue to C — Circulation', 'Continue when breathing is present, effective and supported as needed.')],
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current breathing assessment, oxygen, pulse oximetry and open-chest-wound considerations.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross airway and breathing guidance', 'Current look, listen and feel assessment sequence.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current breathing assessment, oxygen, pulse oximetry and open-chest-wound considerations.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross airway and breathing guidance', 'Current look, listen and feel assessment sequence.')],
     related: ['airway-overview', 'airway-check', 'respiratory-rate', 'breathing-support'],
   },
   {
@@ -1037,7 +1037,7 @@ export const topics = [
     cardLabel: 'Open equipment guide',
     scenarioCards: [
       { topicId: 'bvm', kicker: 'Absent or inadequate breathing', title: 'Use a BVM', text: 'Open the trained two-rescuer sequence and visible-chest-rise check.' },
-      { topicId: 'oxygen', kicker: 'Spontaneously breathing', title: 'Set up oxygen', text: 'Use the correct cylinder, regulator, device, flow and authorized target.' },
+      { topicId: 'oxygen', kicker: 'Spontaneously breathing', title: 'Set up oxygen', text: 'Use the correct cylinder, regulator, delivery device, flow and target.' },
       { topicId: 'chest-seal', kicker: 'Open chest wound', title: 'Chest-wound response', text: 'Recognize entry and exit wounds and use the trained vented-seal pathway.' },
       { topicId: 'aed', kicker: 'Not breathing normally and pulseless', title: 'CPR and AED response', text: 'Begin the current resuscitation sequence and use the AED as soon as possible.' },
     ],
@@ -1047,7 +1047,7 @@ export const topics = [
     ],
     actions: [internal('pulse-oximeter', 'Portable pulse oximeter', 'Confirm a stable signal and interpret the number with the clinical picture.'), internal('airway-breathing-reassessment', 'Reassess support', 'Check airway position, adjuncts, ventilation and oxygen equipment.'), internal('march-c', 'Continue to C — Circulation', 'Proceed after breathing is supported and reassessed.')],
     notice: { title: 'Oxygen is not automatic', text: 'Do not apply oxygen to every casualty by default or chase a monitor number alone. Use the current CCT training, medical direction, the casualty’s condition and the applicable oxygen target.' },
-    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current evidence review for oxygen, pulse oximetry and open chest wounds.', 'Official clinical guidance'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian airway, breathing, CPR and oxygen reference.')],
+    resources: [external(AHA_FIRST_AID, '2024 AHA and American Red Cross first-aid guidelines', 'Current evidence review for oxygen, pulse oximetry and open chest wounds.', 'First-aid reference'), external(RED_CROSS_GUIDE, 'Canadian Red Cross Comprehensive Guide for First Aid & CPR', 'Current Canadian airway, breathing, CPR and oxygen reference.')],
     related: ['bvm', 'oxygen', 'chest-seal', 'airway-breathing-reassessment'],
   },
   {
@@ -1075,12 +1075,12 @@ export const topics = [
     id: 'airway-adjuncts', title: 'Airway adjuncts', category: 'airway', group: 'Airway', icon: 'airway', color: 'yellow', reference: true,
     intro: 'An airway adjunct can help maintain an open airway, but it never replaces positioning, observation and reassessment.',
     sections: [
-      { title: 'Choose only through current training', bullets: ['Use an OPA for an unresponsive casualty without an intact gag response, when trained.', 'Use an NPA only through the locally taught method, including its contraindications.', 'Use an i-gel only when the carried model, training and authorization are confirmed.', 'If an adjunct causes gagging, coughing, resistance or a change in condition, reassess the airway and follow the trained response.'] },
+      { title: 'Choose the adjunct you know how to use', bullets: ['Use an OPA for an unresponsive casualty without an intact gag response, when trained.', 'Use an NPA only with the sizing, insertion method and contraindications you were taught.', 'Use an i-gel only if you are trained to select, insert, secure and check that device.', 'If an adjunct causes gagging, coughing, resistance or a change in condition, reassess the airway and follow the trained response.'] },
       { title: 'After placement', bullets: ['Confirm that air is moving and the airway remains open.', 'Continue to respiration and watch for visible chest movement.', 'Recheck position after movement, vomiting or any change in responsiveness.'] },
     ],
     notice: { title: 'The device does not make the airway “finished”', text: 'Stay with the casualty, keep reassessing and return to airway support immediately if air movement or responsiveness changes.' },
-    actions: [internal('opa', 'OPA', 'Purpose, sizing, checks and trained-use sequence.'), internal('npa', 'NPA', 'Purpose and local-method confirmation.'), internal('igel', 'i-gel', 'Training-dependent device page and official manufacturer media.')],
-    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross airway guidance', 'Current general airway and breathing care.'), external(IGEL_PRODUCT, 'Official i-gel product page', 'Manufacturer product information and adult sizing documents.', 'Manufacturer')],
+    actions: [internal('opa', 'OPA', 'Purpose, sizing, checks and trained-use sequence.'), internal('npa', 'NPA', 'Purpose and local-method confirmation.'), internal('igel', 'i-gel', 'Training-dependent device page and manufacturer information.')],
+    resources: [external(RED_CROSS_GUIDE, 'Canadian Red Cross airway guidance', 'Current general airway and breathing care.'), external(IGEL_PRODUCT, 'i-gel product page', 'Manufacturer product information and adult sizing documents.', 'Manufacturer')],
     related: ['airway-overview', 'airway-positioning', 'opa', 'npa'],
   },
   {
@@ -1091,17 +1091,17 @@ export const topics = [
     related: ['airway-overview', 'airway-positioning', 'npa', 'bvm'],
   },
   {
-    id: 'npa', title: 'Nasopharyngeal airway — NPA', category: 'airway', group: 'Airway adjunct — local method required', icon: 'airway', color: 'yellow', reference: true,
-    intro: 'An NPA can support an airway when the casualty has some responsiveness or an OPA is not tolerated. The exact CCT method must be confirmed before a step card is published.',
-    sections: [{ title: 'The finished page must confirm', bullets: ['Indications and contraindications', 'The carried NPA type', 'Sizing landmark', 'Lubrication method', 'Insertion direction and resistance response', 'How placement and continued effectiveness are checked'] }],
+    id: 'npa', title: 'Nasopharyngeal airway — NPA', category: 'airway', group: 'Airway adjunct — trained skill', icon: 'airway', color: 'yellow', reference: true,
+    intro: 'An NPA can support an airway when some responsiveness remains or an OPA is not tolerated. Use the size, lubrication and insertion method you were taught.',
+    sections: [{ title: 'Use sequence', bullets: ['Check that an NPA is appropriate for the casualty and that no taught contraindication is present.', 'Select and measure the size using the method you were taught.', 'Lubricate the airway with the product used for the device.', 'Insert gently along the floor of the nostril using the taught orientation.', 'Stop if there is firm resistance; do not force the airway.', 'Confirm air movement and keep checking placement, bleeding and casualty response.'] }],
     notice: { title: 'Do not improvise', text: 'Use an NPA only if it is currently taught and follow that exact method. Stop if the device will not advance easily.' },
     related: ['airway-overview', 'airway-positioning', 'opa', 'bvm'],
   },
   {
-    id: 'igel', title: 'i-gel supraglottic airway', category: 'equipment', group: 'Advanced airway adjunct — confirmation required', icon: 'equipment', color: 'coral', reference: true,
-    intro: 'The i-gel is a single-use supraglottic airway available in weight-based sizes. It belongs in the CCT hub only if the carried model, training and authorization are confirmed.',
-    sections: [{ title: 'Before publishing a CCT quick-use sequence', bullets: ['Confirm that casualty clearers are trained and authorized to insert it.', 'Identify the exact carried i-gel or i-gel O₂ product.', 'Confirm size selection, insertion, ventilation connection and securing method.', 'Confirm placement checks and the response to ineffective ventilation.'] }],
-    resources: [external(IGEL_PRODUCT, 'Official i-gel product page', 'Manufacturer product information and adult sizing documents.', 'Manufacturer'), external(IGEL_VIDEOS, 'Official Intersurgical airway videos', 'Includes i-gel training and guidance media.', 'Official video')],
+    id: 'igel', title: 'i-gel supraglottic airway', category: 'equipment', group: 'Advanced airway adjunct — trained-use equipment', icon: 'equipment', color: 'coral', reference: true,
+    intro: 'The i-gel is a single-use supraglottic airway available in weight-based sizes. Use it only if you are trained with the device in front of you.',
+    sections: [{ title: 'Before use', bullets: ['Identify the i-gel or i-gel O₂ model.', 'Use the weight-based size chart supplied with the device.', 'Review the insertion, ventilation connection and securing method you were taught.', 'Know how placement is checked and what to do if ventilation is ineffective.'] }],
+    resources: [external(IGEL_PRODUCT, 'i-gel product page', 'Manufacturer product information and adult sizing documents.', 'Manufacturer'), external(IGEL_VIDEOS, 'Intersurgical airway videos', 'Includes i-gel training and guidance media.', 'Demonstration video')],
     related: ['airway-overview', 'airway-adjuncts', 'bvm', 'opa'],
   },
   {
@@ -1116,7 +1116,7 @@ export const topics = [
     id: 'oxygen', title: 'Oxygen', category: 'equipment', group: 'Breathing-support equipment', icon: 'equipment', color: 'coral', reference: true,
     intro: 'Oxygen is not automatic for every casualty. Use it under current training or medical direction, with the correct delivery device and target.',
     sections: [{ title: 'Quick-use sequence', bullets: ['Confirm the cylinder and regulator are compatible and undamaged.', 'Secure the cylinder before opening it.', 'Open the valve slowly and check the pressure.', 'Connect the selected delivery device.', 'Set the ordered or trained flow rate.', 'Apply the device and reassess breathing, skin, responsiveness and assigned monitor readings.', 'When finished, close the cylinder, relieve line pressure and return the regulator to zero.'] }, { title: 'Safety', bullets: ['Keep away from flame, heat, oil and grease.', 'Protect the cylinder from falling or impact.', 'Do not let a monitor reading override obvious respiratory distress.'] }],
-    notice: { title: 'Confirm the carried system', text: 'The final page should show the actual shipboard cylinder, regulator, masks and authorized targets once those details are confirmed.' },
+    notice: { title: 'Use the system in front of you', text: 'Cylinder valves, regulators, delivery devices and flow controls vary. Check their labels and connections before opening the cylinder.' },
     related: ['airway-overview', 'breathing-support', 'bvm', 'respiratory-rate'],
   },
   {
@@ -1173,7 +1173,7 @@ export const topics = [
       { title: 'Reduce artifact', bullets: ['Keep electrodes on clean, dry, relatively flat skin.', 'Press the full electrode surface into contact.', 'Keep cables supported so they do not pull on the electrodes.', 'Minimize movement and shivering when possible without delaying care.'] },
       { title: 'Keep the role clear', bullets: ['Complete MARCHE and vital signs; the trace does not replace physical assessment.', 'Report symptoms, pulse and casualty appearance with the monitor finding.', 'Use the placement diagram and labels for the actual monitor because cable colour conventions vary.'] },
     ],
-    notice: { title: 'Confirm the monitor model', text: 'The final device-specific page should show the actual cable labels, connector, screen controls and approved lead placement for the monitor in use.' },
+    notice: { title: 'Use the monitor labels', text: 'Cable labels, connectors and controls vary by monitor. Follow the lead labels and placement diagram supplied with the equipment.' },
     related: ['circulation-overview', 'circulation-reassessment', 'monitoring-equipment', 'pulse'],
   },
   {
@@ -1190,7 +1190,7 @@ export const topics = [
       { title: 'Set up without losing priorities', bullets: ['Address immediate MARCHE threats before routine monitoring.', 'Tell the casualty what you are applying when they can respond.', 'Confirm the equipment is clean, powered and shows the expected ready state.', 'Use one team member to continue observation while another sets up equipment when possible.', 'Secure cables and tubing so they do not interfere with treatment or movement.'] },
       { title: 'Make the numbers useful', bullets: ['Check whether each reading fits the casualty’s pulse, breathing, skin and responsiveness.', 'Repeat readings after treatment, movement or a change in condition.', 'Record the time, reading, oxygen or other treatment, and any reason the value may be unreliable.', 'Report the trend and important changes rather than reading a screen without context.'] },
     ],
-    notice: { title: 'Know the equipment in use', text: 'Portable and Sick Bay monitors can use different connectors, cables and controls. Device-specific setup should match the actual monitor and approved instructions.' },
+    notice: { title: 'Know the equipment in use', text: 'Portable and fixed monitors can use different connectors, cables and controls. Match the setup to the equipment instructions.' },
     related: ['circulation-overview', 'circulation-reassessment', 'manual-blood-pressure', 'pulse-oximeter'],
   },
   {
@@ -1209,7 +1209,7 @@ export const topics = [
       { title: 'General setup sequence', bullets: ['Continue MARCHE, remove wet clothing when appropriate, dry the casualty and use insulating blankets as needed.', 'Inspect the warming unit, hose, power connection and compatible warming blanket before use.', 'Position the warming blanket and hose using the diagram for the actual product while keeping the airway and required treatment sites accessible.', 'Turn on the unit and select only the setting taught or directed for the casualty.', 'Confirm warm air is flowing and that the hose is connected to the blanket as designed.', 'Check the casualty’s skin, comfort, vital signs and temperature trend regularly.', 'Respond to alarms by checking the casualty and following the unit instructions; do not bypass the alarm.'] },
       { title: 'Avoid preventable harm', bullets: ['Do not direct an uncovered warming hose onto the casualty.', 'Do not place the blanket or hose where it obstructs the airway, compresses an injury or interferes with monitoring.', 'Watch areas with reduced sensation, poor circulation or pressure risk closely.', 'Stop and report excessive heat, skin changes, worsening condition or equipment malfunction.'] },
     ],
-    notice: { title: 'Add the model-specific controls later', text: 'The exact Cocoon model, compatible blankets, approved temperature settings, alarm meanings and cleaning method still need to be confirmed before a button-by-button card is added.' },
+    notice: { title: 'Use matching components', text: 'Use only a compatible warming blanket and the temperature settings described for the unit. Check the casualty first whenever an alarm appears.' },
     related: ['head-temperature-overview', 'cold-exposure-response', 'foil-blanket', 'head-temperature-reassessment'],
   },
   {
@@ -1220,7 +1220,7 @@ export const topics = [
       { title: 'Good splinting practice', bullets: ['Remove rings, watches or other constricting items early when swelling is expected and it can be done safely.', 'Keep dressings and important treatment sites accessible.', 'Do not straighten a limb simply to make it fit a device.', 'Reassess pain, swelling, bleeding and distal findings regularly.'] },
     ],
     actionHeading: 'Open the splinting guide',
-    actions: [internal('splinting-overview', 'Splinting & movement hub', 'Choose the injury check, CSM check, support or movement guide.'), internal('sam-splint', 'SAM Splint', 'Mold the splint, choose a body area and open official application media.'), internal('csm-check', 'CSM check', 'Compare circulation, sensation and movement before and after.')],
+    actions: [internal('splinting-overview', 'Splinting & movement hub', 'Choose the injury check, CSM check, support or movement guide.'), internal('sam-splint', 'SAM Splint', 'Mold the splint, choose a body area and open the application media.'), internal('csm-check', 'CSM check', 'Compare circulation, sensation and movement before and after.')],
     related: ['splinting-overview', 'march-e', 'capillary-refill', 'basket-stretcher'],
   },
   {
@@ -1289,23 +1289,23 @@ export const topics = [
     sections: [
       { title: 'Strength comes from shape', bullets: ['A flat SAM Splint remains flexible; a C-curve or folded edge adds rigidity.', 'Shape on the rescuer or uninjured side first when possible to reduce movement of the injury.', 'Use the minimum manipulation needed to fit the support.', 'Padding and even wrap tension protect skin and circulation.'] },
     ],
-    resources: [external(SAM_TRAINING, 'SAM Splint training and application videos', 'Official videos for strength in curves and upper- and lower-extremity applications.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official manufacturer IFU PDF.', 'Manufacturer IFU'), external(SAM_PRODUCT_INFO, 'SAM Splint product overview', 'Official product overview PDF.', 'Manufacturer guide'), external(SAM_INSTRUCTIONS, 'SAM Medical instruction library', 'Official IFU directory for current SAM Medical products.', 'Manufacturer instructions')],
+    resources: [external(SAM_TRAINING, 'SAM Splint training and application videos', 'Demonstration videos for strength in curves and upper- and lower-extremity applications.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Manufacturer IFU PDF.', 'Manufacturer IFU'), external(SAM_PRODUCT_INFO, 'SAM Splint product overview', 'Product overview PDF.', 'Manufacturer guide'), external(SAM_INSTRUCTIONS, 'SAM Medical instruction library', 'IFU directory for current SAM Medical products.', 'Manufacturer instructions')],
     related: ['csm-check', 'support-options', 'splinting-assessment', 'casualty-movement'],
   },
   {
     id: 'sam-hand-finger', title: 'SAM Splint — finger & hand', category: 'splinting', group: 'Body-area application', icon: 'movement', color: 'violet', reference: true,
     intro: 'Use a small shaped section to protect an injured finger or the hand while keeping the fingertips visible for repeat CSM checks.',
-    steps: ['Assess the injury, remove constricting jewelry when safe and record CSM.', 'Choose enough splint to support the injured area without covering the fingertips.', 'Shape the splint on your own hand or the uninjured side when practical.', 'For a finger, use the finger-support shape taught; for the little-finger side of the hand, use the official ulnar-gutter application when trained.', 'Pad gaps and place the hand in the comfortable position found without forceful correction.', 'Secure from the hand toward the forearm without excessive wrap tension.', 'Recheck fingertip colour, warmth, sensation and movement as appropriate.'],
+    steps: ['Assess the injury, remove constricting jewelry when safe and record CSM.', 'Choose enough splint to support the injured area without covering the fingertips.', 'Shape the splint on your own hand or the uninjured side when practical.', 'For a finger, use the finger-support shape taught; for the little-finger side of the hand, use the SAM ulnar-gutter application when trained.', 'Pad gaps and place the hand in the comfortable position found without forceful correction.', 'Secure from the hand toward the forearm without excessive wrap tension.', 'Recheck fingertip colour, warmth, sensation and movement as appropriate.'],
     sections: [{ title: 'Keep visible', bullets: ['Fingertips for circulation and sensation checks', 'Wounds and dressings that require reassessment', 'Any area where swelling or wrap pressure may develop'] }],
-    resources: [external(SAM_TRAINING, 'Official finger and ulnar-gutter videos', 'Open the SAM training page and select the finger or ulnar-gutter application.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official precautions, use and care information.', 'Manufacturer IFU')],
+    resources: [external(SAM_TRAINING, 'Finger and ulnar-gutter videos', 'Open the SAM training page and select the finger or ulnar-gutter application.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Precautions, use and care information.', 'Manufacturer IFU')],
     related: ['sam-splint', 'csm-check', 'sam-wrist-forearm', 'splinting-assessment'],
   },
   {
     id: 'sam-wrist-forearm', title: 'SAM Splint — wrist & forearm', category: 'splinting', group: 'Body-area application', icon: 'movement', color: 'sky', reference: true,
     intro: 'A shaped support along the palm side or edge of the forearm can reduce wrist and forearm movement while leaving the fingers accessible.',
     steps: ['Assess the injury and record CSM at the hand.', 'Choose enough length to support the injured area and adjacent joints when practical.', 'Create a strong C-curve along the splint.', 'Mold it on your own wrist and forearm or the uninjured side before application when possible.', 'Apply along the position and side taught for the injury without forcing the wrist straight.', 'Pad gaps and secure above and below the injury without wrapping directly over it when avoidable.', 'Leave the fingertips visible and repeat the complete CSM check.'],
-    sections: [{ title: 'Application choices', bullets: ['The official SAM training page demonstrates volar/wrist, ulnar-gutter and sugar-tong options.', 'Use only the application included in current training.', 'Support the entire arm with a sling when indicated and recheck circulation after the sling is secured.'] }],
-    resources: [external(SAM_TRAINING, 'Official wrist, ulnar-gutter and sugar-tong videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official precautions, use and care information.', 'Manufacturer IFU')],
+    sections: [{ title: 'Application choices', bullets: ['The SAM training page demonstrates volar/wrist, ulnar-gutter and sugar-tong options.', 'Use only the application included in current training.', 'Support the entire arm with a sling when indicated and recheck circulation after the sling is secured.'] }],
+    resources: [external(SAM_TRAINING, 'Wrist, ulnar-gutter and sugar-tong videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Precautions, use and care information.', 'Manufacturer IFU')],
     related: ['sam-splint', 'sam-hand-finger', 'sam-elbow-upper-arm', 'csm-check'],
   },
   {
@@ -1313,22 +1313,22 @@ export const topics = [
     intro: 'Support the arm in the position found. Elbow and upper-arm injuries may need a long shaped support plus a sling or swathe to control movement.',
     steps: ['Complete MARCHE, inspect the injury and record CSM at the hand.', 'Support the arm manually while the splint and securing material are prepared.', 'Choose a length and shape that supports the injured area without requiring the elbow to be straightened.', 'Mold the splint away from the injured arm when practical.', 'Pad the elbow, underarm and other pressure areas.', 'Apply the shaped support and secure it with even tension.', 'Add a sling or swathe when it is part of the taught method, then repeat CSM.'],
     notice: { title: 'Do not force the elbow', text: 'Do not attempt to straighten a painful, deformed or dislocated elbow simply to fit a splint. Support it in the position found and request added clinical help.' },
-    resources: [external(SAM_TRAINING, 'Official upper-arm and dislocated-elbow videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official precautions, use and care information.', 'Manufacturer IFU')],
+    resources: [external(SAM_TRAINING, 'Upper-arm and dislocated-elbow videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Precautions, use and care information.', 'Manufacturer IFU')],
     related: ['sam-splint', 'sam-wrist-forearm', 'support-options', 'csm-check'],
   },
   {
     id: 'sam-knee-lower-leg', title: 'SAM Splint — knee & lower leg', category: 'splinting', group: 'Body-area application', icon: 'movement', color: 'mint', reference: true,
     intro: 'Lower-limb support must control movement around the injury without adding unnecessary lifting, twisting or straightening.',
     steps: ['Complete MARCHE, expose the injury and control bleeding.', 'Record foot CSM before application when possible.', 'Support the limb while enough splint length, padding and wraps are prepared.', 'Build the long C-curve or folded shape demonstrated for the selected application.', 'Mold away from the injured leg when practical and maintain the position found.', 'Apply padding and secure the support above and below the injury without hiding the toes.', 'Repeat foot CSM and check for pressure, pain, swelling and splint movement.', 'Recheck again after lifting or transferring the casualty.'],
-    sections: [{ title: 'Official application choices', bullets: ['The SAM training page demonstrates knee-immobilizer and long-leg applications.', 'Choose the configuration included in current training and appropriate to the area needing support.', 'A traction splint is a separate device and skill; do not substitute one method for the other.'] }],
-    resources: [external(SAM_TRAINING, 'Official knee and long-leg videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official precautions, use and care information.', 'Manufacturer IFU')],
+    sections: [{ title: 'Application choices', bullets: ['The SAM training page demonstrates knee-immobilizer and long-leg applications.', 'Choose the configuration included in current training and appropriate to the area needing support.', 'A traction splint is a separate device and skill; do not substitute one method for the other.'] }],
+    resources: [external(SAM_TRAINING, 'Knee and long-leg videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Precautions, use and care information.', 'Manufacturer IFU')],
     related: ['sam-splint', 'sam-ankle-foot', 'traction-splint', 'csm-check'],
   },
   {
     id: 'sam-ankle-foot', title: 'SAM Splint — ankle & foot', category: 'splinting', group: 'Body-area application', icon: 'movement', color: 'yellow', reference: true,
     intro: 'A stirrup or figure-8 style support can stabilize the sides of the ankle and the foot while keeping the toes visible for reassessment.',
     steps: ['Remove the shoe only when needed for inspection, bleeding control or the chosen application, and support the injury while doing so.', 'Record CSM at the foot and toes.', 'Choose enough splint length for the sides of the ankle and the planned foot support.', 'Form the stirrup or figure-8 shape away from the injured ankle when practical.', 'Pad the ankle bones, heel and gaps.', 'Apply in the position found without forcing the foot to a right angle.', 'Secure evenly while leaving the toes visible.', 'Repeat CSM, heel and ankle pressure checks, and splint security after movement.'],
-    resources: [external(SAM_TRAINING, 'Official ankle-stirrup and figure-8 videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Official precautions, use and care information.', 'Manufacturer IFU')],
+    resources: [external(SAM_TRAINING, 'Ankle-stirrup and figure-8 videos', 'Manufacturer application videos on one training page.', 'Manufacturer training'), external(SAM_IFU, 'SAM Splint Instructions for Use', 'Precautions, use and care information.', 'Manufacturer IFU')],
     related: ['sam-splint', 'sam-knee-lower-leg', 'csm-check', 'casualty-movement'],
   },
   {
@@ -1351,7 +1351,7 @@ export const topics = [
       { title: 'What casualty clearers should recognize', bullets: ['A significant isolated thigh injury can involve severe pain, deformity, shortening, swelling and internal blood loss.', 'Immediate MARCHE threats and external bleeding control come before the device.', 'Record CSM at the foot and protect the injured leg from unnecessary movement.', 'Request the trained clinician, the correct device and enough assistance early.', 'Prepare for pain, movement difficulty, casualty deterioration and repeat reassessment.'] },
       { title: 'Before any application', bullets: ['Identify the exact Sager or traction-splint model available.', 'Confirm the current casualty-clearer training and sign-off for that device.', 'Review the manufacturer indications, contraindications, setup and traction method for that model.', 'Use the required number of trained people and continue manual support until the device is ready.', 'Record CSM before, during and after application and after each move.'] },
     ],
-    notice: { title: 'Model-specific skill', text: 'A full button-by-button or strap-by-strap guide belongs here only after the exact carried model, current manufacturer IFU and casualty-clearer authorization are confirmed.' },
+    notice: { title: 'Model-specific skill', text: 'Traction-splint designs differ. Use the instructions and strap sequence for the exact device in front of you.' },
     actions: [internal('csm-check', 'CSM check', 'Build and repeat the distal baseline.'), internal('splinting-assessment', 'Injury assessment', 'Inspect and protect the limb before choosing equipment.'), internal('casualty-movement', 'Prepare the move', 'Coordinate the whole casualty, team and route.')],
     related: ['sam-knee-lower-leg', 'support-options', 'movement-decision', 'reassessment-loop'],
   },
@@ -1362,11 +1362,11 @@ export const topics = [
     scenarioPhases: [
       { kicker: 'Treat', title: 'Prepare the casualty', text: 'Control immediate threats and decide what must be done before movement.', bullets: ['Complete MARCHE and address time-critical problems on scene.', 'Support injuries and secure dressings, airway equipment, oxygen and other treatments.', 'Record the casualty’s condition and CSM before the move.', 'Explain the plan to a responsive casualty.'], links: [internal('marche', 'MARCHE', 'Treat immediate threats in order.'), internal('csm-check', 'CSM check', 'Record the distal findings before movement.')] },
       { kicker: 'Team', title: 'Prepare people and equipment', text: 'Name one movement leader and assign enough trained people to every part of the move.', bullets: ['State who is protecting the head and airway, who is handling the injured area and who is carrying equipment.', 'Choose the movement device and gather padding, straps and securing material.', 'Keep essential treatment and radio equipment accessible.', 'Rehearse the lift, turn or transfer commands before starting.'], links: [internal('team-roles', 'Team roles', 'Divide care, support and communication work.'), internal('basket-stretcher', 'Basket stretcher', 'Review the rarely used rigid movement option.')] },
-      { kicker: 'Route', title: 'Confirm route and destination', text: 'The route must be safe now—not merely familiar from normal operations.', bullets: ['Confirm the destination is ready to receive the casualty.', 'Check access, doors, ladders, obstructions, smoke, water and other current hazards.', 'Confirm movement authority and request route or carrying assistance as needed.', 'Decide where the team can stop safely if the casualty or situation changes.'], links: [internal('movement-decision', 'Movement decision', 'Check whether to stay, prepare or move.'), internal('radio-report', 'Movement request', 'Report the help, route and destination needed.')] },
+      { kicker: 'Route', title: 'Confirm route and destination', text: 'The route must be safe now—not merely familiar from normal operations.', bullets: ['Confirm the destination is ready to receive the casualty.', 'Check access, doors, ladders, obstructions, smoke, water and other current hazards.', 'Coordinate the move and request route or carrying assistance as needed.', 'Decide where the team can stop safely if the casualty or situation changes.'], links: [internal('movement-decision', 'Movement decision', 'Check whether to stay, prepare or move.'), internal('radio-report', 'Movement request', 'Report the help, route and destination needed.')] },
       { kicker: 'Move', title: 'Move on one leader’s commands', text: 'Use clear commands and protect the casualty and every treatment throughout the move.', bullets: ['Lift, turn and lower together on the leader’s count.', 'Watch the airway, breathing, bleeding control, splints, straps, cables and oxygen continuously.', 'Stop if a treatment fails, the casualty deteriorates or the route becomes unsafe.', 'Avoid unnecessary speed, twisting and repeated transfers.'], links: [internal('treatment-checks', 'Treatment checks', 'Keep every intervention working during movement.')] },
       { kicker: 'Recheck', title: 'Reassess and hand over', text: 'A completed move creates a new assessment point.', bullets: ['Repeat MARCHE and the full CSM check after arrival and after every major transfer.', 'Check skin, pressure areas, pain, swelling and the security of every splint and strap.', 'State what changed during movement and what still needs attention.', 'Give a MIST handover and continue the secondary survey when time and condition allow.'], links: [internal('reassessment-loop', 'Reassessment loop', 'Restart the assessment after change or movement.'), internal('mist-handover', 'MIST handover', 'Transfer the mechanism, injuries, signs and treatments.')] },
     ],
-    notice: { title: 'Shipboard route and lifting methods', text: 'Exact routes, movement authority, confined-space techniques, ladder or vertical movement and device-specific handling must follow the current response organization and trained method.' },
+    notice: { title: 'Shipboard route and lifting methods', text: 'Plan the route, coordinate the team and use the handling method practised for confined spaces, ladders, vertical movement and the selected device.' },
     related: ['movement-decision', 'basket-stretcher', 'team-roles', 'reassessment-loop'],
   },
   {
@@ -1394,7 +1394,7 @@ export const topics = [
     ],
     actionHeading: 'Common team skills',
     actions: [internal('team-roles', 'Two-person team roles', 'Divide patient care, communications and equipment work clearly.'), internal('radio-report', 'Radio reports', 'Send the information needed without stopping casualty care.'), internal('movement-decision', 'Movement decision', 'Decide when to stay, when to move and what must be coordinated.'), internal('sick-bay-continuation', 'Continue care in Sick Bay', 'Carry treatments, monitoring and handover into the receiving space.')],
-    notice: { title: 'Use the current response organization', text: 'Exact mustering points, channels, callsigns, routes, protective dress, movement authority and station assignments must match the current shipboard procedure.' },
+    notice: { title: 'Use the response plan in effect', text: 'Confirm the mustering point, channel, callsign, route, protective clothing and team assignments at the start of the response.' },
     related: ['burns-overview', 'damage-control-casualty', 'person-overboard', 'firefighter-rehab'],
   },
   {
@@ -1404,12 +1404,12 @@ export const topics = [
     quickRouteHeading: 'Open a team tool',
     scenarioPhases: [
       { kicker: 'Muster', title: 'Form the response', text: 'The CCT reports to Sick Bay under the emergency organization and prepares to support the active event.', bullets: ['Establish communications with the Damage Control Centre through the current reporting chain.', 'Set up the assigned casualty display, board or computer view.', 'Organize the available casualty clearers into the directed teams; the working model is two teams of two when staffing allows.', 'Name the lead casualty carer and communications/support member in each team.', 'Confirm each team has its assigned radio and complete radio checks before dispatch.'], links: [internal('team-roles', 'Two-person team roles', 'Who treats, who communicates and how they support each other.'), internal('equipment-bag-check', 'Response-bag check', 'Confirm MARCHE equipment, oxygen and communications are ready.')] },
-      { kicker: 'Dispatch', title: 'Receive the task', text: 'Do not leave with only a location. Build enough shared understanding to reach the casualty safely and work when you arrive.', bullets: ['Confirm the casualty location, known hazards and the route currently available.', 'Take the assigned response bag, oxygen system, radio, protective equipment and any specifically requested item.', 'Repeat back critical details when radio conditions or the situation make misunderstanding likely.', 'Update the coordination point when the team departs and arrives as the current procedure requires.'], links: [internal('scene-survey', 'Scene survey', 'Approach without adding another casualty.'), internal('equipment-overview', 'Equipment directory', 'Open equipment by its MARCHE purpose.')] },
+      { kicker: 'Dispatch', title: 'Receive the task', text: 'Do not leave with only a location. Build enough shared understanding to reach the casualty safely and work when you arrive.', bullets: ['Confirm the casualty location, known hazards and the route currently available.', 'Take the response bag, oxygen system, radio, protective equipment and any specifically requested item.', 'Repeat back critical details when radio conditions or the situation make misunderstanding likely.', 'Update the coordination point when the team departs and arrives.'], links: [internal('scene-survey', 'Scene survey', 'Approach without adding another casualty.'), internal('equipment-overview', 'Equipment directory', 'Open equipment by its MARCHE purpose.')] },
       { kicker: 'On scene', title: 'Assess and treat', text: 'The priority is effective care where the casualty is found—not rushing toward Sick Bay before immediate threats are controlled.', bullets: ['Complete the scene survey and identify any damage-control hazard affecting the team or casualty.', 'The lead carer works through AVPU and MARCHE while the support member prepares equipment, records times and manages the radio.', 'Treat immediate threats within current training and confirm whether each intervention worked.', 'Request advanced medical assistance, more people or additional equipment early when the casualty needs more than the team can provide.'], links: [internal('marche', 'MARCHE primary survey', 'Assess and treat threats in priority order.'), internal('reassessment-loop', 'Reassessment loop', 'Confirm the response to each intervention.')] },
       { kicker: 'Coordinate', title: 'Report and plan movement', text: 'The wider incident may make immediate movement unsafe or impossible. Keep treating while the route and destination are coordinated.', bullets: ['Send the casualty location, priority, key findings, treatments and response.', 'State exactly what the team needs: advanced clinician, extra equipment, movement assistance or a safe route.', 'Do not abandon useful on-scene care simply to move quickly.', 'Confirm who authorizes movement and which route is currently safe before the lift begins.'], links: [internal('radio-report', 'Radio reports', 'Use a short initial report, update and movement request.'), internal('movement-decision', 'Movement decision', 'Check readiness before committing to the move.')] },
       { kicker: 'Continue', title: 'Move, reassess and hand over', text: 'Care continues throughout movement and after arrival in Sick Bay.', bullets: ['Secure the casualty, equipment and treatments for the planned movement.', 'Repeat airway, breathing, bleeding control and other priority checks after each major move.', 'Give a MIST handover and state any change that occurred during transport.', 'Under direction, continue the examination, attach assigned monitors and support further care in Sick Bay.'], links: [internal('mist-handover', 'MIST handover', 'Organize mechanism, injuries, signs and treatments.'), internal('sick-bay-continuation', 'Continue care in Sick Bay', 'Transfer treatments, monitoring and reassessment cleanly.')] },
     ],
-    notice: { title: 'The damage-control picture controls movement', text: 'A route that is normally available may be unsafe during a fire, flood, smoke or other damage. Treat on scene while the current safe route and movement authority are confirmed.' },
+    notice: { title: 'The damage-control picture controls movement', text: 'A route that is normally available may be unsafe during a fire, flood, smoke or other damage. Treat on scene while a safe route and coordinated move are arranged.' },
     related: ['team-roles', 'radio-report', 'movement-decision', 'sick-bay-continuation'],
   },
   {
@@ -1443,7 +1443,7 @@ export const topics = [
     intro: 'A rehabilitation station gives firefighters a controlled place to remove gear, rest, hydrate and be assessed before they return to work or move to medical care.',
     scenarioPhases: [
       { kicker: 'Decide', title: 'Recognize when rehab is needed', text: 'Set up early when repeated entries, prolonged work, heat, heavy protective clothing or a sustained fire make firefighter recovery likely.', bullets: ['For a short incident handled immediately, a full station may not be required unless command requests it or a firefighter needs assessment.', 'For repeated entries or sustained effort, establish the station before exhausted firefighters begin arriving.', 'Tell the response organization where the station is and who is running it.'] },
-      { kicker: 'Set up', title: 'Prepare the station', text: 'Choose an area that supports recovery without interfering with firefighting or exposing the medical team to the hazard.', bullets: ['Use the approved location outside the immediate hazard and smoke path.', 'Set out cooling chairs or normal chairs as available, drinking water and the assigned monitoring equipment.', 'Plan separate space for resting firefighters and anyone who needs medical assessment.', 'Keep contaminated gear and runoff managed under the current contamination-control procedure.', 'Prepare a simple way to track who enters, their team and their disposition.'], links: [internal('monitoring-equipment', 'Monitoring equipment', 'Prepare blood pressure, SpO₂ and other assigned observations.'), internal('radio-report', 'Coordination report', 'Tell the response organization the station status and any medical need.')] },
+      { kicker: 'Set up', title: 'Prepare the station', text: 'Choose an area that supports recovery without interfering with firefighting or exposing the medical team to the hazard.', bullets: ['Use a location outside the immediate hazard and smoke path.', 'Set out cooling chairs or normal chairs as available, drinking water and the monitoring equipment.', 'Plan separate space for resting firefighters and anyone who needs medical assessment.', 'Keep contaminated gear and runoff separated from the clean recovery area.', 'Prepare a simple way to track who enters, their team and their disposition.'], links: [internal('monitoring-equipment', 'Monitoring equipment', 'Prepare blood pressure, SpO₂ and other assigned observations.'), internal('radio-report', 'Coordination report', 'Tell the response organization the station status and any medical need.')] },
       { kicker: 'Receive', title: 'Rest, cool and hydrate', text: 'Help the firefighter begin recovery before focusing on numbers.', bullets: ['Confirm identity and team, then note symptoms or concerns immediately.', 'Remove or loosen protective equipment under the current contamination-control method.', 'Seat the firefighter, provide water and use cooling or warming appropriate to the conditions.', 'Watch for breathing difficulty, chest symptoms, confusion, collapse, marked weakness, heat illness or cold stress.', 'Anyone with an urgent concern moves directly into medical assessment rather than routine rest.'] },
       { kicker: 'Assess', title: 'Monitor when indicated', text: 'During a sustained response, use symptoms, appearance and repeat observations to judge recovery.', bullets: ['Check responsiveness, breathing, pulse and skin signs.', 'Obtain assigned vital signs and monitor readings when directed.', 'Repeat observations after rest rather than relying on one early post-exertion value.', 'Record symptoms, treatment, hydration and the direction of change.', 'Escalate a firefighter who is not recovering as expected or develops a concerning symptom.'], links: [internal('vital-signs', 'Vital signs', 'Build a complete set and record the trend.'), internal('pulse-oximeter', 'Pulse oximeter', 'Validate the reading against the firefighter’s condition.'), internal('manual-blood-pressure', 'Manual blood pressure', 'Obtain a repeatable pressure when assigned.')] },
       { kicker: 'Disposition', title: 'Return, rest or receive care', text: 'The casualty clearers provide findings; return-to-duty decisions follow the current command and medical process.', bullets: ['Do not create a return-to-work threshold from memory or from this app.', 'Report symptoms, observations and recovery trend to the person responsible for the decision.', 'Return the firefighter only through the established control process.', 'Send anyone needing further assessment or treatment to Sick Bay with an appropriate handover.', 'Restock, clean and reset the station for the next group.'], links: [internal('sick-bay-continuation', 'Sick Bay continuation', 'Transfer a firefighter who needs further care.'), internal('reassessment-handover', 'Reassess and hand over', 'Report the trend and what was done.')] },
@@ -1468,7 +1468,7 @@ export const topics = [
     sections: [
       { title: 'Initial report', bullets: ['Identify the team and casualty location using the current reporting format.', 'State scene hazards and whether the team can safely reach the casualty.', 'State the number of casualties and the initial urgency.', 'Say what help or equipment is needed now.', 'Keep the first report short; follow with detail after immediate threats are being managed.'] },
       { title: 'Clinical update', bullets: ['Report responsiveness, major MARCHE findings and the casualty priority.', 'State treatments already completed and whether they worked.', 'Give important changes rather than repeating unchanged information.', 'Request the paramedic, physician assistant or additional equipment when the need is recognized.'] },
-      { title: 'Movement request', bullets: ['State whether immediate threats are controlled enough for movement.', 'Describe the movement assistance and equipment required.', 'Ask for the current safe route and receiving destination.', 'Confirm movement authority through the established response organization.', 'Report when movement begins and when the casualty arrives as required.'] },
+      { title: 'Movement request', bullets: ['State whether immediate threats are controlled enough for movement.', 'Describe the movement assistance and equipment required.', 'Ask for the current safe route and receiving destination.', 'Confirm who is coordinating the move.', 'Report when movement begins and when the casualty arrives.'] },
       { title: 'When radio traffic is difficult', bullets: ['Lead with location, immediate danger and the action required.', 'Use plain words and the current callsigns.', 'Repeat back details that could affect safety or movement.', 'If contact is lost, follow the current communications-failure method without abandoning casualty care.'] },
     ],
     actionHeading: 'Build the report',
@@ -1481,7 +1481,7 @@ export const topics = [
     intro: 'Moving toward Sick Bay is not automatically the first goal. Control immediate threats, then make sure the casualty, team, route and destination are ready.',
     sections: [
       { title: 'Stay and treat when', bullets: ['An immediate MARCHE threat can be treated more effectively before movement.', 'The route is unsafe, blocked or not yet confirmed.', 'The team does not have enough people or the right movement equipment.', 'Movement would dislodge an airway, dressing, tourniquet, splint or other treatment that is not yet secure.', 'Advanced medical help is coming to the scene and remaining is currently safer.'] },
-      { title: 'Prepare to move when', bullets: ['Immediate threats are controlled as well as possible.', 'The destination can provide care the casualty needs.', 'A safe route and movement authority have been confirmed.', 'Enough trained people and the right equipment are ready.', 'Treatments, oxygen, monitoring and loose equipment can be secured for movement.'] },
+      { title: 'Prepare to move when', bullets: ['Immediate threats are controlled as well as possible.', 'The destination can provide care the casualty needs.', 'A safe route and a coordinated movement plan are ready.', 'Enough trained people and the right equipment are ready.', 'Treatments, oxygen, monitoring and loose equipment can be secured for movement.'] },
       { title: 'During the move', bullets: ['Name one movement leader and use clear commands.', 'Maintain the airway, breathing support and bleeding control.', 'Keep the radio and essential equipment accessible.', 'Stop if a critical treatment fails, the casualty deteriorates or the route becomes unsafe.', 'Reassess after every major transfer, turn, lift or arrival.'] },
     ],
     actionHeading: 'Prepare the move',

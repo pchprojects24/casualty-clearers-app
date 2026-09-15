@@ -520,7 +520,7 @@ function ArticleView({ topic, saved, toggleSaved }) {
           {topic.notice && <aside id="important-note" className="reference-notice"><TriangleAlert size={21} /><div><strong>{topic.notice.title}</strong><p>{topic.notice.text}</p></div></aside>}
           {topic.actions && <section id="related-actions" className="reference-block"><h2>{topic.actionHeading || 'Procedures and equipment'}</h2>{renderLinks(topic.actions, 'action-grid')}</section>}
           {topic.nextStep && <button id="next-step" className="continue-primary" type="button" onClick={() => navigate(`topic/${topic.nextStep.topicId}`)}><span><small>{topic.nextStep.kicker || 'Next in MARCHE'}</small><strong>{topic.nextStep.title}</strong><em>{topic.nextStep.description}</em></span><i aria-hidden="true"><ChevronRight size={25} /></i></button>}
-          {topic.resources?.length > 0 && <section id="sources" className="reference-block resources"><h2>Sources and demonstrations</h2>{topic.resources.map((resource) => <a key={resource.url} href={resource.url} target="_blank" rel="noreferrer"><span><em>{resource.kind}</em><strong>{resource.title}</strong><small>{resource.description}</small></span><ExternalLink size={19} /></a>)}</section>}
+          {topic.resources?.length > 0 && <section id="sources" className="reference-block resources"><h2>More information and demonstrations</h2>{topic.resources.map((resource) => <a key={resource.url} href={resource.url} target="_blank" rel="noreferrer"><span><em>{resource.kind}</em><strong>{resource.title}</strong><small>{resource.description}</small></span><ExternalLink size={19} /></a>)}</section>}
         </article>
         <aside className="related-panel">
           <h2>Related topics</h2>
