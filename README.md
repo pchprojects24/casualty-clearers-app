@@ -35,7 +35,6 @@ The application is a responsive React and Vite information hub with:
 - Step-by-step procedure pages with official references and product media where useful.
 - Saved and recently viewed information stored on the user's device.
 - Responsive desktop, tablet and mobile navigation.
-- An installable manifest. The app is online-only; it does not cache for offline use.
 
 Planning documents and source-review notes remain in `docs/`; they are not rendered as user-facing app pages.
 
