@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The app brings casualty assessment, immediate care, equipment, movement and response information into short connected pages. It is designed for quick browsing and search rather than long-form reading.
+The app brings casualty assessment, immediate care, equipment, movement and response information into short connected pages.
 
 ## Page pattern
 
@@ -17,9 +17,7 @@ Each practical page should answer the same questions where they apply:
 
 Equipment pages also cover identification, setup, use checks and common errors. Product links are included only when they make the page more useful.
 
-Write for casualty clearers from non-medical trades, including cooks, clerks and supply technicians. Use plain language, action-first steps and only the technical terms needed to identify equipment or report findings. Pages should work as quick response cards, not exam study.
-
-Do not ask casualty clearers to diagnose a condition, select a medication, calculate a dose or perform a procedure beyond their training. A page may tell them to help a person use their own prescribed rescue inhaler or auto-injector when that assistance is standard first aid, but it must make the boundary explicit.
+Use clear, direct wording and keep treatment at the first-aid level. Do not ask casualty clearers to diagnose a condition, select a medication, calculate a dose or perform a procedure beyond their training. Help with a person’s own prescribed rescue inhaler or auto-injector must have a clear boundary.
 
 ## App sections
 
@@ -28,6 +26,7 @@ Do not ask casualty clearers to diagnose a condition, select a medication, calcu
 - Scene survey and responsiveness.
 - MARCHE from massive bleeding through everything else.
 - Rapid body survey, SAMPLE history and vital signs.
+- Adult triage sieve and reassessment of priority.
 - Focused and head-to-toe examination.
 - Reassessment, treatment checks and MIST handover.
 
@@ -68,18 +67,20 @@ Do not ask casualty clearers to diagnose a condition, select a medication, calcu
 - SAM Splint applications and other support options.
 - Traction-splint recognition.
 - Casualty preparation, packaging, team movement and post-move reassessment.
+- Med Sled, scoop stretcher, KED and backboard recognition.
 
 ### Equipment
 
 - Response-bag check.
 - Bleeding, airway and resuscitation equipment.
 - Oxygen, AED and basic monitoring equipment.
-- Splints, warming equipment and basket-stretcher recognition.
+- Splints, warming equipment and casualty-movement equipment.
 
 ### Response scenarios and communications
 
 - Damage-control and isolated-casualty responses.
 - Person-overboard response.
+- Environmental spill and contaminated-casualty response.
 - Firefighter rehabilitation.
 - Two-person team roles, radio reports and movement decisions.
 - Continued care and handover.
@@ -107,10 +108,8 @@ Each topic should connect back to MARCHE, vital signs, reassessment, equipment a
 After the remaining sudden-illness topics, the most useful additions are:
 
 - Suction setup and use checks.
-- Scoop stretcher, KED, Med Sled and backboard/head-bed recognition.
 - A concise Propaq/ZOLL monitor page.
 - Rad-57 carbon-monoxide monitoring limitations.
-- Environmental spill and contaminated-casualty response.
 - Carbon-fibre contamination awareness.
 
 ## Deliberately excluded
