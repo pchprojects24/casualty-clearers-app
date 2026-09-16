@@ -19,9 +19,10 @@ The project brings practical casualty-clearer information together in one search
 The application is a responsive React and Vite information hub with:
 
 - Search across curated app-facing content.
-- A guided assessment pathway from scene survey through AVPU, MARCHE, vital signs, secondary survey and reassessment.
+- A guided assessment pathway from scene survey through AVPU, MARCHE, vital signs, triage when needed, secondary survey and reassessment.
 - Interactive MARCHE letters that open the relevant actions, procedures and equipment.
 - Sudden-illness pathways for suspected heart attack, stroke, seizure, anaphylaxis, asthma and acute breathing difficulty.
+- Connected movement-equipment and contaminated-casualty pages.
 - Step-by-step procedure pages with useful product instructions and demonstrations where available.
 - Saved and recently viewed information stored on the user's device.
 - Responsive desktop, tablet and mobile navigation.
@@ -32,4 +33,4 @@ Run it locally with `npm install` and `npm run dev`. Check the content links wit
 
 ## Next content step
 
-First run a plain-language, first-aid-level review of the existing treatment pages. Keep actions suitable for non-medical casualty clearers, remove unnecessary study detail and prevent medication selection or dose decisions. Then continue the sudden-illness section with diabetic emergencies.
+Add diabetic emergencies next, using the same connected sudden-illness structure.
