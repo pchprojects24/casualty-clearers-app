@@ -17,6 +17,10 @@ Each practical page should answer the same questions where they apply:
 
 Equipment pages also cover identification, setup, use checks and common errors. Product links are included only when they make the page more useful.
 
+Write for casualty clearers from non-medical trades, including cooks, clerks and supply technicians. Use plain language, action-first steps and only the technical terms needed to identify equipment or report findings. Pages should work as quick response cards, not exam study.
+
+Do not ask casualty clearers to diagnose a condition, select a medication, calculate a dose or perform a procedure beyond their training. A page may tell them to help a person use their own prescribed rescue inhaler or auto-injector when that assistance is standard first aid, but it must make the boundary explicit.
+
 ## App sections
 
 ### Assessment and MARCHE
@@ -88,10 +92,10 @@ The section currently covers:
 - Stroke recognition.
 - Seizure care.
 - Severe allergic reaction and anaphylaxis.
+- Asthma and acute breathing difficulty.
 
 The next bundle should add:
 
-- Asthma and acute breathing difficulty.
 - Diabetic emergencies.
 - Poisoning, opioid overdose and naloxone awareness.
 - Fainting and unexplained altered responsiveness.

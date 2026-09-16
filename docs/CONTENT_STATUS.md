@@ -1,10 +1,10 @@
 # CCT Info Hub — Content Status
 
-Updated 14 September 2026.
+Updated 15 September 2026.
 
 ## Current coverage
 
-The app currently contains 109 searchable topics across nine sections.
+The app currently contains 110 searchable topics across nine sections.
 
 ### Complete connected pathways
 
@@ -13,7 +13,7 @@ The app currently contains 109 searchable topics across nine sections.
 - Bleeding control: recognition, direct pressure, wound packing, pressure dressing, tourniquet pathway and reassessment.
 - Airway and breathing: airway check, adult choking, positioning, adjuncts, breathing assessment, BVM, oxygen, chest wound and reassessment.
 - Circulation: pulse, skin signs, shock, adult CPR/AED and reassessment.
-- Sudden illness: overview, suspected heart attack, stroke recognition, seizure care and anaphylaxis.
+- Sudden illness: overview, suspected heart attack, stroke recognition, seizure care, anaphylaxis, asthma and acute breathing difficulty.
 - Head and temperature: head injury, heat-loss prevention, hypothermia, heat illness and reassessment.
 - Burns and exposure: thermal, chemical skin, chemical eye, smoke/facial and electrical pathways.
 - Splinting and movement: injury assessment, CSM checks, SAM Splint body-area guides, support choices, traction-splint recognition and casualty movement.
@@ -30,18 +30,27 @@ The app currently contains 109 searchable topics across nine sections.
 
 ## Information still needed
 
-### Priority 1 — Complete sudden illness
+### Priority 1 — First-aid-level content review
 
-The first sudden-illness bundle is connected to MARCHE, monitoring, reassessment and handover. The next bundle should add:
+Review the existing treatment pages as quick response cards for cooks, clerks, supply technicians and other non-medical casualty clearers. The pass should:
 
-- Asthma.
+- Put immediate actions and emergency-call triggers first.
+- Replace avoidable clinical language with plain language.
+- Remove detail that feels like exam study rather than help during a response.
+- Prevent medication selection, dose calculation or treatment decisions outside basic first aid.
+- Keep help with a person’s own prescribed rescue inhaler or auto-injector short and clearly bounded.
+
+### Priority 2 — Complete sudden illness
+
+The current sudden-illness pages are connected to MARCHE, monitoring, reassessment and handover. The next bundle should add:
+
 - Diabetic emergencies.
 - Poisoning, opioid overdose and naloxone awareness.
 - Fainting and unexplained altered responsiveness.
 
 These pages should use the same short recognition, immediate-action, monitoring and handover pattern as the first bundle.
 
-### Priority 2 — Common equipment gaps
+### Priority 3 — Common equipment gaps
 
 - Suction equipment.
 - Scoop stretcher.
@@ -53,7 +62,7 @@ These pages should use the same short recognition, immediate-action, monitoring 
 
 These should be added as separate short cards only where the app can give useful setup, use and reassessment information.
 
-### Priority 3 — Contamination scenarios
+### Priority 4 — Contamination scenarios
 
 - Environmental spill with a casualty.
 - Moving from contaminated to clean care areas.
@@ -72,6 +81,7 @@ The existing chemical-burn pages cover skin and eye decontamination, but not the
 
 ### Needed for a broader first-aid information app
 
+- Complete the plain-language, first-aid-level review of existing treatment pages.
 - Complete the remaining sudden-illness topics.
 - Add the most useful missing equipment cards.
 - Add the contaminated-casualty scenario.
@@ -79,7 +89,7 @@ The existing chemical-burn pages cover skin and eye decontamination, but not the
 
 ## Recommended build order
 
-1. Asthma and acute breathing difficulty.
+1. Plain-language, first-aid-level review of existing treatment pages.
 2. Diabetic emergencies.
 3. Poisoning, opioid overdose, naloxone awareness and fainting.
 4. Suction and movement-equipment cards.
