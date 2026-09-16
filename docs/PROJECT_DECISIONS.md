@@ -1,6 +1,6 @@
 # Project Decisions
 
-Updated 14 September 2026.
+Updated 15 September 2026.
 
 ## What this project is
 
@@ -28,8 +28,11 @@ Updated 14 September 2026.
 
 ## Information style
 
+- Write for casualty clearers from non-medical trades, including cooks, clerks and supply technicians.
 - Put the immediate action first, followed by recognition points, cautions and reassessment.
 - Keep wording direct and practical.
+- Keep treatment at the first-aid level. Do not ask the user to select a medication, calculate a dose or make an advanced treatment decision.
+- Only include help with the person’s own prescribed rescue inhaler or auto-injector when the page states the boundary clearly.
 - Preserve practical safety boundaries such as scene safety, equipment limits and when urgent help is needed.
 - Link related pages instead of repeating the same treatment sequence in several places.
 
