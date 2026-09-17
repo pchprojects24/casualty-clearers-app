@@ -92,12 +92,12 @@ The section currently covers:
 - Chest pain and suspected heart attack.
 - Stroke recognition.
 - Seizure care.
+- Diabetic emergencies.
 - Severe allergic reaction and anaphylaxis.
 - Asthma and acute breathing difficulty.
 
 The next bundle should add:
 
-- Diabetic emergencies.
 - Poisoning, opioid overdose and naloxone awareness.
 - Fainting and unexplained altered responsiveness.
 

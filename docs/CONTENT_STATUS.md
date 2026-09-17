@@ -4,7 +4,7 @@ Updated 16 September 2026.
 
 ## Current coverage
 
-The app currently contains 117 searchable topics across nine sections.
+The app currently contains 118 searchable topics across nine sections.
 
 ### Complete connected pathways
 
@@ -13,7 +13,7 @@ The app currently contains 117 searchable topics across nine sections.
 - Bleeding control: recognition, direct pressure, wound packing, pressure dressing, tourniquet pathway and reassessment.
 - Airway and breathing: airway check, adult choking, positioning, adjuncts, breathing assessment, BVM, oxygen, chest wound and reassessment.
 - Circulation: pulse, skin signs, shock, adult CPR/AED and reassessment.
-- Sudden illness: overview, suspected heart attack, stroke recognition, seizure care, anaphylaxis, asthma and acute breathing difficulty.
+- Sudden illness: overview, suspected heart attack, stroke recognition, seizure care, diabetic emergencies, anaphylaxis, asthma and acute breathing difficulty.
 - Head and temperature: head injury, heat-loss prevention, hypothermia, heat illness and reassessment.
 - Burns and exposure: thermal, chemical skin, chemical eye, smoke/facial and electrical pathways.
 - Splinting and movement: injury assessment, CSM checks, SAM Splint body-area guides, support choices, traction-splint recognition, Med Sled, scoop stretcher, KED, backboard and casualty movement.
@@ -34,7 +34,6 @@ The app currently contains 117 searchable topics across nine sections.
 
 The current sudden-illness pages are connected to MARCHE, monitoring, reassessment and handover. The next bundle should add:
 
-- Diabetic emergencies.
 - Poisoning, opioid overdose and naloxone awareness.
 - Fainting and unexplained altered responsiveness.
 
@@ -70,8 +69,8 @@ The environmental-spill page now connects scene safety, clean and contaminated a
 
 ## Recommended build order
 
-1. Diabetic emergencies.
-2. Poisoning, opioid overdose, naloxone awareness and fainting.
+1. Poisoning, opioid overdose and naloxone awareness.
+2. Fainting and unexplained altered responsiveness.
 3. Suction equipment.
 4. Propaq/ZOLL and Rad-57 cards.
 5. Carbon-fibre contamination awareness.

@@ -21,7 +21,7 @@ The application is a responsive React and Vite information hub with:
 - Search across curated app-facing content.
 - A guided assessment pathway from scene survey through AVPU, MARCHE, vital signs, triage when needed, secondary survey and reassessment.
 - Interactive MARCHE letters that open the relevant actions, procedures and equipment.
-- Sudden-illness pathways for suspected heart attack, stroke, seizure, anaphylaxis, asthma and acute breathing difficulty.
+- Sudden-illness pathways for suspected heart attack, stroke, seizure, diabetic emergencies, anaphylaxis, asthma and acute breathing difficulty.
 - Connected movement-equipment and contaminated-casualty pages.
 - Step-by-step procedure pages with useful product instructions and demonstrations where available.
 - Saved and recently viewed information stored on the user's device.
@@ -33,4 +33,4 @@ Run it locally with `npm install` and `npm run dev`. Check the content links wit
 
 ## Next content step
 
-Add diabetic emergencies next, using the same connected sudden-illness structure.
+Add poisoning, opioid overdose and naloxone awareness next, using the same connected sudden-illness structure.
