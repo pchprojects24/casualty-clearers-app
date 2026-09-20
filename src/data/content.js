@@ -1713,11 +1713,29 @@ export const topics = [
   },
 ];
 
-const categoryById = Object.fromEntries(categories.map((category) => [category.id, category]));
-const searchableText = (topic) => JSON.stringify({ title: topic.title, group: topic.group, intro: topic.intro, path: topic.path, march: topic.march, equipmentGroups: topic.equipmentGroups, scenarioCards: topic.scenarioCards, scenarioPhases: topic.scenarioPhases, roleCards: topic.roleCards, quickRoutes: topic.quickRoutes, steps: topic.steps, sections: topic.sections, actions: topic.actions, nextStep: topic.nextStep }).toLowerCase();
-topics.forEach((topic) => { topic.searchText = searchableText(topic); });
+const nullPrototypeIndex = (items) => items.reduce((index, item) => {
+  index[item.id] = item;
+  return index;
+}, Object.create(null));
 
-export const topicById = Object.fromEntries(topics.map((topic) => [topic.id, topic]));
+const renderedText = (value) => {
+  if (typeof value === 'string') return value;
+  if (Array.isArray(value)) return value.map(renderedText).join(' ');
+  if (!value || typeof value !== 'object') return '';
+  return ['title', 'description', 'text', 'kicker', 'heading', 'kind', 'letter', 'group', 'intro', 'term', 'meaning', 'items', 'bullets', 'links']
+    .map((key) => renderedText(value[key]))
+    .join(' ');
+};
+
+export const searchableTextFor = (topic) => [
+  topic.title, topic.group, topic.intro, topic.path, topic.scale, topic.mnemonic, topic.example,
+  topic.quickRoutes, topic.scenarioCards, topic.scenarioPhases, topic.roleCards, topic.march,
+  topic.equipmentGroups, topic.steps, topic.sections, topic.notice, topic.actions, topic.nextStep, topic.resources,
+].map(renderedText).join(' ').toLowerCase();
+
+export const categoryById = nullPrototypeIndex(categories);
+export const topicById = nullPrototypeIndex(topics);
+export const categoryOverviewIds = new Set(categories.filter((category) => Object.hasOwn(topicById, `${category.id}-overview`)).map((category) => category.id));
 export const glossary = [
   { term: 'AVPU', meaning: 'Alert, responds to Voice, responds to Pain, Unresponsive.' },
   { term: 'BVM', meaning: 'Bag-valve-mask.' },
@@ -1734,22 +1752,24 @@ export const glossary = [
   { term: 'Triage priority', meaning: 'P1 immediate, P2 delayed, P3 minimal or P4 dead, assigned with the adult triage sieve.' },
 ];
 
-export const getCategory = (id) => categoryById[id];
+export const getCategory = (id) => typeof id === 'string' && Object.hasOwn(categoryById, id) ? categoryById[id] : undefined;
+export const getTopic = (id) => typeof id === 'string' && Object.hasOwn(topicById, id) ? topicById[id] : undefined;
 
-export function searchTopics(query) {
+export function searchTopics(query, { scope = topics, limit } = {}) {
   const normalizedQuery = query.toLowerCase().trim();
   const words = normalizedQuery.split(/\s+/).filter(Boolean);
   if (!words.length) return [];
-  return topics
+  return scope
     .map((topic) => {
       const title = topic.title.toLowerCase();
+      const text = searchableTextFor(topic);
       const phraseScore = title === normalizedQuery ? 20 : title.startsWith(normalizedQuery) ? 10 : 0;
-      const wordScore = words.reduce((score, word) => score + (title.includes(word) ? 8 : topic.searchText.includes(word) ? 2 : -10), 0);
+      const wordScore = words.reduce((score, word) => score + (title.includes(word) ? 8 : text.includes(word) ? 2 : -10), 0);
       return { ...topic, score: phraseScore + wordScore };
     })
     .filter((topic) => topic.score >= words.length * 2)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
-    .slice(0, 16);
+    .slice(0, limit);
 }
 
 export function topicsForCategory(categoryId) {
