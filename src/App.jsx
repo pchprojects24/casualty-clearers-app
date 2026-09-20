@@ -618,15 +618,16 @@ export default function App() {
     };
   }, []);
 
+  const routeCategory = route.kind === 'category' ? getCategory(route.id) : null;
   const activeTopic = route.kind === 'topic' ? getTopic(route.id) : null;
+  const viewedTopic = activeTopic || (routeCategory && categoryOverviewIds.has(routeCategory.id) ? getTopic(`${routeCategory.id}-overview`) : null);
   useEffect(() => {
-    if (!activeTopic) return;
-    setRecent((items) => [activeTopic.id, ...items.filter((id) => id !== activeTopic.id)].slice(0, 12));
-  }, [activeTopic, setRecent]);
+    if (!viewedTopic) return;
+    setRecent((items) => [viewedTopic.id, ...items.filter((id) => id !== viewedTopic.id)].slice(0, 12));
+  }, [viewedTopic, setRecent]);
 
   useEffect(() => {
-    const category = route.kind === 'category' ? getCategory(route.id) : undefined;
-    const label = activeTopic?.title || category?.label || ({ home: 'Home', explore: 'Topics', saved: 'Saved topics', recent: 'Recently viewed', glossary: 'Glossary' }[route.kind] || 'Page not found');
+    const label = viewedTopic?.title || routeCategory?.label || ({ home: 'Home', explore: 'Topics', saved: 'Saved topics', recent: 'Recently viewed', glossary: 'Glossary' }[route.kind] || 'Page not found');
     document.title = `${label} — CCT Info Hub`;
     if (!focusRouteRef.current) return;
     focusRouteRef.current = false;
@@ -635,12 +636,12 @@ export default function App() {
       main?.setAttribute('tabindex', '-1');
       main?.focus();
     });
-  }, [route, activeTopic]);
+  }, [route, routeCategory, viewedTopic]);
 
   const toggleSaved = (id) => setSaved((items) => items.includes(id) ? items.filter((item) => item !== id) : [id, ...items]);
   const savedTopics = useMemo(() => saved.map(getTopic).filter(Boolean), [saved]);
   const recentTopics = useMemo(() => recent.map(getTopic).filter(Boolean), [recent]);
-  const category = route.kind === 'category' ? getCategory(route.id) : null;
+  const category = routeCategory;
 
   let content;
   if (route.kind === 'home') content = <HomeView recentTopics={recentTopics} />;
