@@ -311,6 +311,7 @@ export const topics = [
         letter: 'E', title: 'Everything else & movement', text: 'Support injuries and move a casualty with coordinated handling.',
         items: [
           internal('splinting-overview', 'Splinting & movement', 'Choose the support, check CSM and plan the move.'),
+          internal('splinting-equipment', 'Splinting equipment', 'Apply a splint, pad it and recheck distal findings.'),
           internal('movement-equipment', 'Movement equipment', 'Compare the Med Sled, scoop stretcher, KED, backboard and basket stretcher.'),
           internal('med-sled', 'Med Sled', 'Flexible device used for selected horizontal and vertical movements.'),
           internal('scoop-stretcher', 'Scoop stretcher', 'Two-part transfer device placed around the casualty.'),
