@@ -12,6 +12,18 @@ const addLinks = (owner, source, links = []) => {
   }
 };
 
+for (const category of categories) {
+  if (!category.navLabel) errors.push(`Category ${category.id} is missing its navLabel, used by the sidebar.`);
+  if (!topics.some((topic) => topic.category === category.id)) {
+    errors.push(`Category ${category.id} has no topics.`);
+  }
+  // A section without an overview page falls back to a plain topic list, which
+  // is a downgrade rather than a break — worth knowing about, not failing on.
+  if (!topics.some((topic) => topic.id === `${category.id}-overview`)) {
+    console.warn(`Note: ${category.id} has no ${category.id}-overview page; its section link will show a topic list.`);
+  }
+}
+
 for (const topic of topics) {
   if (!topic.id) errors.push('A topic is missing its id.');
   if (!topic.title) errors.push(`${topic.id || 'Unknown topic'} is missing its title.`);

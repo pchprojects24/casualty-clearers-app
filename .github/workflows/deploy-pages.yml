@@ -27,6 +27,8 @@ jobs:
       - run: npm run check
       - run: npm run validate:content
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:smoke
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3

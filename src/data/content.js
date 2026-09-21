@@ -1,13 +1,13 @@
 export const categories = [
-  { id: 'assessment', label: 'Assessment & MARCHE', short: 'Assessment', description: 'Approach, assess, treat immediate threats and reassess.', color: 'teal', icon: 'assessment' },
-  { id: 'bleeding', label: 'Bleeding Control', short: 'Bleeding', description: 'Recognize serious bleeding and choose the right control method.', color: 'sky', icon: 'bleeding' },
-  { id: 'airway', label: 'Airway & Breathing', short: 'Airway', description: 'Check and support the airway and breathing.', color: 'yellow', icon: 'airway' },
-  { id: 'circulation', label: 'Circulation & Shock', short: 'Circulation', description: 'Check pulse and skin, recognize shock, respond to cardiac arrest and trend monitoring.', color: 'teal', icon: 'circulation' },
-  { id: 'medical', label: 'Sudden Illness', short: 'Sudden illness', description: 'Recognize time-critical medical problems and give immediate care.', color: 'coral', icon: 'medical' },
-  { id: 'head-temperature', label: 'Head & Temperature', short: 'Head & temperature', description: 'Recognize head-injury concerns, prevent heat loss and respond to cold or heat illness.', color: 'violet', icon: 'head' },
-  { id: 'splinting', label: 'Splinting & Movement', short: 'Splinting', description: 'Support injured limbs, recheck CSM below the injury and move the casualty safely.', color: 'violet', icon: 'movement' },
-  { id: 'equipment', label: 'Equipment', short: 'Equipment', description: 'Quick-use pages and product information.', color: 'coral', icon: 'equipment' },
-  { id: 'scenarios', label: 'Response Scenarios', short: 'Scenarios', description: 'See how the team forms, communicates, treats and moves through each type of response.', color: 'mint', icon: 'situations' },
+  { id: 'assessment', label: 'Assessment & MARCHE', navLabel: 'Assessment', description: 'Approach, assess, treat immediate threats and reassess.', color: 'teal', icon: 'assessment' },
+  { id: 'bleeding', label: 'Bleeding Control', navLabel: 'Bleeding Control', description: 'Recognize serious bleeding and choose the right control method.', color: 'sky', icon: 'bleeding' },
+  { id: 'airway', label: 'Airway & Breathing', navLabel: 'Airway & Breathing', description: 'Check and support the airway and breathing.', color: 'yellow', icon: 'airway' },
+  { id: 'circulation', label: 'Circulation & Shock', navLabel: 'Circulation & Shock', description: 'Check pulse and skin, recognize shock, respond to cardiac arrest and trend monitoring.', color: 'teal', icon: 'circulation' },
+  { id: 'medical', label: 'Sudden Illness', navLabel: 'Sudden Illness', description: 'Recognize time-critical medical problems and give immediate care.', color: 'coral', icon: 'medical' },
+  { id: 'head-temperature', label: 'Head & Temperature', navLabel: 'Head & Temperature', description: 'Recognize head-injury concerns, prevent heat loss and respond to cold or heat illness.', color: 'violet', icon: 'head' },
+  { id: 'splinting', label: 'Splinting & Movement', navLabel: 'Splinting & Movement', description: 'Support injured limbs, recheck CSM below the injury and move the casualty safely.', color: 'violet', icon: 'movement' },
+  { id: 'equipment', label: 'Equipment', navLabel: 'Equipment', description: 'Quick-use pages and product information.', color: 'coral', icon: 'equipment' },
+  { id: 'scenarios', label: 'Response Scenarios', navLabel: 'Scenarios', description: 'See how the team forms, communicates, treats and moves through each type of response.', color: 'mint', icon: 'situations' },
 ];
 
 const RED_CROSS_GUIDE = 'https://cdn.redcross.ca/prodmedia/crc/azure/documents/first-aid-program-2025/comprehensive_guide_fa_cpr_en.pdf';
