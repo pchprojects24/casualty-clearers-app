@@ -26,7 +26,7 @@ body { margin: 0; min-width: 320px; min-height: 100vh; min-height: 100dvh; backg
 button, input { font: inherit; }
 button { color: inherit; touch-action: manipulation; }
 button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid rgba(22, 119, 255, 0.32); outline-offset: 2px; }
-.skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; transform: translateY(-160%); background: #063f39; color: #fff; border-radius: 8px; padding: 10px 14px; font-weight: 700; text-decoration: none; }
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; transform: translateY(-160%); display: inline-flex; align-items: center; min-height: 44px; background: #063f39; color: #fff; border-radius: 8px; padding: 10px 14px; font-weight: 700; text-decoration: none; }
 .skip-link:focus { transform: translateY(0); }
 .storage-status { position: fixed; right: 16px; bottom: 16px; z-index: 45; max-width: 360px; margin: 0; border: 1px solid #d79b00; border-radius: 10px; background: #fff8df; color: #51451f; padding: 12px 14px; font-size: 14px; box-shadow: var(--shadow); }
 
@@ -40,7 +40,7 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 .brand-mark i:nth-child(3) { background: var(--yellow); }
 .brand-mark i:nth-child(4) { background: var(--violet); }
 .sidebar nav { display: flex; flex-direction: column; gap: 5px; margin-top: 36px; }
-.sidebar nav button { border: 0; background: transparent; min-height: 47px; border-radius: 10px; padding: 0 12px; display: flex; align-items: center; gap: 13px; color: #344054; font-size: 15px; font-weight: 550; cursor: pointer; transition: 170ms ease; }
+.sidebar nav button { border: 0; background: transparent; min-height: 47px; border-radius: 10px; padding: 0 12px; display: flex; align-items: center; gap: 13px; color: #344054; font-size: 15px; font-weight: 550; text-align: left; cursor: pointer; transition: 170ms ease; }
 .sidebar nav button:hover { background: #f4f7fa; color: var(--text); }
 .sidebar nav button.selected { color: #087e70; background: #e6f8f5; font-weight: 700; }
 .sidebar nav button em { margin-left: auto; font-style: normal; font-size: 12px; background: var(--teal); color: white; min-width: 22px; height: 22px; display: grid; place-items: center; border-radius: 999px; }
@@ -219,7 +219,7 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 .continue-primary em { color: #d8f7f1; font-size: 14px; line-height: 1.42; font-style: normal; font-weight: 400; }
 .continue-primary > i { width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.35); border-radius: 50%; background: rgba(255,255,255,0.14); color: white; display: grid; place-items: center; font-style: normal; transition: 160ms ease; }
 .continue-primary:hover > i { background: white; color: #087e70; transform: translateX(2px); }
-.march-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.march-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 11px; }
 .march-grid button { min-height: 106px; border: 1px solid var(--border); border-radius: 15px; background: #fff; display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: 13px; padding: 16px; text-align: left; cursor: pointer; transition: 160ms ease; }
 .march-grid button:hover { border-color: #7fd3c7; box-shadow: 0 8px 22px rgba(18,32,53,0.07); transform: translateY(-1px); }
 .march-grid b { width: 50px; height: 50px; border-radius: 15px; background: #dff7f2; color: #087e70; display: grid; place-items: center; font-size: 27px; }
@@ -332,9 +332,9 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
   .related-panel { position: static; }
   .scale-grid { grid-template-columns: 1fr 1fr; }
   .march-progress { grid-template-columns: 1fr; gap: 10px; }
-  .march-progress-heading { display: flex; align-items: baseline; gap: 9px; }
+  .march-progress-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 9px; white-space: normal; }
   .secondary-progress { grid-template-columns: 1fr; gap: 10px; }
-  .secondary-progress-heading { display: flex; align-items: baseline; gap: 9px; }
+  .secondary-progress-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 9px; white-space: normal; }
 }
 
 @media (max-width: 760px) {
@@ -387,7 +387,8 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
   .directory-groups { gap: 38px; margin-top: 33px; }
   .group-heading p { display: none; }
   .group-heading h2 { font-size: 20px; }
-  .article-breadcrumb { overflow-x: auto; white-space: nowrap; padding-bottom: 3px; scrollbar-width: none; }
+  .article-breadcrumb { overflow-x: auto; white-space: nowrap; padding-bottom: 3px; scrollbar-width: none; min-height: 44px; }
+  .article-breadcrumb button { min-height: 44px; display: inline-flex; align-items: center; }
   .article-breadcrumb::-webkit-scrollbar { display: none; }
   .article-header { grid-template-columns: 46px 1fr; gap: 13px; padding: 19px 16px; border-radius: 12px; }
   .article-header > .topic-icon { width: 46px; height: 46px; }
@@ -413,6 +414,8 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
   .secondary-progress-steps button small { font-size: 10px; }
   .page-jumps { margin-top: 14px; padding: 11px 12px; grid-template-columns: 1fr; gap: 8px; }
   .page-jumps > div { margin-inline: -2px; }
+  /* Comfortable touch target for the jump chips on a phone. */
+  .page-jumps button { min-height: 44px; padding: 5px 14px; }
   .reference-content [id] { scroll-margin-top: calc(78px + env(safe-area-inset-top)); }
   .continue-primary { margin-top: 30px; padding: 18px 16px; border-radius: 13px; }
   .continue-primary strong { font-size: 19px; }

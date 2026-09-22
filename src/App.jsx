@@ -28,6 +28,9 @@ import { goBack, initialiseHistory, navigate, normalizeRoute, scrollToSection } 
 import { normalizeTopicIds, readStoredList, writeStoredList } from './lib/storage.js';
 
 const ICONS = {
+  home: Home,
+  search: Search,
+  glossary: BookOpen,
   assessment: ClipboardCheck,
   treatments: Bandage,
   airway: Wind,
@@ -43,18 +46,10 @@ const ICONS = {
 };
 
 const navItems = [
-  { id: 'home', label: 'Home', icon: Home },
-  { id: 'explore', label: 'Explore', icon: Search },
-  { id: 'assessment', label: 'Assessment', icon: ClipboardCheck },
-  { id: 'bleeding', label: 'Bleeding Control', icon: Droplets },
-  { id: 'airway', label: 'Airway & Breathing', icon: Wind },
-  { id: 'circulation', label: 'Circulation & Shock', icon: HeartPulse },
-  { id: 'medical', label: 'Sudden Illness', icon: HeartPulse },
-  { id: 'head-temperature', label: 'Head & Temperature', icon: Brain },
-  { id: 'splinting', label: 'Splinting & Movement', icon: Users },
-  { id: 'equipment', label: 'Equipment', icon: Box },
-  { id: 'scenarios', label: 'Scenarios', icon: TriangleAlert },
-  { id: 'glossary', label: 'Glossary', icon: BookOpen },
+  { id: 'home', label: 'Home', icon: 'home', path: 'home' },
+  { id: 'explore', label: 'Explore', icon: 'search', path: 'explore' },
+  ...categories.map((category) => ({ id: category.id, label: category.navLabel, icon: category.icon, path: `category/${category.id}` })),
+  { id: 'glossary', label: 'Glossary', icon: 'glossary', path: 'glossary' },
 ];
 
 const MARCHE_STEPS = [
@@ -225,9 +220,9 @@ function Sidebar({ route, savedCount }) {
     <aside className="sidebar">
       <Brand />
       <nav aria-label="Primary navigation">
-        {navItems.map(({ id, label, icon: Icon }) => (
-          <button className={selected === id ? 'selected' : ''} aria-current={selected === id ? 'page' : undefined} key={id} type="button" onClick={() => navigate(['assessment', 'bleeding', 'airway', 'circulation', 'medical', 'head-temperature', 'splinting', 'equipment', 'scenarios'].includes(id) ? `category/${id}` : id)}>
-            <Icon size={20} strokeWidth={1.8} /><span>{label}</span>
+        {navItems.map(({ id, label, icon, path }) => (
+          <button className={selected === id ? 'selected' : ''} aria-current={selected === id ? 'page' : undefined} key={id} type="button" onClick={() => navigate(path)}>
+            <IconFor name={icon} size={20} /><span>{label}</span>
           </button>
         ))}
         <span className="nav-rule" />
