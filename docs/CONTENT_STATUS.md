@@ -26,7 +26,7 @@ The app currently contains 118 searchable topics across nine sections.
 - Guided MARCHE and secondary-survey progress navigation.
 - Saved and recently viewed topics stored in the browser.
 - Responsive desktop and mobile layouts.
-- Automated lint, production build and GitHub Pages deployment.
+- Automated lint, content validation, behavioural tests, production build and GitHub Pages deployment.
 
 ## Information still needed
 
@@ -58,7 +58,7 @@ The environmental-spill page now connects scene safety, clean and contaminated a
 ### Ready now
 
 - The current trauma, assessment, triage, burns, airway, circulation, splinting, movement and response-scenario content is navigable and internally connected.
-- The static app builds and deploys successfully.
+- The public static app has no accounts, patient records or backend. Saved and recent lists are browser-local; home-screen installation does not provide offline content.
 - Current content can be searched and used on desktop and mobile browsers.
 
 ### Needed for a broader first-aid information app

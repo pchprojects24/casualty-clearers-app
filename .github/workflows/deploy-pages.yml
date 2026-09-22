@@ -26,18 +26,19 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run validate:content
+      - run: npm run test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:smoke
       - name: Upload Pages artifact
-        if: github.event_name != 'pull_request'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
     needs: build
-    if: github.event_name != 'pull_request'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     # A deployment already in flight is left to finish; cancelling one can
     # leave the published site half-updated.

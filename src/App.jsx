@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+import React, { Component, useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import {
   ArrowLeft,
   Bandage,
@@ -23,7 +23,9 @@ import {
   Users,
   X,
 } from 'lucide-react';
-import { categories, getCategory, glossary, searchTopics, topicById, topics, topicsForCategory } from './data/content.js';
+import { categories, categoryOverviewIds, getCategory, getTopic, glossary, searchTopics, topics, topicsForCategory } from './data/content.js';
+import { goBack, initialiseHistory, navigate, normalizeRoute, scrollToSection } from './lib/navigation.js';
+import { normalizeTopicIds, readStoredList, writeStoredList } from './lib/storage.js';
 
 const ICONS = {
   home: Home,
@@ -42,11 +44,6 @@ const ICONS = {
   equipment: Box,
   document: FileText,
 };
-
-// A section's landing page is its curated overview topic. Deriving this, and
-// the navigation below, from the category list means a new section cannot be
-// added to one place and forgotten in another.
-const overviewIdFor = (categoryId) => `${categoryId}-overview`;
 
 const navItems = [
   { id: 'home', label: 'Home', icon: 'home', path: 'home' },
@@ -75,47 +72,43 @@ const HEAD_TO_TOE_TOPICS = new Set(['head-face-check', 'neck-check', 'chest-chec
 const REASSESSMENT_TOPICS = new Set(['reassessment-loop', 'treatment-checks', 'mist-handover', 'handover-example']);
 const SECONDARY_TOPIC_IDS = new Set(['secondary-survey', 'focused-examination', ...SECONDARY_STEPS.map((step) => step.id), ...HEAD_TO_TOE_TOPICS, ...REASSESSMENT_TOPICS]);
 
-const readStored = (key) => {
-  try {
-    const value = JSON.parse(localStorage.getItem(key));
-    return Array.isArray(value) ? value : [];
-  } catch {
-    return [];
+class AppErrorBoundary extends Component {
+  constructor(props) { super(props); this.state = { failed: false }; }
+  static getDerivedStateFromError() { return { failed: true }; }
+  componentDidCatch(error) { console.error('CCT Info Hub rendering error', error); }
+  render() {
+    if (!this.state.failed) return this.props.children;
+    return <main className="page-main" tabIndex="-1"><div className="empty-state"><TriangleAlert /><h1>Unable to display this page</h1><p>Try returning to the topic directory. If the problem continues, reload the app.</p><button type="button" onClick={() => navigate('explore')}>Browse all topics <ChevronRight size={16} /></button></div></main>;
   }
-};
+}
 
-const writeStored = (key, value) => {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    // Storage can be unavailable (private browsing, blocked site data). Saving is optional.
-  }
-};
+const validTopicIds = new Set(topics.map((topic) => topic.id));
 
-const useStoredList = (key) => {
-  const [list, setList] = useState(() => readStored(key));
-  useEffect(() => writeStored(key, list), [key, list]);
-  return [list, setList];
-};
-
-const routeFromHash = () => {
-  const raw = window.location.hash.replace(/^#\/?/, '') || 'home';
-  const [kind, id] = raw.split('/');
-  return { kind, id };
-};
-
-// History entries that existed before the app loaded. Anything beyond this was
-// added by in-app navigation, so going back stays inside the app.
-const entryHistoryLength = window.history.length;
-
-const navigate = (path) => {
-  window.location.hash = `#/${path}`;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-const goBack = () => {
-  if (window.history.length > entryHistoryLength) window.history.back();
-  else navigate('home');
+const useStoredList = (key, maximum) => {
+  const [initial] = useState(() => readStoredList(key, validTopicIds, maximum));
+  const [list, setList] = useState(initial.list);
+  const [persistent, setPersistent] = useState(initial.available);
+  const updateList = useCallback((updater) => {
+    setList((current) => {
+      const next = normalizeTopicIds(typeof updater === 'function' ? updater(current) : updater, validTopicIds, maximum);
+      setPersistent(writeStoredList(key, next));
+      return next;
+    });
+  }, [key, maximum]);
+  useEffect(() => {
+    const onStorage = (event) => {
+      if (event.key !== key || event.storageArea !== window.localStorage) return;
+      try {
+        setList(normalizeTopicIds(JSON.parse(event.newValue), validTopicIds, maximum));
+        setPersistent(true);
+      } catch {
+        setList([]);
+      }
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, [key, maximum]);
+  return [list, updateList, persistent];
 };
 
 function Brand() {
@@ -136,12 +129,12 @@ function BackLink() {
   return <button type="button" className="back-link" onClick={goBack}><ArrowLeft size={17} /> Back</button>;
 }
 
-function SearchBox({ value, onChange, onSelect, compact = false, shortcut = true }) {
+function SearchBox({ value, onChange, onSelect, scope, compact = false, shortcut = true }) {
   const inputRef = useRef(null);
   const listId = useId();
   const [active, setActive] = useState(false);
   const [highlight, setHighlight] = useState(-1);
-  const results = useMemo(() => searchTopics(value), [value]);
+  const results = useMemo(() => searchTopics(value, { scope, limit: 8 }), [value, scope]);
   const open = active && Boolean(value);
   const expanded = open && results.length > 0;
   // Guard against a highlight left over from a longer result set.
@@ -222,7 +215,7 @@ function SearchBox({ value, onChange, onSelect, compact = false, shortcut = true
 }
 
 function Sidebar({ route, savedCount }) {
-  const selected = route.kind === 'category' ? route.id : route.kind === 'topic' ? topicById[route.id]?.category : route.kind;
+  const selected = route.kind === 'category' ? route.id : route.kind === 'topic' ? getTopic(route.id)?.category : route.kind;
   return (
     <aside className="sidebar">
       <Brand />
@@ -272,7 +265,7 @@ function MobileNav({ route, savedCount, onOpen }) {
             aria-current={selected ? 'page' : undefined}
             aria-haspopup={id === 'more' ? 'dialog' : undefined}
             type="button"
-            onClick={() => id === 'more' ? onOpen() : navigate(path)}
+            onClick={(event) => id === 'more' ? onOpen(event) : navigate(path)}
           >
             <span className="mobile-nav-icon"><Icon size={23} strokeWidth={1.8} />{id === 'saved' && savedCount > 0 && <em aria-hidden="true">{savedCount}</em>}</span><span>{label}</span>
           </button>
@@ -350,20 +343,19 @@ function HomeView({ recentTopics }) {
   );
 }
 
-function DirectoryView({ title = 'All topics', intro = 'Search by name or browse each section.', emptyNote, topicList = topics, saved, toggleSaved }) {
+function DirectoryView({ title = 'All topics', intro = 'Search by name or browse each section.', emptyNote, topicList = topics, saved, toggleSaved, preserveOrder = false }) {
   const [query, setQuery] = useState('');
-  const scopedIds = useMemo(() => new Set(topicList.map((topic) => topic.id)), [topicList]);
-  const visible = query ? searchTopics(query).filter((topic) => scopedIds.has(topic.id)) : topicList;
-  const groups = categories.map((category) => ({ category, items: visible.filter((topic) => topic.category === category.id) })).filter((group) => group.items.length);
+  const visible = query ? searchTopics(query, { scope: topicList }) : topicList;
+  const groups = preserveOrder ? [{ category: null, items: visible }] : categories.map((category) => ({ category, items: visible.filter((topic) => topic.category === category.id) })).filter((group) => group.items.length);
   return (
     <main className="page-main directory-page">
       <BackLink />
       <div className="page-heading"><h1>{title}</h1><p>{intro}</p></div>
-      <SearchBox value={query} onChange={setQuery} onSelect={(topic) => navigate(`topic/${topic.id}`)} />
+      <SearchBox value={query} onChange={setQuery} onSelect={(topic) => navigate(`topic/${topic.id}`)} scope={topicList} />
       <div className="directory-groups">
         {groups.map(({ category, items }) => (
-          <section key={category.id}>
-            <div className="group-heading"><span className={`topic-icon ${category.color}`}><IconFor name={category.icon} /></span><div><h2>{category.label}</h2><p>{category.description}</p></div></div>
+          <section key={category?.id || 'ordered'}>
+            {category && <div className="group-heading"><span className={`topic-icon ${category.color}`}><IconFor name={category.icon} /></span><div><h2>{category.label}</h2><p>{category.description}</p></div></div>}
             <div className="article-list">
               {items.map((topic) => <MiniTopicRow key={topic.id} topic={topic} saved={saved.includes(topic.id)} onSave={toggleSaved} />)}
             </div>
@@ -467,18 +459,17 @@ const pageSectionsFor = (topic) => [
 
 function PageJumps({ sections }) {
   if (sections.length < 3) return null;
-  const jump = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   return (
     <nav className="page-jumps" aria-label="On this page">
       <strong>On this page</strong>
-      <div>{sections.map((section) => <button key={section.id} type="button" onClick={() => jump(section.id)}>{section.label}</button>)}</div>
+      <div>{sections.map((section) => <button key={section.id} type="button" onClick={() => scrollToSection(section.id)}>{section.label}</button>)}</div>
     </nav>
   );
 }
 
 function ArticleView({ topic, saved, toggleSaved }) {
   const category = getCategory(topic.category);
-  const related = (topic.related || []).map((id) => topicById[id]).filter(Boolean);
+  const related = (topic.related || []).map(getTopic).filter(Boolean);
   const isMarchPriority = MARCHE_STEPS.some((step) => step.id === topic.id);
   const isSecondaryTopic = SECONDARY_TOPIC_IDS.has(topic.id);
   const pageSections = pageSectionsFor(topic);
@@ -553,21 +544,38 @@ function GlossaryView() {
   );
 }
 
-function Drawer({ open, onClose, route, savedCount }) {
+function Drawer({ open, onClose, route, savedCount, restoreFocus, backgroundRef }) {
+  const drawerRef = useRef(null);
   const closeRef = useRef(null);
   useEffect(() => {
     if (!open) return undefined;
-    const onKey = (event) => { if (event.key === 'Escape') onClose(); };
+    const background = backgroundRef.current;
+    const onKey = (event) => {
+      if (event.key === 'Escape') { onClose(); return; }
+      if (event.key !== 'Tab') return;
+      const focusable = drawerRef.current?.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
     document.body.style.overflow = 'hidden';
+    if (background) { background.inert = true; background.setAttribute('aria-hidden', 'true'); }
     window.addEventListener('keydown', onKey);
-    closeRef.current?.focus();
-    return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey); };
-  }, [open, onClose]);
+    window.requestAnimationFrame(() => closeRef.current?.focus());
+    return () => {
+      document.body.style.overflow = '';
+      if (background) { background.inert = false; background.removeAttribute('aria-hidden'); }
+      window.removeEventListener('keydown', onKey);
+      restoreFocus?.focus();
+    };
+  }, [open, onClose, restoreFocus, backgroundRef]);
 
   if (!open) return null;
   return (
     <div className="drawer-backdrop" role="presentation" onClick={onClose}>
-      <div className="drawer" role="dialog" aria-modal="true" aria-label="Navigation" onClick={(event) => event.stopPropagation()}>
+      <div ref={drawerRef} className="drawer" role="dialog" aria-modal="true" aria-label="Navigation" onClick={(event) => event.stopPropagation()}>
         <button ref={closeRef} className="drawer-close" type="button" onClick={onClose} aria-label="Close navigation"><X /></button>
         <Sidebar route={route} savedCount={savedCount} />
       </div>
@@ -576,54 +584,87 @@ function Drawer({ open, onClose, route, savedCount }) {
 }
 
 export default function App() {
-  const [route, setRoute] = useState(routeFromHash);
-  const [saved, setSaved] = useStoredList('cc-saved-topics');
-  const [recent, setRecent] = useStoredList('cc-recent-topics');
+  const [route, setRoute] = useState(normalizeRoute);
+  const [saved, setSaved, savedPersistent] = useStoredList('cc-saved-topics', 100);
+  const [recent, setRecent] = useStoredList('cc-recent-topics', 12);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerOpener, setDrawerOpener] = useState(null);
+  const backgroundRef = useRef(null);
+  const focusRouteRef = useRef(false);
   const closeDrawer = useCallback(() => setDrawerOpen(false), []);
+  const openDrawer = useCallback((event) => { setDrawerOpener(event.currentTarget); setDrawerOpen(true); }, []);
 
   useEffect(() => {
-    const onHash = () => { setRoute(routeFromHash()); setDrawerOpen(false); };
-    window.addEventListener('hashchange', onHash);
-    if (!window.location.hash) navigate('home');
-    return () => window.removeEventListener('hashchange', onHash);
+    initialiseHistory();
+    const syncRoute = () => { setRoute(normalizeRoute()); setDrawerOpen(false); };
+    const onNavigate = (event) => { focusRouteRef.current = Boolean(event.detail?.focus); syncRoute(); };
+    const query = window.matchMedia('(min-width: 761px)');
+    const closeForDesktop = () => { if (query.matches) setDrawerOpen(false); };
+    window.addEventListener('popstate', syncRoute);
+    window.addEventListener('hashchange', syncRoute);
+    window.addEventListener('cct:navigate', onNavigate);
+    query.addEventListener('change', closeForDesktop);
+    syncRoute();
+    return () => {
+      window.removeEventListener('popstate', syncRoute);
+      window.removeEventListener('hashchange', syncRoute);
+      window.removeEventListener('cct:navigate', onNavigate);
+      query.removeEventListener('change', closeForDesktop);
+    };
   }, []);
 
-  const activeTopic = route.kind === 'topic' ? topicById[route.id] : null;
+  const routeCategory = route.kind === 'category' ? getCategory(route.id) : null;
+  const activeTopic = route.kind === 'topic' ? getTopic(route.id) : null;
+  const viewedTopic = activeTopic || (routeCategory && categoryOverviewIds.has(routeCategory.id) ? getTopic(`${routeCategory.id}-overview`) : null);
   useEffect(() => {
-    if (!activeTopic) return;
-    setRecent((items) => [activeTopic.id, ...items.filter((id) => id !== activeTopic.id)].slice(0, 12));
-  }, [activeTopic, setRecent]);
+    if (!viewedTopic) return;
+    setRecent((items) => [viewedTopic.id, ...items.filter((id) => id !== viewedTopic.id)].slice(0, 12));
+  }, [viewedTopic, setRecent]);
+
+  useEffect(() => {
+    const label = viewedTopic?.title || routeCategory?.label || ({ home: 'Home', explore: 'Topics', saved: 'Saved topics', recent: 'Recently viewed', glossary: 'Glossary' }[route.kind] || 'Page not found');
+    document.title = `${label} — CCT Info Hub`;
+    if (!focusRouteRef.current) return;
+    focusRouteRef.current = false;
+    window.requestAnimationFrame(() => {
+      const main = backgroundRef.current?.querySelector('#main-content main');
+      main?.setAttribute('tabindex', '-1');
+      main?.focus();
+    });
+  }, [route, routeCategory, viewedTopic]);
 
   const toggleSaved = (id) => setSaved((items) => items.includes(id) ? items.filter((item) => item !== id) : [id, ...items]);
-  const savedTopics = useMemo(() => saved.map((id) => topicById[id]).filter(Boolean), [saved]);
-  const recentTopics = useMemo(() => recent.map((id) => topicById[id]).filter(Boolean), [recent]);
-  const category = route.kind === 'category' ? getCategory(route.id) : null;
+  const savedTopics = useMemo(() => saved.map(getTopic).filter(Boolean), [saved]);
+  const recentTopics = useMemo(() => recent.map(getTopic).filter(Boolean), [recent]);
+  const category = routeCategory;
 
   let content;
   if (route.kind === 'home') content = <HomeView recentTopics={recentTopics} />;
   else if (route.kind === 'explore') content = <DirectoryView key="explore" saved={saved} toggleSaved={toggleSaved} />;
   else if (route.kind === 'category') {
-    const overview = category && topicById[overviewIdFor(category.id)];
-    content = !category
-      ? <NotFoundView />
-      : overview
-        ? <ArticleView topic={overview} saved={saved.includes(overview.id)} toggleSaved={toggleSaved} />
-        : <DirectoryView key={`category-${category.id}`} title={category.label} intro={category.description} topicList={topicsForCategory(category.id)} saved={saved} toggleSaved={toggleSaved} />;
+    content = category
+      ? categoryOverviewIds.has(category.id)
+        ? <ArticleView topic={getTopic(`${category.id}-overview`)} saved={saved.includes(`${category.id}-overview`)} toggleSaved={toggleSaved} />
+        : <DirectoryView key={`category-${category.id}`} title={category.label} intro={category.description} topicList={topicsForCategory(category.id)} saved={saved} toggleSaved={toggleSaved} />
+      : <NotFoundView />;
   } else if (route.kind === 'topic') {
     content = activeTopic ? <ArticleView topic={activeTopic} saved={saved.includes(activeTopic.id)} toggleSaved={toggleSaved} /> : <NotFoundView />;
   } else if (route.kind === 'saved') content = <DirectoryView key="saved" title="Saved topics" intro="Topics you saved for another look." emptyNote="Use the bookmark on any topic to save it here." topicList={savedTopics} saved={saved} toggleSaved={toggleSaved} />;
-  else if (route.kind === 'recent') content = <DirectoryView key="recent" title="Recently viewed" intro="Your most recently opened topics." emptyNote="Topics you open will appear here." topicList={recentTopics} saved={saved} toggleSaved={toggleSaved} />;
+  else if (route.kind === 'recent') content = <DirectoryView key="recent" title="Recently viewed" intro="Your most recently opened topics." emptyNote="Topics you open will appear here." topicList={recentTopics} saved={saved} toggleSaved={toggleSaved} preserveOrder />;
   else if (route.kind === 'glossary') content = <GlossaryView />;
   else content = <NotFoundView />;
 
   return (
     <div className="app-shell">
-      <Sidebar route={route} savedCount={saved.length} />
-      <MobileHeader onOpen={() => setDrawerOpen(true)} />
-      <div className={`content-shell ${route.kind === 'home' ? 'home-layout' : ''}`}>{content}</div>
-      <MobileNav route={route} savedCount={saved.length} onOpen={() => setDrawerOpen(true)} />
-      <Drawer open={drawerOpen} onClose={closeDrawer} route={route} savedCount={saved.length} />
+      <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); const main = backgroundRef.current?.querySelector('#main-content main'); main?.setAttribute('tabindex', '-1'); main?.focus(); }}>Skip to content</a>
+      <div ref={backgroundRef}>
+        <Sidebar route={route} savedCount={saved.length} />
+        <MobileHeader onOpen={openDrawer} />
+        <div id="main-content" className={`content-shell ${route.kind === 'home' ? 'home-layout' : ''}`}><AppErrorBoundary>{content}</AppErrorBoundary></div>
+        <MobileNav route={route} savedCount={saved.length} onOpen={openDrawer} />
+        {!savedPersistent && <p className="storage-status" role="status">Saved topics are available for this session only because browser storage is unavailable.</p>}
+      </div>
+      <Drawer open={drawerOpen} onClose={closeDrawer} route={route} savedCount={saved.length} restoreFocus={drawerOpener} backgroundRef={backgroundRef} />
     </div>
   );
 }
