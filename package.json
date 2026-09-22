@@ -8,15 +8,14 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "eslint .",
-    "validate:content": "node scripts/validate-content.mjs"
+    "validate:content": "node scripts/validate-content.mjs",
+    "test:smoke": "node scripts/smoke-test.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
     "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-markdown": "latest",
-    "remark-gfm": "latest",
     "vite": "latest"
   },
   "devDependencies": {
@@ -24,6 +23,7 @@
     "eslint": "latest",
     "eslint-plugin-react-hooks": "latest",
     "eslint-plugin-react-refresh": "latest",
-    "globals": "latest"
+    "globals": "latest",
+    "playwright": "^1.63.0"
   }
 }
