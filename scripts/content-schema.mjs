@@ -41,6 +41,7 @@ export function validateContent(categories, topics) {
     });
     if (topic.steps !== undefined && !isList(topic.steps)) fail(owner, 'steps', 'must be an array');
     if (isList(topic.steps) && !topic.steps.every(isText)) fail(owner, 'steps', 'must contain non-empty strings');
+    if (topic.keywords !== undefined && !isText(topic.keywords)) fail(owner, 'keywords', 'must be a non-empty string when supplied');
     (topic.sections || []).forEach((section, sectionIndex) => {
       if (!section || !isText(section.title) || !isList(section.bullets) || !section.bullets.every(isText)) fail(owner, `sections[${sectionIndex}]`, 'requires a title and bullets array of strings');
     });

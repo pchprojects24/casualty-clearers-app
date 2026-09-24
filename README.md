@@ -19,7 +19,7 @@ The project brings practical casualty-clearer information together in one search
 The application is a responsive React and Vite information hub with:
 
 - Search across curated app-facing content.
-- A guided assessment pathway from scene survey through AVPU, MARCHE, vital signs, triage when needed, secondary survey and reassessment.
+- A guided assessment pathway from scene survey and triage (when there is more than one casualty) through AVPU, MARCHE, the secondary survey (SAMPLE, vital signs and injury check) and reassessment.
 - Interactive MARCHE letters that open the relevant actions, procedures and equipment.
 - Sudden-illness pathways for suspected heart attack, stroke, seizure, diabetic emergencies, anaphylaxis, asthma and acute breathing difficulty.
 - Connected movement-equipment and contaminated-casualty pages.

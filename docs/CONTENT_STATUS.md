@@ -1,6 +1,6 @@
 # CCT Info Hub — Content Status
 
-Updated 16 September 2026.
+Updated 24 September 2026.
 
 ## Current coverage
 
@@ -18,6 +18,16 @@ The app currently contains 118 searchable topics across nine sections.
 - Burns and exposure: thermal, chemical skin, chemical eye, smoke/facial and electrical pathways.
 - Splinting and movement: injury assessment, CSM checks, SAM Splint body-area guides, support choices, traction-splint recognition, Med Sled, scoop stretcher, KED, backboard and casualty movement.
 - Response workflow: team roles, triage, radio reports, movement decisions, damage-control casualty, isolated casualty, person overboard, contaminated casualty, firefighter rehabilitation and continued care.
+
+### September 2026 content audit
+
+- Assessment order corrected: triage now follows the scene survey; vital signs sit inside the secondary survey.
+- Tourniquet page gives concrete placement (5–10 cm above the wound, never on a joint), a second-tourniquet step and the time-marking step.
+- Airway page now teaches head-tilt/chin-lift, jaw thrust and the recovery position, which several pages already linked to.
+- Sudden-illness pages say "call for medical help" (the ship's medical-emergency call) instead of civilian emergency-call wording.
+- Capillary refill gives the 2-second normal value; the chest-seal page explains what to do if breathing worsens after a seal.
+- Author-facing notes removed from user pages; glossary expanded; search understands everyday words such as "broken bone", "EpiPen" and "unconscious".
+- Still to confirm with the CCT course: the "CDC" glossary entry, the ship's triage-card wording and whether the course teaches "high and tight" tourniquet placement.
 
 ### Working application features
 
