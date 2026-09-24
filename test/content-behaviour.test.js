@@ -17,6 +17,13 @@ describe('content routing and search', () => {
     }
   });
 
+  it('finds pages from everyday words a non-medical responder would type', () => {
+    const expectations = { 'recovery position': 'airway-positioning', 'broken bone': 'splinting-assessment', epipen: 'anaphylaxis', unconscious: 'avpu', spine: 'neck-check', drowning: 'person-overboard' };
+    for (const [query, id] of Object.entries(expectations)) {
+      expect(searchTopics(query).map((topic) => topic.id), query).toContain(id);
+    }
+  });
+
   it('applies Saved and Recent scope before search limits', () => {
     const saved = [getTopic('cat-tourniquet'), getTopic('direct-pressure')];
     const recent = [getTopic('diabetic-emergencies'), getTopic('seizure-care')];

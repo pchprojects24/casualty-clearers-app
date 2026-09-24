@@ -1,6 +1,6 @@
 # Project Decisions
 
-Updated 16 September 2026.
+Updated 24 September 2026.
 
 ## What this project is
 
@@ -29,7 +29,8 @@ Updated 16 September 2026.
 ## Information style
 
 - Present recognition, the basic first-aid sequence, cautions and reassessment in a clear learning order.
-- Keep wording direct and practical.
+- Keep wording direct and practical. Readers are cooks, clerks, supply technicians and other trades for whom medical care is a secondary duty: explain jargon in the glossary and give concrete steps rather than referring only to "the taught method".
+- Write for the reader, not the author. Notes about how the app was built stay in `docs/`.
 - Keep treatment at the first-aid level. Do not ask the user to select a medication, calculate a dose or make an advanced treatment decision.
 - Only include help with the person’s own prescribed rescue inhaler or auto-injector when the page states the boundary clearly.
 - Preserve practical safety boundaries such as scene safety, equipment limits and when urgent help is needed.
@@ -40,5 +41,5 @@ Updated 16 September 2026.
 - `pchprojects24/casualty-clearers-app` is the project repository.
 - The interactive web app is published with GitHub Pages at `https://pchprojects24.github.io/casualty-clearers-app/`.
 - Project notes remain in `docs/`; they are not rendered as app content.
-- The guided pathway runs from scene survey and AVPU through MARCHE, vital signs, secondary survey and reassessment, with connected procedure, equipment and product-information links.
+- The guided pathway runs from scene survey and triage when needed through AVPU, MARCHE, the secondary survey and reassessment, with connected procedure, equipment and product-information links.
 - The app uses local browser state only for saved and recently viewed topics. It has no patient, account, or administrative data.
